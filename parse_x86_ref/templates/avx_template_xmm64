@@ -1,0 +1,56 @@
+InstructionDefinition { 
+    mnemonic: Mnemonic::%MNEMONIC%,
+    is_two_byte_opcode: true,
+    primary_opcode: %PRIMARY_OPCODE%,
+    proc_start: Some(ProcessorLevel::Corei7),
+    mode: Mode::Protected,
+    force_op_size_prefix: %OP_SIZE_PREFIX%,
+    force_evex: false,
+    force_vex: true,
+    vector_size: None,
+    allow_rounding_mode: false,
+    allow_sae: false,
+    allowed_broadcast: None,
+    destination: Some(OperandDescription {
+        addressing_mode: OperandAddressingMode::AVXReg,
+        operand_type: OperandType::XMM,
+        fixed_operand: None,
+    }),
+    source: Some(OperandDescription {
+        addressing_mode: OperandAddressingMode::AVXVex,
+        operand_type: OperandType::XMM,
+        fixed_operand: None
+    }),
+    source2: Some(OperandDescription {
+        addressing_mode: OperandAddressingMode::M,
+        operand_type: OperandType::Q,
+        fixed_operand: None
+    }),
+     can_lock: false, fixed_prefix: %FIXED_PREFIX%, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: %SECONDARY_OPCODE%, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+},
+InstructionDefinition { 
+    mnemonic: Mnemonic::%MNEMONIC%,
+    is_two_byte_opcode: true,
+    primary_opcode: %PARAM1%,
+    proc_start: Some(ProcessorLevel::Corei7),
+    mode: Mode::Protected,
+    force_op_size_prefix: %OP_SIZE_PREFIX%,
+    force_evex: false,
+    force_vex: true,
+    vector_size: None,
+    allow_rounding_mode: false,
+    allow_sae: false,
+    allowed_broadcast: None,
+    destination: Some(OperandDescription {
+        addressing_mode: OperandAddressingMode::M,
+        operand_type: OperandType::Q,
+        fixed_operand: None
+    }),
+    source: Some(OperandDescription {
+        addressing_mode: OperandAddressingMode::AVXReg,
+        operand_type: OperandType::XMM,
+        fixed_operand: None,
+    }),
+    source2: None,
+     can_lock: false, fixed_prefix: %FIXED_PREFIX%, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: %SECONDARY_OPCODE%, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+},

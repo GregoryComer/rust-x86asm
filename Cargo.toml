@@ -1,0 +1,8 @@
+[package]
+name = "x86asm"
+version = "0.1.0"
+authors = ["Gregory Comer <me@gregorycomer.com>"]
+
+[dependencies]
+lazy_static = "0.2"
+byteorder = "1"
