@@ -1,6 +1,6 @@
 use ::instruction::{BroadcastMode, MaskReg, MergeMode, Reg, RegScale, SegmentReg};
 
-#[derive(PartialEq, Eq, Clone, Debug)]
+#[derive(PartialEq, Eq, Clone, Debug, Copy)]
 pub enum Operand {
    Direct(Reg),
    Indirect(Reg, Option<OperandSize>, Option<SegmentReg>),

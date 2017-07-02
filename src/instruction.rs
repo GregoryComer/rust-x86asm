@@ -3,6 +3,7 @@ use ::{Mnemonic, Mode, ProcessorLevel, InstructionEncodingError};
 use ::instruction_def::{InstructionDefinition, find_instruction_def, OperandType};
 use ::operand::{Operand, OperandSize};
 
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct Instruction {
     pub mnemonic: Mnemonic,
     pub operand1: Option<Operand>,
@@ -13,6 +14,51 @@ pub struct Instruction {
 }
 
 impl Instruction {
+    pub fn new0(mnemonic: Mnemonic) -> Instruction {
+        Instruction {
+            mnemonic: mnemonic,
+            ..Default::default()
+        }
+    }
+    
+    pub fn new1(mnemonic: Mnemonic, operand1: Operand) -> Instruction {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            ..Default::default()
+        }
+    }
+    
+    pub fn new2(mnemonic: Mnemonic, operand1: Operand, operand2: Operand) -> Instruction {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            ..Default::default()
+        }
+    }
+
+    pub fn new3(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand) -> Instruction {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            operand3: Some(operand3),
+            ..Default::default()
+        }
+    }
+
+    pub fn new4(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, operand4: Operand) -> Instruction {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            operand3: Some(operand3),
+            operand4: Some(operand4),
+            ..Default::default()
+        }
+    }
+
     pub fn encode<W>(&self, writer: &mut W, mode: Mode, proc_level: ProcessorLevel) -> Result<usize, InstructionEncodingError> 
         where W: Write {
         let encoding = find_instruction_def(&self, mode, proc_level)?;
@@ -52,7 +98,7 @@ impl RoundingMode {
     }
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct InstructionFlags {
     pub lock: bool,
     pub rounding_mode: Option<RoundingMode>,
