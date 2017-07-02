@@ -34,7 +34,6 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode, proc_level: Process
         let mut max: Option<(u32, _)> = None;
         let mut op_size = None;
         for enc_match in encoding_matches {
-            println!("Match: {:x} ({:?}), {:?}", enc_match.0.primary_opcode, enc_match.0.mnemonic, enc_match.1);
             match enc_match.1 {
                 InstructionMatch::Match(size) => {
                     // If there are multiple possible matches, it's ambiguous
@@ -81,7 +80,7 @@ pub struct InstructionDefinition {
     pub secondary_opcode: Option<u8>,
     pub flags: InstructionDefinitionFlags,
     pub opcode_ext: Option<u8>,
-    pub has_r: bool,
+    pub has_destination: bool,
     pub proc_start: Option<ProcessorLevel>,
     pub proc_end: Option<ProcessorLevel>,
     pub mode: Mode,
@@ -97,10 +96,10 @@ pub struct InstructionDefinition {
     pub allow_rounding_mode: bool,
     pub allow_sae: bool,
     pub allowed_broadcast: Option<BroadcastMode>,
-    pub source: Option<OperandDescription>,
-    pub source2: Option<OperandDescription>,
-    pub source3: Option<OperandDescription>,
-    pub destination: Option<OperandDescription>
+    pub operand1: Option<OperandDescription>,
+    pub operand2: Option<OperandDescription>,
+    pub operand3: Option<OperandDescription>,
+    pub operand4: Option<OperandDescription>,
 }
 
 impl InstructionDefinition {
@@ -110,10 +109,10 @@ impl InstructionDefinition {
     }
 
     pub fn matches_instruction(&self, instr: &Instruction, mode: Mode, proc_level: ProcessorLevel) -> InstructionMatch {
-       let operand_pairs = [(&self.source, &instr.source),
-        (&self.source2, &instr.source2),
-        (&self.source3, &instr.source3),
-        (&self.destination, &instr.destination)];
+       let operand_pairs = [(&self.operand1, &instr.operand1),
+        (&self.operand2, &instr.operand2),
+        (&self.operand3, &instr.operand3),
+        (&self.operand4, &instr.operand4)];
 
        // Check mode
        if !(match mode {
@@ -173,11 +172,11 @@ impl InstructionDefinition {
             .map(|tuple| (tuple.0, tuple.1, match *tuple.0 {
                 // If there's an expected operand, test the provided one against it
                 Some(op_def) => Some(op_def.matches_operand(tuple.1, mode, 
-                    // Some operations use sign extend to dest to mean sign extend to other source
-                    instr.destination.as_ref().and_then(|d| d.size() ).or(instr.source.as_ref().and_then(|s| s.size() ) ))),
+                    // Some operations use sign extend to op1 to mean sign extend to other operand2
+                    instr.operand1.as_ref().and_then(|d| d.size() ).or(instr.operand2.as_ref().and_then(|s| s.size() ) ))),
                 // If there's no operand expected, but one was provided, it's an error
                 None => tuple.1.as_ref().map(|_| false )
-            }) ).inspect(|match_tuple| println!("Operand Match: {:?}", match_tuple) );
+            }) );
 
         if !op_matches.filter_map(|tuple| tuple.2).all(|v| v) {
             return InstructionMatch::NoMatch;
@@ -211,7 +210,7 @@ impl InstructionDefinition {
                     }
                 })}) {
                     Ok((_, v_size)) => v_size,
-                    Err(InstructionEncodingError::MismatchedSize) => { println!("Vector size mismatch."); return InstructionMatch::NoMatch },
+                    Err(InstructionEncodingError::MismatchedSize) => { return InstructionMatch::NoMatch }, // Vector size mismatch
                     _ => panic!("Internal error") // Shouldn't be possible
                 };
 
@@ -230,7 +229,7 @@ impl InstructionDefinition {
                 .filter_map(|x| x).next() {
 
             if let Some(bcst) = self.allowed_broadcast {
-                if bcst != broadcast_mode { println!("Disallowed broadcast mode."); return InstructionMatch::NoMatch; }
+                if bcst != broadcast_mode { return InstructionMatch::NoMatch; } // Disallowed broadcast mode
             } else if let Some(v_size) = vector_size {
                 if let Some(o_size) = op.size() {
                     if !(v_size.bits() == o_size.bits() * match broadcast_mode {
@@ -238,7 +237,7 @@ impl InstructionDefinition {
                         BroadcastMode::Broadcast1To4 => 4,
                         BroadcastMode::Broadcast1To8 => 8,
                         BroadcastMode::Broadcast1To16 => 16
-                    }) { println!("Broadcast mismatch: {:?} * {:?} != {:?}", op.size(), broadcast_mode, v_size); return InstructionMatch::NoMatch; }
+                    }) { return InstructionMatch::NoMatch; } // Broadcast mode mismatch
                 }
             }
         }
@@ -246,10 +245,11 @@ impl InstructionDefinition {
         // Check avx semantics (sae/rounding mode)
         let has_memory_operands = operand_pairs.iter().any(|pair| pair.1.as_ref().map(|o| o.is_memory()).unwrap_or(false));
         let has_avx_operands = operand_pairs.iter().any(|pair| pair.0.map(|o| o.operand_type == OperandType::AVX).unwrap_or(false));
-        if instr.flags.sae && !self.allow_sae { println!("SAE invalid."); return InstructionMatch::NoMatch; }
+        if instr.flags.sae && !self.allow_sae { return InstructionMatch::NoMatch; } // SAE invalid
         if instr.flags.rounding_mode.is_some() && (!self.allow_rounding_mode || has_memory_operands ||
             (has_avx_operands && vector_size.map(|v| v != OperandSize::ZMMword).unwrap_or(false))) {
-            println!("Rounding mode invalid: r_m: {:?} v_s: {:?} mem_ops: {:?} avx_ops: {:?} allow_r_m: {:?}.", instr.flags.rounding_mode, vector_size, has_memory_operands, has_avx_operands, self.allow_rounding_mode); return InstructionMatch::NoMatch; };
+            return InstructionMatch::NoMatch; // Invalid rounding mode
+        };
 
         let op_size = operand_pairs.iter().filter_map(|t| t.0.and_then(|def| def.get_size(op_size_pref, false, vector_size, mode ))).max_by_key(|s| s.bits() );
 
@@ -266,7 +266,7 @@ impl InstructionDefinition {
             if op.and_then(|op| op.fixed_operand).is_some() { 1 } else { 0 }
         }
 
-        *(&[self.source, self.source2, self.source3, self.destination].iter()
+        *(&[self.operand2, self.operand3, self.operand4, self.operand1].iter()
             .fold(0, |acc, op| acc + test_op(op)))
     }
 }
@@ -296,7 +296,7 @@ pub struct OperandDescription {
 }
 
 impl OperandDescription {
-    fn matches_operand(&self, operand: &Option<Operand>, mode: Mode, dest_size: Option<OperandSize>) -> bool {
+    fn matches_operand(&self, operand: &Option<Operand>, mode: Mode, op1_size: Option<OperandSize>) -> bool {
         if !(match self.addressing_mode { // Check addressing mode
            OperandAddressingMode::A   => test_op(operand, |op| op.is_far_pointer() ),
            OperandAddressingMode::BA  => operand.is_none(),
@@ -353,8 +353,8 @@ impl OperandDescription {
                 Operand::Direct(reg) => reg.is_avx(),
                 _ => false
            }),
-           OperandAddressingMode::AVXMemRm => test_op(operand, |op| (op.is_avx() && !op.is_avx_dest()) || op.is_memory()),
-           OperandAddressingMode::AVXReg => test_op(operand, |op| op.is_avx() && !op.is_avx_dest() && !op.is_memory()),
+           OperandAddressingMode::AVXMemRm => test_op(operand, |op| (op.is_avx() && !op.is_avx_op1()) || op.is_memory()),
+           OperandAddressingMode::AVXReg => test_op(operand, |op| op.is_avx() && !op.is_avx_op1() && !op.is_memory()),
            OperandAddressingMode::AVXDestMemRm => test_op(operand, |op| op.is_memory()),
            OperandAddressingMode::MaskedMaskReg => test_op(operand, |op| match *op {
                Operand::Direct(reg) |
@@ -391,7 +391,7 @@ impl OperandDescription {
                     } else { true }
                ),
            OperandAddressingMode::Fixed => true // Checking of fixed operands is done in operand type check
-        }) { println!("Addressing mode mismatch."); return false; }
+        }) { return false; } // Addressing mode mismatch
 
         if let Some(fixed_op) = self.fixed_operand {
             if operand.is_some() {
@@ -450,7 +450,7 @@ impl OperandDescription {
                     } else {
                         false
                     })
-                }) { println!("Fixed operand mismatch."); return false; }
+                }) { return false; } // Fixed operand mismatch
             } else {
                 // Skip operand type check for implied fixed operands
                 return true; 
@@ -856,7 +856,7 @@ pub enum OperandAddressingMode {
     AVXMemBcst32Rm,  // AVX register, AVXword memory, or 32-bit broadcast, encoded in ModR/M:Rm
     AVXMemBcst64Rm,  // AVX register, AVXword memory, or 64-bit broadcast, encoded in ModR/M:Rm
     AVXImm8,    // AVX register encoded in Imm8[7:4]
-    AVXDestMemRm,   // AVX memory destination encoded in ModR/M:Rm
+    AVXDestMemRm,   // AVX memory operand1 encoded in ModR/M:Rm
     AVXRegMaskedRm, // Masked AVX register encoded in ModR/M:Rm
     MaskedMaskReg,  // Masked mask register encoded in ModR/M:Reg
     MaskReg,    // Mask register encoded in ModR/M:Reg

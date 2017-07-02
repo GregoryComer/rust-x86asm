@@ -185,7 +185,7 @@ impl Operand {
         }
     }
 
-    pub fn is_avx_dest(&self) -> bool {
+    pub fn is_avx_op1(&self) -> bool {
         match *self {
             Operand::AVXDestination(..) |
             Operand::AVXDestinationIndirect(..) |

@@ -94,7 +94,7 @@ fn parse_opcode<R: Read>(reader: &mut EventReader<R>, opcode: u8, is_two_byte_op
             XmlEvent::StartElement { name, attributes, .. } => {
                 match name.local_name.as_ref() {
                     "entry" => {
-                        // In the source document, there is a entry indicating that 0F functions as
+                        // In the operand2 document, there is a entry indicating that 0F functions as
                         // the two-byte opcode prefix. We don't want to parse this.
                         if !attr_has_value(&attributes, "ref", "two-byte") {
                             // Source document indicates that opcodes are invalid in long mode with
@@ -157,7 +157,6 @@ fn parse_opcode_entry<R: Read>(reader: &mut EventReader<R>, attributes: &Vec<Own
     let can_lock = get_attr_as_bool(&attributes, "lock")?;
     let mem_format = get_attr_as_bin(&attributes, "mem_format")?;
     let tttn = get_attr_as_bin(&attributes, "tttn")?;
-    let has_r = get_attr_as_bool(&attributes, "r")?.unwrap_or(false);
 
     while let Ok(e) = reader.next() {
         match e {
@@ -218,7 +217,7 @@ fn parse_opcode_entry<R: Read>(reader: &mut EventReader<R>, attributes: &Vec<Own
                 mem_format: mem_format
             },
             opcode_ext: opcode_ext,
-            has_r: has_r,
+            has_destination: block.has_destination,
             proc_start: proc_start,
             proc_end: proc_end,
             mode: mode.unwrap_or(Mode::Real),
@@ -235,28 +234,29 @@ fn parse_opcode_entry<R: Read>(reader: &mut EventReader<R>, attributes: &Vec<Own
             allow_sae: false,
             allowed_broadcast: None,
             mnemonic: block.mnemonic,
-            source: block.source,
-            source2: block.source2,
-            source3: block.source3,
-            destination: block.destination
+            operand1: block.operand1,
+            operand2: block.operand2,
+            operand3: block.operand3,
+            operand4: block.operand4,
         }
     }).collect())
 }
 
 struct SyntaxBlock {
     mnemonic: Mnemonic,
-    source: Option<OperandDescription>,
-    source2: Option<OperandDescription>,
-    source3: Option<OperandDescription>,
-    destination: Option<OperandDescription>
+    operand1: Option<OperandDescription>,
+    operand2: Option<OperandDescription>,
+    operand3: Option<OperandDescription>,
+    operand4: Option<OperandDescription>,
+    has_destination: bool
 }
 
 fn parse_syntax_block<R: Read>(reader: &mut EventReader<R>) -> Result<SyntaxBlock, &'static str> {
     let mut mnemonic: Option<Mnemonic> = None;
-    let mut source: Option<OperandDescription> = None;
-    let mut source2: Option<OperandDescription> = None;
-    let mut source3: Option<OperandDescription> = None;
-    let mut destination: Option<OperandDescription> = None;
+    let mut operand1: Option<OperandDescription> = None;
+    let mut operand2: Option<OperandDescription> = None;
+    let mut operand3: Option<OperandDescription> = None;
+    let mut operand4: Option<OperandDescription> = None;
 
     while let Ok(e) = reader.next() {
         match e {
@@ -271,16 +271,16 @@ fn parse_syntax_block<R: Read>(reader: &mut EventReader<R>) -> Result<SyntaxBloc
                     },
                    "dst" => {
                         if get_attr_val(&attributes, "displayed").is_none() {
-                            destination = parse_operand_description(reader, &attributes).map(Some)?;
+                            operand1 = parse_operand_description(reader, &attributes).map(Some)?;
                         }
                     },
                     "src" => {
                         if get_attr_val(&attributes, "displayed").is_none() {
                             let operand = parse_operand_description(reader, &attributes).map(Some)?;
-                            if source.is_none() { source = operand; }
-                            else if source2.is_none() { source2 = operand; }
-                            else if source3.is_none() { source3 = operand; }
-                            else { return Err("Can't process more than three source operands."); }
+                            if operand2.is_none() { operand2 = operand; }
+                            else if operand3.is_none() { operand3 = operand; }
+                            else if operand4.is_none() { operand4 = operand; }
+                            else { return Err("Can't process more than three operand2 operands."); }
                         }
                     },
                     "syntax" => { break; },
@@ -297,12 +297,24 @@ fn parse_syntax_block<R: Read>(reader: &mut EventReader<R>) -> Result<SyntaxBloc
         }
     }
 
+    // Parsing logic treats operand1 as operand1. If no operand1 operand
+    // exists, but there are other operands, shift the operands down so that
+    // the first operand is operand1.
+    let has_destination = if operand1.is_none() && operand2.is_some() {
+        operand1 = operand2;
+        operand2 = operand3;
+        operand3 = operand4;
+        operand4 = None;
+        false
+    } else { true };
+
     Ok(SyntaxBlock {
         mnemonic: mnemonic.ok_or("Syntax block is missing mnemonic.")?,
-        source: source,
-        source2: source2,
-        source3: source3,
-        destination: destination
+        operand1: operand1,
+        operand2: operand2,
+        operand3: operand3,
+        operand4: operand4,
+        has_destination: has_destination
     })
 }
 
@@ -469,7 +481,7 @@ fn parse_operand_description<R: Read>(reader: &mut EventReader<R>, attributes: &
         operand_type = Some(OperandType::FpuRegister); 
     }
     
-    // Addressing mode is not specified for some fixed operands in the source document.
+    // Addressing mode is not specified for some fixed operands in the operand2 document.
     if addressing_mode.is_none() {
         if fixed_operand.is_some() {
             addressing_mode = Some(OperandAddressingMode::Fixed);

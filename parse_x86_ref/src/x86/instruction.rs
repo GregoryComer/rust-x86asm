@@ -4,10 +4,10 @@ use std::io::Write;
 
 pub struct Instruction {
     pub mnemonic: Mnemonic,
-    pub source: Option<Operand>,
-    pub source2: Option<Operand>,
-    pub source3: Option<Operand>,
-    pub destination: Option<Operand>,
+    pub operand2: Option<Operand>,
+    pub operand3: Option<Operand>,
+    pub operand4: Option<Operand>,
+    pub operand1: Option<Operand>,
     pub flags: InstructionFlags,
 }
 
@@ -98,10 +98,10 @@ impl Operand {
     }
 
     // Operand size, taking in to account sign extension (based on addressing mode)
-    pub fn real_size(&self, operand_type: OperandType, mode: Mode, dest_size: OperandSize) -> OperandSize {
+    pub fn real_size(&self, operand_type: OperandType, mode: Mode, op1_size: OperandSize) -> OperandSize {
         match operand_type {
-            // Sign extend to destination operand size
-            OperandType::BS => dest_size,
+            // Sign extend to operand1 operand size
+            OperandType::BS => op1_size,
             
             // Sign extend to 64 bits
             OperandType::BSQ |

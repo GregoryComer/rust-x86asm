@@ -43,7 +43,7 @@ Should I add this comment?
 
 LAR, LSL:
 Should I add this comment?
-"For all loads (regardless of source or destination sizing) only bits 16-0 are used. Other bits are ignored."
+"For all loads (regardless of operand2 or operand1 sizing) only bits 16-0 are used. Other bits are ignored."
 
 -->
 
@@ -14673,7 +14673,7 @@ Should I add this comment?
 
   </two-byte>
 
-  <!-- General and ring notes are not a part of public XML source -->
+  <!-- General and ring notes are not a part of public XML operand2 -->
 
   <gen_notes>
     <gen_note id="gen_note_opcd_POP_CS_0F"/>

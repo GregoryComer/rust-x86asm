@@ -1,7 +1,74 @@
 use std::io::Write;
-use ::{Instruction, Mode, Operand, OperandSize, ProcessorLevel, Reg, RegScale};
+use ::{Instruction, Mnemonic, Mode, Operand, OperandSize, ProcessorLevel, Reg, RegScale};
 use ::instruction_buffer::{ImmediateValue, InstructionBuffer, Prefix1, Prefix2};
-use ::instruction_def::{InstructionDefinition, OperandAddressingMode, OperandDescription, OpSize64Behavior };
+use ::instruction_def::{InstructionDefinition, OperandAddressingMode, OperandDescription, OpSize64Behavior};
+
+pub struct InstructionWriter<T: Write> {
+    writer: T,
+    mode: Mode,
+    proc_level: ProcessorLevel
+}
+
+impl<T: Write> InstructionWriter<T> {
+    pub fn new(writer: T, mode: Mode) -> InstructionWriter<T> {
+        InstructionWriter {
+            writer: writer,
+            mode: mode,
+            proc_level: ProcessorLevel::Corei7
+        }
+    }
+
+    pub fn get_inner_writer_ref(&self) -> &T { &self.writer }
+
+    pub fn write(&mut self, instr: &Instruction) -> Result<usize, InstructionEncodingError> {
+        instr.encode(&mut self.writer, self.mode, self.proc_level)
+    }
+
+    pub fn write0(&mut self, mnemonic: Mnemonic) -> Result<usize, InstructionEncodingError> {
+        Instruction {
+            mnemonic: mnemonic,
+            .. Default::default()
+        } .encode(&mut self.writer, self.mode, self.proc_level)
+    }
+
+    pub fn write1(&mut self, mnemonic: Mnemonic, operand1: Operand) -> Result<usize, InstructionEncodingError> {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            .. Default::default()
+        } .encode(&mut self.writer, self.mode, self.proc_level)
+    }
+
+    pub fn write2(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand) -> Result<usize, InstructionEncodingError> {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            .. Default::default()
+        } .encode(&mut self.writer, self.mode, self.proc_level)
+    }
+
+    pub fn write3(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand) -> Result<usize, InstructionEncodingError> {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            operand3: Some(operand3),
+            .. Default::default()
+        } .encode(&mut self.writer, self.mode, self.proc_level)
+    }
+
+    pub fn write4(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, operand4: Operand) -> Result<usize, InstructionEncodingError> {
+        Instruction {
+            mnemonic: mnemonic,
+            operand1: Some(operand1),
+            operand2: Some(operand2),
+            operand3: Some(operand3),
+            operand4: Some(operand4),
+            .. Default::default()
+        } .encode(&mut self.writer, self.mode, self.proc_level)
+    }
+}
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum InstructionEncodingError {
@@ -15,7 +82,6 @@ pub enum InstructionEncodingError {
 }
 
 pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDescription, op: &Option<Operand>, mode: Mode, proc_level: ProcessorLevel) -> Result<(), InstructionEncodingError> {
-        println!("encode() op: {:?}, addr: {:?}, type: {:?}", op, def.addressing_mode, def.operand_type);
         match def.addressing_mode {
             OperandAddressingMode::A => { // Direct memory address w/ segment selector
                 buffer.add_immediate(match *op.as_ref().expect("Missing operand.") {
@@ -191,10 +257,10 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
     where W : Write {
     let mut buffer: InstructionBuffer = Default::default(); 
 
-    let operand_pairs = [(&def.source, &instr.source),
-        (&def.source2, &instr.source2),
-        (&def.source3, &instr.source3),
-        (&def.destination, &instr.destination)];
+    let operand_pairs = [(&def.operand1, &instr.operand1),
+        (&def.operand2, &instr.operand2),
+        (&def.operand3, &instr.operand3),
+        (&def.operand4, &instr.operand4)];
 
     if instr.flags.lock { buffer.prefix1 = Some(Prefix1::Lock); }
     // TODO Rep prefixes
@@ -271,7 +337,7 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
             },
             _ => panic!("Invalid vector size.")
         }
-    } else { println!("No vector size"); }
+    }
 
     // Segment register
     let seg_reg_acc = operand_pairs.iter().filter(|t| t.0.map(|o| o.fixed_operand.is_none()).unwrap_or(true))
@@ -283,13 +349,20 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
         buffer.set_segment_override(seg_reg);
     }
         
-    if let Some(ref op) = def.source { encode_operand(&mut buffer, op, &instr.source, mode, proc_level)?; }
-    if let Some(ref op) = def.source2 { encode_operand(&mut buffer, op, &instr.source2, mode, proc_level)?; }
-    if let Some(ref op) = def.source3 { encode_operand(&mut buffer, op, &instr.source3, mode, proc_level)?; }
-    if let Some(ref op) = def.destination { encode_operand(&mut buffer, op, &instr.destination, mode, proc_level)?; }
+    if def.has_destination {
+        if let Some(ref op) = def.operand2 { encode_operand(&mut buffer, op, &instr.operand2, mode, proc_level)?; }
+        if let Some(ref op) = def.operand3 { encode_operand(&mut buffer, op, &instr.operand3, mode, proc_level)?; }
+        if let Some(ref op) = def.operand4 { encode_operand(&mut buffer, op, &instr.operand4, mode, proc_level)?; }
+        if let Some(ref op) = def.operand1 { encode_operand(&mut buffer, op, &instr.operand1, mode, proc_level)?; }
+    } else {
+        if let Some(ref op) = def.operand1 { encode_operand(&mut buffer, op, &instr.operand1, mode, proc_level)?; }
+        if let Some(ref op) = def.operand2 { encode_operand(&mut buffer, op, &instr.operand2, mode, proc_level)?; }
+        if let Some(ref op) = def.operand3 { encode_operand(&mut buffer, op, &instr.operand3, mode, proc_level)?; }
+        if let Some(ref op) = def.operand4 { encode_operand(&mut buffer, op, &instr.operand4, mode, proc_level)?; }
+    }
 
     if let Some(op_ext) = def.opcode_ext {
-        // Seems like the source document uses secondary opcodes as a special case of mod/rm
+        // Seems like the operand2 document uses secondary opcodes as a special case of mod/rm
         // bytes in some cases? TODO Look into this more
         if def.secondary_opcode.is_none() || buffer.mod_rm_mod.is_some() || buffer.mod_rm_rm.is_some() {
             buffer.mod_rm_reg = Some(op_ext);
@@ -421,7 +494,6 @@ fn encode_indirect(buffer: &mut InstructionBuffer, base: Option<Reg>, index: Opt
 }
 
 fn encode_indirect_16(buffer: &mut InstructionBuffer, reg1: Option<Reg>, reg2: Option<Reg>, displacement: u64, mode: Mode) -> Result<(), InstructionEncodingError> {
-    println!("enc_ind_16. reg1: {:?}, reg2: {:?}, disp: {:?}", reg1, reg2, displacement);
     let rm = match (reg1, reg2) {
         (Some(Reg::BX), Some(Reg::SI))  => 0,
         (Some(Reg::BX), Some(Reg::DI))  => 1,

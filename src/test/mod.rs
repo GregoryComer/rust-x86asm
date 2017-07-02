@@ -22,14 +22,14 @@ fn encode16_helper(instr: &Instruction, expected: &Vec<u8>) {
     assert_eq!(buffer.get_ref(), expected);
 }
 
-fn encode16_helper_ds(mnemonic: Mnemonic, destination: Operand, source: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?}", mnemonic, destination, source);
+fn encode16_helper2(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?}", mnemonic, operand1, operand2);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: None,
-        source3: None,
-        destination: Some(destination),
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: None,
+        operand4: None,
         flags: Default::default()
     };
     encode16_helper(&instr, expected);
@@ -41,156 +41,103 @@ fn encode32_helper(instr: &Instruction, expected: &Vec<u8>) {
     assert_eq!(buffer.get_ref(), expected);
 }
 
-fn encode32_helper_empty(mnemonic: Mnemonic, expected: &Vec<u8>) {
+fn encode32_helper0(mnemonic: Mnemonic, expected: &Vec<u8>) {
     println!(" * * * * {:?}", mnemonic);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: None,
-        source2: None,
-        source3: None,
-        destination: None,
+        operand2: None,
+        operand3: None,
+        operand4: None,
+        operand1: None,
         flags: Default::default()
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_d(mnemonic: Mnemonic, dest: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?}", mnemonic, dest);
+fn encode32_helper1(mnemonic: Mnemonic, op1: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?}", mnemonic, op1);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: None,
-        source2: None,
-        source3: None,
-        destination: Some(dest),
+        operand1: Some(op1),
+        operand2: None,
+        operand3: None,
+        operand4: None,
+        flags: Default::default()
+    };
+    encode32_helper(&instr, expected);
+}
+fn encode32_helper2(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?}", mnemonic, operand1, operand2);
+    let instr = Instruction {
+        mnemonic: mnemonic,
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: None,
+        operand4: None,
         flags: Default::default()
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_s(mnemonic: Mnemonic, source: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?}", mnemonic, source);
+fn encode32_helper2_flags(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, flags: InstructionFlags, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, operand1, operand2, flags);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: None,
-        source3: None,
-        destination: None,
-        flags: Default::default()
-    };
-    encode32_helper(&instr, expected);
-}
-
-fn encode32_helper_ss(mnemonic: Mnemonic, source: Operand, source2: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?}", mnemonic, source, source2);
-    let instr = Instruction {
-        mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: None,
-        destination: None,
-        flags: Default::default()
-    };
-    encode32_helper(&instr, expected);
-}
-
-fn encode32_helper_ss_flags(mnemonic: Mnemonic, source: Operand, source2: Operand, flags: InstructionFlags, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, source, source2, flags);
-    let instr = Instruction {
-        mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: None,
-        destination: None,
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: None,
+        operand4: None,
         flags: flags
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_ds(mnemonic: Mnemonic, destination: Operand, source: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?}", mnemonic, destination, source);
+fn encode32_helper3(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, operand1, operand2, operand3);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: None,
-        source3: None,
-        destination: Some(destination),
-        flags: Default::default()
-    };
-    encode32_helper(&instr, expected);
-}
-
-fn encode32_helper_ds_flags(mnemonic: Mnemonic, destination: Operand, source: Operand, flags: InstructionFlags, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, destination, source, flags);
-    let instr = Instruction {
-        mnemonic: mnemonic,
-        source: Some(source),
-        source2: None,
-        source3: None,
-        destination: Some(destination),
-        flags: flags
-    };
-    encode32_helper(&instr, expected);
-}
-
-fn encode32_helper_dss(mnemonic: Mnemonic, destination: Operand, source: Operand, source2: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, destination, source, source2);
-    let instr = Instruction {
-        mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: None,
-        destination: Some(destination),
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: Some(operand3),
+        operand4: None,
         flags: Default::default(),
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_dss_flags(mnemonic: Mnemonic, destination: Operand, source: Operand, source2: Operand, flags: InstructionFlags, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?} {:?}", mnemonic, destination, source, source2, flags);
+fn encode32_helper3_flags(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, flags: InstructionFlags, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?} {:?} {:?}", mnemonic, operand1, operand2, operand3, flags);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: None,
-        destination: Some(destination),
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: Some(operand3),
+        operand4: None,
         flags: flags,
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_dsss(mnemonic: Mnemonic, destination: Operand, source: Operand, source2: Operand, source3: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?} {:?}", mnemonic, destination, source, source2, source3);
+fn encode32_helper4(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, operand4: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?} {:?} {:?}", mnemonic, operand1, operand2, operand3, operand4);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: Some(source3),
-        destination: Some(destination),
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: Some(operand3),
+        operand4: Some(operand4),
         flags: Default::default()
     };
     encode32_helper(&instr, expected);
 }
 
-fn encode32_helper_sss(mnemonic: Mnemonic, source: Operand, source2: Operand, source3: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?} {:?}", mnemonic, source, source2, source3);
+fn encode32_assert_ambiguous(mnemonic: Mnemonic, operand1: Option<Operand>, operand2: Option<Operand>, operand3: Option<Operand>, operand4: Option<Operand>) {
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: Some(source2),
-        source3: Some(source3),
-        destination: None,
-        flags: Default::default()
-    };
-    encode32_helper(&instr, expected);
-}
-
-fn encode32_assert_ambiguous(mnemonic: Mnemonic, destination: Option<Operand>, source: Option<Operand>, source2: Option<Operand>, source3: Option<Operand>) {
-    let instr = Instruction {
-        mnemonic: mnemonic,
-        source: source,
-        source2: source2,
-        source3: source3,
-        destination: destination,
+        operand1: operand1,
+        operand2: operand2,
+        operand3: operand3,
+        operand4: operand4,
         flags: Default::default()
     };
     let mut buffer = Cursor::new(Vec::new());
@@ -203,14 +150,14 @@ fn encode64_helper(instr: &Instruction, expected: &Vec<u8>) {
     assert_eq!(buffer.get_ref(), expected);
 }
 
-fn encode64_helper_ds(mnemonic: Mnemonic, destination: Operand, source: Operand, expected: &Vec<u8>) {
-    println!(" * * * * {:?} {:?} {:?}", mnemonic, destination, source);
+fn encode64_helper2(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, expected: &Vec<u8>) {
+    println!(" * * * * {:?} {:?} {:?}", mnemonic, operand1, operand2);
     let instr = Instruction {
         mnemonic: mnemonic,
-        source: Some(source),
-        source2: None,
-        source3: None,
-        destination: Some(destination),
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        operand3: None,
+        operand4: None,
         flags: Default::default()
     };
     encode64_helper(&instr, expected);

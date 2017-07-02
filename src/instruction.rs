@@ -1,14 +1,14 @@
 use std::io::Write;
-use ::{Mode, ProcessorLevel, Mnemonic, InstructionEncodingError};
+use ::{Mnemonic, Mode, ProcessorLevel, InstructionEncodingError};
 use ::instruction_def::{InstructionDefinition, find_instruction_def, OperandType};
 use ::operand::{Operand, OperandSize};
 
 pub struct Instruction {
     pub mnemonic: Mnemonic,
-    pub source: Option<Operand>,
-    pub source2: Option<Operand>,
-    pub source3: Option<Operand>,
-    pub destination: Option<Operand>,
+    pub operand1: Option<Operand>,
+    pub operand2: Option<Operand>,
+    pub operand3: Option<Operand>,
+    pub operand4: Option<Operand>,
     pub flags: InstructionFlags,
 }
 
@@ -17,6 +17,19 @@ impl Instruction {
         where W: Write {
         let encoding = find_instruction_def(&self, mode, proc_level)?;
         encoding.encode(writer, &self, mode, proc_level)
+    }
+}
+
+impl Default for Instruction {
+    fn default() -> Instruction {
+        Instruction {
+            mnemonic: Mnemonic::ADD, // Shouldn't ever need a default mnemonic, but compiler requires it.
+            operand1: None,
+            operand2: None,
+            operand3: None,
+            operand4: None,
+            flags: Default::default()
+        }
     }
 }
 

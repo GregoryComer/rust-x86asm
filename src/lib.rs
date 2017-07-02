@@ -10,7 +10,7 @@ mod mnemonic;
 mod operand;
 #[cfg(test)] mod test;
 
-pub use self::encoding::{InstructionEncodingError};
+pub use self::encoding::{InstructionEncodingError, InstructionWriter};
 pub use self::instruction::{ Instruction, Reg, RegScale, InstructionFlags, SegmentReg, MergeMode, MaskReg, BroadcastMode, RoundingMode };
 pub use self::operand::{Operand, OperandSize};
 pub use self::mnemonic::Mnemonic;

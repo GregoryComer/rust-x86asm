@@ -11,25 +11,25 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXImm8,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: %FIXED_PREFIX%, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: %SECONDARY_OPCODE%, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: %FIXED_PREFIX%, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: %SECONDARY_OPCODE%, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },

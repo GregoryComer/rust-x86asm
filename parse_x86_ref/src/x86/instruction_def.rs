@@ -92,7 +92,7 @@ pub struct InstructionDefinition {
     pub secondary_opcode: Option<u8>,
     pub flags: InstructionDefinitionFlags,
     pub opcode_ext: Option<u8>,
-    pub has_r: bool,
+    pub has_destination: bool,
     pub proc_start: Option<ProcessorLevel>,
     pub proc_end: Option<ProcessorLevel>,
     pub mode: Mode,
@@ -108,10 +108,10 @@ pub struct InstructionDefinition {
     pub allow_rounding_mode: bool,
     pub allow_sae: bool,
     pub allowed_broadcast: Option<BroadcastMode>,
-    pub source: Option<OperandDescription>,
-    pub source2: Option<OperandDescription>,
-    pub source3: Option<OperandDescription>,
-    pub destination: Option<OperandDescription>
+    pub operand2: Option<OperandDescription>,
+    pub operand3: Option<OperandDescription>,
+    pub operand4: Option<OperandDescription>,
+    pub operand1: Option<OperandDescription>
 }
 
 impl InstructionDefinition {
@@ -131,10 +131,10 @@ impl InstructionDefinition {
 
         println!("encode32() {:?}", self);
 
-        let operand_pairs = [(&self.source, &instr.source),
-            (&self.source2, &instr.source2),
-            (&self.source3, &instr.source3),
-            (&self.destination, &instr.destination)];
+        let operand_pairs = [(&self.operand2, &instr.operand2),
+            (&self.operand3, &instr.operand3),
+            (&self.operand4, &instr.operand4),
+            (&self.operand1, &instr.operand1)];
 
         if instr.flags.lock { buffer.prefix1 = Some(Prefix1::Lock); }
         // TODO Rep prefixes
@@ -158,13 +158,13 @@ impl InstructionDefinition {
             buffer.address_size_prefix = pref;
         }
        
-        if let Some(op) = self.source { op.encode(&mut buffer, &instr.source, mode, proc_level)?; }
-        if let Some(op) = self.source2 { op.encode(&mut buffer, &instr.source2, mode, proc_level)?; }
-        if let Some(op) = self.source3 { op.encode(&mut buffer, &instr.source3, mode, proc_level)?; }
-        if let Some(op) = self.destination { op.encode(&mut buffer, &instr.destination, mode, proc_level)?; }
+        if let Some(op) = self.operand2 { op.encode(&mut buffer, &instr.operand2, mode, proc_level)?; }
+        if let Some(op) = self.operand3 { op.encode(&mut buffer, &instr.operand3, mode, proc_level)?; }
+        if let Some(op) = self.operand4 { op.encode(&mut buffer, &instr.operand4, mode, proc_level)?; }
+        if let Some(op) = self.operand1 { op.encode(&mut buffer, &instr.operand1, mode, proc_level)?; }
 
         if let Some(op_ext) = self.opcode_ext {
-            // Seems like the source document uses secondary opcodes as a special case of mod/rm
+            // Seems like the operand2 document uses secondary opcodes as a special case of mod/rm
             // bytes in some cases? TODO Look into this more
             if self.secondary_opcode.is_none() {
                 buffer.mod_rm_reg = Some(op_ext);
@@ -177,10 +177,10 @@ impl InstructionDefinition {
     }
 
     pub fn matches_instruction(&self, instr: &Instruction, mode: Mode, proc_level: ProcessorLevel) -> InstructionMatch {
-       let operand_pairs = [(&self.source, &instr.source),
-        (&self.source2, &instr.source2),
-        (&self.source3, &instr.source3),
-        (&self.destination, &instr.destination)];
+       let operand_pairs = [(&self.operand2, &instr.operand2),
+        (&self.operand3, &instr.operand3),
+        (&self.operand4, &instr.operand4),
+        (&self.operand1, &instr.operand1)];
 
        // Check mode
        if !(match mode {
@@ -223,8 +223,8 @@ impl InstructionDefinition {
             .map(|tuple| (tuple.0, tuple.1, match *tuple.0 {
                 // If there's an expected operand, test the provided one against it
                 Some(op_def) => Some(op_def.matches_operand(tuple.1, mode, 
-                    // Some operations use sign extend to dest to mean sign extend to other source
-                    instr.destination.as_ref().map(|d| d.size() ).or(instr.source.as_ref().map(|s| s.size() ) ))),
+                    // Some operations use sign extend to op1 to mean sign extend to other operand2
+                    instr.operand1.as_ref().map(|d| d.size() ).or(instr.operand2.as_ref().map(|s| s.size() ) ))),
                 // If there's no operand expected, but one was provided, it's an error
                 None => tuple.1.as_ref().map(|_| OperandMatch::NoMatch )
             }) ).inspect(|match_tuple| println!("Operand Match: {:?}", match_tuple) );
@@ -301,10 +301,10 @@ impl InstructionDefinition {
             }
         }
         
-        if test_op(&self.source) { score += 1; } 
-        if test_op(&self.source2) { score += 1; } 
-        if test_op(&self.source3) { score += 1; } 
-        if test_op(&self.destination) { score += 1; } 
+        if test_op(&self.operand2) { score += 1; } 
+        if test_op(&self.operand3) { score += 1; } 
+        if test_op(&self.operand4) { score += 1; } 
+        if test_op(&self.operand1) { score += 1; } 
 
         score
     }
@@ -504,7 +504,7 @@ impl OperandDescription {
         Ok(())
     }
 
-    fn matches_operand(&self, operand: &Option<Operand>, mode: Mode, dest_size: Option<OperandSize>) -> OperandMatch {
+    fn matches_operand(&self, operand: &Option<Operand>, mode: Mode, op1_size: Option<OperandSize>) -> OperandMatch {
         if !(match self.addressing_mode { // Check addressing mode
            OperandAddressingMode::A   => test_op(operand, |op| op.is_far_pointer() ),
            OperandAddressingMode::BA  => operand.is_none(),
@@ -606,7 +606,7 @@ impl OperandDescription {
             OperandType::B      => test_op_size(operand, OperandSize::Byte),
             OperandType::BCD    => test_op_size(operand, OperandSize::Tbyte),
             OperandType::BS     => if let Some(ref op) = *operand {
-                if op.size() == OperandSize::Byte && dest_size.is_some() { OperandMatch::Match(dest_size) } // Sign extend to dest operand size
+                if op.size() == OperandSize::Byte && op1_size.is_some() { OperandMatch::Match(op1_size) } // Sign extend to op1 operand size
                 else { OperandMatch::NoMatch }
             } else { OperandMatch:: NoMatch },
             OperandType::BSQ    => if let Some(ref op) = *operand {
@@ -664,7 +664,7 @@ impl OperandDescription {
             OperandType::V      => test_op_size2(operand, OperandSize::Word, OperandSize::Dword),
             OperandType::VDS    =>  if let Some(ref op) = *operand {
                 if op.size() == OperandSize::Dword || op.size() == OperandSize::Word { 
-                    if dest_size.map(|d| d == OperandSize::Qword).unwrap_or(false) { OperandMatch::Match(Some(OperandSize::Qword)) } // Sign extend to 64 bits
+                    if op1_size.map(|d| d == OperandSize::Qword).unwrap_or(false) { OperandMatch::Match(Some(OperandSize::Qword)) } // Sign extend to 64 bits
                     else { OperandMatch::Match(Some(op.size())) }
                 } else { OperandMatch::NoMatch }
             } else { OperandMatch:: NoMatch },

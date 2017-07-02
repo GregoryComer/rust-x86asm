@@ -72,8 +72,6 @@ impl InstructionBuffer {
         // TODO Support vector sib (See Intel x86 manual - AVX)
         // TODO Support compressed displacement when EVEX is used (see Intel x86 - Vol. 2A 2-39)
 
-        println!("{:?}", self);
-
         let emit_evex = self.should_emit_evex();
         let emit_vex = !emit_evex && self.should_emit_vex();
         let emit_rex = !emit_evex && !emit_vex && self.should_emit_rex();
@@ -195,7 +193,6 @@ impl InstructionBuffer {
                          else if self.primary_opcode == 0x3A { 3 }
                          else { 1 };
 
-        println!("Emitting VEX: x: {:?}, b: {:?}, we: {:?}, ms: {:?}, pp: {:?}", vex_x, vex_b, vex_we, map_select, pp);
         // Select 2 or 3-byte form
         if vex_x.map(|x| x == 1).unwrap_or(true) &&
             vex_b.map(|b| b == 1).unwrap_or(true) &&

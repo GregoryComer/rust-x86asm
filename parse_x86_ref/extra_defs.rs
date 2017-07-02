@@ -12,22 +12,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VADDPD,
@@ -42,22 +42,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VADDPS
 InstructionDefinition { 
@@ -73,22 +73,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VADDPS,
@@ -103,22 +103,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VADDSD
 InstructionDefinition { 
@@ -134,22 +134,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VADDSD,
@@ -164,22 +164,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VADDSS
 InstructionDefinition { 
@@ -195,22 +195,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::SS,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VADDSS,
@@ -225,22 +225,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::SS,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VADDSUBPD
 InstructionDefinition { 
@@ -256,22 +256,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VADDSUBPS
 InstructionDefinition { 
@@ -287,22 +287,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VANDPD
 InstructionDefinition { 
@@ -318,22 +318,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VANDPD,
@@ -348,22 +348,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VANDPS
 InstructionDefinition { 
@@ -379,22 +379,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VANDPS,
@@ -409,22 +409,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VANDNPD
 InstructionDefinition { 
@@ -440,22 +440,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VANDNPD,
@@ -470,22 +470,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VANDNPS
 InstructionDefinition { 
@@ -501,22 +501,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VANDNPS,
@@ -531,22 +531,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VBLENDPD
 InstructionDefinition { 
@@ -563,27 +563,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VBLENDPS
 InstructionDefinition { 
@@ -600,27 +600,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VBLENDVPD
 InstructionDefinition { 
@@ -637,27 +637,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXImm8,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VBLENDVPS
 InstructionDefinition { 
@@ -674,27 +674,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXImm8,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCMPPD
 InstructionDefinition { 
@@ -711,27 +711,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCMPPD,
@@ -747,27 +747,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskedMaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCMPPS
 InstructionDefinition { 
@@ -784,27 +784,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCMPPS,
@@ -820,27 +820,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskedMaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCMPSD
 InstructionDefinition { 
@@ -857,27 +857,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCMPSD,
@@ -893,27 +893,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskedMaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::SD,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCMPSS
 InstructionDefinition { 
@@ -930,27 +930,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::SS,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCMPSS,
@@ -966,27 +966,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskedMaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::SS,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+     can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCOMISD
 InstructionDefinition { 
@@ -1003,19 +1003,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::V,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::W,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCOMISD,
@@ -1031,19 +1031,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::V,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::W,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCOMISS
 InstructionDefinition { 
@@ -1060,19 +1060,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::V,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::W,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCOMISS,
@@ -1088,19 +1088,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::V,
         operand_type: OperandType::SD,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::W,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTDQ2PD
 InstructionDefinition { 
@@ -1117,19 +1117,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTDQ2PD,
@@ -1145,19 +1145,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTDQ2PD,
@@ -1173,19 +1173,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To2),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::XMMorMemOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTDQ2PD,
@@ -1201,19 +1201,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To4),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::XMMorMemOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTDQ2PD,
@@ -1229,19 +1229,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To8),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::ZMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::YMMorMemOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTDQ2PS
 InstructionDefinition { 
@@ -1258,19 +1258,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTDQ2PS,
@@ -1286,19 +1286,19 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTPD2DQ
 InstructionDefinition { 
@@ -1315,19 +1315,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2DQ,
@@ -1343,19 +1343,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2DQ,
@@ -1371,19 +1371,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To2),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::XMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2DQ,
@@ -1399,19 +1399,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To4),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::YMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2DQ,
@@ -1427,19 +1427,19 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To8),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::ZMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCVTPD2PS
 InstructionDefinition { 
@@ -1456,19 +1456,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2PS,
@@ -1484,19 +1484,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::XMMorYMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPD2PS,
@@ -1512,19 +1512,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::ZMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCVTPS2DQ
 InstructionDefinition { 
@@ -1541,19 +1541,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPS2DQ,
@@ -1569,19 +1569,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTPS2PD
 InstructionDefinition { 
@@ -1598,19 +1598,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPS2PD,
@@ -1626,19 +1626,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPS2PD,
@@ -1654,19 +1654,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To2),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPS2PD,
@@ -1682,19 +1682,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To4),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::XMMorMemOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTPS2PD,
@@ -1710,19 +1710,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: Some(BroadcastMode::Broadcast1To8),
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::ZMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::YMMorMemOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTSD2SI
 InstructionDefinition { 
@@ -1739,19 +1739,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSD2SI,
@@ -1767,19 +1767,19 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTSD2SS
 InstructionDefinition { 
@@ -1796,23 +1796,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSD2SS,
@@ -1828,23 +1828,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCVTSI2SD
 InstructionDefinition { 
@@ -1861,23 +1861,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSI2SD,
@@ -1893,23 +1893,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VCVTSI2SS
 InstructionDefinition { 
@@ -1926,23 +1926,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSI2SS,
@@ -1958,23 +1958,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTSS2SD
 InstructionDefinition { 
@@ -1991,23 +1991,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSS2SD,
@@ -2023,23 +2023,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTSS2SI
 InstructionDefinition { 
@@ -2056,19 +2056,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTSS2SI,
@@ -2084,19 +2084,19 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VCVTTPD2DQ
 InstructionDefinition { 
@@ -2113,19 +2113,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTPD2DQ,
@@ -2141,19 +2141,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::XMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTPD2DQ,
@@ -2169,19 +2169,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::YMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTPD2DQ,
@@ -2197,19 +2197,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::ZMMorMemOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // CVTTPS2DQ
 InstructionDefinition { 
@@ -2226,19 +2226,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTPS2DQ,
@@ -2254,19 +2254,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // CVTTSD2SI
 InstructionDefinition { 
@@ -2283,19 +2283,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTSD2SI,
@@ -2311,19 +2311,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // CVTTSS2SI
 InstructionDefinition { 
@@ -2340,19 +2340,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VCVTTSS2SI,
@@ -2368,19 +2368,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: true,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VDIVPD
 InstructionDefinition { 
@@ -2397,23 +2397,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VDIVPD,
@@ -2429,23 +2429,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst64Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VDIVPS
 InstructionDefinition { 
@@ -2462,23 +2462,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VDIVPS,
@@ -2494,23 +2494,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::AVX,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemBcst32Rm,
         operand_type: OperandType::AVX,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VDIVSD
 InstructionDefinition { 
@@ -2527,23 +2527,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VDIVSD,
@@ -2559,23 +2559,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VDIVSS
 InstructionDefinition { 
@@ -2592,23 +2592,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VDIVSS,
@@ -2624,23 +2624,23 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // DPPD
 InstructionDefinition { 
@@ -2657,23 +2657,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VDPPD
 InstructionDefinition { 
@@ -2690,27 +2690,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // DPPS
 InstructionDefinition { 
@@ -2727,23 +2727,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VDPPS
 InstructionDefinition { 
@@ -2760,27 +2760,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VDPPS,
@@ -2796,27 +2796,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VHADDPD
 InstructionDefinition { 
@@ -2833,23 +2833,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VHADDPS
 InstructionDefinition { 
@@ -2866,23 +2866,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VHSUBPD
 InstructionDefinition { 
@@ -2899,23 +2899,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VHSUBPS
 InstructionDefinition { 
@@ -2932,23 +2932,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VINSERTPS
 InstructionDefinition { 
@@ -2965,27 +2965,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorYMMorMem32,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AAD
 InstructionDefinition { 
@@ -3002,15 +3002,15 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AAM
 InstructionDefinition { 
@@ -3027,15 +3027,15 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // ADCX
 InstructionDefinition { 
@@ -3052,19 +3052,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // ADOX
 InstructionDefinition { 
@@ -3081,19 +3081,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESDEC
 InstructionDefinition { 
@@ -3110,19 +3110,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESDEC
 InstructionDefinition { 
@@ -3139,23 +3139,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESDECLAST
 InstructionDefinition { 
@@ -3172,19 +3172,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESDECLAST
 InstructionDefinition { 
@@ -3201,23 +3201,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESENC
 InstructionDefinition { 
@@ -3234,19 +3234,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESENC
 InstructionDefinition { 
@@ -3263,23 +3263,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESENCLAST
 InstructionDefinition { 
@@ -3296,19 +3296,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESENCLAST
 InstructionDefinition { 
@@ -3325,23 +3325,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESIMC
 InstructionDefinition { 
@@ -3358,19 +3358,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESIMC
 InstructionDefinition { 
@@ -3387,19 +3387,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // AESKEYGENASSIST
 InstructionDefinition { 
@@ -3416,23 +3416,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VAESKEYGENASSIST
 InstructionDefinition { 
@@ -3449,23 +3449,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // ANDN
 InstructionDefinition { 
@@ -3482,23 +3482,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BEXTR
 InstructionDefinition { 
@@ -3515,23 +3515,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BLSI
 InstructionDefinition { 
@@ -3548,19 +3548,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(3), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(3), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BLSMSK
 InstructionDefinition { 
@@ -3577,19 +3577,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(2), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(2), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BLSR
 InstructionDefinition { 
@@ -3606,19 +3606,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(1), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(1), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDCL
 InstructionDefinition { 
@@ -3635,19 +3635,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDCU
 InstructionDefinition { 
@@ -3664,19 +3664,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDCN
 InstructionDefinition { 
@@ -3693,19 +3693,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDLDX
 InstructionDefinition { 
@@ -3722,19 +3722,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::UnsizedMemory,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDMK
 InstructionDefinition { 
@@ -3751,19 +3751,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::H,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDMOV
 InstructionDefinition { 
@@ -3780,19 +3780,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundMemRm,
         operand_type: OperandType::BoundOrMem,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::BNDMOV,
@@ -3808,19 +3808,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::BoundOrMem,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BNDSTX
 InstructionDefinition { 
@@ -3837,19 +3837,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::UnsizedMemory,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::BoundReg,
         operand_type: OperandType::Bound,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // BZHI
 InstructionDefinition { 
@@ -3866,23 +3866,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // CLAC
 InstructionDefinition { 
@@ -3899,11 +3899,11 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: None,
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand1: None,
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // CLFLUSHOPT
 InstructionDefinition { 
@@ -3920,15 +3920,15 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(7), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(7), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // CLWB
 InstructionDefinition { 
@@ -3945,15 +3945,15 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(6), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(6), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // INVPCID
 InstructionDefinition { 
@@ -3970,19 +3970,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // KADD
 InstructionDefinition { 
@@ -3999,23 +3999,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KADDW,
@@ -4031,23 +4031,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KADDD,
@@ -4063,23 +4063,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KADDQ,
@@ -4095,23 +4095,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KAND
 InstructionDefinition { 
@@ -4128,23 +4128,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDW,
@@ -4160,23 +4160,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDD,
@@ -4192,23 +4192,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDQ,
@@ -4224,23 +4224,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KANDN
 InstructionDefinition { 
@@ -4257,23 +4257,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDNW,
@@ -4289,23 +4289,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDND,
@@ -4321,23 +4321,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KANDNQ,
@@ -4353,23 +4353,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KNOTN
 InstructionDefinition { 
@@ -4386,19 +4386,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KNOTW,
@@ -4414,19 +4414,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KNOTD,
@@ -4442,19 +4442,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KNOTQ,
@@ -4470,19 +4470,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KOR
 InstructionDefinition { 
@@ -4499,23 +4499,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORW,
@@ -4531,23 +4531,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORD,
@@ -4563,23 +4563,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORQ,
@@ -4595,23 +4595,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KORTEST
 InstructionDefinition { 
@@ -4628,19 +4628,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORTESTW,
@@ -4656,19 +4656,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORTESTD,
@@ -4684,19 +4684,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KORTESTQ,
@@ -4712,19 +4712,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KSHIFTL
 InstructionDefinition { 
@@ -4741,23 +4741,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTLW,
@@ -4773,23 +4773,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTLD,
@@ -4805,23 +4805,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTLQ,
@@ -4837,23 +4837,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KSHIFTR
 InstructionDefinition { 
@@ -4870,23 +4870,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTRW,
@@ -4902,23 +4902,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTRD,
@@ -4934,23 +4934,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KSHIFTRQ,
@@ -4966,23 +4966,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KTEST
 InstructionDefinition { 
@@ -4999,19 +4999,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KTESTW,
@@ -5027,19 +5027,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KTESTD,
@@ -5055,19 +5055,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KTESTQ,
@@ -5083,19 +5083,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KXNOR
 InstructionDefinition { 
@@ -5112,23 +5112,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXNORW,
@@ -5144,23 +5144,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXNORD,
@@ -5176,23 +5176,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXNORQ,
@@ -5208,23 +5208,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KXOR
 InstructionDefinition { 
@@ -5241,23 +5241,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXORW,
@@ -5273,23 +5273,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXORD,
@@ -5305,23 +5305,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KXORQ,
@@ -5337,23 +5337,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KMOV
 InstructionDefinition { 
@@ -5370,19 +5370,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskMemRm,
         operand_type: OperandType::MaskOrMem8,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVW,
@@ -5398,19 +5398,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskMemRm,
         operand_type: OperandType::MaskOrMem16,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVD,
@@ -5426,19 +5426,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskMemRm,
         operand_type: OperandType::MaskOrMem32,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVQ,
@@ -5454,19 +5454,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskMemRm,
         operand_type: OperandType::MaskOrMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVB,
@@ -5482,19 +5482,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVW,
@@ -5510,19 +5510,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::W,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVD,
@@ -5538,19 +5538,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVQ,
@@ -5566,19 +5566,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVB,
@@ -5594,19 +5594,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralRm,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVW,
@@ -5622,19 +5622,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralRm,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVD,
@@ -5650,19 +5650,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralRm,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVQ,
@@ -5678,19 +5678,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralRm,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVB,
@@ -5706,19 +5706,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVW,
@@ -5734,19 +5734,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVD,
@@ -5762,19 +5762,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KMOVQ,
@@ -5790,19 +5790,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // KUNPCK
 InstructionDefinition { 
@@ -5819,23 +5819,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KUNPCKWD,
@@ -5851,23 +5851,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::KUNPCKDQ,
@@ -5883,23 +5883,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskReg,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskVex,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::MaskRm,
         operand_type: OperandType::MaskReg,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VLDDQU
 InstructionDefinition { 
@@ -5916,19 +5916,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::XMMorYMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VLDMXCSR
 InstructionDefinition { 
@@ -5945,15 +5945,15 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: None,
-    source: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::M,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: Some(2), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand2: None,
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: Some(2), proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // LZCNT
 InstructionDefinition { 
@@ -5970,19 +5970,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::VQP,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::VQP,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VEXTRACTPS
 InstructionDefinition { 
@@ -5999,23 +5999,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VMOVD
 InstructionDefinition { 
@@ -6032,19 +6032,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVD,
@@ -6060,19 +6060,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // VMOVQ
 InstructionDefinition { 
@@ -6089,19 +6089,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVQ,
@@ -6117,19 +6117,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::D,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // VMOVDDUP
 InstructionDefinition { 
@@ -6146,19 +6146,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVDDUP,
@@ -6174,19 +6174,19 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source2: None,
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: false, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: false, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVDDUP,
@@ -6201,18 +6201,18 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMMorMem64,
         fixed_operand: None
     }),
-    source2: None,
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVDDUP,
@@ -6227,18 +6227,18 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::YMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::YMM,
         fixed_operand: None
     }),
-    source2: None,
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::VMOVDDUP,
@@ -6253,18 +6253,18 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMaskedReg,
         operand_type: OperandType::ZMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::ZMM,
         fixed_operand: None
     }),
-    source2: None,
-     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
+    operand3: None,
+     can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, secondary_opcode: None, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Force64
 },
 // MULX
 InstructionDefinition { 
@@ -6281,22 +6281,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // PALIGNR
 InstructionDefinition { 
@@ -6313,22 +6313,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::P,
         operand_type: OperandType::Q,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::Q,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 InstructionDefinition { 
     mnemonic: Mnemonic::PALIGNR,
@@ -6344,22 +6344,22 @@ InstructionDefinition {
     allow_rounding_mode: true,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // PAND
 InstructionDefinition { 
@@ -6376,18 +6376,18 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::P,
         operand_type: OperandType::Q,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::Q,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source2: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
+    operand3: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
 // PANDN
 InstructionDefinition { 
     mnemonic: Mnemonic::PANDN,
@@ -6403,18 +6403,18 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::P,
         operand_type: OperandType::Q,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::Q,
         operand_type: OperandType::Q,
         fixed_operand: None
     }),
-    source2: None,
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
+    operand3: None,
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal
 },
 // PCLMULQDQ
 InstructionDefinition { 
@@ -6431,22 +6431,22 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, source3: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, operand4: None, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
 // VPCLMULQDQ
 InstructionDefinition { 
     mnemonic: Mnemonic::VPCLMULQDQ,
@@ -6462,27 +6462,27 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
         operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
         operand_type: OperandType::XMM,
         fixed_operand: None
     }),
-    source3: Some(OperandDescription {
+    operand4: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::I,
         operand_type: OperandType::B,
         fixed_operand: None
     }),
-    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
+    can_lock: false, fixed_prefix: None, flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
 // PDEP
 InstructionDefinition { 
     mnemonic: Mnemonic::PDEP,
@@ -6498,23 +6498,23 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF2), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
 // PEXT
 InstructionDefinition { 
     mnemonic: Mnemonic::PEXT,
@@ -6530,20 +6530,20 @@ InstructionDefinition {
     allow_rounding_mode: false,
     allow_sae: false,
     allowed_broadcast: None,
-    destination: Some(OperandDescription {
+    operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::G,
         operand_type: OperandType::DQP,
         fixed_operand: None,
     }),
-    source: Some(OperandDescription {
+    operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::GeneralVex,
         operand_type: OperandType::DQP,
         fixed_operand: None,
     }),
-    source2: Some(OperandDescription {
+    operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::E,
         operand_type: OperandType::DQP,
         fixed_operand: None
     }),
-    source3: None,
-    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_r: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
+    operand4: None,
+    can_lock: false, fixed_prefix: Some(0xF3), flags: InstructionDefinitionFlags { mem_format: None, tttn: None }, force_addr_size_prefix: false, has_destination: true, opcode_ext: None, proc_end: None, ring_level: RingLevel::Ring3, valid_in_long_mode: true, op_size_64_behavior: OpSize64Behavior::Normal },
