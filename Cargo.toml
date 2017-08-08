@@ -6,3 +6,4 @@ authors = ["Gregory Comer <me@gregorycomer.com>"]
 [dependencies]
 lazy_static = "0.2"
 byteorder = "1"
+arrayvec = "0.3.23"

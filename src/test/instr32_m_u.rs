@@ -106,12 +106,12 @@ fn instr_mov() {
     encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::SS), Operand::Direct(Reg::BX), &vec![0x8E, 0xD3]); // MOV SS, BX
     // TODO Test the next 3 instructions with dword-sized addresses (to test the non-addres size
     // prefix encoding)
-    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::AL), Operand::Memory(0x12, Some(OperandSize::Byte), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0xA0, 0x12, 0x00]); // MOV AL, ES:0x12
-    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::AX), Operand::Memory(0x12, Some(OperandSize::Word), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0x66, 0xA1, 0x12, 0x00]); // MOV AX, ES:0x12
-    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::EAX), Operand::Memory(0x12, Some(OperandSize::Dword), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0xA1, 0x12, 0x00]); // MOV EAX, ES:0x12
-    encode32_helper2(Mnemonic::MOV, Operand::Memory(0x12, Some(OperandSize::Byte), Some(SegmentReg::ES)), Operand::Direct(Reg::AL), &vec![0x26, 0x67, 0xA2, 0x12, 0x00]); // MOV ES:0x12, AL
-    encode32_helper2(Mnemonic::MOV, Operand::Memory(0x12, Some(OperandSize::Word), Some(SegmentReg::ES)), Operand::Direct(Reg::AX), &vec![0x26, 0x67, 0x66, 0xA3, 0x12, 0x00]); // MOV ES:0x12, AX
-    encode32_helper2(Mnemonic::MOV, Operand::Memory(0x12, Some(OperandSize::Dword), Some(SegmentReg::ES)), Operand::Direct(Reg::EAX), &vec![0x26, 0x67, 0xA3, 0x12, 0x00]); // MOV ES:0x12, EAX
+    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::AL), Operand::Offset(0x12, Some(OperandSize::Byte), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0xA0, 0x12, 0x00]); // MOV AL, ES:0x12
+    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::AX), Operand::Offset(0x12, Some(OperandSize::Word), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0x66, 0xA1, 0x12, 0x00]); // MOV AX, ES:0x12
+    encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::EAX), Operand::Offset(0x12, Some(OperandSize::Dword), Some(SegmentReg::ES)), &vec![0x26, 0x67, 0xA1, 0x12, 0x00]); // MOV EAX, ES:0x12
+    encode32_helper2(Mnemonic::MOV, Operand::Offset(0x12, Some(OperandSize::Byte), Some(SegmentReg::ES)), Operand::Direct(Reg::AL), &vec![0x26, 0x67, 0xA2, 0x12, 0x00]); // MOV ES:0x12, AL
+    encode32_helper2(Mnemonic::MOV, Operand::Offset(0x12, Some(OperandSize::Word), Some(SegmentReg::ES)), Operand::Direct(Reg::AX), &vec![0x26, 0x67, 0x66, 0xA3, 0x12, 0x00]); // MOV ES:0x12, AX
+    encode32_helper2(Mnemonic::MOV, Operand::Offset(0x12, Some(OperandSize::Dword), Some(SegmentReg::ES)), Operand::Direct(Reg::EAX), &vec![0x26, 0x67, 0xA3, 0x12, 0x00]); // MOV ES:0x12, EAX
     encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::BL), Operand::Literal8(0x12), &vec![0xB3, 0x12]); // MOV BL, 0x12
     encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::BX), Operand::Literal16(0x1234), &vec![0x66, 0xBB, 0x34, 0x12]); // MOV BX, 0x1234
     encode32_helper2(Mnemonic::MOV, Operand::Direct(Reg::EBX), Operand::Literal32(0x1234567), &vec![0xBB, 0x67, 0x45, 0x23, 0x01]); // MOV EBX, 0x1234567

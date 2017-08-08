@@ -9,6 +9,7 @@ pub enum Operand {
    IndirectScaledIndexedDisplaced(Reg, Reg, RegScale, u64, Option<OperandSize>, Option<SegmentReg>),
    IndirectScaledDisplaced(Reg, RegScale, u64, Option<OperandSize>, Option<SegmentReg>),
    Memory(u64, Option<OperandSize>, Option<SegmentReg>),
+   Offset(u64, Option<OperandSize>, Option<SegmentReg>),
    Literal8(u8),
    Literal16(u16),
    Literal32(u32),
@@ -37,7 +38,8 @@ impl Operand {
             Operand::IndirectScaledIndexed(_, _, _, size, _) |
             Operand::IndirectScaledIndexedDisplaced(_, _, _, _, size, _) |
             Operand::IndirectScaledDisplaced(_, _, _, size, _) |
-            Operand::Memory(_, size, _)
+            Operand::Memory(_, size, _) |
+            Operand::Offset(_, size, _)
                 => size,
             Operand::Literal8(_) => Some(OperandSize::Byte),
             Operand::Literal16(_) => Some(OperandSize::Word),
@@ -68,6 +70,7 @@ impl Operand {
            Operand::IndirectScaledIndexedDisplaced(_, _, _, _, _, seg) |
            Operand::IndirectScaledDisplaced(_, _, _, _, seg) |
            Operand::Memory(_, _, seg) |
+           Operand::Offset(_, _, seg) |
            Operand::AVXDestinationIndirect(_, _, seg, ..) |
            Operand::AVXDestinationIndirectDisplaced(_, _, _, seg, ..) |
            Operand::AVXDestinationIndirectScaledIndexed(_, _, _, _, seg, ..) |
@@ -99,6 +102,7 @@ impl Operand {
             Operand::IndirectScaledIndexedDisplaced(..) |
             Operand::IndirectScaledDisplaced(..) |
             Operand::Memory(..) |
+            Operand::Offset(..) |
             Operand::AVXBroadcastIndirect(..) |
             Operand::AVXBroadcastIndirectDisplaced(..) |
             Operand::AVXBroadcastIndirectScaledIndexed(..) |
@@ -116,6 +120,7 @@ impl Operand {
     pub fn is_fixed_memory(&self) -> bool {
         match *self {
             Operand::Memory(..) |
+            Operand::Offset(..) |
             Operand::MemoryAndSegment16(..) => true,
             Operand::MemoryAndSegment32(..) => true,
             _ => false

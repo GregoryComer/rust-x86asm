@@ -144,7 +144,7 @@ pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDescription, 
             },
             OperandAddressingMode::O => { // Offset
                 match *op.as_ref().expect("Missing operand") {
-                    Operand::Memory(addr, ..) => {
+                    Operand::Offset(addr, ..) => {
                         if addr < u16::max_value() as u64 {
                             buffer.add_immediate(ImmediateValue::Literal16(addr as u16));
                             buffer.address_size_prefix = true;
@@ -422,7 +422,7 @@ fn encode_rm(buffer: &mut InstructionBuffer, op: &Operand, mode: Mode) {
         Operand::IndirectScaledDisplaced(index, scale, disp, ..) => {
             encode_indirect(buffer, None, Some(index), Some(scale), disp, mode);
         },
-        Operand::Memory(addr, ..) => {
+        Operand::Memory(addr, ..) | Operand::Offset(addr, ..) => { // TODO Should offset panic or be here?
             encode_indirect(buffer, None, None, None, addr, mode);
         },
         Operand::AVXDestination(reg, maybe_mask, maybe_merge_mode) => {

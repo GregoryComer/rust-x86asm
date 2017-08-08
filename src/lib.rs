@@ -1,6 +1,8 @@
 extern crate byteorder;
 #[macro_use] extern crate lazy_static;
+extern crate arrayvec;
 
+mod decoding;
 mod encoding;
 mod instruction;
 mod instruction_buffer;
@@ -10,6 +12,7 @@ mod mnemonic;
 mod operand;
 #[cfg(test)] mod test;
 
+pub use self::decoding::{InstructionDecodingError, InstructionReader};
 pub use self::encoding::{InstructionEncodingError, InstructionWriter};
 pub use self::instruction::{ Instruction, Reg, RegScale, InstructionFlags, SegmentReg, MergeMode, MaskReg, BroadcastMode, RoundingMode };
 pub use self::operand::{Operand, OperandSize};
@@ -28,6 +31,15 @@ impl Mode {
             Mode::Real => OperandSize::Word,
             Mode::Protected => OperandSize::Dword,
             Mode::Long => OperandSize::Qword,
+        }
+    }
+
+    fn from_size(size: OperandSize) -> Option<Mode> {
+        match size {
+            OperandSize::Word => Some(Mode::Real),
+            OperandSize::Dword => Some(Mode::Protected),
+            OperandSize::Qword => Some(Mode::Long),
+            _ => None,
         }
     }
 }

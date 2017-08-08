@@ -1,12 +1,13 @@
 mod addressing16;
 mod addressing32;
 mod addressing64;
+mod decode;
 mod instr32_a_l;
 mod instr32_m_u;
 mod size_inference;
 
 use std::io::Cursor;
-use ::{Mnemonic, Mode, Operand, ProcessorLevel, InstructionEncodingError};
+use ::*;
 use ::instruction::{Instruction, InstructionFlags};
 
 fn test_aliased<F>(mnemonics: &[Mnemonic], test: F) 
@@ -14,6 +15,35 @@ fn test_aliased<F>(mnemonics: &[Mnemonic], test: F)
     for mnemonic in mnemonics {
         test(*mnemonic);
     }
+}
+
+fn decode_helper(bytes: &Vec<u8>, mode: Mode, expected: &Instruction) {
+    let mut buffer = Cursor::new(bytes);
+    let mut reader = InstructionReader::new(buffer, mode);
+    assert_eq!(reader.read().expect("Decoding failed"), *expected);
+}
+
+fn decode32_helper(bytes: &Vec<u8>, expected: &Instruction) {
+    decode_helper(bytes, Mode::Protected, expected);
+}
+
+fn decode32_helper1(bytes: &Vec<u8>, mnemonic: Mnemonic, operand1: Operand) {
+    let instr = Instruction {
+        mnemonic: Mnemonic::ADD,
+        operand1: Some(operand1),
+        .. Default::default()
+    };
+    decode32_helper(bytes, &instr);
+}
+
+fn decode32_helper2(bytes: &Vec<u8>, mnemonic: Mnemonic, operand1: Operand, operand2: Operand) {
+    let instr = Instruction {
+        mnemonic: Mnemonic::ADD,
+        operand1: Some(operand1),
+        operand2: Some(operand2),
+        .. Default::default()
+    };
+    decode32_helper(bytes, &instr);
 }
 
 fn encode16_helper(instr: &Instruction, expected: &Vec<u8>) {

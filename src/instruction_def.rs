@@ -60,6 +60,11 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode, proc_level: Process
     }
 }
 
+pub fn get_instruction_def_by_opcode(primary_opcode: u8, secondary_opcode: Option<u8>, is_two_byte_opcode: bool) -> Option<&'static InstructionDefinition> {
+    INSTR_DEFS.iter().find(|def| def.primary_opcode == primary_opcode &&
+                        def.secondary_opcode == secondary_opcode && def.is_two_byte_opcode == is_two_byte_opcode)
+}
+
 pub fn load_instructions(map: &mut HashMap<Mnemonic, Vec<&'static InstructionDefinition>>) {
     for instr in INSTR_DEFS.iter() {
         if !map.contains_key(&instr.mnemonic) {
@@ -268,6 +273,14 @@ impl InstructionDefinition {
 
         *(&[self.operand2, self.operand3, self.operand4, self.operand1].iter()
             .fold(0, |acc, op| acc + test_op(op)))
+    }
+
+    pub fn ordered_operands(&self) -> [&Option<OperandDescription>; 4] {
+        if self.has_destination {
+            [&self.operand2, &self.operand3, &self.operand4, &self.operand1]
+        } else {
+            [&self.operand1, &self.operand2, &self.operand3, &self.operand4]
+        }
     }
 }
 

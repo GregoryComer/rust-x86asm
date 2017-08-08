@@ -133,6 +133,16 @@ impl RegScale {
            RegScale::Eight => 0b11
        }
     }
+
+    pub fn from_sib_code(code: u8) -> Option<RegScale> {
+        match code {
+            0b00 => Some(RegScale::One),
+            0b01 => Some(RegScale::Two),
+            0b10 => Some(RegScale::Four),
+            0b11 => Some(RegScale::Eight),
+            _ => None,
+        }
+    }
 }
 
 #[derive(PartialEq, Eq, Clone, Copy, Debug)]
@@ -151,10 +161,10 @@ pub enum Reg {
     BL, BH, BX, EBX, RBX,
     CL, CH, CX, ECX, RCX,
     DL, DH, DX, EDX, RDX,
-    BP, EBP, RBP,
-    SP, ESP, RSP,
-    SI, ESI, RSI,
-    DI, EDI, RDI,
+    BP, EBP, RBP, BPL,
+    SP, ESP, RSP, SPL,
+    SI, ESI, RSI, SIL,
+    DI, EDI, RDI, DIL,
     IP, EIP, RIP,
     R8, R8D, R8W, R8B,
     R9, R9D, R9W, R9B,
@@ -271,10 +281,10 @@ impl Reg {
             Reg::BL | Reg::BH | Reg::BX | Reg::EBX | Reg::RBX |
             Reg::CL | Reg::CH | Reg::CX | Reg::ECX | Reg::RCX |
             Reg::DL | Reg::DH | Reg::DX | Reg::EDX | Reg::RDX |
-            Reg::SI | Reg::ESI | Reg::RSI |
-            Reg::DI | Reg::EDI | Reg::RDI |
-            Reg::SP | Reg::ESP | Reg::RSP |
-            Reg::BP | Reg::EBP | Reg::RBP |
+            Reg::SI | Reg::ESI | Reg::RSI | Reg::SIL |
+            Reg::DI | Reg::EDI | Reg::RDI | Reg::DIL |
+            Reg::SP | Reg::ESP | Reg::RSP | Reg::SPL |
+            Reg::BP | Reg::EBP | Reg::RBP | Reg::BPL |
             Reg::R8  | Reg::R8D  | Reg::R8W  | Reg::R8B  |
             Reg::R9  | Reg::R9D  | Reg::R9W  | Reg::R9B  |
             Reg::R10 | Reg::R10D | Reg::R10W | Reg::R10B |
@@ -358,7 +368,8 @@ impl Reg {
             Reg::AL   | Reg::AH   | Reg::BL   | Reg::BH   |        
             Reg::CL   | Reg::CH   | Reg::DL   | Reg::DH   |        
             Reg::R8B  | Reg::R9B  | Reg::R10B | Reg::R11B | 
-            Reg::R12B | Reg::R13B | Reg::R14B | Reg::R15B => OperandSize::Byte,
+            Reg::R12B | Reg::R13B | Reg::R14B | Reg::R15B |
+            Reg::SPL  | Reg::BPL  | Reg::SIL  | Reg::DIL  => OperandSize::Byte,
             
             // 16-bit regiters
             Reg::AX   | Reg::BX   | Reg::CX   | Reg::DX   |        
@@ -520,6 +531,292 @@ impl Reg {
             Reg::R15B | Reg::R15W | Reg::R15D | Reg::R15                       | Reg::XMM15 | Reg::YMM15 | Reg::ZMM15                                                                   => 15,
             _ => panic!("Invalid register.")
         }
+    }
+
+    pub fn from_code_general_sized(code: u8, has_rex: bool, size: OperandSize) -> Option<Reg> {
+        match size {
+            OperandSize::Byte => Reg::from_code_general_8(code, has_rex),
+            OperandSize::Word => Reg::from_code_general_16(code),
+            OperandSize::Dword => Reg::from_code_general_32(code),
+            OperandSize::Qword => Reg::from_code_general_64(code),
+            _ => None,
+        }
+    }
+
+    pub fn from_code_general_8(code: u8, has_rex: bool) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::AL,
+            0x1 => Reg::CL,
+            0x2 => Reg::DL,
+            0x3 => Reg::BL,
+            0x4 => if !has_rex { Reg::AH } else { Reg::SPL },
+            0x5 => if !has_rex { Reg::CH } else { Reg::BPL },
+            0x6 => if !has_rex { Reg::DH } else { Reg::SIL },
+            0x7 => if !has_rex { Reg::BH } else { Reg::DIL },
+            0x8 => Reg::R8B,
+            0x9 => Reg::R9B,
+            0xA => Reg::R10B,
+            0xB => Reg::R11B,
+            0xC => Reg::R12B,
+            0xD => Reg::R13B,
+            0xE => Reg::R14B,
+            0xF => Reg::R15B,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_general_16(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::AX,
+            0x1 => Reg::CX,
+            0x2 => Reg::DX,
+            0x3 => Reg::BX,
+            0x4 => Reg::SP,
+            0x5 => Reg::BP,
+            0x6 => Reg::SI,
+            0x7 => Reg::DI,
+            0x8 => Reg::R8W,
+            0x9 => Reg::R9W,
+            0xA => Reg::R10W,
+            0xB => Reg::R11W,
+            0xC => Reg::R12W,
+            0xD => Reg::R13W,
+            0xE => Reg::R14W,
+            0xF => Reg::R15W,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_general_32(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::EAX,
+            0x1 => Reg::ECX,
+            0x2 => Reg::EDX,
+            0x3 => Reg::EBX,
+            0x4 => Reg::ESP,
+            0x5 => Reg::EBP,
+            0x6 => Reg::ESI,
+            0x7 => Reg::EDI,
+            0x8 => Reg::R8D,
+            0x9 => Reg::R9D,
+            0xA => Reg::R10D,
+            0xB => Reg::R11D,
+            0xC => Reg::R12D,
+            0xD => Reg::R13D,
+            0xE => Reg::R14D,
+            0xF => Reg::R15D,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_general_64(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::RAX,
+            0x1 => Reg::RCX,
+            0x2 => Reg::RDX,
+            0x3 => Reg::RBX,
+            0x4 => Reg::RSP,
+            0x5 => Reg::RBP,
+            0x6 => Reg::RSI,
+            0x7 => Reg::RDI,
+            0x8 => Reg::R8,
+            0x9 => Reg::R9,
+            0xA => Reg::R10,
+            0xB => Reg::R11,
+            0xC => Reg::R12,
+            0xD => Reg::R13,
+            0xE => Reg::R14,
+            0xF => Reg::R15,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_fpu(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::ST0,
+            0x1 => Reg::ST1,
+            0x2 => Reg::ST2,
+            0x3 => Reg::ST3,
+            0x4 => Reg::ST4,
+            0x5 => Reg::ST5,
+            0x6 => Reg::ST6,
+            0x7 => Reg::ST7,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_mmx(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::MM0,
+            0x1 => Reg::MM1,
+            0x2 => Reg::MM2,
+            0x3 => Reg::MM3,
+            0x4 => Reg::MM4,
+            0x5 => Reg::MM5,
+            0x6 => Reg::MM6,
+            0x7 => Reg::MM7,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_xmm(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::XMM0,
+            0x1 => Reg::XMM1,
+            0x2 => Reg::XMM2,
+            0x3 => Reg::XMM3,
+            0x4 => Reg::XMM4,
+            0x5 => Reg::XMM5,
+            0x6 => Reg::XMM6,
+            0x7 => Reg::XMM7,
+            0x8 => Reg::XMM8,
+            0x9 => Reg::XMM9,
+            0xA => Reg::XMM10,
+            0xB => Reg::XMM11,
+            0xC => Reg::XMM12,
+            0xD => Reg::XMM13,
+            0xE => Reg::XMM14,
+            0xF => Reg::XMM15,
+            0x10 => Reg::XMM16,
+            0x11 => Reg::XMM17,
+            0x12 => Reg::XMM18,
+            0x13 => Reg::XMM19,
+            0x14 => Reg::XMM20,
+            0x15 => Reg::XMM21,
+            0x16 => Reg::XMM22,
+            0x17 => Reg::XMM23,
+            0x18 => Reg::XMM24,
+            0x19 => Reg::XMM25,
+            0x1A => Reg::XMM26,
+            0x1B => Reg::XMM27,
+            0x1C => Reg::XMM28,
+            0x1D => Reg::XMM29,
+            0x1E => Reg::XMM30,
+            0x1F => Reg::XMM31,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_ymm(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::YMM0,
+            0x1 => Reg::YMM1,
+            0x2 => Reg::YMM2,
+            0x3 => Reg::YMM3,
+            0x4 => Reg::YMM4,
+            0x5 => Reg::YMM5,
+            0x6 => Reg::YMM6,
+            0x7 => Reg::YMM7,
+            0x8 => Reg::YMM8,
+            0x9 => Reg::YMM9,
+            0xA => Reg::YMM10,
+            0xB => Reg::YMM11,
+            0xC => Reg::YMM12,
+            0xD => Reg::YMM13,
+            0xE => Reg::YMM14,
+            0xF => Reg::YMM15,
+            0x10 => Reg::YMM16,
+            0x11 => Reg::YMM17,
+            0x12 => Reg::YMM18,
+            0x13 => Reg::YMM19,
+            0x14 => Reg::YMM20,
+            0x15 => Reg::YMM21,
+            0x16 => Reg::YMM22,
+            0x17 => Reg::YMM23,
+            0x18 => Reg::YMM24,
+            0x19 => Reg::YMM25,
+            0x1A => Reg::YMM26,
+            0x1B => Reg::YMM27,
+            0x1C => Reg::YMM28,
+            0x1D => Reg::YMM29,
+            0x1E => Reg::YMM30,
+            0x1F => Reg::YMM31,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_zmm(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::ZMM0,
+            0x1 => Reg::ZMM1,
+            0x2 => Reg::ZMM2,
+            0x3 => Reg::ZMM3,
+            0x4 => Reg::ZMM4,
+            0x5 => Reg::ZMM5,
+            0x6 => Reg::ZMM6,
+            0x7 => Reg::ZMM7,
+            0x8 => Reg::ZMM8,
+            0x9 => Reg::ZMM9,
+            0xA => Reg::ZMM10,
+            0xB => Reg::ZMM11,
+            0xC => Reg::ZMM12,
+            0xD => Reg::ZMM13,
+            0xE => Reg::ZMM14,
+            0xF => Reg::ZMM15,
+            0x10 => Reg::ZMM16,
+            0x11 => Reg::ZMM17,
+            0x12 => Reg::ZMM18,
+            0x13 => Reg::ZMM19,
+            0x14 => Reg::ZMM20,
+            0x15 => Reg::ZMM21,
+            0x16 => Reg::ZMM22,
+            0x17 => Reg::ZMM23,
+            0x18 => Reg::ZMM24,
+            0x19 => Reg::ZMM25,
+            0x1A => Reg::ZMM26,
+            0x1B => Reg::ZMM27,
+            0x1C => Reg::ZMM28,
+            0x1D => Reg::ZMM29,
+            0x1E => Reg::ZMM30,
+            0x1F => Reg::ZMM31,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_segment(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::ES,
+            0x1 => Reg::CS,
+            0x2 => Reg::SS,
+            0x3 => Reg::DS,
+            0x4 => Reg::FS,
+            0x5 => Reg::GS,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_control(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::CR0,
+            0x1 => Reg::CR1,
+            0x2 => Reg::CR2,
+            0x3 => Reg::CR3,
+            0x4 => Reg::CR4,
+            0x8 => Reg::CR8,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_debug(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x0 => Reg::DR0,
+            0x1 => Reg::DR1,
+            0x2 => Reg::DR2,
+            0x3 => Reg::DR3,
+            0x4 => Reg::DR4,
+            0x5 => Reg::DR5,
+            0x6 => Reg::DR6,
+            0x7 => Reg::DR7,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_test(code: u8) -> Option<Reg> {
+        Some(match code {
+            0x6 => Reg::TR6,
+            0x7 => Reg::TR7,
+            _ => return None
+        })
     }
 }
 

@@ -23,7 +23,7 @@ pub const PREFIX_VEX2: u8 = 0xC5;
 pub const PREFIX_VEX3: u8 = 0xC4;
 pub const PREFIX_EVEX: u8 = 0x62;
 
-#[derive(Default, Debug)]
+#[derive(Debug)]
 pub struct InstructionBuffer { 
     pub prefix1: Option<Prefix1>,
     pub prefix2: Option<Prefix2>,
@@ -54,6 +54,7 @@ pub struct InstructionBuffer {
     pub vex_b: Option<bool>,
     pub vex_l: Option<bool>,
     pub op_size_64_behavior: OpSize64Behavior,
+    pub composite_prefix: Option<CompositePrefix>
 
     // TODO Force REX
 }
@@ -364,6 +365,55 @@ impl InstructionBuffer {
             SegmentReg::SS => Prefix2::SS,
         });
     }
+
+    pub fn get_segment_reg(&self) -> Option<SegmentReg> {
+        self.prefix2.and_then(|prefix| match prefix {
+            Prefix2::CS => Some(SegmentReg::CS),
+            Prefix2::DS => Some(SegmentReg::DS),
+            Prefix2::ES => Some(SegmentReg::ES),
+            Prefix2::FS => Some(SegmentReg::FS),  
+            Prefix2::GS => Some(SegmentReg::GS),
+            Prefix2::SS => Some(SegmentReg::SS),
+            _ => None
+        })
+    }
+}
+
+impl Default for InstructionBuffer {
+    fn default() -> InstructionBuffer {
+        InstructionBuffer {
+            prefix1: None,
+            prefix2: None,
+            composite_prefix: None,
+            operand_size_prefix: false,
+            operand_size_64: false,
+            force_vex: false,
+            force_evex: false,
+            address_size_prefix: false,
+            fixed_prefix: None,
+            is_two_byte_opcode: false,
+            primary_opcode: 0,
+            secondary_opcode: None,
+            opcode_add: None,
+            mod_rm_mod: None,
+            mod_rm_reg: None,
+            mod_rm_rm: None,
+            sib_scale: None,
+            sib_index: None,
+            sib_base: None,
+            immediate: None,
+            immediate2: None,
+            displacement: None,
+            vex_operand: None,
+            vex_e: None,
+            vector_len: None,
+            mask_reg: None,
+            merge_mode: None,
+            vex_b: None,
+            vex_l: None,
+            op_size_64_behavior: OpSize64Behavior::Normal
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -378,7 +428,7 @@ pub enum ImmediateValue {
     Literal64(u64)
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum Prefix1 {
     Lock,
     Rep,
@@ -386,7 +436,7 @@ pub enum Prefix1 {
     RepE,  RepZ
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum Prefix2 {
     CS,
     SS,
@@ -396,4 +446,11 @@ pub enum Prefix2 {
     GS,
     BranchNotTaken,
     BranchTaken,
+}
+
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+pub enum CompositePrefix {
+    REX,
+    VEX,
+    EVEX
 }
