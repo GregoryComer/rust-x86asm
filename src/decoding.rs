@@ -70,7 +70,7 @@ impl<T: Read> InstructionReader<T> {
                 PREFIX_VEX2 => { // Two-byte VEX prefix
                     let data = self.expect_byte()?;
                     buffer.composite_prefix = Some(CompositePrefix::VEX);
-                    reg_ext = if data & 0x80 != 0 { 0 } else { 0x8 };
+                    reg_ext = if data & 0x80 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
                     buffer.vex_operand = Some((data >> 3) & 0xF);
                     buffer.vex_l = Some(data & 0x2 != 0);
                     match data & 0x3 {
@@ -84,9 +84,9 @@ impl<T: Read> InstructionReader<T> {
                     let data1 = self.expect_byte()?;
                     let data2 = self.expect_byte()?;
                     buffer.composite_prefix = Some(CompositePrefix::VEX);
-                    reg_ext = if data1 & 0x80 != 0 { 0 } else { 0x8 };
-                    index_ext = if data1 & 0x40 != 0 { 0 } else { 0x8 };
-                    b_ext = if data1 & 0x20 != 0 { 0 } else { 0x8 };
+                    reg_ext = if data1 & 0x80 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
+                    index_ext = if data1 & 0x40 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
+                    b_ext = if data1 & 0x20 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
                     match data1 & 0x1F { // map_select
                         0 => {},
                         1 => buffer.is_two_byte_opcode = true,
@@ -109,10 +109,10 @@ impl<T: Read> InstructionReader<T> {
                     let data2 = self.expect_byte()?;
                     let data3 = self.expect_byte()?;
                     buffer.composite_prefix = Some(CompositePrefix::EVEX);
-                    reg_ext |= if data1 & 0x80 != 0 { 0x8 } else { 0 };
-                    index_ext |= if data1 & 0x40 != 0 { 0x8 } else { 0 };
-                    b_ext |= if data1 & 0x20 != 0 { 0x8 } else { 0 };
-                    reg_ext |= if data1 & 0x10 != 0 { 0x10 } else { 0 };
+                    reg_ext |= if data1 & 0x80 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
+                    index_ext |= if data1 & 0x40 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
+                    b_ext |= if data1 & 0x20 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
+                    reg_ext |= if data1 & 0x10 != 0 && self.mode == Mode::Long { 0x10 } else { 0 };
                     match data1 & 0x3 { // map_select
                         0 => {},
                         1 => buffer.is_two_byte_opcode = true,
@@ -160,8 +160,7 @@ impl<T: Read> InstructionReader<T> {
         }
 
         // Find the matching instruction definition
-        let def = get_instruction_def_by_opcode(buffer.primary_opcode, buffer.secondary_opcode,
-            buffer.is_two_byte_opcode).ok_or(InstructionDecodingError::UnknownOpcode)?;
+        let def = get_instruction_def_by_opcode(&buffer, self.mode).ok_or(InstructionDecodingError::UnknownOpcode)?;
 
         // ModR/M
         if InstructionReader::<T>::has_mod_rm(def) {
@@ -174,44 +173,23 @@ impl<T: Read> InstructionReader<T> {
             if InstructionReader::<T>::has_sib(addr_mode, &buffer) {
                 let sib = self.expect_byte()?;
                 buffer.sib_scale = Some(sib >> 6);
-                buffer.sib_index = Some((mod_rm >> 3) & 0x7 | index_ext);
-                buffer.sib_base = Some(mod_rm & 0x7 | b_ext);
+                buffer.sib_index = Some((sib >> 3) & 0x7 | index_ext);
+                buffer.sib_base = Some(sib & 0x7 | b_ext);
             } else {
                 buffer.mod_rm_reg = buffer.mod_rm_reg.map(|reg| reg | b_ext);
                 buffer.mod_rm_rm = buffer.mod_rm_rm.map(|rm| rm | index_ext);
             }
-
-            // Displacement
-            if let Some(disp_size) = InstructionReader::<T>::get_displacement_size(addr_mode, &buffer) {
-                match disp_size {
-                    OperandSize::Byte => {
-                        buffer.displacement = Some(ImmediateValue::Literal8(self.expect_byte()?));
-                    },
-                    OperandSize::Word => {
-                        buffer.displacement = Some(ImmediateValue::Literal16(
-                            (self.expect_byte()? as u16) |
-                            (self.expect_byte()? as u16) << 8));
-                    },
-                    OperandSize::Dword => {
-                        buffer.displacement = Some(ImmediateValue::Literal32(
-                            (self.expect_byte()? as u32) |
-                            (self.expect_byte()? as u32) << 8 |
-                            (self.expect_byte()? as u32) << 16 |
-                            (self.expect_byte()? as u32) << 24));
-                    },
-                    _ => panic!("Invalid displacement size.") // Shouldn't ever happen
-                }
-            }
         }
-
-        println!("Buffer: {:?}", buffer);
 
         // Build operands (read immediates as appropriate)
         // Destination operand is typically operand1, but needs to be read last (source operands
         // come first), so read the operands in the correct order (ordered_operands()), then
         // re-arrange them so they map to the correct operands.
         let operand_results: Result<ArrayVec<[_; 4]>, InstructionDecodingError> = def.ordered_operands().iter()
-            .map(|op_def| op_def.as_ref().map_or(Ok(None), |o_d| Ok(Some(self.read_operand(o_d, &buffer)?)))).collect();
+            .map(|op_def| op_def.as_ref().map_or(Ok(None), |o_d| 
+                Ok(if o_d.fixed_operand.is_none() {
+                    Some(self.read_operand(o_d, &buffer)?)
+                } else { None }))).collect();
         let operands = operand_results?;
         let ordered_operands = if def.has_destination {
             [operands[3], operands[0], operands[1], operands[2]]
@@ -506,7 +484,7 @@ impl<T: Read> InstructionReader<T> {
 
     fn has_sib(mode: Mode, buffer: &InstructionBuffer) -> bool {
         (mode != Mode::Real) && (buffer.mod_rm_mod.and_then(|rm_mod| buffer.mod_rm_rm.map(
-            |rm_rm| (rm_rm & 0b111) == 0b101)).unwrap_or(false))
+            |rm_rm| (rm_rm & 0b111) == 0b100)).unwrap_or(false))
     }
 
     fn get_displacement_size(mode: Mode, buffer: &InstructionBuffer) -> Option<OperandSize> {
@@ -552,7 +530,9 @@ impl<T: Read> InstructionReader<T> {
                 let mode = buffer.mod_rm_mod.ok_or(InstructionDecodingError::InvalidInstruction)?;
                 let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
                 let segment = buffer.get_segment_reg();
-                let disp = if mode == 0 && rm != 0b110 { None } // No displacement
+                if mode == 0b11 { return conv_proc(rm).ok_or(InstructionDecodingError::InvalidInstruction)
+                    .map(|r| Operand::Direct(r)); }
+                let disp = if mode == 0 && rm != 0b110 || mode == 3 { None } // No displacement
                     else { // 8/16-bit displacement
                         Some((if mode == 1 { self.read_disp8()? as u64 } else { self.read_disp16()? as u64 }))
                     };
@@ -563,7 +543,7 @@ impl<T: Read> InstructionReader<T> {
                     3 => (Some(Reg::BP), Some(Reg::DI)),
                     4 => (Some(Reg::SI), None),
                     5 => (Some(Reg::DI), None),
-                    6 => (None, None),
+                    6 => if mode == 0 { (None, None) } else { (Some(Reg::BP), None) },
                     7 => (Some(Reg::BX), None),
                     _ => unreachable!()
                 };
@@ -589,23 +569,24 @@ impl<T: Read> InstructionReader<T> {
                                     addr_size).ok_or(InstructionDecodingError::InvalidInstruction)?,
                                     size, segment),
                             0b100 => self.sib_helper(buffer, op_def, addr_size)?, // [SIB]
-                            0b101 => unimplemented!(), // TODO [RIP/EIP + disp32]
+                            0b101 => if addr_size == OperandSize::Dword { Operand::Memory(self.read_disp32()? as u64, size, segment) }
+                                        else { Operand::Offset(self.read_disp32()? as u64, size, segment) },
                             _ => unreachable!()
                         }
                     },
                     0b01 => {
                         match rm {
-                            0b000 | 0b001 | 0b010 | 0b100 | 0b101 | 0b110 | 0b111 => // [RM + disp8]
+                            0b000 | 0b001 | 0b010 | 0b011 | 0b101 | 0b110 | 0b111 => // [RM + disp8]
                                 Operand::IndirectDisplaced(Reg::from_code_general_sized(rm, InstructionReader::<T>::has_rex(buffer),
                                     addr_size).ok_or(InstructionDecodingError::InvalidInstruction)?,
-                                    self.read_disp32()? as u64, size, segment),
+                                    self.read_disp8()? as u64, size, segment),
                             0b100 => self.sib_helper(buffer, op_def, addr_size)?, // [SIB + disp8]
                             _ => unreachable!()
                         }
                     },
                     0b10 => {
                         match rm {
-                            0b000 | 0b001 | 0b010 | 0b100 | 0b101 | 0b110 | 0b111 => // [RM + disp32]
+                            0b000 | 0b001 | 0b010 | 0b011 | 0b101 | 0b110 | 0b111 => // [RM + disp32]
                                 Operand::IndirectDisplaced(Reg::from_code_general_sized(rm, InstructionReader::<T>::has_rex(buffer),
                                     addr_size).ok_or(InstructionDecodingError::InvalidInstruction)?,
                                     self.read_disp32()? as u64, size, segment),
@@ -652,14 +633,14 @@ impl<T: Read> InstructionReader<T> {
                 }
             },
             0b01 | 0b10 => {
-                let disp = if mode == 0b10 { self.read_disp8()? as u64 } else { self.read_disp32()? as u64 };
+                let disp = if mode == 0b01 { self.read_disp8()? as u64 } else { self.read_disp32()? as u64 };
                 if index_code == 0b100 { // [base + disp8/32]
                     Operand::IndirectDisplaced(base, disp, size, segment)
                 } else { // [base + index*s + disp8/32]
                     Operand::IndirectScaledIndexedDisplaced(base, index, scale, disp, size, segment)
                 }
             },
-            _ => panic!("Internal error.") // Should be statically impossible
+            _ => unreachable!()
         })
     }
 

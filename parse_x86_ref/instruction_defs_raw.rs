@@ -4141,17 +4141,17 @@ InstructionDefinition {
     allowed_broadcast: None,
     operand1: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXReg,
-        operand_type: OperandType::XMMorYMM,
+        operand_type: OperandType::XMM,
         fixed_operand: None,
     }),
     operand2: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXVex,
-        operand_type: OperandType::XMMorYMM,
+        operand_type: OperandType::XMM,
         fixed_operand: None
     }),
     operand3: Some(OperandDescription {
         addressing_mode: OperandAddressingMode::AVXMemRm,
-        operand_type: OperandType::XMMorYMMorMem32,
+        operand_type: OperandType::XMMorMem32,
         fixed_operand: None
     }),
     operand4: Some(OperandDescription {

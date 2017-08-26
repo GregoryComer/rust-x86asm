@@ -7,6 +7,7 @@ use std::io::Write;
 use std::sync::RwLock;
 use ::{ Instruction, Operand, Mnemonic, Mode, Reg, OperandSize, RegScale, SegmentReg, ProcessorLevel, InstructionFlags, BroadcastMode, InstructionEncodingError };
 use ::encoding::{encode};
+use ::instruction_buffer::InstructionBuffer;
 use ::instruction_defs::INSTR_DEFS;
 
 lazy_static! {
@@ -60,9 +61,17 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode, proc_level: Process
     }
 }
 
-pub fn get_instruction_def_by_opcode(primary_opcode: u8, secondary_opcode: Option<u8>, is_two_byte_opcode: bool) -> Option<&'static InstructionDefinition> {
-    INSTR_DEFS.iter().find(|def| def.primary_opcode == primary_opcode &&
-                        def.secondary_opcode == secondary_opcode && def.is_two_byte_opcode == is_two_byte_opcode)
+pub fn get_instruction_def_by_opcode(buffer: &InstructionBuffer, mode: Mode) -> Option<&'static InstructionDefinition> {
+    INSTR_DEFS.iter().find(|def| def.primary_opcode == buffer.primary_opcode &&
+                        def.secondary_opcode == buffer.secondary_opcode &&
+                        def.is_two_byte_opcode == buffer.is_two_byte_opcode &&
+                        (def.valid_in_long_mode || mode != Mode::Long) &&
+                        match def.mode {
+                            Mode::Real => true,
+                            Mode::Protected => mode == Mode::Real || mode == Mode::Protected,
+                            Mode::Long => mode == Mode::Long
+                        } &&
+                        def.fixed_prefix == buffer.fixed_prefix)
 }
 
 pub fn load_instructions(map: &mut HashMap<Mnemonic, Vec<&'static InstructionDefinition>>) {
