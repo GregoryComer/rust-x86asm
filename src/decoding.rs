@@ -1,14 +1,14 @@
 use std::io::{Bytes, Read};
 use std::iter::Peekable;
-use ::{Instruction, InstructionFlags, MergeMode, Mnemonic, Mode, Operand, OperandSize, ProcessorLevel, Reg, RegScale, SegmentReg};
+use ::{Instruction, MergeMode, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale, SegmentReg};
 use ::instruction_buffer::*;
+use ::instruction_buffer::CompositePrefix; // For disambiguation
 use ::instruction_def::*;
 use arrayvec::ArrayVec;
 
 pub struct InstructionReader<T: Read> {
     reader: Peekable<Bytes<T>>,
     mode: Mode,
-    proc_level: ProcessorLevel
 }
 
 impl<T: Read> InstructionReader<T> {
@@ -16,7 +16,6 @@ impl<T: Read> InstructionReader<T> {
         InstructionReader {
             reader: reader.bytes().peekable(),
             mode: mode,
-            proc_level: ProcessorLevel::Corei7
         }
     }
 
@@ -160,58 +159,38 @@ impl<T: Read> InstructionReader<T> {
         }
 
         // Find the matching instruction definition
-        let def = get_instruction_def_by_opcode(&buffer, self.mode).ok_or(InstructionDecodingError::UnknownOpcode)?;
+        // let def = get_instruction_def_by_opcode(&buffer, self.mode).ok_or(InstructionDecodingError::UnknownOpcode)?;
 
         // ModR/M
-        if InstructionReader::<T>::has_mod_rm(def) {
-            let mod_rm = self.expect_byte()?;
-            buffer.mod_rm_mod = Some(mod_rm >> 6);
-            buffer.mod_rm_reg = Some((mod_rm >> 3) & 0x7 | reg_ext);
-            buffer.mod_rm_rm = Some(mod_rm & 0x7);
+        //if InstructionReader::<T>::has_mod_rm(def) {
+        //    let mod_rm = self.expect_byte()?;
+        //    buffer.mod_rm_mod = Some(mod_rm >> 6);
+        //    buffer.mod_rm_reg = Some((mod_rm >> 3) & 0x7 | reg_ext);
+        //    buffer.mod_rm_rm = Some(mod_rm & 0x7);
 
-            // SIB
-            if InstructionReader::<T>::has_sib(addr_mode, &buffer) {
-                let sib = self.expect_byte()?;
-                buffer.sib_scale = Some(sib >> 6);
-                buffer.sib_index = Some((sib >> 3) & 0x7 | index_ext);
-                buffer.sib_base = Some(sib & 0x7 | b_ext);
-            } else {
-                buffer.mod_rm_reg = buffer.mod_rm_reg.map(|reg| reg | b_ext);
-                buffer.mod_rm_rm = buffer.mod_rm_rm.map(|rm| rm | index_ext);
-            }
-        }
+        //    // SIB
+        //    if InstructionReader::<T>::has_sib(addr_mode, &buffer) {
+        //        let sib = self.expect_byte()?;
+        //        buffer.sib_scale = Some(sib >> 6);
+        //        buffer.sib_index = Some((sib >> 3) & 0x7 | index_ext);
+        //        buffer.sib_base = Some(sib & 0x7 | b_ext);
+        //    } else {
+        //        buffer.mod_rm_reg = buffer.mod_rm_reg.map(|reg| reg | b_ext);
+        //        buffer.mod_rm_rm = buffer.mod_rm_rm.map(|rm| rm | index_ext);
+        //    }
+        //}
 
         // Build operands (read immediates as appropriate)
         // Destination operand is typically operand1, but needs to be read last (source operands
         // come first), so read the operands in the correct order (ordered_operands()), then
         // re-arrange them so they map to the correct operands.
-        let operand_results: Result<ArrayVec<[_; 4]>, InstructionDecodingError> = def.ordered_operands().iter()
-            .map(|op_def| op_def.as_ref().map_or(Ok(None), |o_d| 
-                Ok(if o_d.fixed_operand.is_none() {
-                    Some(self.read_operand(o_d, &buffer)?)
-                } else { None }))).collect();
-        let operands = operand_results?;
-        let ordered_operands = if def.has_destination {
-            [operands[3], operands[0], operands[1], operands[2]]
-        } else {
-            [operands[0], operands[1], operands[2], operands[3]]
-        };
+        //let operand_results: Result<ArrayVec<[_; 4]>, InstructionDecodingError> = def.ordered_operands().iter()
+        //    .map(|op_def| op_def.as_ref().map_or(Ok(None), |o_d| 
+        //        Ok(if o_d.fixed_operand.is_none() {
+        //            Some(self.read_operand(o_d, &buffer)?)
+        //        } else { None }))).collect();
 
-        // Build instruction
-        let mut instr = Instruction {
-            mnemonic: def.mnemonic,
-            operand1: ordered_operands[0],
-            operand2: ordered_operands[1],
-            operand3: ordered_operands[2],
-            operand4: ordered_operands[3],
-            flags: InstructionFlags {
-                lock: buffer.prefix1.map(|p| p == Prefix1::Lock).unwrap_or(false),
-                rounding_mode: None, // TODO
-                sae: false, // TODO
-            }
-        };
-
-        Ok(instr)
+        unimplemented!();
     }
 
     fn read_literal8(&mut self) -> Result<Operand, InstructionDecodingError> {
@@ -288,138 +267,15 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn read_operand(&mut self, op_def: &OperandDescription, buffer: &InstructionBuffer)
+    fn read_operand(&mut self, op_def: &OperandDefinition, buffer: &InstructionBuffer)
         -> Result<Operand, InstructionDecodingError> {
         let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
         let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);
-        Ok(match op_def.addressing_mode {
-            OperandAddressingMode::A => {
-                if (!buffer.address_size_prefix && self.mode == Mode::Real)
-                    || (buffer.address_size_prefix && self.mode != Mode::Real) {
-                        self.read_memory_and_segment_16()?
-                    } else { // 32-bit address
-                        self.read_memory_and_segment_32()?
-                    }
-            },
-            OperandAddressingMode::BA => Operand::Indirect(if self.mode == Mode::Long { Reg::RAX }
-                else { Reg::EAX }, Some(InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer)), Some(SegmentReg::DS)),
-            OperandAddressingMode::BB => Operand::IndirectScaledIndexed(InstructionReader::<T>::get_sized_b(self.mode, &buffer, addr_size), Reg::AL, RegScale::One, Some(InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer)), Some(SegmentReg::DS)),
-            OperandAddressingMode::BD => Operand::Indirect(InstructionReader::<T>::get_sized_di(self.mode, &buffer, InstructionReader::<T>::get_address_size(self.mode, &buffer)), Some(size), Some(SegmentReg::DS)),
-            OperandAddressingMode::C => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_control)?),
-            OperandAddressingMode::D => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_debug)?),
-            OperandAddressingMode::E |
-            OperandAddressingMode::M => self.rm_helper(buffer, op_def, |code| Reg::from_code_general_sized(code, InstructionReader::<T>::has_rex(buffer), size))?,
-            OperandAddressingMode::ES => self.rm_helper(buffer, op_def, Reg::from_code_fpu)?, 
-            OperandAddressingMode::EST => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_rm_code, Reg::from_code_fpu)?),
-            OperandAddressingMode::F => Operand::Direct(InstructionReader::<T>::get_flags_sized(size)),
-            OperandAddressingMode::G => Operand::Direct(InstructionReader::<T>::reg_helper_general(self.mode, buffer, op_def, InstructionReader::<T>::get_reg_code)?),
-            OperandAddressingMode::H => Operand::Direct(Reg::from_code_general_sized(InstructionReader::<T>::get_rm_code(buffer)?, InstructionReader::<T>::has_rex(buffer), size).ok_or(InstructionDecodingError::InvalidInstruction)?),
-            OperandAddressingMode::I |
-            OperandAddressingMode::J => self.read_literal_sized(size)?,
-            OperandAddressingMode::N => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_rm_code, Reg::from_code_mmx)?),
-            OperandAddressingMode::O => Operand::Offset(self.read_disp_sized(size)?, Some(size), buffer.get_segment_reg()),
-            OperandAddressingMode::P => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_mmx)?),
-            OperandAddressingMode::Q => self.rm_helper(buffer, op_def, Reg::from_code_mmx)?,
-            OperandAddressingMode::R => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_mod_code, |code| Reg::from_code_general_sized(code, InstructionReader::<T>::has_rex(buffer), size))?),
-            OperandAddressingMode::S => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_segment)?),
-            OperandAddressingMode::SC => unimplemented!(), // TODO?
-            OperandAddressingMode::T => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_test)?),
-            OperandAddressingMode::U => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_rm_code, Reg::from_code_xmm)?),
-            OperandAddressingMode::V => Operand::Direct(InstructionReader::<T>::reg_helper(buffer, InstructionReader::<T>::get_reg_code, Reg::from_code_xmm)?),
-            OperandAddressingMode::W => self.rm_helper(buffer, op_def, Reg::from_code_xmm)?,
-            OperandAddressingMode::X => match addr_size {
-                    OperandSize::Word => Operand::Indirect(Reg::SI, Some(size), Some(SegmentReg::DS)),
-                    OperandSize::Dword => Operand::Indirect(Reg::ESI, Some(size), Some(SegmentReg::DS)),
-                    OperandSize::Qword => Operand::Indirect(Reg::RSI, Some(size), Some(SegmentReg::DS)),
-                    _ => unreachable!()
-                },
-            OperandAddressingMode::Y => match addr_size {
-                    OperandSize::Word => Operand::Indirect(Reg::DI, Some(size), Some(SegmentReg::ES)),
-                    OperandSize::Dword => Operand::Indirect(Reg::EDI, Some(size), Some(SegmentReg::ES)),
-                    OperandSize::Qword => Operand::Indirect(Reg::RDI, Some(size), Some(SegmentReg::ES)),
-                    _ => unreachable!()
-                },
-            OperandAddressingMode::Z => Operand::Direct(Reg::from_code_general_sized(buffer.primary_opcode & 0x7,
-                InstructionReader::<T>::has_rex(buffer), size).ok_or(InstructionDecodingError::InvalidInstruction)?),
-            OperandAddressingMode::AVXVex |
-            OperandAddressingMode::AVXMemRm |
-            OperandAddressingMode::AVXReg |
-            OperandAddressingMode::AVXRm |
-            OperandAddressingMode::AVXMaskedReg |
-            OperandAddressingMode::AVXMemBcst32Rm |
-            OperandAddressingMode::AVXMemBcst64Rm |
-            OperandAddressingMode::AVXImm8 |
-            OperandAddressingMode::AVXDestMemRm |
-            OperandAddressingMode::AVXRegMaskedRm |
-            OperandAddressingMode::MaskedMaskReg |
-            OperandAddressingMode::MaskReg |
-            OperandAddressingMode::MaskRm |
-            OperandAddressingMode::MaskMemRm |
-            OperandAddressingMode::MaskVex |
-            OperandAddressingMode::GeneralVex |
-            OperandAddressingMode::GeneralRm |
-            OperandAddressingMode::BoundReg |
-            OperandAddressingMode::BoundMemRm |
-            OperandAddressingMode::Fixed => unimplemented!(),
-        })
+        unimplemented!();
     }
 
     fn has_mod_rm(def: &InstructionDefinition) -> bool {
-        def.ordered_operands().iter().filter_map(|x| **x).any(|op_def| match op_def.addressing_mode {
-            OperandAddressingMode::A |
-            OperandAddressingMode::BA |
-            OperandAddressingMode::BB |
-            OperandAddressingMode::BD |
-            OperandAddressingMode::F |
-            OperandAddressingMode::I |
-            OperandAddressingMode::J |
-            OperandAddressingMode::O |
-            OperandAddressingMode::W |
-            OperandAddressingMode::X |
-            OperandAddressingMode::Y |
-            OperandAddressingMode::Z |
-            OperandAddressingMode::Fixed
-                => false,
-
-            OperandAddressingMode::C |
-            OperandAddressingMode::D |
-            OperandAddressingMode::E |
-            OperandAddressingMode::ES |
-            OperandAddressingMode::EST |
-            OperandAddressingMode::G |
-            OperandAddressingMode::H |
-            OperandAddressingMode::M |
-            OperandAddressingMode::N |
-            OperandAddressingMode::P |
-            OperandAddressingMode::Q |
-            OperandAddressingMode::R |
-            OperandAddressingMode::S |
-            OperandAddressingMode::SC |
-            OperandAddressingMode::T |
-            OperandAddressingMode::U |
-            OperandAddressingMode::V |
-            OperandAddressingMode::W |
-            OperandAddressingMode::AVXVex |
-            OperandAddressingMode::AVXMemRm |
-            OperandAddressingMode::AVXReg |
-            OperandAddressingMode::AVXRm |
-            OperandAddressingMode::AVXMaskedReg |
-            OperandAddressingMode::AVXMemBcst32Rm |
-            OperandAddressingMode::AVXMemBcst64Rm |
-            OperandAddressingMode::AVXImm8 |
-            OperandAddressingMode::AVXDestMemRm |
-            OperandAddressingMode::AVXRegMaskedRm |
-            OperandAddressingMode::MaskedMaskReg |
-            OperandAddressingMode::MaskReg |
-            OperandAddressingMode::MaskRm |
-            OperandAddressingMode::MaskMemRm |
-            OperandAddressingMode::MaskVex |
-            OperandAddressingMode::GeneralVex |
-            OperandAddressingMode::GeneralRm |
-            OperandAddressingMode::BoundReg |
-            OperandAddressingMode::BoundMemRm 
-                => true
-        })
+        unimplemented!();
     }
 
     fn get_address_size(mode: Mode, buffer: &InstructionBuffer) -> OperandSize {
@@ -508,7 +364,7 @@ impl<T: Read> InstructionReader<T> {
         read_proc(buffer).and_then(|code| conv_proc(code).ok_or(InstructionDecodingError::InvalidInstruction))
     }
 
-    fn reg_helper_general(mode: Mode, buffer: &InstructionBuffer, op_def: &OperandDescription, read_proc:
+    fn reg_helper_general(mode: Mode, buffer: &InstructionBuffer, op_def: &OperandDefinition, read_proc:
         fn(&InstructionBuffer) -> Result<u8, InstructionDecodingError>) -> Result<Reg, InstructionDecodingError> {
         match InstructionReader::<T>::get_operand_size(mode, op_def, buffer) {
             OperandSize::Byte => InstructionReader::<T>::reg_helper(buffer, read_proc,
@@ -520,7 +376,7 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn rm_helper<TConv>(&mut self, buffer: &InstructionBuffer, op_def: &OperandDescription, conv_proc: TConv)
+    fn rm_helper<TConv>(&mut self, buffer: &InstructionBuffer, op_def: &OperandDefinition, conv_proc: TConv)
         -> Result<Operand, InstructionDecodingError>
         where TConv : Fn(u8) -> Option<Reg> {
         let rm = buffer.mod_rm_rm.ok_or(InstructionDecodingError::InvalidInstruction)?;
@@ -602,7 +458,7 @@ impl<T: Read> InstructionReader<T> {
         })
     }
 
-    fn sib_helper(&mut self, buffer: &InstructionBuffer, op_def: &OperandDescription, addr_size: OperandSize) -> 
+    fn sib_helper(&mut self, buffer: &InstructionBuffer, op_def: &OperandDefinition, addr_size: OperandSize) -> 
         Result<Operand, InstructionDecodingError> {
         let scale = buffer.sib_scale.and_then(|scale| RegScale::from_sib_code(scale))
             .ok_or(InstructionDecodingError::InvalidInstruction)?;
@@ -653,76 +509,12 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn get_operand_size(mode: Mode, op_def: &OperandDescription, buffer: &InstructionBuffer) -> OperandSize {
+    fn get_operand_size(mode: Mode, op_def: &OperandDefinition, buffer: &InstructionBuffer) -> OperandSize {
         fn is_mem(buffer: &InstructionBuffer) -> bool {
             buffer.mod_rm_mod.map(|m| m != 0b11).unwrap_or(false)
         }
 
-        match op_def.operand_type {
-            OperandType::A => if (mode == Mode::Real) ^ (buffer.operand_size_prefix) { OperandSize::Dword } else { OperandSize::Qword },
-            OperandType::B | OperandType::BS | OperandType::BSQ | OperandType::BSS =>
-                OperandSize::Byte,
-            OperandType::BCD | OperandType::ER | OperandType::PT | OperandType::T =>
-                OperandSize::Tbyte,
-            OperandType::D | OperandType::DI | OperandType::DO | OperandType::DS | OperandType::SI | OperandType::SR =>
-                OperandSize::Dword,
-            OperandType::DR | OperandType::PI | OperandType::PSQ | OperandType::Q | OperandType::QI | OperandType::QP =>
-                OperandSize::Qword,
-            OperandType::DQP => if buffer.operand_size_64 { OperandSize::Qword } else { OperandSize::Dword },
-            OperandType::E | OperandType::ST | OperandType::STX => 
-                OperandSize::Unsized,
-            OperandType::P => if (mode == Mode::Real) ^ (buffer.operand_size_prefix) { OperandSize::Dword } else { OperandSize::Fword },
-            OperandType::DQ | OperandType::PD | OperandType::PS | OperandType::SD | OperandType::SS =>
-                OperandSize::XMMword,
-            OperandType::PTP => if buffer.operand_size_64 { OperandSize::Tbyte } else if (mode == Mode::Real) ^ (buffer.operand_size_prefix)
-                { OperandSize::Dword } else { OperandSize::Fword },
-            OperandType::S => if mode != Mode::Long { OperandSize::Tbyte } else { OperandSize::Fword },
-            OperandType::V | OperandType::VDS | OperandType::VS =>
-                if (mode == Mode::Real) ^ (buffer.operand_size_prefix) { OperandSize::Word } else { OperandSize::Dword },
-            OperandType::VQ => if buffer.operand_size_prefix { OperandSize::Qword } else { OperandSize::Word },
-            OperandType::VQP => 
-                if buffer.operand_size_64 { OperandSize::Qword } else if (mode == Mode::Real) ^ (buffer.operand_size_prefix)
-                { OperandSize::Word } else { OperandSize::Dword },
-            OperandType::W | OperandType::WI | OperandType::WO => OperandSize::Word,
-            OperandType::XMM => OperandSize::XMMword,
-            OperandType::YMM => OperandSize::YMMword,
-            OperandType::ZMM => OperandSize::ZMMword,
-            OperandType::XMMorYMM => if buffer.vector_len.unwrap_or(false) { OperandSize::YMMword } else { OperandSize::XMMword },
-            OperandType::XMMorYMMorMem32 => if is_mem(buffer) && buffer.vex_b.unwrap_or(false) { OperandSize::Dword } 
-                else if buffer.vector_len.unwrap_or(false) { OperandSize::YMMword } else { OperandSize::XMMword },
-            OperandType::XMMorYMMorMemOrMem64 => if is_mem(buffer) && buffer.vex_b.unwrap_or(true) { OperandSize::Qword }
-                else { if buffer.vector_len.unwrap_or(false) { OperandSize::YMMword } else { OperandSize::XMMword } },
-            OperandType::XMMorMem32 | OperandType::XMMorMemOrMem32 => 
-                if is_mem(buffer) && buffer.vex_b.unwrap_or(false) { OperandSize::Dword }
-                else { OperandSize::XMMword },
-            OperandType::XMMorMem64 | OperandType::XMMorMemOrMem64 => if is_mem(buffer) && buffer.vex_b.unwrap_or(false) 
-                { OperandSize::Qword } else { OperandSize::XMMword },
-            OperandType::YMMorMemOrMem32 => if is_mem(buffer) && buffer.vex_b.unwrap_or(false) 
-                { OperandSize::Dword } else { OperandSize::YMMword },
-            OperandType::YMMorMemOrMem64 => if is_mem(buffer) && buffer.vex_b.unwrap_or(false) 
-                { OperandSize::Qword } else { OperandSize::YMMword },
-            OperandType::ZMMorMemOrMem64 => if is_mem(buffer) && buffer.vex_b.unwrap_or(false) 
-                { OperandSize::Qword } else { OperandSize::ZMMword },
-            OperandType::AVX => match (buffer.vector_len.unwrap_or(false), buffer.vex_l.unwrap_or(false)) {
-                    (false, _) => OperandSize::XMMword,
-                    (true, false) => OperandSize::YMMword,
-                    (true, true) => OperandSize::ZMMword
-                },
-            OperandType::MaskReg => match (buffer.operand_size_prefix, buffer.operand_size_64) {
-                    (true, false) => OperandSize::Byte,
-                    (false, false) => OperandSize::Word,
-                    (true, true) => OperandSize::Dword,
-                    (false, true) => OperandSize::Qword,
-                },
-            OperandType::MaskOrMem8 => OperandSize::Byte,
-            OperandType::MaskOrMem16 => OperandSize::Word,
-            OperandType::MaskOrMem32 => OperandSize::Dword,
-            OperandType::MaskOrMem64 => OperandSize::Qword,
-            OperandType::Bound => OperandSize::XMMword,
-            OperandType::BoundOrMem => OperandSize::XMMword, // TODO?
-            OperandType::UnsizedMemory => OperandSize::Unsized,
-            OperandType::FpuRegister => OperandSize::Tbyte
-        }
+        unimplemented!();
     }
 
     pub fn has_rex(buffer: &InstructionBuffer) -> bool {

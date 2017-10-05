@@ -1,6 +1,6 @@
 use std::io::Write;
-use ::{Mnemonic, Mode, ProcessorLevel, InstructionEncodingError};
-use ::instruction_def::{InstructionDefinition, find_instruction_def, OperandType};
+use ::{Mnemonic, Mode, InstructionEncodingError};
+use ::instruction_def::{InstructionDefinition, OperandType};
 use ::operand::{Operand, OperandSize};
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -10,7 +10,11 @@ pub struct Instruction {
     pub operand2: Option<Operand>,
     pub operand3: Option<Operand>,
     pub operand4: Option<Operand>,
-    pub flags: InstructionFlags,
+    pub lock: bool,
+    pub rounding_mode: Option<RoundingMode>,
+    pub sae: bool,
+    pub mask_reg: Option<MaskReg>,
+    pub broadcast: Option<BroadcastMode>
 }
 
 impl Instruction {
@@ -59,10 +63,11 @@ impl Instruction {
         }
     }
 
-    pub fn encode<W>(&self, writer: &mut W, mode: Mode, proc_level: ProcessorLevel) -> Result<usize, InstructionEncodingError> 
+    pub fn encode<W>(&self, writer: &mut W, mode: Mode) -> Result<usize, InstructionEncodingError> 
         where W: Write {
-        let encoding = find_instruction_def(&self, mode, proc_level)?;
-        encoding.encode(writer, &self, mode, proc_level)
+        //let encoding = find_instruction_def(&self, mode, proc_level)?;
+        //encoding.encode(writer, &self, mode, proc_level)
+        unimplemented!();
     }
 }
 
@@ -74,7 +79,11 @@ impl Default for Instruction {
             operand2: None,
             operand3: None,
             operand4: None,
-            flags: Default::default()
+            lock: false,
+            rounding_mode: None,
+            sae: false,
+            mask_reg: None,
+            broadcast: None
         }
     }
 }
@@ -97,24 +106,6 @@ impl RoundingMode {
         }
     }
 }
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
-pub struct InstructionFlags {
-    pub lock: bool,
-    pub rounding_mode: Option<RoundingMode>,
-    pub sae: bool
-    // TODO Rep prefixes
-}
-
-impl Default for InstructionFlags { 
-    fn default() -> InstructionFlags { InstructionFlags { 
-            lock: false,
-            rounding_mode: None,
-            sae: false
-        }
-    }
-}
-
 
 #[derive(PartialEq, Eq, Clone, Copy, Debug)]
 pub enum RegScale {
@@ -411,7 +402,7 @@ impl Reg {
             Reg::XMM20 | Reg::XMM21 | Reg::XMM22 | Reg::XMM23 |
             Reg::XMM24 | Reg::XMM25 | Reg::XMM26 | Reg::XMM27 |
             Reg::XMM28 | Reg::XMM29 | Reg::XMM30 | Reg::XMM31 |
-            Reg::BND0  | Reg::BND1  | Reg::BND2  | Reg::BND3  => OperandSize::XMMword,
+            Reg::BND0  | Reg::BND1  | Reg::BND2  | Reg::BND3  => OperandSize::Xmmword,
 
             // 256-bit registers
             Reg::YMM0  | Reg::YMM1  | Reg::YMM2  | Reg::YMM3  |
@@ -421,7 +412,7 @@ impl Reg {
             Reg::YMM16 | Reg::YMM17 | Reg::YMM18 | Reg::YMM19 |
             Reg::YMM20 | Reg::YMM21 | Reg::YMM22 | Reg::YMM23 |
             Reg::YMM24 | Reg::YMM25 | Reg::YMM26 | Reg::YMM27 |
-            Reg::YMM28 | Reg::YMM29 | Reg::YMM30 | Reg::YMM31 => OperandSize::YMMword,
+            Reg::YMM28 | Reg::YMM29 | Reg::YMM30 | Reg::YMM31 => OperandSize::Ymmword,
 
             // 512-bit registers
             Reg::ZMM0  | Reg::ZMM1  | Reg::ZMM2  | Reg::ZMM3  |
@@ -431,7 +422,7 @@ impl Reg {
             Reg::ZMM16 | Reg::ZMM17 | Reg::ZMM18 | Reg::ZMM19 |
             Reg::ZMM20 | Reg::ZMM21 | Reg::ZMM22 | Reg::ZMM23 |
             Reg::ZMM24 | Reg::ZMM25 | Reg::ZMM26 | Reg::ZMM27 |
-            Reg::ZMM28 | Reg::ZMM29 | Reg::ZMM30 | Reg::ZMM31 => OperandSize::ZMMword,
+            Reg::ZMM28 | Reg::ZMM29 | Reg::ZMM30 | Reg::ZMM31 => OperandSize::Zmmword,
 
             // Mask registers
             Reg::K0 | Reg::K1 | Reg::K2 | Reg::K3 |
@@ -452,9 +443,9 @@ impl Reg {
     pub fn is_16_bit(&self) -> bool { self.size() == OperandSize::Word }
     pub fn is_32_bit(&self) -> bool { self.size() == OperandSize::Dword }
     pub fn is_64_bit(&self) -> bool { self.size() == OperandSize::Qword }
-    pub fn is_128_bit(&self) -> bool { self.size() == OperandSize::XMMword }
-    pub fn is_256_bit(&self) -> bool { self.size() == OperandSize::YMMword }
-    pub fn is_512_bit(&self) -> bool { self.size() == OperandSize::ZMMword }
+    pub fn is_128_bit(&self) -> bool { self.size() == OperandSize::Xmmword }
+    pub fn is_256_bit(&self) -> bool { self.size() == OperandSize::Ymmword }
+    pub fn is_512_bit(&self) -> bool { self.size() == OperandSize::Zmmword }
 
     pub fn is_control(&self) -> bool {
         match *self {

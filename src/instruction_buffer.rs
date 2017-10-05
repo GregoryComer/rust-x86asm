@@ -2,7 +2,6 @@ use std::io::{ Write };
 use std::io::Result as IoResult;
 use byteorder::{ LittleEndian, WriteBytesExt };
 use ::{ InstructionEncodingError, Mode, Reg, SegmentReg };
-use ::instruction_def::{ OpSize64Behavior };
 use ::instruction::MergeMode;
 
 pub const PREFIX_LOCK: u8 = 0xF0;
@@ -53,7 +52,6 @@ pub struct InstructionBuffer {
     pub merge_mode: Option<MergeMode>,
     pub vex_b: Option<bool>,
     pub vex_l: Option<bool>,
-    pub op_size_64_behavior: OpSize64Behavior,
     pub composite_prefix: Option<CompositePrefix>
 
     // TODO Force REX
@@ -231,7 +229,7 @@ impl InstructionBuffer {
         let vex_b2 = if self.vex_b.unwrap_or(false) { 1 } else { 0 };
         let vex_v = vex_operand.map(|s| (s & 0x10) >> 4).unwrap_or(1);
         let vex_v4 = vex_operand.map(|s| s & 0xF).unwrap_or(0xF);
-        let vex_we = if self.op_size_64_behavior == OpSize64Behavior::Force64EvexOnly { 1 } else { self.vex_e.or(Some(self.operand_size_64)).map(|b| if b { 1 } else { 0 }).unwrap_or(0) };
+        let vex_we = 1; // if self.op_size_64_behavior == OpSize64Behavior::Force64EvexOnly { 1 } else { self.vex_e.or(Some(self.operand_size_64)).map(|b| if b { 1 } else { 0 }).unwrap_or(0) }; // TODO
         let vex_l = self.vector_len.map(|v| if v { 1 } else { 0 }).unwrap_or(0);
         let vex_l2 = if self.vex_l.unwrap_or(false) { 1 } else { 0 };
         let vex_a3 = self.mask_reg.map(|m| m & 0x7).unwrap_or(0);
@@ -411,7 +409,6 @@ impl Default for InstructionBuffer {
             merge_mode: None,
             vex_b: None,
             vex_l: None,
-            op_size_64_behavior: OpSize64Behavior::Normal
         }
     }
 }

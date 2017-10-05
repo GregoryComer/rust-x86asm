@@ -1,12 +1,11 @@
 use std::io::Write;
-use ::{Instruction, Mnemonic, Mode, Operand, OperandSize, ProcessorLevel, Reg, RegScale};
+use ::{Instruction, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale};
 use ::instruction_buffer::{ImmediateValue, InstructionBuffer, Prefix1, Prefix2};
-use ::instruction_def::{InstructionDefinition, OperandAddressingMode, OperandDescription, OpSize64Behavior};
+use ::instruction_def::*;
 
 pub struct InstructionWriter<T: Write> {
     writer: T,
     mode: Mode,
-    proc_level: ProcessorLevel
 }
 
 impl<T: Write> InstructionWriter<T> {
@@ -14,21 +13,20 @@ impl<T: Write> InstructionWriter<T> {
         InstructionWriter {
             writer: writer,
             mode: mode,
-            proc_level: ProcessorLevel::Corei7
         }
     }
 
     pub fn get_inner_writer_ref(&self) -> &T { &self.writer }
 
     pub fn write(&mut self, instr: &Instruction) -> Result<usize, InstructionEncodingError> {
-        instr.encode(&mut self.writer, self.mode, self.proc_level)
+        instr.encode(&mut self.writer, self.mode)
     }
 
     pub fn write0(&mut self, mnemonic: Mnemonic) -> Result<usize, InstructionEncodingError> {
         Instruction {
             mnemonic: mnemonic,
             .. Default::default()
-        } .encode(&mut self.writer, self.mode, self.proc_level)
+        } .encode(&mut self.writer, self.mode)
     }
 
     pub fn write1(&mut self, mnemonic: Mnemonic, operand1: Operand) -> Result<usize, InstructionEncodingError> {
@@ -36,7 +34,7 @@ impl<T: Write> InstructionWriter<T> {
             mnemonic: mnemonic,
             operand1: Some(operand1),
             .. Default::default()
-        } .encode(&mut self.writer, self.mode, self.proc_level)
+        } .encode(&mut self.writer, self.mode)
     }
 
     pub fn write2(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand) -> Result<usize, InstructionEncodingError> {
@@ -45,7 +43,7 @@ impl<T: Write> InstructionWriter<T> {
             operand1: Some(operand1),
             operand2: Some(operand2),
             .. Default::default()
-        } .encode(&mut self.writer, self.mode, self.proc_level)
+        } .encode(&mut self.writer, self.mode)
     }
 
     pub fn write3(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand) -> Result<usize, InstructionEncodingError> {
@@ -55,7 +53,7 @@ impl<T: Write> InstructionWriter<T> {
             operand2: Some(operand2),
             operand3: Some(operand3),
             .. Default::default()
-        } .encode(&mut self.writer, self.mode, self.proc_level)
+        } .encode(&mut self.writer, self.mode)
     }
 
     pub fn write4(&mut self, mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, operand4: Operand) -> Result<usize, InstructionEncodingError> {
@@ -66,7 +64,7 @@ impl<T: Write> InstructionWriter<T> {
             operand3: Some(operand3),
             operand4: Some(operand4),
             .. Default::default()
-        } .encode(&mut self.writer, self.mode, self.proc_level)
+        } .encode(&mut self.writer, self.mode)
     }
 }
 
@@ -81,304 +79,14 @@ pub enum InstructionEncodingError {
     InvalidAddressing
 }
 
-pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDescription, op: &Option<Operand>, mode: Mode, proc_level: ProcessorLevel) -> Result<(), InstructionEncodingError> {
-        match def.addressing_mode {
-            OperandAddressingMode::A => { // Direct memory address w/ segment selector
-                buffer.add_immediate(match *op.as_ref().expect("Missing operand.") {
-                    Operand::MemoryAndSegment16(seg, addr) => ImmediateValue::MemoryAndSegment16(seg, addr),
-                    Operand::MemoryAndSegment32(seg, addr) => ImmediateValue::MemoryAndSegment32(seg, addr),
-                    _ => panic!("Invalid operand.")
-                })
-            },
-            OperandAddressingMode::BA => {}, // DS:rAX
-            OperandAddressingMode::BB => {}, // DS:rBX+AL
-            OperandAddressingMode::BD => {}, // DS:rDI
-            OperandAddressingMode::C => { // Reg field is control register
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::D => { // Reg field is 
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::E |     // Rm is general/mem
-            OperandAddressingMode::ES => { // Rm is fpu/mem
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::EST => { // Rm is fpu
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::F => {}, // Flags
-            OperandAddressingMode::G => {   // Reg is general
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::H => { // Rm is general (ignore mod)
-                match *op.as_ref().expect("Missing operand.") {
-                    Operand::Direct(reg) => encode_rm_direct_no_mod(buffer, reg),
-                   _ => panic!("Invalid operand.")
-                }
-            },
-            OperandAddressingMode::I => { // Immediate
-               buffer.add_immediate(match *op.as_ref().expect("Missing operand.") {
-                   Operand::Literal8(n) => ImmediateValue::Literal8(n),
-                   Operand::Literal16(n) => ImmediateValue::Literal16(n),
-                   Operand::Literal32(n) => ImmediateValue::Literal32(n),
-                   Operand::Literal64(n) => ImmediateValue::Literal64(n),
-                   _ => panic!("Invalid operand.")
-               });
-            },
-            OperandAddressingMode::J => { // Relative offset
-                // TODO Maybe should factor in instruction size here? Some assemblers do. See
-                // relative call instructions (offset specified from next instruction).
-                buffer.add_immediate(match *op.as_ref().expect("Missing operand") {
-                   Operand::Literal8(n) => ImmediateValue::Literal8(n),
-                   Operand::Literal16(n) => ImmediateValue::Literal16(n),
-                   Operand::Literal32(n) => ImmediateValue::Literal32(n),
-                   Operand::Literal64(n) => ImmediateValue::Literal64(n),
-                   _ => panic!("Invalid operand.")
-                });
-            },
-            OperandAddressingMode::M => { // Rm is memory
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::N => { // Rm is mmx
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::O => { // Offset
-                match *op.as_ref().expect("Missing operand") {
-                    Operand::Offset(addr, ..) => {
-                        if addr < u16::max_value() as u64 {
-                            buffer.add_immediate(ImmediateValue::Literal16(addr as u16));
-                            buffer.address_size_prefix = true;
-                        } else {
-                            buffer.add_immediate(ImmediateValue::Literal32(addr as u32));
-                        }
-                    },
-                    _ => panic!("Invalid operand.")
-                }
-            },
-            OperandAddressingMode::P => { // Reg is mmx
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::Q => { // Rm is mmx or memory
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::R => { // Mod is general
-                // Source document says that this should mean that a general purpose register
-                // is encoded in the mod field. I think this is a typo, as it doesn't match
-                // Intel docs. Should be the r/m field? (See mov to/from control register)
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::S => { // Reg is segment
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::SC => {}, // Stack operand
-            OperandAddressingMode::T => { // Reg is test
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::U => { // Rm is XMM
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::V => { // Reg is XMM
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::W => { // Rm is XMM/mem
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::X => {}, // DS:rSI
-            OperandAddressingMode::Y => {}, // ES:rDI
-            OperandAddressingMode::Z => {
-                if let Some(Operand::Direct(reg)) = *op {
-                    buffer.opcode_add = Some(reg.get_reg_code());
-                } else { panic!("Invalid operand."); }
-            }, // Last 3 bits of opcode is general reg
-            OperandAddressingMode::AVXVex => {
-                encode_vvvv(buffer, op.as_ref().expect("Missing operand."));
-            },
-            OperandAddressingMode::AVXMemRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::AVXReg => {
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::AVXRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::AVXMaskedReg |
-            OperandAddressingMode::MaskedMaskReg => {
-                encode_reg(buffer, op.as_ref().expect("Missing operand."));
-            },
-            OperandAddressingMode::AVXMemBcst32Rm |
-            OperandAddressingMode::AVXMemBcst64Rm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::AVXImm8 => {
-                match *op.as_ref().expect("Missing operand") {
-                    Operand::Direct(reg) => {
-                        buffer.displacement = Some(ImmediateValue::Literal8(reg.get_reg_code() << 4))
-                    },
-                    _ => panic!("Invalid operand")
-                }
-            },
-            OperandAddressingMode::AVXDestMemRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::AVXRegMaskedRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::MaskReg => {
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::MaskRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::MaskMemRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::MaskVex => {
-                encode_vvvv(buffer, op.as_ref().expect("Missing operand."));
-            },
-            OperandAddressingMode::GeneralRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::GeneralVex => {
-                encode_vvvv(buffer, op.as_ref().expect("Missing operand."));
-            },
-            OperandAddressingMode::BoundReg => {
-                encode_reg(buffer, op.as_ref().expect("Invalid operand."));
-            },
-            OperandAddressingMode::BoundMemRm => {
-                encode_rm(buffer, op.as_ref().expect("Missing operand"), mode);
-            },
-            OperandAddressingMode::Fixed => {}
-        }
-        Ok(())
-    }
-
-pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instruction, mode: Mode, proc_level: ProcessorLevel) -> Result<usize, InstructionEncodingError>
+pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instruction, mode: Mode) -> Result<usize, InstructionEncodingError>
     where W : Write {
     let mut buffer: InstructionBuffer = Default::default(); 
+    unimplemented!();
+}
 
-    let operand_pairs = [(&def.operand1, &instr.operand1),
-        (&def.operand2, &instr.operand2),
-        (&def.operand3, &instr.operand3),
-        (&def.operand4, &instr.operand4)];
-
-    if instr.flags.lock { buffer.prefix1 = Some(Prefix1::Lock); }
-    // TODO Rep prefixes
-
-    buffer.is_two_byte_opcode = def.is_two_byte_opcode;
-    buffer.primary_opcode = def.primary_opcode;
-    buffer.secondary_opcode = def.secondary_opcode;
-    buffer.fixed_prefix = def.fixed_prefix;
-    buffer.force_vex = def.force_vex;
-    buffer.force_evex = def.force_evex;
-
-    let op_size_pref = def.force_op_size_prefix || if let Some(size_pref_acc) = operand_pairs.iter().fold(None, |acc: Option<(bool, bool)>, pair| {
-       pair.0.and_then(|op_def| {
-           let maybe_pair_pref = op_def.get_operand_size_prefix(pair.1, mode);
-           maybe_pair_pref.and_then(|pair_pref|
-               acc.map(|acc_i: (bool, bool)| (acc_i.0 & pair_pref.0, acc_i.1 & pair_pref.1) ).or(maybe_pair_pref)
-           )
-       }).or(acc)
-    }) {
-        if size_pref_acc.0 & size_pref_acc.1 { return Err(InstructionEncodingError::AmbiguousSize); }
-        else if !size_pref_acc.0 & !size_pref_acc.1 { return Err(InstructionEncodingError::MismatchedEncoding); }
-        else { size_pref_acc.1 }
-    } else { false };
-
-    if op_size_pref { buffer.operand_size_prefix = true; }
-
-    let rex_w = def.op_size_64_behavior == OpSize64Behavior::Force64 || (mode == Mode::Long) && def.force_op_size_prefix || if let Some(size_pref_acc) = operand_pairs.iter().fold(None, |acc: Option<(bool, bool)>, pair| {
-       pair.0.and_then(|op_def| {
-           let maybe_pair_pref = pair.1.as_ref().and_then(|o| op_def.get_rex_w(o));
-           maybe_pair_pref.and_then(|pair_pref|
-               acc.map(|acc_i: (bool, bool)| (acc_i.0 & pair_pref.0, acc_i.1 & pair_pref.1) ).or(maybe_pair_pref)
-           )
-       }).or(acc)
-    }) {
-        if size_pref_acc.0 & size_pref_acc.1 { return Err(InstructionEncodingError::AmbiguousSize); }
-        else if !size_pref_acc.0 & !size_pref_acc.1 { return Err(InstructionEncodingError::MismatchedEncoding); }
-        else { size_pref_acc.1 }
-    } else { false };
-
-    buffer.op_size_64_behavior = def.op_size_64_behavior;
-
-    if rex_w {
-        buffer.operand_size_64 = true;
-    }
-
-    if def.force_addr_size_prefix {
-        buffer.address_size_prefix = true;
-    }
-    
-    // Vector size
-    if def.vector_size.is_some() {
-        buffer.vector_len = def.vector_size;
-    } else if let Some(vector_size) = operand_pairs.iter().filter_map(|tuple| tuple.0.and_then(
-                |op_def| tuple.1.as_ref().and_then(|ref op| op_def.get_vector_size(op) ) ) )
-        // If there are multiple vector sizes (i.e. conversion instructions, take the largest one)
-        .fold(None, |acc: Option<OperandSize>, s| match acc {
-            Some(acc_size) => if s.bits() > acc_size.bits() { Some(s) } else { acc },
-            None => Some(s)
-        })
-    {
-        match vector_size {
-            OperandSize::XMMword => { 
-                buffer.vector_len = Some(false);
-                buffer.vex_l = Some(false);
-            },
-            OperandSize::YMMword => {
-                buffer.vector_len = Some(true);
-                buffer.vex_l = Some(false);
-            },
-            OperandSize::ZMMword => {
-                // TODO Is this correct? Rounding modes?
-                buffer.vector_len = Some(false);
-                buffer.vex_l = Some(true);
-            },
-            _ => panic!("Invalid vector size.")
-        }
-    }
-
-    // Segment register
-    let seg_reg_acc = operand_pairs.iter().filter(|t| t.0.map(|o| o.fixed_operand.is_none()).unwrap_or(true))
-        .filter_map(|t| t.1.as_ref().and_then(|op| op.segment_reg())).fold(Ok(None), |acc, reg| 
-        acc.and_then(|a| if a.map(|ac| ac == reg).unwrap_or(true) { Ok(Some(reg)) } else { Err(()) }));
-    let maybe_seg_reg = seg_reg_acc.map_err(|_| InstructionEncodingError::NoEncoding)?;
-
-    if let Some(seg_reg) = maybe_seg_reg {
-        buffer.set_segment_override(seg_reg);
-    }
-        
-    if def.has_destination {
-        if let Some(ref op) = def.operand2 { encode_operand(&mut buffer, op, &instr.operand2, mode, proc_level)?; }
-        if let Some(ref op) = def.operand3 { encode_operand(&mut buffer, op, &instr.operand3, mode, proc_level)?; }
-        if let Some(ref op) = def.operand4 { encode_operand(&mut buffer, op, &instr.operand4, mode, proc_level)?; }
-        if let Some(ref op) = def.operand1 { encode_operand(&mut buffer, op, &instr.operand1, mode, proc_level)?; }
-    } else {
-        if let Some(ref op) = def.operand1 { encode_operand(&mut buffer, op, &instr.operand1, mode, proc_level)?; }
-        if let Some(ref op) = def.operand2 { encode_operand(&mut buffer, op, &instr.operand2, mode, proc_level)?; }
-        if let Some(ref op) = def.operand3 { encode_operand(&mut buffer, op, &instr.operand3, mode, proc_level)?; }
-        if let Some(ref op) = def.operand4 { encode_operand(&mut buffer, op, &instr.operand4, mode, proc_level)?; }
-    }
-
-    if let Some(op_ext) = def.opcode_ext {
-        // Seems like the operand2 document uses secondary opcodes as a special case of mod/rm
-        // bytes in some cases? TODO Look into this more
-        if def.secondary_opcode.is_none() || buffer.mod_rm_mod.is_some() || buffer.mod_rm_rm.is_some() {
-            buffer.mod_rm_reg = Some(op_ext);
-        }
-    }
-
-    // SAE/Rounding Mode
-    if instr.flags.sae { buffer.vex_b = Some(true); }
-    if let Some(ref rounding_mode) = instr.flags.rounding_mode {
-        let mode = rounding_mode.get_code();
-        buffer.vex_b = Some(true);
-        buffer.vex_l = Some(mode & 0x2 != 0);
-        buffer.vector_len = Some(mode & 0x1 != 0);
-    }
-
-    buffer.write(writer, mode)
+pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, op: &Option<Operand>, mode: Mode) -> Result<(), InstructionEncodingError> {
+    unimplemented!();
 }
 
 fn encode_rm(buffer: &mut InstructionBuffer, op: &Operand, mode: Mode) {
@@ -390,76 +98,20 @@ fn encode_rm(buffer: &mut InstructionBuffer, op: &Operand, mode: Mode) {
         Operand::Indirect(base, ..) => {
             encode_indirect(buffer, Some(base), None, None, 0, mode);
         },
-        Operand::AVXBroadcastIndirect(_, base, ..) => {
-            encode_indirect(buffer, Some(base), None, None, 0, mode);
-            buffer.vex_b = Some(true);
-        },
         Operand::IndirectDisplaced(base, disp, ..) => {
             encode_indirect(buffer, Some(base), None, None, disp, mode);
-        },
-        Operand::AVXBroadcastIndirectDisplaced(_, base, disp, ..) => {
-            encode_indirect(buffer, Some(base), None, None, disp, mode);
-            buffer.vex_b = Some(true);
         },
         Operand::IndirectScaledIndexed(base, index, scale, ..) => {
             encode_indirect(buffer, Some(base), Some(index), Some(scale), 0, mode);
         },
-        Operand::AVXBroadcastIndirectScaledIndexed(_, base, index, scale, ..) => {
-            encode_indirect(buffer, Some(base), Some(index), Some(scale), 0, mode);
-            buffer.vex_b = Some(true);
-        },
-        Operand::AVXBroadcastIndirectScaledIndexedDisplaced(_, base, index, scale, disp, ..) => {
-            encode_indirect(buffer, Some(base), Some(index), Some(scale), disp, mode);
-            buffer.vex_b = Some(true);
-        },
         Operand::IndirectScaledIndexedDisplaced(base, index, scale, disp, ..) => {
             encode_indirect(buffer, Some(base), Some(index), Some(scale), disp, mode);
-        },
-        Operand::AVXBroadcastIndirectScaledDisplaced(_, index, scale, disp, ..) => {
-            buffer.vex_b = Some(true);
-            encode_indirect(buffer, None, Some(index), Some(scale), disp, mode);
         },
         Operand::IndirectScaledDisplaced(index, scale, disp, ..) => {
             encode_indirect(buffer, None, Some(index), Some(scale), disp, mode);
         },
         Operand::Memory(addr, ..) | Operand::Offset(addr, ..) => { // TODO Should offset panic or be here?
             encode_indirect(buffer, None, None, None, addr, mode);
-        },
-        Operand::AVXDestination(reg, maybe_mask, maybe_merge_mode) => {
-            buffer.mod_rm_mod = Some(0b11);
-            buffer.mod_rm_rm = Some(reg.get_reg_code());
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirect(base, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, Some(base), None, None, 0, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirectScaledIndexed(base, index, scale, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, Some(base), Some(index), Some(scale), 0, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirectScaledIndexedDisplaced(base, index, scale, disp, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, Some(base), Some(index), Some(scale), disp, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirectScaledIndexedDisplaced(base, index, scale, disp, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, Some(base), Some(index), Some(scale), disp, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirectScaledDisplaced(index, scale, disp, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, None, Some(index), Some(scale), disp, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
-        },
-        Operand::AVXDestinationIndirectDisplaced(index, disp, _, _, maybe_mask, maybe_merge_mode) => {
-            encode_indirect(buffer, None, Some(index), None, disp, mode);
-            buffer.mask_reg = maybe_mask.map(|m| m.get_reg_code());
-            buffer.merge_mode = maybe_merge_mode;
         },
         Operand::Literal8(..) |
         Operand::Literal16(..) |
@@ -863,15 +515,6 @@ fn encode_rm_memory(buffer: &mut InstructionBuffer, addr: u64) {
 fn encode_reg(buffer: &mut InstructionBuffer, op: &Operand) {
     match *op {
         Operand::Direct(reg) => { buffer.mod_rm_reg = Some(reg.get_reg_code()); }
-        Operand::AVXDestination(reg, maybe_mask, maybe_merge_mode) => {
-            buffer.mod_rm_reg = Some(reg.get_reg_code());
-            if let Some(mask) = maybe_mask {
-                buffer.mask_reg = Some(mask.get_reg_code());
-            }
-            if let Some(merge_mode) = maybe_merge_mode {
-                buffer.merge_mode = Some(merge_mode);
-            }
-        },
         _ => panic!("Invalid operand.")
     }
 }
