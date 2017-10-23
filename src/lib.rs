@@ -44,8 +44,8 @@ impl Mode {
     }
 }
 
-#[derive(Clone, Copy, Debug)]
-pub enum RegType {
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RegType { // TODO Move to different file?
     General,
     Mmx,
     Avx,

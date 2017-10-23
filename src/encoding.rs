@@ -82,14 +82,206 @@ pub enum InstructionEncodingError {
 pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instruction, mode: Mode) -> Result<usize, InstructionEncodingError>
     where W : Write {
     let mut buffer: InstructionBuffer = Default::default(); 
-    unimplemented!();
+
+    println!("def: {:?}", def);
+
+    let addr_size = get_addr_size(def, instr, mode)?;
+
+    buffer.operand_size_prefix = get_operand_size_prefix(instr, def.operand_size_prefix, mode);
+    buffer.address_size_prefix = def.address_size_prefix.unwrap_or_else(
+        || get_address_size_prefix(addr_size, mode));
+    buffer.fixed_prefix = def.fixed_prefix;
+    buffer.operand_size_64 = get_op_size_64(def, instr);
+    if def.opcode_ext.is_some() { buffer.mod_rm_reg = def.opcode_ext; }
+
+    if let Some(pref) = def.composite_prefix {
+        match pref {
+            CompositePrefix::Rex { size_64: s } => { },
+            CompositePrefix::Vex { vector_size: vs, operand_behavior: _, we: w } => {
+                buffer.vex_e = w;
+                buffer.vector_len = vs.map(|s| s == OperandSize::Ymmword);
+                buffer.vex_l = vs.map(|s| s == OperandSize::Zmmword);
+            },
+            CompositePrefix::Evex { vector_size: vs, operand_behavior: _, we: w } => {
+                buffer.vex_e = w;
+                buffer.vector_len = vs.map(|s| s == OperandSize::Ymmword);
+                buffer.vex_l = vs.map(|s| s == OperandSize::Zmmword);
+            },
+        }
+    }
+
+    buffer.is_two_byte_opcode = def.two_byte_opcode;
+    buffer.primary_opcode = def.primary_opcode;
+    buffer.secondary_opcode = def.secondary_opcode;
+    buffer.fixed_post = def.fixed_post;
+
+    for (maybe_op_def, op) in def.operands.iter().zip(instr.operands().iter()) {
+        if let Some(ref op_def) = *maybe_op_def {
+            encode_operand(&mut buffer, &op_def, op, mode, addr_size)?;
+        }
+    }
+
+    buffer.write(writer, mode)
 }
 
-pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, op: &Option<Operand>, mode: Mode) -> Result<(), InstructionEncodingError> {
-    unimplemented!();
+fn get_operand_size_prefix(instr: &Instruction, behavior: OperandSizePrefixBehavior, mode: Mode) 
+    -> bool {
+    match behavior {
+        OperandSizePrefixBehavior::Always => true,
+        OperandSizePrefixBehavior::Never => false,
+        OperandSizePrefixBehavior::ConditionalOnSize(i) => {
+            instr.operands()[i as usize].and_then(|op| op.size())
+                .map_or(false, |s| match mode {
+                    Mode::Real => { s == OperandSize::Dword } ,
+                    Mode::Protected | Mode::Long => { s == OperandSize::Word }
+                })
+        }
+    }
+}
+
+fn get_addr_size(def: &InstructionDefinition, instr: &Instruction, mode: Mode)
+    -> Result<OperandSize, InstructionEncodingError> {
+    match check_unique::<_, OperandSize, InstructionEncodingError>(def.operands.iter().zip(instr.operands().iter()).filter_map(
+        |(ref op_def, op)| op_def.as_ref().and_then( // TODO Clean up?
+            |ref o_def| get_operand_addr_size(&o_def, op, mode)
+                .map(|v| v.map(Ok)).unwrap_or_else(|e| Some(Err(e))))
+            ), InstructionEncodingError::InvalidAddressing) {
+        Ok(Some(size)) => Ok(size),
+        Ok(None) => Ok(mode.pointer_size()),
+        Err(_) => Err(InstructionEncodingError::InvalidAddressing)
+    }
+}
+
+fn get_operand_addr_size(op_def: &OperandDefinition, operand: &Option<Operand>, mode: Mode)
+    -> Result<Option<OperandSize>, InstructionEncodingError> {
+    operand.map(|op| match op {
+        // TODO - Should offset/memory be here?
+        Operand::Indirect(reg, ..) |
+        Operand::IndirectScaledDisplaced(reg, ..) |
+        Operand::IndirectDisplaced(reg, ..) => Ok(Some(reg.size())),
+        Operand::IndirectScaledIndexed(base, index, ..) |
+        Operand::IndirectScaledIndexedDisplaced(base, index, ..) => { 
+            let base_size = base.size();
+            let index_size = index.size();
+            if base_size == index_size { Ok(Some(base_size)) }
+            else { Err(InstructionEncodingError::InvalidAddressing) }
+        },
+        _ => Ok(None)
+    }).unwrap_or(Ok(None))
+}
+
+// 3 Cases:
+// - Unambiguous - Ok(Some(val))
+// - Ambiguous - Ok(None)
+// - Conflicting - Err(_)
+fn check_unique<I, J, E>(mut iter: I, default_error: E) -> Result<Option<J>, E>
+    where J: PartialEq, I: Iterator<Item=Result<J, E>> {
+    if let Some(first_res) = iter.next() {
+        first_res.and_then(|first| {
+            for res in iter {
+                match res {
+                    Ok(item) => if item != first { return Err(default_error); },
+                    Err(e) => { return Err(e); }
+                }
+            }
+            Ok(Some(first))
+        })
+    } else { Ok(None) }
+}
+
+fn get_address_size_prefix(addr_size: OperandSize, mode: Mode) -> bool {
+    match mode {
+        Mode::Long => match addr_size {
+            OperandSize::Qword => false,
+            OperandSize::Dword => true,
+            _ => unreachable!()
+        },
+        Mode::Protected => match addr_size {
+            OperandSize::Dword => false,
+            OperandSize::Word => true,
+            _ => unreachable!()
+        },
+        Mode::Real => match addr_size {
+            OperandSize::Word => false,
+            OperandSize::Dword => true,
+            _ => unreachable!()
+        },
+    }
+}
+
+pub fn get_op_size_64(def: &InstructionDefinition, instr: &Instruction) -> bool {
+    // def.operands.iter().by_ref().filter_map(
+    //     |ref op_def| op_def.as_ref().map(|o| o.size)).max().map(
+    //         |op_size| op_size == OperandSize::Qword).unwrap_or(false)
+
+    if let Some(CompositePrefix::Rex { size_64: Some(true) }) = def.composite_prefix
+        { true } else { false }
+}
+
+pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, op: &Option<Operand>, mode: Mode, addr_size: OperandSize) -> Result<(), InstructionEncodingError> {
+    if let OperandType::Fixed(_) = def.op_type { return Ok(()); }
+
+    match def.encoding {
+        OperandEncoding::ModRmReg => { 
+            if let Some(Operand::Direct(reg)) = *op {
+                buffer.mod_rm_reg = Some(reg.get_reg_code());
+            } else { panic!("Internal error."); }
+        }
+        OperandEncoding::Mib |
+        OperandEncoding::ModRmRm => { encode_rm(buffer, &op.expect("Internal error."), mode); },
+        OperandEncoding::Vex => {
+            if let Some(Operand::Direct(reg)) = *op {
+                buffer.vex_operand = Some(reg.get_reg_code());
+            } else { panic!("Internal error."); }
+        },
+        OperandEncoding::Offset |
+        OperandEncoding::Imm => {
+            match op.expect("Internal error.") {
+                Operand::Literal8(val) => 
+                    { buffer.add_immediate(ImmediateValue::Literal8(val)); },
+                Operand::Literal16(val) =>
+                    { buffer.add_immediate(ImmediateValue::Literal16(val)); },
+                Operand::Literal32(val) =>
+                    { buffer.add_immediate(ImmediateValue::Literal32(val)); },
+                Operand::Literal64(val) =>
+                    { buffer.add_immediate(ImmediateValue::Literal64(val)); },
+                Operand::MemoryAndSegment16(seg, addr) =>
+                    { buffer.add_immediate(ImmediateValue::MemoryAndSegment16(seg, addr)); },
+                Operand::MemoryAndSegment32(seg, addr) =>
+                    { buffer.add_immediate(ImmediateValue::MemoryAndSegment32(seg, addr)); },
+                Operand::Offset(offset, ..) => { 
+                    let imm_size = if let OperandType::Rel(enc_size) = def.op_type { enc_size }
+                        else { addr_size };
+                    buffer.add_immediate(match imm_size {
+                        OperandSize::Byte => { ImmediateValue::Literal8(offset as u8) },
+                        OperandSize::Word => { ImmediateValue::Literal16(offset as u16) },
+                        OperandSize::Dword => { ImmediateValue::Literal32(offset as u32) },
+                        OperandSize::Qword => { ImmediateValue::Literal64(offset) },
+                        _ => panic!("Internal error")
+                    });
+                },
+                _ => panic!("Internal error.")
+            }
+        },
+        OperandEncoding::OpcodeAddend => {
+            if let Some(Operand::Direct(reg)) = *op {
+                buffer.opcode_add = Some(reg.get_reg_code());
+            } else { panic!("Internal error."); }
+        },
+        OperandEncoding::FixedPostAddend => {
+            if buffer.fixed_post.is_none() { unreachable!(); } // Bad def
+            if let Some(Operand::Direct(reg)) = *op {
+                buffer.fixed_post = Some(buffer.fixed_post.unwrap() + reg.get_reg_code());
+            } else { panic!("Internal error."); }
+        },
+        OperandEncoding::Fixed => {}
+    }
+
+    Ok(())
 }
 
 fn encode_rm(buffer: &mut InstructionBuffer, op: &Operand, mode: Mode) {
+    println!("encode_rm: {:?}", op);
     match *op {
         Operand::Direct(reg) => {
             buffer.mod_rm_mod = Some(0b11);
@@ -166,7 +358,7 @@ fn encode_indirect_16(buffer: &mut InstructionBuffer, reg1: Option<Reg>, reg2: O
     } else if (rm == 6) && reg1.is_none() && reg2.is_none() {
         buffer.mod_rm_mod = Some(0);
         buffer.displacement = Some(ImmediateValue::Literal16(displacement as u16));
-    } else if displacement < u8::max_value() as u64 {
+    } else if displacement < 128 as u64 {
         buffer.mod_rm_mod = Some(1);
         buffer.displacement = Some(ImmediateValue::Literal8(displacement as u8));
     } else {
@@ -180,7 +372,7 @@ fn encode_indirect_16(buffer: &mut InstructionBuffer, reg1: Option<Reg>, reg2: O
 fn encode_indirect_32(buffer: &mut InstructionBuffer, base: Option<Reg>, index: Option<Reg>, scale: Option<RegScale>, displacement: u64, mode: Mode) -> Result<(), InstructionEncodingError> {
     fn disp_helper(buffer: &mut InstructionBuffer, disp: u64) {
         if disp == 0 { buffer.mod_rm_mod = Some(0); }
-        else if disp <= u8::max_value() as u64 {
+        else if disp <= 128 as u64 {
             buffer.mod_rm_mod = Some(1);
             buffer.displacement = Some(ImmediateValue::Literal8(disp as u8));
         }
@@ -217,7 +409,7 @@ fn encode_indirect_32(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
                 Some(index_reg) if index_reg != Reg::ESP => {
                     // Mode 0 for EBP is reserved for index*scale + disp32, so we'll encode it with
                     // mode 1 or 2.
-                    if displacement < u8::max_value() as u64 {
+                    if displacement < 128 as u64 {
                         buffer.mod_rm_mod = Some(1); 
                         buffer.displacement = Some(ImmediateValue::Literal8(displacement as u8));
                     }
@@ -234,7 +426,7 @@ fn encode_indirect_32(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
                     // Mode 0 for EBP means displacement (or EIP+displacement in long mode), so use
                     // mode 1 or 2.
                     buffer.mod_rm_rm = base.map(|b| b.get_reg_code());
-                    if displacement < u8::max_value() as u64 {
+                    if displacement < 128 as u64 {
                         buffer.mod_rm_mod = Some(1);
                         buffer.displacement = Some(ImmediateValue::Literal8(displacement as u8));
                     }
@@ -299,7 +491,7 @@ fn encode_indirect_32(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
 fn encode_indirect_64(buffer: &mut InstructionBuffer, base: Option<Reg>, index: Option<Reg>, scale: Option<RegScale>, displacement: u64, mode: Mode) -> Result<(), InstructionEncodingError> {
     fn disp_helper(buffer: &mut InstructionBuffer, disp: u64) {
         if disp == 0 { buffer.mod_rm_mod = Some(0); }
-        else if disp <= u8::max_value() as u64 {
+        else if disp <= 128 as u64 {
             buffer.mod_rm_mod = Some(1);
             buffer.displacement = Some(ImmediateValue::Literal8(disp as u8));
         }
@@ -336,7 +528,7 @@ fn encode_indirect_64(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
                 Some(index_reg) if index_reg != Reg::RSP => {
                     // Mode 0 for EBP is reserved for index*scale + disp32, so we'll encode it with
                     // mode 1 or 2.
-                    if displacement < u8::max_value() as u64 {
+                    if displacement < 128 as u64 {
                         buffer.mod_rm_mod = Some(1); 
                         buffer.displacement = Some(ImmediateValue::Literal8(displacement as u8));
                     }
@@ -353,7 +545,7 @@ fn encode_indirect_64(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
                     // Mode 0 for EBP means displacement (or EIP+displacement in long mode), so use
                     // mode 1 or 2.
                     buffer.mod_rm_rm = base.map(|b| b.get_reg_code());
-                    if displacement < u8::max_value() as u64 {
+                    if displacement < 128 as u64 {
                         buffer.mod_rm_mod = Some(1);
                         buffer.displacement = Some(ImmediateValue::Literal8(displacement as u8));
                     }

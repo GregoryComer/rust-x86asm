@@ -52,7 +52,8 @@ pub struct InstructionBuffer {
     pub merge_mode: Option<MergeMode>,
     pub vex_b: Option<bool>,
     pub vex_l: Option<bool>,
-    pub composite_prefix: Option<CompositePrefix>
+    pub composite_prefix: Option<CompositePrefix>,
+    pub fixed_post: Option<u8>
 
     // TODO Force REX
 }
@@ -60,6 +61,7 @@ pub struct InstructionBuffer {
 impl InstructionBuffer {
     pub fn write<W>(&self, writer: &mut W, mode: Mode) -> Result<usize, InstructionEncodingError> 
         where W: Write {
+        println!("Buffer: {:?}", self);
         self.write_inner(writer, mode).map_err(|_| InstructionEncodingError::WriteFailed)
     }
     
@@ -96,17 +98,17 @@ impl InstructionBuffer {
             }
         }
 
-        // Two byte opcode prefix
-        if self.is_two_byte_opcode && !emit_vex && !emit_evex {
-            writer.write_all(&[PREFIX_TWO_BYTE_OPCODE])?; bytes_written += 1; 
-        }
-
         if emit_evex {
             bytes_written += self.write_evex(writer, mode)?;
         } else if emit_vex {
             bytes_written += self.write_vex(writer)?;
         } else if emit_rex {
             bytes_written += self.write_rex(writer)?;
+        }
+
+        // Two byte opcode prefix
+        if self.is_two_byte_opcode && !emit_vex && !emit_evex {
+            writer.write_all(&[PREFIX_TWO_BYTE_OPCODE])?; bytes_written += 1; 
         }
 
         // Primary opcode
@@ -116,6 +118,9 @@ impl InstructionBuffer {
 
         // Secondary opcode
         if let Some(op) = self.secondary_opcode { writer.write_all(&[op])?; bytes_written += 1; }
+
+        // Fixed post
+        if let Some(b) = self.fixed_post { writer.write_all(&[b])?; bytes_written += 1; }
 
         // ModR/M byte
         if let Some(mod_rm) = self.get_mod_rm() { writer.write_all(&[mod_rm])?; bytes_written += 1; }
@@ -133,7 +138,7 @@ impl InstructionBuffer {
         if let Some(ref v) = self.immediate2 {
             bytes_written += InstructionBuffer::write_immediate(writer, &v)?;
         }
-        
+
         Ok(bytes_written)
     }
 
@@ -409,6 +414,7 @@ impl Default for InstructionBuffer {
             merge_mode: None,
             vex_b: None,
             vex_l: None,
+            fixed_post: None,
         }
     }
 }

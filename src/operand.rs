@@ -40,6 +40,14 @@ impl Operand {
         }
     }
 
+    pub fn is_scaled_indexed(&self) -> bool {
+        match *self {
+            Operand::IndirectScaledIndexed(..) |
+            Operand::IndirectScaledIndexedDisplaced(..) => true,
+            _ => false
+        }
+    }
+
     pub fn segment_reg(&self) -> Option<SegmentReg> {
         match *self {
            Operand::Indirect(_, _, seg) |
@@ -57,6 +65,13 @@ impl Operand {
     pub fn is_direct(&self) -> bool {
         match *self {
             Operand::Direct(..) => true,
+            _ => false
+        }
+    }
+
+    pub fn is_offset(&self) -> bool {
+        match *self {
+            Operand::Offset(..) => true,
             _ => false
         }
     }
@@ -84,6 +99,14 @@ impl Operand {
         }
     }
 
+    pub fn is_far(&self) -> bool {
+        match *self {
+            Operand::MemoryAndSegment16(..) => true,
+            Operand::MemoryAndSegment32(..) => true,
+            _ => false
+        }
+    }
+
     pub fn is_literal(&self) -> bool {
         match *self {
             Operand::Literal8(_) |
@@ -91,6 +114,16 @@ impl Operand {
             Operand::Literal32(_) |
             Operand::Literal64(_) => true,
             _ => false
+        }
+    }
+
+    pub fn get_literal(&self) -> Option<u64> {
+        match *self {
+            Operand::Literal8(val) => Some(val as u64),
+            Operand::Literal16(val) => Some(val as u64),
+            Operand::Literal32(val) => Some(val as u64),
+            Operand::Literal64(val) => Some(val),
+            _ => None
         }
     }
 
@@ -145,39 +178,40 @@ impl Operand {
     }
 }
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum OperandSize {
+    // Order here is important because of derive(Ord)
+    Unsized,
     Byte,       // 8-bit
     Word,       // 16-bit
     Dword,      // 32-bit
+    Far16,      // 16:16
     Fword,      // 48-bit
+    Far32,      // 16:32
     Qword,      // 64-bit
     Tbyte,      // 80-bit
+    Far64,      // 16:64
     Xmmword,    // 128-bit
     Ymmword,    // 256-bit
     Zmmword,    // 512-bit
-    Far16,      // 16:16
-    Far32,      // 16:32
-    Far64,      // 16:64
-    Unsized
 }
 
 impl OperandSize {
     pub fn bits(&self) -> u32 {
         match *self {
+            OperandSize::Unsized => 0, // TODO?
             OperandSize::Byte => 8,
             OperandSize::Word => 16,
             OperandSize::Dword => 32,
+            OperandSize::Far16 => 32,
             OperandSize::Fword => 48,
+            OperandSize::Far32 => 48,
             OperandSize::Qword => 64,
             OperandSize::Tbyte => 80,
+            OperandSize::Far64 => 80,
             OperandSize::Xmmword => 128,
             OperandSize::Ymmword => 256,
             OperandSize::Zmmword => 512,
-            OperandSize::Far16 => 32,
-            OperandSize::Far32 => 48,
-            OperandSize::Far64 => 80,
-            OperandSize::Unsized => 0, // TODO?
         }
     }
 
@@ -195,5 +229,20 @@ impl OperandSize {
             0 => OperandSize::Unsized,
             _ => return None
         })
+    }
+
+    pub fn is_valid_literal(&self, v: u64) -> bool {
+        let signed = v as i64; // TODO?
+        match *self {
+            OperandSize::Byte => signed >= i8::min_value() as i64 && 
+                signed <= i8::max_value() as i64,
+            OperandSize::Word => signed >= i16::min_value() as i64 && 
+                signed <= i16::max_value() as i64,
+            OperandSize::Dword => signed >= i32::min_value() as i64 && 
+                signed <= i32::max_value() as i64,
+            OperandSize::Qword => signed >= i64::min_value() as i64 && 
+                signed <= i64::max_value() as i64,
+            _ => false,
+        }
     }
 }

@@ -1,6 +1,7 @@
 use std::io::Write;
-use ::{Mnemonic, Mode, InstructionEncodingError};
-use ::instruction_def::{InstructionDefinition, OperandType};
+use ::{InstructionEncodingError, Mnemonic, Mode, RegType};
+use ::encoding::{encode};
+use ::instruction_def::{find_instruction_def, InstructionDefinition, OperandType};
 use ::operand::{Operand, OperandSize};
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -12,8 +13,9 @@ pub struct Instruction {
     pub operand4: Option<Operand>,
     pub lock: bool,
     pub rounding_mode: Option<RoundingMode>,
+    pub merge_mode: Option<MergeMode>,
     pub sae: bool,
-    pub mask_reg: Option<MaskReg>,
+    pub mask: Option<MaskReg>,
     pub broadcast: Option<BroadcastMode>
 }
 
@@ -63,11 +65,14 @@ impl Instruction {
         }
     }
 
+    pub fn operands(&self) -> [&Option<Operand>; 4] {
+        [&self.operand1, &self.operand2, &self.operand3, &self.operand4]
+    }
+
     pub fn encode<W>(&self, writer: &mut W, mode: Mode) -> Result<usize, InstructionEncodingError> 
         where W: Write {
-        //let encoding = find_instruction_def(&self, mode, proc_level)?;
-        //encoding.encode(writer, &self, mode, proc_level)
-        unimplemented!();
+        let enc = find_instruction_def(&self, mode)?;
+        encode(writer, enc, &self, mode)
     }
 }
 
@@ -81,8 +86,9 @@ impl Default for Instruction {
             operand4: None,
             lock: false,
             rounding_mode: None,
+            merge_mode: None,
             sae: false,
-            mask_reg: None,
+            mask: None,
             broadcast: None
         }
     }
@@ -216,6 +222,17 @@ pub enum Reg {
 }
 
 impl Reg {
+    pub fn get_reg_type(&self) -> RegType {
+        if self.is_general() { RegType::General }
+        else if self.is_mmx() { RegType::Mmx }
+        else if self.is_avx() { RegType::Avx }
+        else if self.is_fpu() { RegType::Fpu }
+        else if self.is_mask() { RegType::Mask }
+        else if self.is_segment() { RegType::Segment }
+        else if self.is_bounds() { RegType::Bound }
+        else { panic!("Unknown register type for {:?}.", self); }
+    }
+
     pub fn is_64_only(&self) -> bool {
        match *self {
             Reg::RAX | Reg::RBX  | Reg::RCX  | Reg::RDX  |
