@@ -1,0 +1,3 @@
+ - MOV SREG forms can use op size prefix in place of VEX.W in 32-bit mode. Need to add instruction defs for this case as it's not explicit in intel docs.
+ - Manual defs - VPBROADCAST/VPBROADCASTB files overlap?
+ - Handle unsized register operands better (don't enforce size?)

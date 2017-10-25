@@ -443,7 +443,7 @@ impl Reg {
 
             // Mask registers
             Reg::K0 | Reg::K1 | Reg::K2 | Reg::K3 |
-            Reg::K4 | Reg::K5 | Reg::K6 | Reg::K7 => OperandSize::Word, // TODO Is this size correct?
+            Reg::K4 | Reg::K5 | Reg::K6 | Reg::K7 => OperandSize::Unsized,
 
             // TODO
             // Mode dependent (16/32/64)
@@ -520,7 +520,7 @@ impl Reg {
 
     pub fn get_reg_code(&self) -> u8 {
         match *self {
-            // TODO Handle SPL, BPL, SIL, DIL, AVX16-3j
+            // TODO Handle SPL, BPL, SIL, DIL
             Reg::AL   | Reg::AX   | Reg::EAX  | Reg::RAX | Reg::ST0 | Reg::MM0 | Reg::XMM0  | Reg::YMM0  | Reg::ZMM0  | Reg::ES | Reg::CR0             | Reg::K0 | Reg::BND0 | Reg::DR0 => 0,
             Reg::CL   | Reg::CX   | Reg::ECX  | Reg::RCX | Reg::ST1 | Reg::MM1 | Reg::XMM1  | Reg::YMM1  | Reg::ZMM1  | Reg::CS | Reg::CR1             | Reg::K1 | Reg::BND1 | Reg::DR1 => 1,
             Reg::DL   | Reg::DX   | Reg::EDX  | Reg::RDX | Reg::ST2 | Reg::MM2 | Reg::XMM2  | Reg::YMM2  | Reg::ZMM2  | Reg::SS | Reg::CR2             | Reg::K2 | Reg::BND2 | Reg::DR2 => 2,
@@ -537,7 +537,23 @@ impl Reg {
             Reg::R13B | Reg::R13W | Reg::R13D | Reg::R13                       | Reg::XMM13 | Reg::YMM13 | Reg::ZMM13 | Reg::GS                                                         => 13,
             Reg::R14B | Reg::R14W | Reg::R14D | Reg::R14                       | Reg::XMM14 | Reg::YMM14 | Reg::ZMM14                                                                   => 14,
             Reg::R15B | Reg::R15W | Reg::R15D | Reg::R15                       | Reg::XMM15 | Reg::YMM15 | Reg::ZMM15                                                                   => 15,
-            _ => panic!("Invalid register.")
+                                                                                 Reg::XMM16 | Reg::YMM16 | Reg::ZMM16                                                                   => 16,
+                                                                                 Reg::XMM17 | Reg::YMM17 | Reg::ZMM17                                                                   => 17,
+                                                                                 Reg::XMM18 | Reg::YMM18 | Reg::ZMM18                                                                   => 18,
+                                                                                 Reg::XMM19 | Reg::YMM19 | Reg::ZMM19                                                                   => 19,
+                                                                                 Reg::XMM20 | Reg::YMM20 | Reg::ZMM20                                                                   => 20,
+                                                                                 Reg::XMM21 | Reg::YMM21 | Reg::ZMM21                                                                   => 21,
+                                                                                 Reg::XMM22 | Reg::YMM22 | Reg::ZMM22                                                                   => 22,
+                                                                                 Reg::XMM23 | Reg::YMM23 | Reg::ZMM23                                                                   => 23,
+                                                                                 Reg::XMM24 | Reg::YMM24 | Reg::ZMM24                                                                   => 24,
+                                                                                 Reg::XMM25 | Reg::YMM25 | Reg::ZMM25                                                                   => 25,
+                                                                                 Reg::XMM26 | Reg::YMM26 | Reg::ZMM26                                                                   => 26,
+                                                                                 Reg::XMM27 | Reg::YMM27 | Reg::ZMM27                                                                   => 27,
+                                                                                 Reg::XMM28 | Reg::YMM28 | Reg::ZMM28                                                                   => 28,
+                                                                                 Reg::XMM29 | Reg::YMM29 | Reg::ZMM29                                                                   => 29,
+                                                                                 Reg::XMM30 | Reg::YMM30 | Reg::ZMM30                                                                   => 30,
+                                                                                 Reg::XMM31 | Reg::YMM31 | Reg::ZMM31                                                                   => 31,
+            _ => panic!("Invalid register: {:?}.", self)
         }
     }
 

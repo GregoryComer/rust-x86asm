@@ -43,7 +43,7 @@ impl InstructionDefinition {
         (self.allow_mask || instr.mask.is_none()) &&
         (self.operands.iter().zip(instr.operands().iter()).all(
             |(def, op)| if let Some(ref d) = *def {
-                d.matches_operand(op, instr)
+                d.matches_operand(op, self, instr)
             } else { op.is_none() }
         ))
     }
@@ -129,14 +129,27 @@ pub struct OperandDefinition {
 }
 
 impl OperandDefinition {
-    pub fn matches_operand(&self, op: &Option<Operand>, instr: &Instruction) -> bool {
+    pub fn matches_operand(&self, op: &Option<Operand>, instr_def: &InstructionDefinition, instr: &Instruction) -> bool {
         op.map(|o| {
-            OperandDefinition::matches_operand_type(&self.op_type, self.size, op, instr)
+            OperandDefinition::matches_operand_type(&self.op_type, self.size, op, instr_def, instr) &&
+                if let Operand::Direct(reg) = o { // TODO Cleanup
+                    if reg.is_avx() {
+                        let code = reg.get_reg_code();
+                        if code >= 0x10 {
+                            if let Some(CompositePrefix::Evex { .. }) = instr_def.composite_prefix { true }
+                            else { false }
+                        } else if code >= 0x8 { 
+                            if let Some(CompositePrefix::Evex { .. }) = instr_def.composite_prefix { true }
+                            else if let Some(CompositePrefix::Vex { .. }) = instr_def.composite_prefix { true }
+                            else { false }
+                        } else { true }
+                    } else { true }
+                } else { true }
         }).unwrap_or(false)
     }
 
-    fn matches_operand_type(op_type: &OperandType, def_size: OperandSize, op: &Option<Operand>, instr: &Instruction)
-        -> bool {
+    fn matches_operand_type(op_type: &OperandType, def_size: OperandSize, op: &Option<Operand>,
+        instr_def: &InstructionDefinition, instr: &Instruction) -> bool {
         fn size_helper(def_size: OperandSize, op: &Option<Operand>) -> bool {
             op.and_then(|o| o.size()).map(
                 |s| s == def_size || s == OperandSize::Unsized ||
@@ -163,11 +176,13 @@ impl OperandDefinition {
             },
             OperandType::Mib => op.map(|o| o.is_scaled_indexed()).unwrap_or(false), // TODO Size?
             OperandType::Bcst(op_size) => op.map(|o| o.is_memory()).unwrap_or(false) &&
-                size_helper(op_size, op),
+                size_helper(op_size, op) &&
+                instr.broadcast.map_or(false,
+                    |b_m| op_size.bits() * b_m.get_multiplier() == def_size.bits()),
             OperandType::Fixed(fixed_op) => op.map(|o| fixed_op.matches_operand(&o))
                 .unwrap_or(true),
             OperandType::Set(types) => types.iter().any(
-                |t| OperandDefinition::matches_operand_type(t, def_size, op, instr))
+                |t| OperandDefinition::matches_operand_type(t, def_size, op, instr_def, instr))
         }
     }
 }

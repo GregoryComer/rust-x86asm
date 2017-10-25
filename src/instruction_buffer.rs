@@ -28,8 +28,6 @@ pub struct InstructionBuffer {
     pub prefix2: Option<Prefix2>,
     pub operand_size_prefix: bool,
     pub operand_size_64: bool,
-    pub force_vex: bool,
-    pub force_evex: bool,
     pub address_size_prefix: bool,
     pub fixed_prefix: Option<u8>,
     pub is_two_byte_opcode: bool,
@@ -227,14 +225,15 @@ impl InstructionBuffer {
     fn write_evex<W>(&self, writer: &mut W, mode: Mode) -> IoResult<usize>
         where W: Write {
         let vex_operand = self.vex_operand.map(|v| 0x1F - v);
-        let vex_r = if mode == Mode::Long { self.mod_rm_reg.map(|r| (r & 0x8) >> 3).unwrap_or(0) } else { 1 };
-        let vex_r2 = if mode == Mode::Long { self.mod_rm_reg.map(|r| (r & 0x10) >> 4).unwrap_or(0) } else { 1 };
-        let vex_x = if mode == Mode::Long { self.sib_index.map(|s| (s & 0x8) >> 3).or(self.mod_rm_rm.map(|r| (r & 0x10) >> 4)).unwrap_or(1) } else { 1 };
-        let vex_b = if mode == Mode::Long { self.mod_rm_rm.or(self.sib_base).map(|r| (r & 0x8) >> 3).unwrap_or(1) } else { 1 };
+        let vex_r = if mode == Mode::Long { self.mod_rm_reg.map(|r| if r & 0x8 == 0 { 1 } else { 0 }).unwrap_or(0) } else { 1 };
+        let vex_r2 = if mode == Mode::Long { self.mod_rm_reg.map(|r| if r & 0x10 == 0 { 1 } else { 0 }).unwrap_or(0) } else { 1 };
+        let vex_x = if mode == Mode::Long { self.sib_index.map(|s| if s & 0x8 == 0 { 1 } else { 0 })
+            .or(self.mod_rm_rm.map(|r| if r & 0x10 == 0 { 1 } else { 0 })).unwrap_or(1) } else { 1 };
+        let vex_b = if mode == Mode::Long { self.mod_rm_rm.or(self.sib_base).map(|r| if r & 0x8 == 0 { 1 } else { 0 }).unwrap_or(1) } else { 1 };
         let vex_b2 = if self.vex_b.unwrap_or(false) { 1 } else { 0 };
         let vex_v = vex_operand.map(|s| (s & 0x10) >> 4).unwrap_or(1);
         let vex_v4 = vex_operand.map(|s| s & 0xF).unwrap_or(0xF);
-        let vex_we = 1; // if self.op_size_64_behavior == OpSize64Behavior::Force64EvexOnly { 1 } else { self.vex_e.or(Some(self.operand_size_64)).map(|b| if b { 1 } else { 0 }).unwrap_or(0) }; // TODO
+        let vex_we = if self.vex_e.unwrap_or(false) { 1 } else { 0 }; // if self.op_size_64_behavior == OpSize64Behavior::Force64EvexOnly { 1 } else { self.vex_e.or(Some(self.operand_size_64)).map(|b| if b { 1 } else { 0 }).unwrap_or(0) }; // TODO
         let vex_l = self.vector_len.map(|v| if v { 1 } else { 0 }).unwrap_or(0);
         let vex_l2 = if self.vex_l.unwrap_or(false) { 1 } else { 0 };
         let vex_a3 = self.mask_reg.map(|m| m & 0x7).unwrap_or(0);
@@ -339,7 +338,7 @@ impl InstructionBuffer {
     fn should_emit_vex(&self) -> bool {
         // Emit a VEX prefix if there's a vex operand, vector length override, e bit,
         // or 64-bit operand size override.
-        self.force_vex ||
+        self.composite_prefix == Some(CompositePrefix::Vex) ||
         self.vex_e.is_some() || 
         self.vex_operand.is_some() ||
         self.vector_len.unwrap_or(false)
@@ -349,7 +348,7 @@ impl InstructionBuffer {
         // Emit a VEX prefix if index needs a fourth bit, reg/rm need a fifth bit,
         // there's an opcode map, extra opcode, vector length override, e bit, or 64-bit
         // operand size override.
-        self.force_evex ||
+        self.composite_prefix == Some(CompositePrefix::Evex) ||
         self.mod_rm_reg.map(|reg| reg & 0x10 != 0).unwrap_or(false) ||
         self.mod_rm_rm.map(|rm| rm & 0x10 != 0).unwrap_or(false) ||
         self.mask_reg.is_some() ||
@@ -390,8 +389,6 @@ impl Default for InstructionBuffer {
             composite_prefix: None,
             operand_size_prefix: false,
             operand_size_64: false,
-            force_vex: false,
-            force_evex: false,
             address_size_prefix: false,
             fixed_prefix: None,
             is_two_byte_opcode: false,
@@ -453,7 +450,7 @@ pub enum Prefix2 {
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum CompositePrefix {
-    REX,
-    VEX,
-    EVEX
+    Rex,
+    Vex,
+    Evex
 }

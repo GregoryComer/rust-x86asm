@@ -96,16 +96,19 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
 
     if let Some(pref) = def.composite_prefix {
         match pref {
-            CompositePrefix::Rex { size_64: s } => { },
+            CompositePrefix::Rex { size_64: s } => { buffer.operand_size_64 = true }, // TODO?
             CompositePrefix::Vex { vector_size: vs, operand_behavior: _, we: w } => {
                 buffer.vex_e = w;
                 buffer.vector_len = vs.map(|s| s == OperandSize::Ymmword);
                 buffer.vex_l = vs.map(|s| s == OperandSize::Zmmword);
+                buffer.composite_prefix = Some(::instruction_buffer::CompositePrefix::Vex);
             },
             CompositePrefix::Evex { vector_size: vs, operand_behavior: _, we: w } => {
                 buffer.vex_e = w;
                 buffer.vector_len = vs.map(|s| s == OperandSize::Ymmword);
+                println!("vs: {:?}, v_l: {:?}", vs, buffer.vector_len);
                 buffer.vex_l = vs.map(|s| s == OperandSize::Zmmword);
+                buffer.composite_prefix = Some(::instruction_buffer::CompositePrefix::Evex);
             },
         }
     }
@@ -114,6 +117,23 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
     buffer.primary_opcode = def.primary_opcode;
     buffer.secondary_opcode = def.secondary_opcode;
     buffer.fixed_post = def.fixed_post;
+
+    buffer.mask_reg = instr.mask.map(|m| m.get_reg_code());
+    buffer.merge_mode = instr.merge_mode;
+
+    if instr.sae {
+        buffer.vex_b = Some(true);
+        buffer.vector_len = Some(false);
+        buffer.vex_l = Some(false);
+    }
+
+    if let Some(_) = instr.broadcast { buffer.vex_b = Some(true); }
+
+    if let Some(code) = instr.rounding_mode.map(|r| r.get_code()) {
+        buffer.vex_b = Some(true);
+        buffer.vex_l = Some(code & 0x2 != 0);
+        buffer.vector_len = Some(code & 0x1 != 0);
+    }
 
     for (maybe_op_def, op) in def.operands.iter().zip(instr.operands().iter()) {
         if let Some(ref op_def) = *maybe_op_def {
@@ -260,7 +280,9 @@ pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, o
                         _ => panic!("Internal error")
                     });
                 },
-                _ => panic!("Internal error.")
+                Operand::Direct(reg) => 
+                    { buffer.add_immediate(ImmediateValue::Literal8(reg.get_reg_code() << 4)); }
+                _ => panic!("Invalid immediate operand: {:?}.", op)
             }
         },
         OperandEncoding::OpcodeAddend => {

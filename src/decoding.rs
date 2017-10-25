@@ -68,7 +68,7 @@ impl<T: Read> InstructionReader<T> {
                 PREFIX_TWO_BYTE_OPCODE => { buffer.is_two_byte_opcode = true; },
                 PREFIX_VEX2 => { // Two-byte VEX prefix
                     let data = self.expect_byte()?;
-                    buffer.composite_prefix = Some(CompositePrefix::VEX);
+                    buffer.composite_prefix = Some(CompositePrefix::Vex);
                     reg_ext = if data & 0x80 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
                     buffer.vex_operand = Some((data >> 3) & 0xF);
                     buffer.vex_l = Some(data & 0x2 != 0);
@@ -82,7 +82,7 @@ impl<T: Read> InstructionReader<T> {
                 PREFIX_VEX3 => { // Three-byte VEX prefix
                     let data1 = self.expect_byte()?;
                     let data2 = self.expect_byte()?;
-                    buffer.composite_prefix = Some(CompositePrefix::VEX);
+                    buffer.composite_prefix = Some(CompositePrefix::Vex);
                     reg_ext = if data1 & 0x80 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
                     index_ext = if data1 & 0x40 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
                     b_ext = if data1 & 0x20 != 0 || self.mode != Mode::Long { 0 } else { 0x8 };
@@ -107,7 +107,7 @@ impl<T: Read> InstructionReader<T> {
                     let data1 = self.expect_byte()?;
                     let data2 = self.expect_byte()?;
                     let data3 = self.expect_byte()?;
-                    buffer.composite_prefix = Some(CompositePrefix::EVEX);
+                    buffer.composite_prefix = Some(CompositePrefix::Evex);
                     reg_ext |= if data1 & 0x80 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
                     index_ext |= if data1 & 0x40 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
                     b_ext |= if data1 & 0x20 != 0 && self.mode == Mode::Long { 0x8 } else { 0 };
@@ -135,7 +135,7 @@ impl<T: Read> InstructionReader<T> {
                     buffer.mask_reg = Some(data3 & 0x7);
                 },
                 b if self.mode == Mode::Long && b & 0xF0 == 0x40 => { // REX prefix
-                    buffer.composite_prefix = Some(CompositePrefix::REX);
+                    buffer.composite_prefix = Some(CompositePrefix::Rex);
                     reg_ext |= if b & 0x4 != 0 { 0x8 } else { 0 };
                     index_ext |= if b & 0x2 != 0 { 0x8 } else { 0 };
                     b_ext |= if b & 0x1 != 0 { 0x8 } else { 0 };
@@ -518,7 +518,7 @@ impl<T: Read> InstructionReader<T> {
     }
 
     pub fn has_rex(buffer: &InstructionBuffer) -> bool {
-        buffer.composite_prefix.as_ref().map(|p| *p == CompositePrefix::VEX).unwrap_or(false)
+        buffer.composite_prefix.as_ref().map(|p| *p == CompositePrefix::Rex).unwrap_or(false)
     }
 }
 

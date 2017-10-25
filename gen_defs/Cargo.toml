@@ -1,0 +1,12 @@
+[package]
+name = "libx86_parse_def"
+version = "0.1.0"
+authors = ["gregory"]
+
+[dependencies]
+csv = "1.0.0-beta.4"
+nom = "^3.2"
+serde = "1.0.15"
+serde_derive = "1.0.15"
+rand = "0.3"
+itertools = "0.7.1"
