@@ -31,13 +31,16 @@ use instruction_def::VexOperandBehavior;
 use instruction::{BroadcastMode, Instruction, MaskReg, MergeMode, Reg, RegScale, RoundingMode, SegmentReg};
 use operand::{Operand, OperandSize};
 
-static SKIP_MNEMONICS: [&'static str; 7] = [ // TODO
+static SKIP_MNEMONICS: [&'static str; 10] = [ // TODO
     "CALL",
     "JMP", // Gnu assember won't use 16:16 in protected mode
+    "LAR", // Gnu assember puts a REX.W. Not sure if it matters?
     "MOV", // Getting assembler to use relative movs is hard?
     "MOVQ", // Instruction ambiguity?
-    "POP", // Ambiguous test cases (POP r/m16 vs POP r16)
-    "PUSH", // Ambiguous test cases (PUSH r/m16 vs PUSH r16)
+    "PUSH", // Gnu as doesn't use shortest form, auto promotes to word size?
+    "SLDT", // Gnu as doesn't emit 66 for memory operands, but does for registers?
+    "SMSW", // Gnu as doesn't emit 66 for memory operands, but does for registers?
+    "STR", // Gnu as doesn't emit 66 for memory operands, but does for registers?
     "VMOVQ", // Interchangable forms when source is mem64
 ];
 

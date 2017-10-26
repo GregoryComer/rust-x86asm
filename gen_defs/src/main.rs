@@ -88,8 +88,9 @@ fn main() {
                     has_32 || op.size == OperandSize::Dword)
                 );
             if has_16 && has_32 { Some(i) } else { None }
+            // if has_16 || has_32 { Some(i) } else { None }
         }).next();
-
+        
         for mut instr in group {
             if let Some(i) = op_size_op {
                 if instr_needs_op_size_prefix(&instr, i) {
@@ -97,6 +98,8 @@ fn main() {
                         OperandSizePrefixBehavior::ConditionalOnSize(i);
                 }
             }
+
+            fixup(&mut instr);
 
             println!("{:?},", &instr);
 
@@ -259,6 +262,40 @@ fn parse_record(record: &EncodingRecord) -> instruction_def::InstructionDefiniti
     }
 
     instr
+}
+
+fn fixup(instr: &mut InstructionDefinition) {
+    match instr.mnemonic.as_str() {
+        "BSWAP" => {
+            // BSWAP needs an operand size prefix in real mode
+            if instr.operands[0].as_ref().map_or(false, |o| o.size == OperandSize::Dword) {
+                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+            }   
+        },
+        "LAR" => {
+            // LAR's operand size prefix depends on the first operand, but this isn't obvious
+            instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+        },
+        "MOVNTI" => {
+            // MOVNTI r32, r/m16 needs op size prefix in real mode, even though it's unambiguous
+            if instr.operands[0].as_ref().map_or(false, |o| o.size == OperandSize::Dword) {
+                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+            }
+        }
+        "MOVSX" |
+        "MOVZX" => {
+            // MOVS/ZX r32, r/m16 needs op size prefix in real mode, even though it's unambiguous
+            if (instr.primary_opcode == 0xBF || instr.primary_opcode == 0xB7)
+                && instr.operands[0].as_ref().map_or(false,
+                |o| o.size == OperandSize::Dword) {
+                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+            }
+        },
+        "SLDT" => {
+            instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+        },
+        _ => {}
+    }
 }
 
 fn mnemonic_from_instr(instr: &String) -> &str {

@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn fxch_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FXCH, operand1: Some(Direct(ST5)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[217, 205], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FXCH, operand1: Some(Direct(ST6)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[217, 206], OperandSize::Word)
 }
 
 #[test]
 fn fxch_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FXCH, operand1: Some(Direct(ST6)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[217, 206], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FXCH, operand1: Some(Direct(ST5)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[217, 205], OperandSize::Dword)
 }
 
 #[test]

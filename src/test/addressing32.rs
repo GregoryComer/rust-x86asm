@@ -1,5 +1,5 @@
-use ::{Mnemonic, Operand, Reg, OperandSize, SegmentReg, MaskReg, BroadcastMode, MergeMode, RoundingMode, InstructionFlags, RegScale};
-use ::test::{encode32_helper0, encode32_helper2, encode32_helper2_flags, encode32_helper3, encode32_helper3_flags, encode32_helper4, test_aliased};
+use ::{Mnemonic, Operand, Reg, OperandSize, SegmentReg, MaskReg, BroadcastMode, MergeMode, RoundingMode, RegScale};
+use ::test::{encode32_helper0, encode32_helper2, encode32_helper3, encode32_helper4, test_aliased};
 
 #[test]
 fn encode_direct() {

@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn invlpg_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::INVLPG, operand1: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 56], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::INVLPG, operand1: Some(Indirect(SI, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 60], OperandSize::Word)
 }
 
 #[test]
 fn invlpg_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::INVLPG, operand1: Some(IndirectDisplaced(EDX, 1589290773, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 186, 21, 167, 186, 94], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::INVLPG, operand1: Some(IndirectScaledDisplaced(EDI, Four, 985597689, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 60, 189, 249, 6, 191, 58], OperandSize::Dword)
 }
 
 #[test]

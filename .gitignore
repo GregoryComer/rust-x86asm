@@ -1,5 +1,9 @@
 target/
 **/*.rs.bk
 Cargo.lock
-*.swp
+*.bin
 *.swo
+*.swn
+*.swp
+gen_defs/test
+gen_defs/instruction_tests

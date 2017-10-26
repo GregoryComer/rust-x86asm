@@ -13,11 +13,11 @@ fn fdivrp_1() {
 
 #[test]
 fn fdivrp_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST1)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 241], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST6)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 246], OperandSize::Dword)
 }
 
 #[test]
 fn fdivrp_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST7)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 247], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST3)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 243], OperandSize::Qword)
 }
 

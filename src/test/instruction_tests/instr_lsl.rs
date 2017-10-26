@@ -8,71 +8,71 @@ use ::test::run_test;
 
 #[test]
 fn lsl_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(DI)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 250], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(DI)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 255], OperandSize::Word)
 }
 
 #[test]
 fn lsl_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(BX)), operand2: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 18610, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 154, 178, 72], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(BP)), operand2: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 69, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 104, 69], OperandSize::Word)
 }
 
 #[test]
 fn lsl_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(DI)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 254], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(DX)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 210], OperandSize::Dword)
 }
 
 #[test]
 fn lsl_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(DI)), operand2: Some(IndirectScaledDisplaced(ECX, Four, 526953562, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 60, 141, 90, 172, 104, 31], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(BP)), operand2: Some(IndirectScaledIndexedDisplaced(EAX, EDI, Two, 444215035, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 172, 120, 251, 46, 122, 26], OperandSize::Dword)
 }
 
 #[test]
 fn lsl_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(SI)), operand2: Some(Direct(BP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 245], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(SP)), operand2: Some(Direct(BP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 229], OperandSize::Qword)
 }
 
 #[test]
 fn lsl_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(SI)), operand2: Some(Indirect(RAX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 48], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(CX)), operand2: Some(IndirectDisplaced(RSI, 412227889, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 142, 49, 25, 146, 24], OperandSize::Qword)
 }
 
 #[test]
 fn lsl_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EDI)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 254], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBX)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 218], OperandSize::Word)
 }
 
 #[test]
 fn lsl_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBX)), operand2: Some(IndirectDisplaced(BP, 890, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 158, 122, 3], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 133, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 3, 163, 133, 0], OperandSize::Word)
 }
 
 #[test]
 fn lsl_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 226], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 220], OperandSize::Dword)
 }
 
 #[test]
 fn lsl_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(ECX)), operand2: Some(IndirectDisplaced(EDI, 1118282369, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 143, 129, 162, 167, 66], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, EDI, Four, 1419303952, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 172, 190, 16, 220, 152, 84], OperandSize::Dword)
 }
 
 #[test]
 fn lsl_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 226], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBX)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 219], OperandSize::Qword)
 }
 
 #[test]
 fn lsl_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(ESI)), operand2: Some(IndirectDisplaced(RDX, 1650827425, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 178, 161, 160, 101, 98], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RDX, Four, 262587349, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 3, 172, 147, 213, 195, 166, 15], OperandSize::Qword)
 }
 
 #[test]
 fn lsl_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(RSI)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 3, 245], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(RBP)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 3, 236], OperandSize::Qword)
 }
 
 #[test]
 fn lsl_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(RDX)), operand2: Some(IndirectDisplaced(RDX, 1650521311, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 3, 146, 223, 244, 96, 98], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSL, operand1: Some(Direct(RDI)), operand2: Some(Indirect(RDX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 3, 58], OperandSize::Qword)
 }
 

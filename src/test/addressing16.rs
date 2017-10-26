@@ -1,4 +1,4 @@
-use ::{Mnemonic, Operand, Reg, OperandSize, SegmentReg, MaskReg, BroadcastMode, MergeMode, RoundingMode, InstructionFlags, RegScale};
+use ::{Mnemonic, Operand, Reg, OperandSize, SegmentReg, MaskReg, BroadcastMode, MergeMode, RoundingMode, RegScale};
 use ::test::{encode16_helper2};
 
 #[test]

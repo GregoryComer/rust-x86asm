@@ -13,12 +13,12 @@ fn bswap_1() {
 
 #[test]
 fn bswap_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EBP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 205], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EBX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 203], OperandSize::Dword)
 }
 
 #[test]
 fn bswap_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(ESI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 206], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 202], OperandSize::Qword)
 }
 
 #[test]

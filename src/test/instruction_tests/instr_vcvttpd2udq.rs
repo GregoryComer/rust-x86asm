@@ -8,61 +8,61 @@ use ::test::run_test;
 
 #[test]
 fn vcvttpd2udq_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 241, 252, 142, 120, 216], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 252, 141, 120, 211], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexedDisplaced(EDI, EDX, Two, 1320996917, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 241, 252, 143, 120, 164, 87, 53, 208, 188, 78], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM1)), operand2: Some(Indirect(ECX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 252, 138, 120, 9], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM14)), operand2: Some(Direct(XMM10)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 81, 252, 138, 120, 242], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM27)), operand2: Some(Direct(XMM28)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 1, 252, 139, 120, 220], OperandSize::Qword)
 }
 
 #[test]
 fn vcvttpd2udq_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM9)), operand2: Some(IndirectScaledIndexed(RBX, RDI, Two, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 113, 252, 141, 120, 12, 123], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM19)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RDI, Four, 953118014, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 225, 252, 138, 120, 156, 186, 62, 109, 207, 56], OperandSize::Qword)
 }
 
 #[test]
 fn vcvttpd2udq_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM3)), operand2: Some(Direct(YMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 252, 170, 120, 222], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM0)), operand2: Some(Direct(YMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 252, 173, 120, 192], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM2)), operand2: Some(IndirectDisplaced(EAX, 328100117, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 241, 252, 169, 120, 144, 21, 105, 142, 19], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, EBX, Eight, 445777572, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 241, 252, 172, 120, 188, 218, 164, 6, 146, 26], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM3)), operand2: Some(Direct(YMM16)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 177, 252, 175, 120, 216], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM7)), operand2: Some(Direct(YMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 252, 170, 120, 254], OperandSize::Qword)
 }
 
 #[test]
 fn vcvttpd2udq_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM22)), operand2: Some(IndirectScaledIndexedDisplaced(RSI, RDX, Eight, 384078994, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 225, 252, 171, 120, 180, 214, 146, 148, 228, 22], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(XMM13)), operand2: Some(IndirectScaledIndexedDisplaced(RDI, RAX, Four, 599820255, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 113, 252, 172, 120, 172, 135, 223, 135, 192, 35], OperandSize::Qword)
 }
 
 #[test]
 fn vcvttpd2udq_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM4)), operand2: Some(Direct(ZMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K1), broadcast: None }, &[98, 241, 252, 153, 120, 228], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM2)), operand2: Some(Direct(ZMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 252, 154, 120, 214], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM0)), operand2: Some(IndirectDisplaced(ESI, 1840048578, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 252, 205, 120, 134, 194, 233, 172, 109], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM7)), operand2: Some(IndirectScaledIndexed(EDI, ECX, Eight, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 252, 202, 120, 60, 207], OperandSize::Dword)
 }
 
 #[test]
 fn vcvttpd2udq_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM21)), operand2: Some(Direct(ZMM20)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K7), broadcast: None }, &[98, 161, 252, 159, 120, 236], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM22)), operand2: Some(Direct(ZMM16)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K3), broadcast: None }, &[98, 161, 252, 155, 120, 240], OperandSize::Qword)
 }
 
 #[test]
 fn vcvttpd2udq_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM17)), operand2: Some(IndirectScaledIndexed(RDX, RDI, Four, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 225, 252, 207, 120, 12, 186], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTTPD2UDQ, operand1: Some(Direct(YMM4)), operand2: Some(Indirect(RDX, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 241, 252, 201, 120, 34], OperandSize::Qword)
 }
 

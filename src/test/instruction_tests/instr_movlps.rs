@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn movlps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledDisplaced(EDX, Four, 552631767, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 18, 20, 149, 215, 125, 240, 32], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(Direct(XMM3)), operand2: Some(IndirectDisplaced(ESI, 1629356529, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 18, 158, 241, 1, 30, 97], OperandSize::Dword)
 }
 
 #[test]
 fn movlps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(Direct(XMM7)), operand2: Some(Indirect(RAX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 18, 56], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RSI, Two, 1651022664, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 18, 132, 115, 72, 155, 104, 98], OperandSize::Qword)
 }
 
 #[test]
 fn movlps_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(IndirectScaledDisplaced(EBX, Eight, 1232981715, Some(OperandSize::Qword), None)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 19, 60, 221, 211, 206, 125, 73], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(IndirectScaledIndexedDisplaced(EDI, EDX, Two, 1354480687, Some(OperandSize::Qword), None)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 19, 172, 87, 47, 188, 187, 80], OperandSize::Dword)
 }
 
 #[test]
 fn movlps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(IndirectScaledDisplaced(RBX, Two, 1914992316, Some(OperandSize::Qword), None)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 19, 28, 93, 188, 118, 36, 114], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLPS, operand1: Some(Indirect(RSI, Some(OperandSize::Qword), None)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 19, 30], OperandSize::Qword)
 }
 

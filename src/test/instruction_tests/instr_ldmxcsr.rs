@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn ldmxcsr_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::LDMXCSR, operand1: Some(IndirectScaledIndexedDisplaced(EDX, EDI, Eight, 2003666992, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 148, 250, 48, 136, 109, 119], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LDMXCSR, operand1: Some(IndirectDisplaced(EAX, 642333352, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 144, 168, 58, 73, 38], OperandSize::Dword)
 }
 
 #[test]
 fn ldmxcsr_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::LDMXCSR, operand1: Some(IndirectScaledIndexed(RBX, RSI, Four, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 20, 179], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LDMXCSR, operand1: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 23], OperandSize::Qword)
 }
 

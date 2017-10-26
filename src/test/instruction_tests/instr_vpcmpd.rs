@@ -8,91 +8,91 @@ use ::test::run_test;
 
 #[test]
 fn vpcmpd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K5)), operand2: Some(Direct(XMM5)), operand3: Some(Direct(XMM7)), operand4: Some(Literal8(62)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 243, 85, 9, 31, 239, 62], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(XMM7)), operand3: Some(Direct(XMM0)), operand4: Some(Literal8(54)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 243, 69, 9, 31, 224, 54], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(XMM4)), operand3: Some(Indirect(EDI, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(119)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 93, 13, 31, 39, 119], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K7)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexed(ESI, ECX, Four, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(103)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 101, 12, 31, 60, 142, 103], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(XMM6)), operand3: Some(IndirectScaledDisplaced(EBX, Two, 871944229, Some(OperandSize::Dword), None)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 77, 30, 31, 20, 93, 37, 208, 248, 51, 118], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K3)), operand2: Some(Direct(XMM2)), operand3: Some(IndirectDisplaced(EDI, 1481728402, Some(OperandSize::Dword), None)), operand4: Some(Literal8(116)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 109, 28, 31, 159, 146, 97, 81, 88, 116], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K6)), operand2: Some(Direct(XMM13)), operand3: Some(Direct(XMM20)), operand4: Some(Literal8(60)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 179, 21, 11, 31, 244, 60], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K3)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(XMM11)), operand4: Some(Literal8(83)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 211, 117, 14, 31, 219, 83], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(XMM29)), operand3: Some(IndirectScaledDisplaced(RSI, Four, 275383410, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(96)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 243, 21, 2, 31, 36, 181, 114, 4, 106, 16, 96], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K6)), operand2: Some(Direct(XMM26)), operand3: Some(Indirect(RSI, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(100)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 45, 6, 31, 54, 100], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(XMM19)), operand3: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand4: Some(Literal8(77)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 101, 23, 31, 23, 77], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K1)), operand2: Some(Direct(XMM7)), operand3: Some(Indirect(RCX, Some(OperandSize::Dword), None)), operand4: Some(Literal8(116)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 69, 31, 31, 9, 116], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K3)), operand2: Some(Direct(YMM0)), operand3: Some(Direct(YMM6)), operand4: Some(Literal8(1)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 125, 44, 31, 222, 1], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K7)), operand2: Some(Direct(YMM7)), operand3: Some(Direct(YMM6)), operand4: Some(Literal8(100)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 69, 47, 31, 254, 100], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K1)), operand2: Some(Direct(YMM2)), operand3: Some(IndirectScaledDisplaced(ESI, Two, 1419932308, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(77)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 109, 44, 31, 12, 117, 148, 114, 162, 84, 77], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K6)), operand2: Some(Direct(YMM3)), operand3: Some(IndirectDisplaced(EDX, 1133858001, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(39)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 101, 47, 31, 178, 209, 76, 149, 67, 39], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K5)), operand2: Some(Direct(YMM4)), operand3: Some(IndirectScaledDisplaced(EAX, Four, 213146301, Some(OperandSize::Dword), None)), operand4: Some(Literal8(124)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 93, 61, 31, 44, 133, 189, 90, 180, 12, 124], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K6)), operand2: Some(Direct(YMM0)), operand3: Some(Indirect(EBX, Some(OperandSize::Dword), None)), operand4: Some(Literal8(123)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 125, 63, 31, 51, 123], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(YMM5)), operand3: Some(Direct(YMM14)), operand4: Some(Literal8(78)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 211, 85, 44, 31, 214, 78], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(YMM14)), operand3: Some(Direct(YMM7)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 13, 43, 31, 215, 118], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(YMM2)), operand3: Some(IndirectScaledIndexedDisplaced(RCX, RSI, Two, 1302661498, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(109)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 109, 47, 31, 164, 113, 122, 9, 165, 77, 109], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(YMM10)), operand3: Some(IndirectDisplaced(RAX, 574761012, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(100)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 45, 47, 31, 144, 52, 40, 66, 34, 100], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(YMM30)), operand3: Some(IndirectScaledIndexedDisplaced(RDI, RBX, Two, 310247127, Some(OperandSize::Dword), None)), operand4: Some(Literal8(114)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 13, 50, 31, 164, 95, 215, 254, 125, 18, 114], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K1)), operand2: Some(Direct(YMM9)), operand3: Some(IndirectScaledDisplaced(RBX, Two, 1853734496, Some(OperandSize::Dword), None)), operand4: Some(Literal8(100)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 53, 60, 31, 12, 93, 96, 190, 125, 110, 100], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K4)), operand2: Some(Direct(ZMM3)), operand3: Some(Direct(ZMM3)), operand4: Some(Literal8(52)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 101, 78, 31, 227, 52], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K6)), operand2: Some(Direct(ZMM7)), operand3: Some(Direct(ZMM1)), operand4: Some(Literal8(23)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 69, 75, 31, 241, 23], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K5)), operand2: Some(Direct(ZMM4)), operand3: Some(IndirectScaledIndexedDisplaced(ESI, EDI, Four, 1880271646, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(68)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 93, 75, 31, 172, 190, 30, 171, 18, 112, 68], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K7)), operand2: Some(Direct(ZMM3)), operand3: Some(IndirectScaledIndexed(ESI, ECX, Two, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(92)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 243, 101, 74, 31, 60, 78, 92], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(ZMM7)), operand3: Some(IndirectScaledIndexedDisplaced(EBX, ECX, Eight, 733388799, Some(OperandSize::Dword), None)), operand4: Some(Literal8(68)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 69, 95, 31, 148, 203, 255, 159, 182, 43, 68], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K3)), operand2: Some(Direct(ZMM4)), operand3: Some(IndirectScaledDisplaced(ECX, Eight, 1640392784, Some(OperandSize::Dword), None)), operand4: Some(Literal8(96)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 93, 92, 31, 28, 205, 80, 104, 198, 97, 96], OperandSize::Dword)
 }
 
 #[test]
 fn vpcmpd_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K5)), operand2: Some(Direct(ZMM18)), operand3: Some(Direct(ZMM2)), operand4: Some(Literal8(19)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 109, 71, 31, 234, 19], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K3)), operand2: Some(Direct(ZMM3)), operand3: Some(Direct(ZMM20)), operand4: Some(Literal8(52)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 179, 101, 73, 31, 220, 52], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K5)), operand2: Some(Direct(ZMM29)), operand3: Some(Indirect(RBX, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(46)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 21, 71, 31, 43, 46], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(ZMM25)), operand3: Some(Indirect(RDX, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(73)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 53, 70, 31, 18, 73], OperandSize::Qword)
 }
 
 #[test]
 fn vpcmpd_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(ZMM3)), operand3: Some(Indirect(RBX, Some(OperandSize::Dword), None)), operand4: Some(Literal8(97)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 101, 94, 31, 19, 97], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPCMPD, operand1: Some(Direct(K2)), operand2: Some(Direct(ZMM31)), operand3: Some(IndirectScaledDisplaced(RDX, Eight, 1932621267, Some(OperandSize::Dword), None)), operand4: Some(Literal8(10)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 5, 86, 31, 20, 213, 211, 117, 49, 115, 10], OperandSize::Qword)
 }
 

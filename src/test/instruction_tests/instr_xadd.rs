@@ -8,111 +8,111 @@ use ::test::run_test;
 
 #[test]
 fn xadd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(DL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 202], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(BL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 219], OperandSize::Word)
 }
 
 #[test]
 fn xadd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexed(BP, DI, One, Some(OperandSize::Byte), None)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 11], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 236, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 155, 236, 0], OperandSize::Word)
 }
 
 #[test]
 fn xadd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(BL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 211], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(DL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 210], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Indirect(EDI, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 31], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledDisplaced(ECX, Two, 1024634730, Some(OperandSize::Byte), None)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 20, 77, 106, 175, 18, 61], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(CL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 217], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(BL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 211], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RDI, Four, 2037339933, Some(OperandSize::Byte), None)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 148, 185, 29, 87, 111, 121], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexed(RSI, RDI, Two, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 28, 126], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(BL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 219], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(DL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 218], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Indirect(RBX, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 27], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexedDisplaced(RDI, RCX, Four, 1099815293, Some(OperandSize::Byte), None)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 192, 148, 143, 125, 217, 141, 65], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(BX)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 251], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(DX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 242], OperandSize::Word)
 }
 
 #[test]
 fn xadd_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 105, Some(OperandSize::Word), None)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 123, 105], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Memory(30155, Some(OperandSize::Word), None)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 54, 203, 117], OperandSize::Word)
 }
 
 #[test]
 fn xadd_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(DI)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 231], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(SI)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 254], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectDisplaced(ECX, 1378712254, Some(OperandSize::Word), None)), operand2: Some(Direct(CX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 137, 190, 122, 45, 82], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Indirect(EAX, Some(OperandSize::Word), None)), operand2: Some(Direct(CX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 8], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(SP)), operand2: Some(Direct(BP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 236], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(SI)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 254], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledDisplaced(RSI, Four, 656697727, Some(OperandSize::Word), None)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 60, 181, 127, 105, 36, 39], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledDisplaced(RCX, Two, 750065183, Some(OperandSize::Word), None)), operand2: Some(Direct(CX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 12, 77, 31, 22, 181, 44], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(EBP)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 253], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(ECX)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 201], OperandSize::Word)
 }
 
 #[test]
 fn xadd_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Indirect(DI, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 45], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Indirect(SI, Some(OperandSize::Dword), None)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 193, 36], OperandSize::Word)
 }
 
 #[test]
 fn xadd_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(EDI)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(EDI)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 247], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectDisplaced(EDX, 198966247, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 154, 231, 251, 219, 11], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectDisplaced(EBX, 2019150721, Some(OperandSize::Dword), None)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 139, 129, 203, 89, 120], OperandSize::Dword)
 }
 
 #[test]
 fn xadd_19() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(EBP)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 237], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(ESI)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 230], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledDisplaced(RAX, Two, 47152786, Some(OperandSize::Dword), None)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 12, 69, 146, 126, 207, 2], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexed(RSI, RBX, Two, Some(OperandSize::Dword), None)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 193, 36, 94], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(RSI)), operand2: Some(Direct(RDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 193, 214], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(Direct(RSP)), operand2: Some(Direct(RSI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 193, 244], OperandSize::Qword)
 }
 
 #[test]
 fn xadd_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledIndexedDisplaced(RDX, RCX, Eight, 1277492264, Some(OperandSize::Qword), None)), operand2: Some(Direct(RBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 193, 156, 202, 40, 252, 36, 76], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XADD, operand1: Some(IndirectScaledDisplaced(RBX, Two, 1344112946, Some(OperandSize::Qword), None)), operand2: Some(Direct(RCX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 193, 12, 93, 50, 137, 29, 80], OperandSize::Qword)
 }
 

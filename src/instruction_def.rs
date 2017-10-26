@@ -29,13 +29,53 @@ pub fn load_instructions(map: &mut HashMap<Mnemonic, Vec<&'static InstructionDef
 pub fn find_instruction_def(instr: &Instruction, mode: Mode) 
     -> Result<&'static InstructionDefinition, InstructionEncodingError> {
     INSTR_MNEMONIC_MAP.read().unwrap().get(&instr.mnemonic)
-        .and_then(|list| list.iter().find(|enc| enc.matches_instruction(instr)))
-        .map(|&i| i)
         .ok_or(InstructionEncodingError::NoEncoding)
+        .and_then(|list| {
+            let matches = list.iter().filter(|enc| enc.matches_instruction(instr, mode));
+            let mut sizes = None;
+            let mut best = None;
+            
+            // Look for the shortest matching def. If multiple incompatible defs match,
+            // return AmbiguousSize.
+            for m in matches {
+                if best.map_or(true, |b| compare_def_length(m, b)) {
+                    let m_sizes = get_op_sizes(m);
+                    if sizes.map_or(true, |s| compare_sizes(&s, &m_sizes)) {
+                        best = Some(m);
+                        sizes = Some(m_sizes);
+                    } else {
+                        return Err(InstructionEncodingError::AmbiguousSize);
+                    }
+                }
+            }
+
+            best.ok_or(InstructionEncodingError::NoEncoding)
+        })
+}
+
+fn compare_sizes(a: &[Option<OperandSize>; 4], b: &[Option<OperandSize>; 4]) -> bool {
+    a.iter().zip(b.iter()).all( |(m_s1, m_s2)| match (*m_s1, *m_s2) {
+        (Some(s1), Some(s2)) => s1 == s2 || s1 == OperandSize::Unsized || s2 == OperandSize::Unsized,
+        (None, None) => true,
+        _ => false
+    })
+}
+
+fn get_op_sizes(def: &InstructionDefinition) -> [Option<OperandSize>; 4] {
+    let mut iter = def.operands.iter().map(|o| o.as_ref().map(|op| op.size));
+    [iter.next().unwrap_or(None),
+     iter.next().unwrap_or(None),
+     iter.next().unwrap_or(None),
+     iter.next().unwrap_or(None)]
+}
+
+fn compare_def_length(a: &InstructionDefinition, b: &InstructionDefinition) -> bool {
+    println!("cmp a ({}): {:?}\nb ({}): {:?}", a.len(), a, b.len(), b);
+    a.len() < b.len()
 }
 
 impl InstructionDefinition {
-    fn matches_instruction(&self, instr: &Instruction) -> bool {
+    fn matches_instruction(&self, instr: &Instruction, mode: Mode) -> bool {
         self.mnemonic == instr.mnemonic &&
         // (self.allow_lock || instr.lock) &&
         (self.allow_rounding || instr.rounding_mode.is_none()) &&
@@ -45,7 +85,30 @@ impl InstructionDefinition {
             |(def, op)| if let Some(ref d) = *def {
                 d.matches_operand(op, self, instr)
             } else { op.is_none() }
-        ))
+        )) &&
+        match mode {
+            Mode::Real => self.valid_16,
+            Mode::Protected => self.valid_32,
+            Mode::Long => self.valid_64
+        }
+    }
+
+    // This isn't intended to be an exact byte length of the instruction, as it's only used to
+    // compare definitions to find the shortest.
+    fn len(&self) -> u32 {
+        fn b(v: bool) -> u32 { if v { 1 } else { 0 } }
+
+        (match self.composite_prefix {
+            Some(CompositePrefix::Evex { .. }) => 4,
+            Some(CompositePrefix::Vex { .. }) => 3, // TODO This could be made to determine vex len
+            Some(CompositePrefix::Rex { .. }) => 1,
+            None => 0
+        }) +
+        b(self.fixed_prefix.is_some()) +
+        b(self.two_byte_opcode) +
+        b(self.secondary_opcode.is_some()) +
+        b(self.fixed_post.is_some()) +
+        self.operands.iter().filter_map(|o| o.as_ref().map(|op| op.len())).sum::<u32>()
     }
 }
 
@@ -185,9 +248,31 @@ impl OperandDefinition {
                 |t| OperandDefinition::matches_operand_type(t, def_size, op, instr_def, instr))
         }
     }
+
+    // This isn't intended to be an exact byte length of the instruction, as it's only used to
+    // compare definitions to find the shortest.
+    fn len(&self) -> u32 {
+        if self.encoding == OperandEncoding::OpcodeAddend { return 0; }
+
+        match self.op_type {
+            OperandType::Reg(_) |
+            OperandType::Mem(_) |
+            OperandType::Bcst(_) |
+            OperandType::Offset |
+            OperandType::Mib |
+            OperandType::Set(_)
+                => 1,
+            OperandType::Imm
+                => self.size.bits() / 8,
+            OperandType::Rel(s)
+                => s.bits() / 8,
+            OperandType::Fixed(_)
+                => 0
+        }
+    }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum OperandType {
     Reg(RegType),
     Mem(Option<OperandSize>),
@@ -200,7 +285,7 @@ pub enum OperandType {
     Set(&'static [OperandType])
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum OperandEncoding {
     ModRmReg,
     ModRmRm,
@@ -220,7 +305,7 @@ pub enum OperandAccess {
     ReadWrite
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum FixedOperand {
     Reg(Reg),
     Constant(u32)

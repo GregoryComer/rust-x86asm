@@ -8,26 +8,26 @@ use ::test::run_test;
 
 #[test]
 fn rdseed_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(SI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 254], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(SP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 252], OperandSize::Dword)
 }
 
 #[test]
 fn rdseed_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(CX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 249], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 253], OperandSize::Qword)
 }
 
 #[test]
 fn rdseed_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(EDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(EBP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 253], OperandSize::Dword)
 }
 
 #[test]
 fn rdseed_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(ESI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 254], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(ESP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 252], OperandSize::Qword)
 }
 
 #[test]
 fn rdseed_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(RDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 199, 255], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(RDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 199, 250], OperandSize::Qword)
 }
 

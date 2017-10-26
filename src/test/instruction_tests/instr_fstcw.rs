@@ -8,7 +8,7 @@ use ::test::run_test;
 
 #[test]
 fn fstcw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSTCW, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 18997, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 185, 53, 74], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FSTCW, operand1: Some(Indirect(DI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 61], OperandSize::Word)
 }
 
 #[test]
@@ -18,6 +18,6 @@ fn fstcw_2() {
 
 #[test]
 fn fstcw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSTCW, operand1: Some(IndirectScaledDisplaced(RBX, Eight, 1061097393, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 60, 221, 177, 15, 63, 63], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FSTCW, operand1: Some(IndirectScaledIndexed(RDX, RDX, Two, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 60, 82], OperandSize::Qword)
 }
 

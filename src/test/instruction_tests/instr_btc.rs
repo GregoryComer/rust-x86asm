@@ -8,141 +8,141 @@ use ::test::run_test;
 
 #[test]
 fn btc_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(DX)), operand2: Some(Literal8(2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 250, 2], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(BX)), operand2: Some(Literal8(51)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 251, 51], OperandSize::Word)
 }
 
 #[test]
 fn btc_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Word), None)), operand2: Some(Literal8(86)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 58, 86], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Word), None)), operand2: Some(Literal8(67)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 57, 67], OperandSize::Word)
 }
 
 #[test]
 fn btc_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(BX)), operand2: Some(Literal8(127)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 251, 127], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(BX)), operand2: Some(Literal8(2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 251, 2], OperandSize::Dword)
 }
 
 #[test]
 fn btc_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(EDI, ECX, Eight, 1076986913, Some(OperandSize::Word), None)), operand2: Some(Literal8(104)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 188, 207, 33, 132, 49, 64, 104], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(EBX, 2141936693, Some(OperandSize::Word), None)), operand2: Some(Literal8(1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 187, 53, 92, 171, 127, 1], OperandSize::Dword)
 }
 
 #[test]
 fn btc_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(DX)), operand2: Some(Literal8(103)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 250, 103], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(BP)), operand2: Some(Literal8(53)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 253, 53], OperandSize::Qword)
 }
 
 #[test]
 fn btc_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RDI, 1162862143, Some(OperandSize::Word), None)), operand2: Some(Literal8(49)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 191, 63, 222, 79, 69, 49], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexed(RDX, RSI, Eight, Some(OperandSize::Word), None)), operand2: Some(Literal8(76)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 60, 242, 76], OperandSize::Qword)
 }
 
 #[test]
 fn btc_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(ESI)), operand2: Some(Literal8(89)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 254, 89], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EDX)), operand2: Some(Literal8(48)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 250, 48], OperandSize::Word)
 }
 
 #[test]
 fn btc_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 30138, Some(OperandSize::Dword), None)), operand2: Some(Literal8(90)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 185, 186, 117, 90], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Dword), None)), operand2: Some(Literal8(7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 186, 56, 7], OperandSize::Word)
 }
 
 #[test]
 fn btc_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(ESI)), operand2: Some(Literal8(53)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 254, 53], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(ESP)), operand2: Some(Literal8(2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 252, 2], OperandSize::Dword)
 }
 
 #[test]
 fn btc_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(EDI, 362989046, Some(OperandSize::Dword), None)), operand2: Some(Literal8(81)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 191, 246, 197, 162, 21, 81], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(EBX, 109729381, Some(OperandSize::Dword), None)), operand2: Some(Literal8(55)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 187, 101, 86, 138, 6, 55], OperandSize::Dword)
 }
 
 #[test]
 fn btc_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EDI)), operand2: Some(Literal8(63)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 255, 63], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EBP)), operand2: Some(Literal8(79)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 253, 79], OperandSize::Qword)
 }
 
 #[test]
 fn btc_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledDisplaced(RSI, Four, 2110307495, Some(OperandSize::Dword), None)), operand2: Some(Literal8(72)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 60, 181, 167, 188, 200, 125, 72], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RCX, 2007843256, Some(OperandSize::Dword), None)), operand2: Some(Literal8(96)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 186, 185, 184, 65, 173, 119, 96], OperandSize::Qword)
 }
 
 #[test]
 fn btc_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(RCX)), operand2: Some(Literal8(36)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 186, 249, 36], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(RDI)), operand2: Some(Literal8(65)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 186, 255, 65], OperandSize::Qword)
 }
 
 #[test]
 fn btc_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RCX, 1422180567, Some(OperandSize::Qword), None)), operand2: Some(Literal8(81)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 186, 185, 215, 192, 196, 84, 81], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(RAX, RDI, Eight, 791118153, Some(OperandSize::Qword), None)), operand2: Some(Literal8(121)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 186, 188, 248, 73, 129, 39, 47, 121], OperandSize::Qword)
 }
 
 #[test]
 fn btc_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(BP)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 229], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(DI)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 215], OperandSize::Word)
 }
 
 #[test]
 fn btc_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Indirect(BX, Some(OperandSize::Word), None)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 23], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 170, Some(OperandSize::Word), None)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 176, 170, 0], OperandSize::Word)
 }
 
 #[test]
 fn btc_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(SI)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 214], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(SI)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 254], OperandSize::Dword)
 }
 
 #[test]
 fn btc_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Indirect(ECX, Some(OperandSize::Word), None)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 57], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledDisplaced(EBX, Eight, 777963856, Some(OperandSize::Word), None)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 20, 221, 80, 201, 94, 46], OperandSize::Dword)
 }
 
 #[test]
 fn btc_19() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(SI)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 246], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(SP)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 244], OperandSize::Qword)
 }
 
 #[test]
 fn btc_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RBX, 555461385, Some(OperandSize::Word), None)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 163, 9, 171, 27, 33], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Indirect(RSI, Some(OperandSize::Word), None)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 30], OperandSize::Qword)
 }
 
 #[test]
 fn btc_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EBP)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 245], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EDI)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 239], OperandSize::Word)
 }
 
 #[test]
 fn btc_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 43, Some(OperandSize::Dword), None)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 115, 43], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(BP, 203, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 187, 158, 203, 0], OperandSize::Word)
 }
 
 #[test]
 fn btc_23() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EBX)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 243], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(ESI)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 254], OperandSize::Dword)
 }
 
 #[test]
 fn btc_24() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexed(ECX, EAX, Eight, Some(OperandSize::Dword), None)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 60, 193], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Indirect(EBX, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 43], OperandSize::Dword)
 }
 
 #[test]
 fn btc_25() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(ECX)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 241], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(EBX)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 219], OperandSize::Qword)
 }
 
 #[test]
 fn btc_26() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RSI, Two, 569590720, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 172, 113, 192, 67, 243, 33], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RDI, 1802523545, Some(OperandSize::Dword), None)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 187, 151, 153, 83, 112, 107], OperandSize::Qword)
 }
 
 #[test]
 fn btc_27() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(RCX)), operand2: Some(Direct(RBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 187, 233], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(Direct(RBX)), operand2: Some(Direct(RBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 187, 219], OperandSize::Qword)
 }
 
 #[test]
 fn btc_28() {
-    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectScaledDisplaced(RCX, Eight, 753682947, Some(OperandSize::Qword), None)), operand2: Some(Direct(RDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 187, 20, 205, 3, 74, 236, 44], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BTC, operand1: Some(IndirectDisplaced(RCX, 17190650, Some(OperandSize::Qword), None)), operand2: Some(Direct(RCX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 187, 137, 250, 78, 6, 1], OperandSize::Qword)
 }
 

@@ -1,9 +1,8 @@
-//mod addressing16;
-//mod addressing32;
-//mod addressing64;
+mod addressing16;
+mod addressing32;
+mod addressing64;
 //mod decode;
-//mod instr32_m_u;
-//mod size_inference;
+mod size_inference;
 mod instruction_tests;
 
 use std::io::Cursor;
@@ -170,5 +169,8 @@ fn encode64_helper2(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, ex
 fn run_test(instr: &Instruction, expected: &[u8], addr_size: OperandSize) {
     let mut buffer = Cursor::new(Vec::new());
     instr.encode(&mut buffer, Mode::from_size(addr_size).unwrap()).expect("Encoding failed");
-    assert_eq!(&buffer.get_ref()[..], expected);
+    if &buffer.get_ref()[..] != expected {
+        panic!("Test failed. Mode: {:?}.\nInstruction: {:?}.\nOutput: {:?}.\nExpected: {:?}",
+            addr_size, instr, buffer.get_ref(), expected);
+    }
 }

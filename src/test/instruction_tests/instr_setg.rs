@@ -13,36 +13,36 @@ fn setg_1() {
 
 #[test]
 fn setg_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 12157, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 130, 125, 47], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectDisplaced(BX, 150, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 135, 150, 0], OperandSize::Word)
 }
 
 #[test]
 fn setg_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 193], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 195], OperandSize::Dword)
 }
 
 #[test]
 fn setg_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectDisplaced(EDX, 1290405890, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 130, 2, 8, 234, 76], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledDisplaced(ECX, Two, 63796253, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 77, 29, 116, 205, 3], OperandSize::Dword)
 }
 
 #[test]
 fn setg_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 193], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 194], OperandSize::Qword)
 }
 
 #[test]
 fn setg_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledIndexed(RBX, RBX, Two, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 91], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledDisplaced(RDX, Four, 968940052, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 149, 20, 218, 192, 57], OperandSize::Qword)
 }
 
 #[test]
 fn setg_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 193], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 195], OperandSize::Qword)
 }
 
 #[test]
 fn setg_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledIndexed(RBX, RSI, Eight, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 243], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETG, operand1: Some(IndirectScaledDisplaced(RDI, Eight, 892762010, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 253, 154, 119, 54, 53], OperandSize::Qword)
 }
 

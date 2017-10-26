@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn blsmsk_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(ECX)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 112, 243, 209], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(EBX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 96, 243, 212], OperandSize::Dword)
 }
 
 #[test]
 fn blsmsk_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(ECX)), operand2: Some(Indirect(EAX, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 112, 243, 16], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(EBP)), operand2: Some(Indirect(EAX, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 80, 243, 16], OperandSize::Dword)
 }
 
 #[test]
 fn blsmsk_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(EDI)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 64, 243, 215], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(ECX)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 112, 243, 209], OperandSize::Qword)
 }
 
 #[test]
 fn blsmsk_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(ESI)), operand2: Some(Indirect(RCX, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 72, 243, 17], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(EDX)), operand2: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 104, 243, 23], OperandSize::Qword)
 }
 
 #[test]
 fn blsmsk_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(RBP)), operand2: Some(Direct(RBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 208, 243, 213], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(RSI)), operand2: Some(Direct(RSP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 200, 243, 212], OperandSize::Qword)
 }
 
 #[test]
 fn blsmsk_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(RBX)), operand2: Some(IndirectScaledIndexedDisplaced(RAX, RCX, Four, 1569684702, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 224, 243, 148, 136, 222, 124, 143, 93], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLSMSK, operand1: Some(Direct(RDI)), operand2: Some(IndirectScaledIndexedDisplaced(RAX, RCX, Eight, 960851900, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 192, 243, 148, 200, 188, 111, 69, 57], OperandSize::Qword)
 }
 

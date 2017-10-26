@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn cmpps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM4)), operand3: Some(Literal8(16)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 244, 16], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM3)), operand3: Some(Literal8(48)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 243, 48], OperandSize::Dword)
 }
 
 #[test]
 fn cmpps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledIndexed(ESI, ECX, Four, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(8)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 52, 142, 8], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM7)), operand2: Some(IndirectDisplaced(ESI, 1405311637, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(48)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 190, 149, 90, 195, 83, 48], OperandSize::Dword)
 }
 
 #[test]
 fn cmpps_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM5)), operand3: Some(Literal8(46)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 213, 46], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM6)), operand3: Some(Literal8(105)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 198, 105], OperandSize::Qword)
 }
 
 #[test]
 fn cmpps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledDisplaced(RSI, Four, 1143834269, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(97)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 52, 181, 157, 134, 45, 68, 97], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMPPS, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledIndexed(RSI, RAX, Two, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(16)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 194, 44, 70, 16], OperandSize::Qword)
 }
 

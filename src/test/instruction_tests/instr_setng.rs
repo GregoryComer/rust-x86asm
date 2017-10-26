@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn setng_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 195], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 193], OperandSize::Word)
 }
 
 #[test]
 fn setng_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectDisplaced(BP, 4848, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 134, 240, 18], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectScaledIndexed(BP, DI, One, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 3], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn setng_3() {
 
 #[test]
 fn setng_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectScaledIndexed(EAX, EAX, Two, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 64], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectScaledIndexed(EBX, EDI, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 187], OperandSize::Dword)
 }
 
 #[test]
@@ -33,16 +33,16 @@ fn setng_5() {
 
 #[test]
 fn setng_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(Indirect(RSI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 6], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectDisplaced(RCX, 258581215, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 129, 223, 162, 105, 15], OperandSize::Qword)
 }
 
 #[test]
 fn setng_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 195], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 193], OperandSize::Qword)
 }
 
 #[test]
 fn setng_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectDisplaced(RAX, 428849652, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 128, 244, 185, 143, 25], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNG, operand1: Some(IndirectScaledIndexed(RDI, RBX, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 159], OperandSize::Qword)
 }
 

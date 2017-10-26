@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn pcmpeqq_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 241], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 219], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpeqq_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM6)), operand2: Some(IndirectDisplaced(ESI, 197268245, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 182, 21, 19, 194, 11], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledDisplaced(EAX, Four, 503835536, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 20, 133, 144, 235, 7, 30], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpeqq_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 208], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 237], OperandSize::Qword)
 }
 
 #[test]
 fn pcmpeqq_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM3)), operand2: Some(IndirectDisplaced(RDX, 208306680, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 154, 248, 129, 106, 12], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPEQQ, operand1: Some(Direct(XMM2)), operand2: Some(Indirect(RSI, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 41, 22], OperandSize::Qword)
 }
 

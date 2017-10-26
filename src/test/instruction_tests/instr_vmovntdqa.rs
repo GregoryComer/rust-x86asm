@@ -8,51 +8,51 @@ use ::test::run_test;
 
 #[test]
 fn vmovntdqa_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 1381592065, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 60, 77, 1, 108, 89, 82], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledIndexedDisplaced(EAX, ESI, Four, 176566229, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 148, 176, 213, 47, 134, 10], OperandSize::Dword)
 }
 
 #[test]
 fn vmovntdqa_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledDisplaced(RBX, Eight, 1819049728, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 44, 221, 0, 127, 108, 108], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledIndexedDisplaced(RDI, RSI, Four, 383181311, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 148, 183, 255, 225, 214, 22], OperandSize::Qword)
 }
 
 #[test]
 fn vmovntdqa_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM2)), operand2: Some(Indirect(EDX, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 18], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM7)), operand2: Some(IndirectDisplaced(ESI, 933380979, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 190, 115, 67, 162, 55], OperandSize::Dword)
 }
 
 #[test]
 fn vmovntdqa_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM2)), operand2: Some(Indirect(RCX, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 17], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM1)), operand2: Some(Indirect(RAX, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 8], OperandSize::Qword)
 }
 
 #[test]
 fn vmovntdqa_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledDisplaced(EBX, Four, 1967228240, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 28, 157, 80, 133, 65, 117], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, ECX, Two, 2015190345, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 121, 42, 156, 78, 73, 93, 29, 120], OperandSize::Dword)
 }
 
 #[test]
 fn vmovntdqa_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM10)), operand2: Some(IndirectDisplaced(RAX, 1782469213, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 98, 121, 42, 144, 93, 82, 62, 106], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(XMM16)), operand2: Some(Indirect(RBX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 226, 125, 8, 42, 3], OperandSize::Qword)
 }
 
 #[test]
 fn vmovntdqa_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM1)), operand2: Some(IndirectScaledDisplaced(EDX, Two, 216448030, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 12, 85, 30, 188, 230, 12], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM0)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 532127134, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 125, 42, 4, 77, 158, 157, 183, 31], OperandSize::Dword)
 }
 
 #[test]
 fn vmovntdqa_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM14)), operand2: Some(Indirect(RBX, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 98, 125, 42, 51], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(YMM20)), operand2: Some(IndirectDisplaced(RSI, 940941355, Some(OperandSize::Ymmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 226, 125, 40, 42, 166, 43, 160, 21, 56], OperandSize::Qword)
 }
 
 #[test]
 fn vmovntdqa_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(ZMM4)), operand2: Some(IndirectScaledDisplaced(EBX, Eight, 1293796419, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 242, 125, 72, 42, 36, 221, 67, 196, 29, 77], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(ZMM6)), operand2: Some(IndirectDisplaced(EDX, 956820301, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 242, 125, 72, 42, 178, 77, 235, 7, 57], OperandSize::Dword)
 }
 
 #[test]
 fn vmovntdqa_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(ZMM4)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RSI, Eight, 1386660530, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 242, 125, 72, 42, 164, 243, 178, 194, 166, 82], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VMOVNTDQA, operand1: Some(Direct(ZMM10)), operand2: Some(IndirectScaledIndexed(RSI, RBX, Eight, Some(OperandSize::Zmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 114, 125, 72, 42, 20, 222], OperandSize::Qword)
 }
 

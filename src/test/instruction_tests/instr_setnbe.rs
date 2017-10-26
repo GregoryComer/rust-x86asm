@@ -13,7 +13,7 @@ fn setnbe_1() {
 
 #[test]
 fn setnbe_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(Indirect(SI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 4], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(IndirectDisplaced(DI, 10045, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 133, 61, 39], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn setnbe_3() {
 
 #[test]
 fn setnbe_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(Indirect(ESI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 6], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(Indirect(EBX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 3], OperandSize::Dword)
 }
 
 #[test]
@@ -33,7 +33,7 @@ fn setnbe_5() {
 
 #[test]
 fn setnbe_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(IndirectScaledIndexed(RCX, RBX, Eight, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 4, 217], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(Indirect(RSI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 6], OperandSize::Qword)
 }
 
 #[test]
@@ -43,6 +43,6 @@ fn setnbe_7() {
 
 #[test]
 fn setnbe_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(IndirectScaledIndexed(RSI, RDX, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 4, 150], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNBE, operand1: Some(Indirect(RSI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 151, 6], OperandSize::Qword)
 }
 

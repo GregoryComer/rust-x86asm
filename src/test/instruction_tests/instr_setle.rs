@@ -13,7 +13,7 @@ fn setle_1() {
 
 #[test]
 fn setle_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(Indirect(DI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 5], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 1], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn setle_3() {
 
 #[test]
 fn setle_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(IndirectScaledIndexed(ESI, EDX, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 150], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(Indirect(ESI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 6], OperandSize::Dword)
 }
 
 #[test]
@@ -33,7 +33,7 @@ fn setle_5() {
 
 #[test]
 fn setle_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(Indirect(RCX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 1], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(IndirectScaledIndexed(RAX, RCX, Two, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 72], OperandSize::Qword)
 }
 
 #[test]
@@ -43,6 +43,6 @@ fn setle_7() {
 
 #[test]
 fn setle_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(Indirect(RBX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 3], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETLE, operand1: Some(IndirectScaledDisplaced(RDX, Two, 854966802, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 158, 4, 85, 18, 194, 245, 50], OperandSize::Qword)
 }
 

@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn kandb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::KANDB, operand1: Some(Direct(K5)), operand2: Some(Direct(K7)), operand3: Some(Direct(K6)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 197, 65, 238], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KANDB, operand1: Some(Direct(K4)), operand2: Some(Direct(K1)), operand3: Some(Direct(K5)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 245, 65, 229], OperandSize::Dword)
 }
 
 #[test]
 fn kandb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::KANDB, operand1: Some(Direct(K1)), operand2: Some(Direct(K3)), operand3: Some(Direct(K5)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 229, 65, 205], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KANDB, operand1: Some(Direct(K1)), operand2: Some(Direct(K1)), operand3: Some(Direct(K7)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 245, 65, 207], OperandSize::Qword)
 }
 

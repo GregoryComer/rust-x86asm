@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn sgdt_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(Indirect(SI, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 4], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(Memory(7942, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 6, 6, 31], OperandSize::Word)
 }
 
 #[test]
 fn sgdt_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectScaledIndexedDisplaced(EAX, EBX, Eight, 495059530, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 132, 216, 74, 2, 130, 29], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectDisplaced(ECX, 1599724274, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 129, 242, 218, 89, 95], OperandSize::Dword)
 }
 
 #[test]
 fn sgdt_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectScaledIndexedDisplaced(RAX, RCX, Eight, 232866531, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 132, 200, 227, 66, 225, 13], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectDisplaced(RAX, 581580906, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 128, 106, 56, 170, 34], OperandSize::Qword)
 }
 

@@ -1,5 +1,5 @@
 use std::io::Write;
-use ::{Instruction, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale};
+use ::{Instruction, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale, RegType};
 use ::instruction_buffer::{ImmediateValue, InstructionBuffer, Prefix1, Prefix2};
 use ::instruction_def::*;
 
@@ -238,7 +238,8 @@ pub fn get_op_size_64(def: &InstructionDefinition, instr: &Instruction) -> bool 
         { true } else { false }
 }
 
-pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, op: &Option<Operand>, mode: Mode, addr_size: OperandSize) -> Result<(), InstructionEncodingError> {
+pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, op: &Option<Operand>,
+    mode: Mode, addr_size: OperandSize) -> Result<(), InstructionEncodingError> {
     if let OperandType::Fixed(_) = def.op_type { return Ok(()); }
 
     match def.encoding {

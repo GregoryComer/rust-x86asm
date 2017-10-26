@@ -13,11 +13,11 @@ fn fsubp_1() {
 
 #[test]
 fn fsubp_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSUBP, operand1: Some(Direct(ST7)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 239], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FSUBP, operand1: Some(Direct(ST4)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 236], OperandSize::Dword)
 }
 
 #[test]
 fn fsubp_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSUBP, operand1: Some(Direct(ST1)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 233], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FSUBP, operand1: Some(Direct(ST5)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 237], OperandSize::Qword)
 }
 

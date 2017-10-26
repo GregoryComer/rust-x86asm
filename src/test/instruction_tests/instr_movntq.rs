@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn movntq_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectDisplaced(DI, 14300, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 133, 220, 55], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectDisplaced(BP, 16097, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 142, 225, 62], OperandSize::Word)
 }
 
 #[test]
 fn movntq_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectDisplaced(EDX, 1138446899, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 146, 51, 82, 219, 67], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectDisplaced(ESI, 799456014, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 174, 14, 187, 166, 47], OperandSize::Dword)
 }
 
 #[test]
 fn movntq_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectScaledDisplaced(RAX, Two, 513320351, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 4, 69, 159, 165, 152, 30], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTQ, operand1: Some(IndirectScaledIndexed(RBX, RBX, Eight, Some(OperandSize::Qword), None)), operand2: Some(Direct(MM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 231, 60, 219], OperandSize::Qword)
 }
 

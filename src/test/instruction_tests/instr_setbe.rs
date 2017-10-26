@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn setbe_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 194], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 195], OperandSize::Word)
 }
 
 #[test]
 fn setbe_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectScaledIndexed(BP, DI, One, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 3], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectDisplaced(BX, 229, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 135, 229, 0], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn setbe_3() {
 
 #[test]
 fn setbe_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectDisplaced(EDI, 1357605590, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 135, 214, 106, 235, 80], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectDisplaced(ECX, 366163427, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 129, 227, 53, 211, 21], OperandSize::Dword)
 }
 
 #[test]
@@ -33,16 +33,16 @@ fn setbe_5() {
 
 #[test]
 fn setbe_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectScaledIndexed(RAX, RBX, Eight, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 216], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectScaledDisplaced(RAX, Four, 2081899246, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 133, 238, 66, 23, 124], OperandSize::Qword)
 }
 
 #[test]
 fn setbe_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 194], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 193], OperandSize::Qword)
 }
 
 #[test]
 fn setbe_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectDisplaced(RDX, 215968491, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 130, 235, 106, 223, 12], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETBE, operand1: Some(IndirectScaledDisplaced(RBX, Four, 2141204301, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 157, 77, 47, 160, 127], OperandSize::Qword)
 }
 

@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn xrstors_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(Indirect(DI, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 29], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 8, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 88, 8], OperandSize::Word)
 }
 
 #[test]
 fn xrstors_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(IndirectScaledIndexedDisplaced(ECX, EAX, Four, 647110028, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 156, 129, 140, 29, 146, 38], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(IndirectScaledIndexed(EDI, EDI, Two, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 28, 127], OperandSize::Dword)
 }
 
 #[test]
 fn xrstors_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(IndirectScaledIndexedDisplaced(RSI, RDX, Two, 811200519, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 156, 86, 7, 240, 89, 48], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XRSTORS, operand1: Some(IndirectDisplaced(RSI, 1537805347, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 158, 35, 12, 169, 91], OperandSize::Qword)
 }
 

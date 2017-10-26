@@ -8,41 +8,41 @@ use ::test::run_test;
 
 #[test]
 fn pand_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM1)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 205], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM5)), operand2: Some(Direct(MM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 233], OperandSize::Dword)
 }
 
 #[test]
 fn pand_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM4)), operand2: Some(IndirectScaledIndexedDisplaced(EBX, EBX, Four, 1072806706, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 164, 155, 50, 187, 241, 63], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM7)), operand2: Some(IndirectDisplaced(EBX, 498449789, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 187, 125, 189, 181, 29], OperandSize::Dword)
 }
 
 #[test]
 fn pand_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM5)), operand2: Some(Direct(MM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 233], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM4)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 229], OperandSize::Qword)
 }
 
 #[test]
 fn pand_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM3)), operand2: Some(IndirectScaledIndexed(RBX, RCX, Eight, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 28, 203], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(MM1)), operand2: Some(IndirectScaledDisplaced(RAX, Four, 1936753183, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 219, 12, 133, 31, 130, 112, 115], OperandSize::Qword)
 }
 
 #[test]
 fn pand_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 246], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 249], OperandSize::Dword)
 }
 
 #[test]
 fn pand_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 1885108162, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 20, 77, 194, 119, 92, 112], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM1)), operand2: Some(IndirectScaledIndexed(ECX, ESI, Two, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 12, 113], OperandSize::Dword)
 }
 
 #[test]
 fn pand_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 207], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 212], OperandSize::Qword)
 }
 
 #[test]
 fn pand_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM6)), operand2: Some(Indirect(RCX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 49], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAND, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledIndexed(RDI, RAX, Four, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 219, 44, 135], OperandSize::Qword)
 }
 

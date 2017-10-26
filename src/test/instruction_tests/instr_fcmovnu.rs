@@ -13,11 +13,11 @@ fn fcmovnu_1() {
 
 #[test]
 fn fcmovnu_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCMOVNU, operand1: Some(Direct(ST)), operand2: Some(Direct(ST5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 221], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCMOVNU, operand1: Some(Direct(ST)), operand2: Some(Direct(ST3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 219], OperandSize::Dword)
 }
 
 #[test]
 fn fcmovnu_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCMOVNU, operand1: Some(Direct(ST)), operand2: Some(Direct(ST7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 223], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCMOVNU, operand1: Some(Direct(ST)), operand2: Some(Direct(ST4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 220], OperandSize::Qword)
 }
 

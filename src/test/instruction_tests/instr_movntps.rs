@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn movntps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTPS, operand1: Some(IndirectScaledIndexed(ECX, EDX, Two, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 43, 28, 81], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTPS, operand1: Some(IndirectScaledDisplaced(EBX, Four, 1072739319, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 43, 36, 157, 247, 179, 240, 63], OperandSize::Dword)
 }
 
 #[test]
 fn movntps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTPS, operand1: Some(IndirectScaledIndexed(RCX, RSI, Four, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 43, 28, 177], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTPS, operand1: Some(Indirect(RSI, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 43, 38], OperandSize::Qword)
 }
 

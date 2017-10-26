@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn adox_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 226], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(EBP)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 237], OperandSize::Dword)
 }
 
 #[test]
 fn adox_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(EBP)), operand2: Some(IndirectDisplaced(ESI, 645649078, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 174, 182, 210, 123, 38], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(ESP)), operand2: Some(Indirect(EDX, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 34], OperandSize::Dword)
 }
 
 #[test]
 fn adox_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(EBX)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 218], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(EBX)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 223], OperandSize::Qword)
 }
 
 #[test]
 fn adox_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(ESI)), operand2: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 55], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledIndexed(RSI, RAX, Two, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 56, 246, 36, 70], OperandSize::Qword)
 }
 
 #[test]
 fn adox_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(RBX)), operand2: Some(Direct(RSI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 56, 246, 222], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(RCX)), operand2: Some(Direct(RDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 56, 246, 207], OperandSize::Qword)
 }
 
 #[test]
 fn adox_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(RSP)), operand2: Some(Indirect(RBX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 56, 246, 35], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADOX, operand1: Some(Direct(RBX)), operand2: Some(IndirectScaledIndexed(RAX, RCX, Eight, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 56, 246, 28, 200], OperandSize::Qword)
 }
 

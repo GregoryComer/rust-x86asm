@@ -8,41 +8,41 @@ use ::test::run_test;
 
 #[test]
 fn vpinsrw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM4)), operand3: Some(Direct(EBX)), operand4: Some(Literal8(27)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 217, 196, 203, 27], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(ECX)), operand4: Some(Literal8(3)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 233, 196, 233, 3], OperandSize::Dword)
 }
 
 #[test]
 fn vpinsrw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM7)), operand3: Some(IndirectDisplaced(EDI, 2135058042, Some(OperandSize::Word), None)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 193, 196, 175, 122, 102, 66, 127, 118], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexedDisplaced(EAX, ECX, Four, 855918384, Some(OperandSize::Word), None)), operand4: Some(Literal8(74)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 225, 196, 180, 136, 48, 71, 4, 51, 74], OperandSize::Dword)
 }
 
 #[test]
 fn vpinsrw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(EBP)), operand4: Some(Literal8(116)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 233, 196, 253, 116], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM6)), operand3: Some(Direct(ESI)), operand4: Some(Literal8(78)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 201, 196, 198, 78], OperandSize::Qword)
 }
 
 #[test]
 fn vpinsrw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM1)), operand3: Some(IndirectDisplaced(RSI, 692811173, Some(OperandSize::Word), None)), operand4: Some(Literal8(93)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 241, 196, 190, 165, 117, 75, 41, 93], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectDisplaced(RDX, 374550764, Some(OperandSize::Word), None)), operand4: Some(Literal8(35)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 225, 196, 154, 236, 48, 83, 22, 35], OperandSize::Qword)
 }
 
 #[test]
 fn vpinsrw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(ESP)), operand4: Some(Literal8(33)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 241, 196, 220, 33], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(ESI)), operand4: Some(Literal8(64)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 241, 196, 198, 64], OperandSize::Dword)
 }
 
 #[test]
 fn vpinsrw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM5)), operand3: Some(IndirectScaledDisplaced(EDI, Eight, 1911028851, Some(OperandSize::Word), None)), operand4: Some(Literal8(127)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 209, 196, 60, 253, 115, 252, 231, 113, 127], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexedDisplaced(EDI, ECX, Two, 269231693, Some(OperandSize::Word), None)), operand4: Some(Literal8(116)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 225, 196, 156, 79, 77, 38, 12, 16, 116], OperandSize::Dword)
 }
 
 #[test]
 fn vpinsrw_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM23)), operand2: Some(Direct(XMM20)), operand3: Some(Direct(ESI)), operand4: Some(Literal8(94)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 225, 93, 0, 196, 254, 94], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM8)), operand3: Some(Direct(ECX)), operand4: Some(Literal8(22)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 185, 196, 233, 22], OperandSize::Qword)
 }
 
 #[test]
 fn vpinsrw_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM29)), operand2: Some(Direct(XMM31)), operand3: Some(IndirectScaledIndexedDisplaced(RAX, RCX, Eight, 2051743249, Some(OperandSize::Word), None)), operand4: Some(Literal8(45)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 97, 5, 0, 196, 172, 200, 17, 30, 75, 122, 45], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VPINSRW, operand1: Some(Direct(XMM20)), operand2: Some(Direct(XMM26)), operand3: Some(IndirectScaledIndexed(RDI, RBX, Two, Some(OperandSize::Word), None)), operand4: Some(Literal8(78)), lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 225, 45, 0, 196, 36, 95, 78], OperandSize::Qword)
 }
 

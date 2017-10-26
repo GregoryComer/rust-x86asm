@@ -8,131 +8,131 @@ use ::test::run_test;
 
 #[test]
 fn vaddpd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM7)), operand3: Some(Direct(XMM3)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 193, 88, 251], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM4)), operand3: Some(Direct(XMM2)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 217, 88, 202], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexedDisplaced(EBX, EDX, Two, 1587493453, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 225, 88, 172, 83, 77, 58, 159, 94], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM6)), operand3: Some(Indirect(EDX, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 201, 88, 58], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 233, 88, 232], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(XMM3)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 241, 88, 243], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM0)), operand3: Some(IndirectDisplaced(RCX, 2002132945, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 249, 88, 137, 209, 31, 86, 119], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM7)), operand3: Some(IndirectDisplaced(RAX, 123896429, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 193, 88, 176, 109, 130, 98, 7], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM2)), operand2: Some(Direct(YMM5)), operand3: Some(Direct(YMM5)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 213, 88, 213], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM0)), operand2: Some(Direct(YMM5)), operand3: Some(Direct(YMM1)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 213, 88, 193], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM7)), operand2: Some(Direct(YMM4)), operand3: Some(Indirect(EAX, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 221, 88, 56], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM4)), operand2: Some(Direct(YMM2)), operand3: Some(IndirectScaledIndexed(ECX, EBX, Eight, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 237, 88, 36, 217], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM7)), operand2: Some(Direct(YMM5)), operand3: Some(Direct(YMM6)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 213, 88, 254], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM2)), operand2: Some(Direct(YMM7)), operand3: Some(Direct(YMM4)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 197, 88, 212], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM0)), operand2: Some(Direct(YMM6)), operand3: Some(IndirectDisplaced(RCX, 360798031, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 205, 88, 129, 79, 87, 129, 21], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM5)), operand2: Some(Direct(YMM3)), operand3: Some(IndirectDisplaced(RCX, 1160005887, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 229, 88, 169, 255, 72, 36, 69], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(XMM2)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 237, 141, 88, 234], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM7)), operand3: Some(Direct(XMM7)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 197, 141, 88, 215], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM7)), operand3: Some(Indirect(EAX, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 197, 138, 88, 0], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM7)), operand3: Some(IndirectScaledIndexedDisplaced(ECX, EDI, Eight, 1355112413, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 241, 197, 143, 88, 188, 249, 221, 95, 197, 80], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM7)), operand3: Some(IndirectScaledDisplaced(EDI, Four, 1779384287, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: Some(BroadcastMode::Broadcast1To2) }, &[98, 241, 197, 155, 88, 28, 189, 223, 63, 15, 106], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM6)), operand3: Some(IndirectScaledDisplaced(ECX, Eight, 1238015488, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To2) }, &[98, 241, 205, 154, 88, 28, 205, 0, 158, 202, 73], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM19)), operand2: Some(Direct(XMM10)), operand3: Some(Direct(XMM24)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 129, 173, 139, 88, 216], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM13)), operand2: Some(Direct(XMM12)), operand3: Some(Direct(XMM20)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 49, 157, 142, 88, 236], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM22)), operand2: Some(Direct(XMM6)), operand3: Some(Indirect(RDX, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 225, 205, 140, 88, 50], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM27)), operand2: Some(Direct(XMM15)), operand3: Some(IndirectDisplaced(RDX, 527235624, Some(OperandSize::Xmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 97, 133, 143, 88, 154, 40, 250, 108, 31], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM5)), operand3: Some(IndirectScaledDisplaced(RAX, Two, 1426913848, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To2) }, &[98, 241, 213, 156, 88, 52, 69, 56, 250, 12, 85], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(XMM23)), operand2: Some(Direct(XMM20)), operand3: Some(IndirectDisplaced(RBX, 363462957, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To2) }, &[98, 225, 221, 151, 88, 187, 45, 1, 170, 21], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM5)), operand2: Some(Direct(YMM0)), operand3: Some(Direct(YMM3)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 253, 173, 88, 235], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM4)), operand2: Some(Direct(YMM1)), operand3: Some(Direct(YMM3)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 245, 170, 88, 227], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM2)), operand2: Some(Direct(YMM7)), operand3: Some(Indirect(EDI, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 197, 170, 88, 23], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM6)), operand2: Some(Direct(YMM6)), operand3: Some(IndirectScaledDisplaced(EDI, Eight, 1842916280, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 241, 205, 171, 88, 52, 253, 184, 171, 216, 109], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM3)), operand2: Some(Direct(YMM3)), operand3: Some(Indirect(ECX, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 241, 229, 187, 88, 25], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM1)), operand2: Some(Direct(YMM6)), operand3: Some(Indirect(EBX, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 241, 205, 187, 88, 11], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM9)), operand2: Some(Direct(YMM19)), operand3: Some(Direct(YMM2)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 113, 229, 161, 88, 202], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM8)), operand2: Some(Direct(YMM24)), operand3: Some(Direct(YMM29)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 17, 189, 164, 88, 197], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_19() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM6)), operand2: Some(Direct(YMM19)), operand3: Some(IndirectScaledDisplaced(RAX, Four, 656770395, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 241, 229, 163, 88, 52, 133, 91, 133, 37, 39], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM28)), operand2: Some(Direct(YMM20)), operand3: Some(IndirectScaledIndexedDisplaced(RDI, RDI, Two, 1347172207, Some(OperandSize::Ymmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 97, 221, 167, 88, 164, 127, 111, 55, 76, 80], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM26)), operand2: Some(Direct(YMM31)), operand3: Some(Indirect(RCX, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 97, 133, 180, 88, 17], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(YMM9)), operand2: Some(Direct(YMM19)), operand3: Some(IndirectDisplaced(RBX, 1063696714, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 113, 229, 182, 88, 139, 74, 185, 102, 63], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM3)), operand2: Some(Direct(ZMM3)), operand3: Some(Direct(ZMM7)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Zero), merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 241, 229, 250, 88, 223], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM4)), operand2: Some(Direct(ZMM0)), operand3: Some(Direct(ZMM4)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Up), merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 241, 253, 222, 88, 228], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM4)), operand2: Some(Direct(ZMM6)), operand3: Some(IndirectScaledIndexed(EDI, EAX, Four, Some(OperandSize::Zmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 241, 205, 203, 88, 36, 135], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM5)), operand2: Some(Direct(ZMM1)), operand3: Some(IndirectScaledIndexed(ESI, EDX, Two, Some(OperandSize::Zmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 241, 245, 205, 88, 44, 86], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_23() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM5)), operand2: Some(Direct(ZMM7)), operand3: Some(IndirectDisplaced(ECX, 802055242, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 241, 197, 223, 88, 169, 74, 100, 206, 47], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM5)), operand2: Some(Direct(ZMM5)), operand3: Some(IndirectScaledIndexedDisplaced(ECX, ECX, Two, 699442104, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 241, 213, 221, 88, 172, 73, 184, 163, 176, 41], OperandSize::Dword)
 }
 
 #[test]
 fn vaddpd_24() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM1)), operand2: Some(Direct(ZMM0)), operand3: Some(Direct(ZMM21)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Up), merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 177, 253, 220, 88, 205], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM12)), operand2: Some(Direct(ZMM16)), operand3: Some(Direct(ZMM31)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Nearest), merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 17, 253, 151, 88, 231], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_25() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM5)), operand2: Some(Direct(ZMM23)), operand3: Some(IndirectScaledIndexed(RDX, RBX, Eight, Some(OperandSize::Zmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 241, 197, 193, 88, 44, 218], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM17)), operand2: Some(Direct(ZMM1)), operand3: Some(Indirect(RCX, Some(OperandSize::Zmmword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 225, 245, 205, 88, 9], OperandSize::Qword)
 }
 
 #[test]
 fn vaddpd_26() {
-    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM3)), operand2: Some(Direct(ZMM2)), operand3: Some(IndirectDisplaced(RSI, 1322845769, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 241, 237, 217, 88, 158, 73, 6, 217, 78], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VADDPD, operand1: Some(Direct(ZMM0)), operand2: Some(Direct(ZMM8)), operand3: Some(IndirectScaledDisplaced(RBX, Eight, 78451381, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 241, 189, 222, 88, 4, 221, 181, 18, 173, 4], OperandSize::Qword)
 }
 

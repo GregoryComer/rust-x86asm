@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn vextractf64x4_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(Direct(YMM5)), operand2: Some(Direct(ZMM3)), operand3: Some(Literal8(83)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 253, 203, 27, 221, 83], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(Direct(YMM3)), operand2: Some(Direct(ZMM6)), operand3: Some(Literal8(33)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 243, 253, 201, 27, 243, 33], OperandSize::Dword)
 }
 
 #[test]
 fn vextractf64x4_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(IndirectScaledDisplaced(EAX, Two, 1217806021, Some(OperandSize::Ymmword), None)), operand2: Some(Direct(ZMM2)), operand3: Some(Literal8(46)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 243, 253, 72, 27, 20, 69, 197, 62, 150, 72, 46], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(IndirectDisplaced(EDI, 1633666429, Some(OperandSize::Ymmword), None)), operand2: Some(Direct(ZMM0)), operand3: Some(Literal8(125)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 243, 253, 72, 27, 135, 125, 197, 95, 97, 125], OperandSize::Dword)
 }
 
 #[test]
 fn vextractf64x4_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(Direct(YMM19)), operand2: Some(Direct(ZMM19)), operand3: Some(Literal8(76)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 163, 253, 203, 27, 219, 76], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(Direct(YMM26)), operand2: Some(Direct(ZMM9)), operand3: Some(Literal8(43)), operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 19, 253, 204, 27, 202, 43], OperandSize::Qword)
 }
 
 #[test]
 fn vextractf64x4_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(IndirectDisplaced(RCX, 680470691, Some(OperandSize::Ymmword), None)), operand2: Some(Direct(ZMM30)), operand3: Some(Literal8(63)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 99, 253, 72, 27, 177, 163, 40, 143, 40, 63], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VEXTRACTF64x4, operand1: Some(IndirectDisplaced(RDX, 663132638, Some(OperandSize::Ymmword), None)), operand2: Some(Direct(ZMM6)), operand3: Some(Literal8(62)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 243, 253, 72, 27, 178, 222, 153, 134, 39, 62], OperandSize::Qword)
 }
 

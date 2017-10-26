@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn extractps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(Direct(EDX)), operand2: Some(Direct(XMM0)), operand3: Some(Literal8(47)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 194, 47], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(Direct(ESP)), operand2: Some(Direct(XMM5)), operand3: Some(Literal8(114)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 236, 114], OperandSize::Dword)
 }
 
 #[test]
 fn extractps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(IndirectScaledIndexed(EDI, EBX, Two, Some(OperandSize::Dword), None)), operand2: Some(Direct(XMM1)), operand3: Some(Literal8(107)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 12, 95, 107], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(IndirectScaledIndexedDisplaced(EDX, EDI, Two, 2017330259, Some(OperandSize::Dword), None)), operand2: Some(Direct(XMM1)), operand3: Some(Literal8(118)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 140, 122, 83, 4, 62, 120, 118], OperandSize::Dword)
 }
 
 #[test]
 fn extractps_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(Direct(ESP)), operand2: Some(Direct(XMM6)), operand3: Some(Literal8(12)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 244, 12], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(Direct(ESI)), operand2: Some(Direct(XMM5)), operand3: Some(Literal8(56)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 238, 56], OperandSize::Qword)
 }
 
 #[test]
 fn extractps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(IndirectScaledIndexed(RBX, RAX, Two, Some(OperandSize::Dword), None)), operand2: Some(Direct(XMM0)), operand3: Some(Literal8(34)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 4, 67, 34], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::EXTRACTPS, operand1: Some(IndirectScaledIndexed(RCX, RAX, Four, Some(OperandSize::Dword), None)), operand2: Some(Direct(XMM3)), operand3: Some(Literal8(17)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 23, 28, 129, 17], OperandSize::Qword)
 }
 

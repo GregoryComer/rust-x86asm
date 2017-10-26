@@ -418,8 +418,7 @@ impl Reg {
             Reg::XMM16 | Reg::XMM17 | Reg::XMM18 | Reg::XMM19 |
             Reg::XMM20 | Reg::XMM21 | Reg::XMM22 | Reg::XMM23 |
             Reg::XMM24 | Reg::XMM25 | Reg::XMM26 | Reg::XMM27 |
-            Reg::XMM28 | Reg::XMM29 | Reg::XMM30 | Reg::XMM31 |
-            Reg::BND0  | Reg::BND1  | Reg::BND2  | Reg::BND3  => OperandSize::Xmmword,
+            Reg::XMM28 | Reg::XMM29 | Reg::XMM30 | Reg::XMM31 => OperandSize::Xmmword,
 
             // 256-bit registers
             Reg::YMM0  | Reg::YMM1  | Reg::YMM2  | Reg::YMM3  |
@@ -444,6 +443,9 @@ impl Reg {
             // Mask registers
             Reg::K0 | Reg::K1 | Reg::K2 | Reg::K3 |
             Reg::K4 | Reg::K5 | Reg::K6 | Reg::K7 => OperandSize::Unsized,
+
+            // Bounds registers
+            Reg::BND0  | Reg::BND1  | Reg::BND2  | Reg::BND3  => OperandSize::Unsized,
 
             // TODO
             // Mode dependent (16/32/64)

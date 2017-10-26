@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn fucomi_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 236], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 235], OperandSize::Word)
 }
 
 #[test]
 fn fucomi_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 237], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 234], OperandSize::Dword)
 }
 
 #[test]
 fn fucomi_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 236], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FUCOMI, operand1: Some(Direct(ST)), operand2: Some(Direct(ST5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 237], OperandSize::Qword)
 }
 

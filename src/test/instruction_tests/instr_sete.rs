@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn sete_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 194], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 195], OperandSize::Word)
 }
 
 #[test]
 fn sete_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(IndirectDisplaced(DI, 15299, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 133, 195, 59], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Memory(11418, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 6, 154, 44], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn sete_3() {
 
 #[test]
 fn sete_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(IndirectScaledDisplaced(EAX, Eight, 677911605, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 4, 197, 53, 28, 104, 40], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(IndirectDisplaced(EDI, 1239280881, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 135, 241, 236, 221, 73], OperandSize::Dword)
 }
 
 #[test]
@@ -33,16 +33,16 @@ fn sete_5() {
 
 #[test]
 fn sete_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Indirect(RCX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 1], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RAX, Four, 78863053, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 132, 129, 205, 90, 179, 4], OperandSize::Qword)
 }
 
 #[test]
 fn sete_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 194], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 195], OperandSize::Qword)
 }
 
 #[test]
 fn sete_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(Indirect(RBX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 3], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETE, operand1: Some(IndirectScaledDisplaced(RDX, Four, 1927607509, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 148, 4, 149, 213, 244, 228, 114], OperandSize::Qword)
 }
 

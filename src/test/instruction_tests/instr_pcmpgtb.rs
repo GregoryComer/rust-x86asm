@@ -8,41 +8,41 @@ use ::test::run_test;
 
 #[test]
 fn pcmpgtb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM5)), operand2: Some(Direct(MM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 239], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM4)), operand2: Some(Direct(MM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 230], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpgtb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM6)), operand2: Some(IndirectDisplaced(EDI, 745180546, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 183, 130, 141, 106, 44], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM7)), operand2: Some(IndirectScaledIndexed(ECX, EBX, Eight, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 60, 217], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpgtb_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM4)), operand2: Some(Direct(MM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 227], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM2)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 213], OperandSize::Qword)
 }
 
 #[test]
 fn pcmpgtb_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM0)), operand2: Some(IndirectScaledIndexed(RCX, RCX, Four, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 4, 137], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(MM0)), operand2: Some(IndirectDisplaced(RDI, 176289802, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 100, 135, 10, 248, 129, 10], OperandSize::Qword)
 }
 
 #[test]
 fn pcmpgtb_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 248], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 252], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpgtb_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledDisplaced(EAX, Eight, 964660741, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 52, 197, 5, 142, 127, 57], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM7)), operand2: Some(IndirectDisplaced(EDX, 639280342, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 186, 214, 164, 26, 38], OperandSize::Dword)
 }
 
 #[test]
 fn pcmpgtb_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 238], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 235], OperandSize::Qword)
 }
 
 #[test]
 fn pcmpgtb_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledDisplaced(RAX, Four, 127425190, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 60, 133, 166, 90, 152, 7], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PCMPGTB, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexed(RDI, RAX, Eight, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 100, 28, 199], OperandSize::Qword)
 }
 

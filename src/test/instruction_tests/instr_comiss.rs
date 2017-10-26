@@ -13,16 +13,16 @@ fn comiss_1() {
 
 #[test]
 fn comiss_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexedDisplaced(EAX, EAX, Two, 456335175, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 188, 64, 71, 31, 51, 27], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledIndexed(EDX, EAX, Two, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 52, 66], OperandSize::Dword)
 }
 
 #[test]
 fn comiss_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 226], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 215], OperandSize::Qword)
 }
 
 #[test]
 fn comiss_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledDisplaced(RAX, Two, 412314479, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 28, 69, 111, 107, 147, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISS, operand1: Some(Direct(XMM1)), operand2: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 47, 15], OperandSize::Qword)
 }
 

@@ -13,36 +13,36 @@ fn psubd_1() {
 
 #[test]
 fn psubd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM3)), operand2: Some(IndirectScaledDisplaced(EAX, Four, 989815647, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 28, 133, 95, 99, 255, 58], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM5)), operand2: Some(Indirect(ECX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 41], OperandSize::Dword)
 }
 
 #[test]
 fn psubd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM4)), operand2: Some(Direct(MM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 227], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM5)), operand2: Some(Direct(MM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 234], OperandSize::Qword)
 }
 
 #[test]
 fn psubd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM7)), operand2: Some(IndirectDisplaced(RCX, 2092444980, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 185, 52, 45, 184, 124], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(MM5)), operand2: Some(Indirect(RAX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 250, 40], OperandSize::Qword)
 }
 
 #[test]
 fn psubd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 237], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 211], OperandSize::Dword)
 }
 
 #[test]
 fn psubd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledIndexed(EDX, EBX, Two, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 20, 90], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledIndexedDisplaced(EAX, EBX, Eight, 1501264372, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 172, 216, 244, 121, 123, 89], OperandSize::Dword)
 }
 
 #[test]
 fn psubd_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 252], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 247], OperandSize::Qword)
 }
 
 #[test]
 fn psubd_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM3)), operand2: Some(Indirect(RDI, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 31], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PSUBD, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledDisplaced(RAX, Two, 1234669762, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 250, 36, 69, 194, 144, 151, 73], OperandSize::Qword)
 }
 
