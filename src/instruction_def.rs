@@ -53,6 +53,49 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
         })
 }
 
+pub fn find_instruction_def_by_opcode(two_byte_opcode: bool, primary_opcode: u8, 
+    secondary_opcode: Option<u8>, opcode_ext: Option<u8>, mode: Mode)
+    -> Result<&'static InstructionDefinition, FindInstructionDefByOpcodeError> {
+    let mut matches = INSTR_DEFS.iter().filter(|def|
+        def.two_byte_opcode == two_byte_opcode &&
+        def.primary_opcode == primary_opcode &&
+        def.secondary_opcode == secondary_opcode &&
+        // Only compare extensions if one is provided. If an opcode extension is needed to
+        // disambiguate, it will be checked below.
+        (def.opcode_ext.is_none() && opcode_ext.is_none() || 
+         opcode_ext.map_or(true, |_| opcode_ext == def.opcode_ext)) &&
+        match mode {
+            Mode::Real => def.valid_16,
+            Mode::Protected => def.valid_32,
+            Mode::Long => def.valid_64,
+        }
+    );
+    let first = matches.next();
+    if let Some(f) = first {
+        let next = matches.next();
+        if next.is_some() { // If multiple matches exist...
+            if f.opcode_ext.is_some() { // And they differentiate by opcode ext, it's ambiguous
+                Err(FindInstructionDefByOpcodeError::NeedOpcodeExt)
+            } else { // Shouldn't happen, indicates a problem with the instruction definitions
+                panic!("Internal error - multiple matching instruction definitions.");
+            }
+        } else { // If there's only one match, it's the one we're looking for
+            Ok(f)
+        }
+    } else {
+        Err(FindInstructionDefByOpcodeError::NoEncoding)
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum FindInstructionDefByOpcodeError {
+    // Indicates that no matching definition exists
+    NoEncoding,
+
+    // Indicates that an opcode extension is needed to disambiguate
+    NeedOpcodeExt
+}
+
 fn compare_sizes(a: &[Option<OperandSize>; 4], b: &[Option<OperandSize>; 4]) -> bool {
     a.iter().zip(b.iter()).all( |(m_s1, m_s2)| match (*m_s1, *m_s2) {
         (Some(s1), Some(s2)) => s1 == s2 || s1 == OperandSize::Unsized || s2 == OperandSize::Unsized,

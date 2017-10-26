@@ -1,7 +1,7 @@
 mod addressing16;
 mod addressing32;
 mod addressing64;
-//mod decode;
+mod decode;
 mod size_inference;
 mod instruction_tests;
 

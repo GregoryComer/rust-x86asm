@@ -326,7 +326,7 @@ fn sib_long_mod_2() {
 
 #[test]
 fn addressing_mode_a() {
-    decode_helper(&vec![0xEA, 0xAB, 0x90, 0x78, 0x56, 0x34, 0x12], Mode::Protected, &Instruction::new1(Mnemonic::JMPF, Operand::MemoryAndSegment32(0x1234, 0x567890AB))); // JMPF 0x1234:567890AB
+    decode_helper(&vec![0xEA, 0xAB, 0x90, 0x78, 0x56, 0x34, 0x12], Mode::Protected, &Instruction::new1(Mnemonic::JMP, Operand::MemoryAndSegment32(0x1234, 0x567890AB))); // JMP 0x1234:567890AB
 }
 
 #[test]
@@ -432,7 +432,7 @@ fn addressing_mode_v() {
 #[test]
 fn addressing_mode_w() {
     decode_helper(&vec![0x66, 0x0F, 0x5C, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::SUBPD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // SUBPD XMM1, XMM2
-    decode_helper(&vec![0x66, 0x0F, 0x5C, 0x08], Mode::Long, &Instruction::new2(Mnemonic::SUBPD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::XMMword), None))); // SUBPD XMM1, [EAX]
+    decode_helper(&vec![0x66, 0x0F, 0x5C, 0x08], Mode::Long, &Instruction::new2(Mnemonic::SUBPD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::Xmmword), None))); // SUBPD XMM1, [EAX]
 }
 
 #[test]
@@ -448,7 +448,7 @@ fn addressing_mode_avx_vex() {
 #[test]
 fn addressing_mode_avx_mem_rm() {
     decode_helper(&vec![0xC5, 0xE9, 0x58, 0x08], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2),
-        Operand::Indirect(Reg::EAX, Some(OperandSize::XMMword), None))); // VADDPD XMM1, XMM2, [EAX]
+        Operand::Indirect(Reg::EAX, Some(OperandSize::Xmmword), None))); // VADDPD XMM1, XMM2, [EAX]
 }
 
 #[test]
@@ -464,8 +464,16 @@ fn addressing_mode_avx_rm() {
 
 #[test]
 fn addressing_mode_masked_reg() {
-    decode_helper(&vec![0x62, 0xF1, 0xED, 0x0A, 0x58, 0xCB], Mode::Protected, &Instruction::new3(Mnemonic::VADDPD, Operand::AVXDestination(Reg::XMM1, Some(MaskReg::K2), Some(MergeMode::Merge)),
-        Operand::Direct(Reg::XMM2), Operand::Direct(Reg::XMM3))); // VADDPD XMM1 {K2}, XMM2, XMM3
+    decode_helper(&vec![0x62, 0xF1, 0xED, 0x0A, 0x58, 0xCB], Mode::Protected, 
+        &Instruction {
+            mnemonic: Mnemonic::VADDPD,
+            operand1: Some(Operand::Direct(Reg::XMM1)),
+            operand2: Some(Operand::Direct(Reg::XMM2)),
+            operand3: Some(Operand::Direct(Reg::XMM3)),
+            mask: Some(MaskReg::K2),
+            merge_mode: Some(MergeMode::Merge),
+            .. Default::default()
+        }); // VADDPD XMM1 {K2}, XMM2, XMM3
 }
 
 #[test]
@@ -488,7 +496,7 @@ fn addressing_mode_avx_imm8() {
 
 #[test]
 fn addressing_mode_avx_dest_mem_rm() {
-    decode_helper(&vec![0x62, 0xF1, 0x7C, 0x2B, 0x29, 0x18], Mode::Protected, &Instruction::new2(Mnemonic::VMOVAPS, Operand::AVXDestinationIndirect(Reg::EAX, Some(OperandSize::YMMword), None,
+    decode_helper(&vec![0x62, 0xF1, 0x7C, 0x2B, 0x29, 0x18], Mode::Protected, &Instruction::new2(Mnemonic::VMOVAPS, Operand::AVXDestinationIndirect(Reg::EAX, Some(OperandSize::Ymmword), None,
         Some(MaskReg::K3), Some(MergeMode::Merge)), Operand::Direct(Reg::YMM3))); // VMOVAPS [EAX] {K3}, YMM3
 }
 
@@ -585,7 +593,7 @@ fn operand_type_di() {
 
 #[test]
 fn operand_type_dq() {
-    decode_helper(&vec![0x66, 0x0F, 0x38, 0x00, 0x08], Mode::Protected, &Instruction::new2(Mnemonic::PSHUFB, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::XMMword), None))); // PSHUFB XMM1, [EAX]
+    decode_helper(&vec![0x66, 0x0F, 0x38, 0x00, 0x08], Mode::Protected, &Instruction::new2(Mnemonic::PSHUFB, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::Xmmword), None))); // PSHUFB XMM1, [EAX]
     decode_helper(&vec![0x66, 0x0F, 0x38, 0x00, 0xCA], Mode::Protected, &Instruction::new2(Mnemonic::PSHUFB, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // PSHUFB XMM1, [EAX]
 }
 
@@ -617,10 +625,10 @@ fn operand_type_er() {
 
 #[test]
 fn operand_type_p() {
-    decode_helper(&vec![0x9A, 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01], Mode::Protected, &Instruction::new1(Mnemonic::CALLF, Operand::MemoryAndSegment32(0x0123, 0x456789AB))); // CALL 0x0123:0x456789AB
-    decode_helper(&vec![0x66, 0x9A, 0x67, 0x45, 0x23, 0x01], Mode::Protected, &Instruction::new1(Mnemonic::CALLF, Operand::MemoryAndSegment16(0x0123, 0x4567))); // CALL 0x0123:0x4567
-    decode_helper(&vec![0x66, 0x9A, 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01], Mode::Real, &Instruction::new1(Mnemonic::CALLF, Operand::MemoryAndSegment32(0x0123, 0x456789AB))); // CALL 0x0123:0x456789AB
-    decode_helper(&vec![0x9A, 0x67, 0x45, 0x23, 0x01], Mode::Real, &Instruction::new1(Mnemonic::CALLF, Operand::MemoryAndSegment16(0x0123, 0x4567))); // CALL 0x0123:0x4567
+    decode_helper(&vec![0x9A, 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01], Mode::Protected, &Instruction::new1(Mnemonic::CALL, Operand::MemoryAndSegment32(0x0123, 0x456789AB))); // CALL 0x0123:0x456789AB
+    decode_helper(&vec![0x66, 0x9A, 0x67, 0x45, 0x23, 0x01], Mode::Protected, &Instruction::new1(Mnemonic::CALL, Operand::MemoryAndSegment16(0x0123, 0x4567))); // CALL 0x0123:0x4567
+    decode_helper(&vec![0x66, 0x9A, 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01], Mode::Real, &Instruction::new1(Mnemonic::CALL, Operand::MemoryAndSegment32(0x0123, 0x456789AB))); // CALL 0x0123:0x456789AB
+    decode_helper(&vec![0x9A, 0x67, 0x45, 0x23, 0x01], Mode::Real, &Instruction::new1(Mnemonic::CALL, Operand::MemoryAndSegment16(0x0123, 0x4567))); // CALL 0x0123:0x4567
 }
 
 #[test]
@@ -631,13 +639,13 @@ fn operand_type_pi() {
 #[test]
 fn operand_type_pd() {
     decode_helper(&vec![0x66, 0x0F, 0x58, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::ADDPD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // ADDPD XMM1, XMM2
-    decode_helper(&vec![0x66, 0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDPD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::XMMword), None))); // ADDPD XMM1, [EAX]1
+    decode_helper(&vec![0x66, 0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDPD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::Xmmword), None))); // ADDPD XMM1, [EAX]1
 }
 
 #[test]
 fn operand_type_ps() {
     decode_helper(&vec![0x0F, 0x58, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::ADDPS, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // ADDPS XMM1, XMM2
-    decode_helper(&vec![0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDPS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::XMMword), None))); // ADDPS XMM1, [EAX]1
+    decode_helper(&vec![0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDPS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::EAX, Some(OperandSize::Xmmword), None))); // ADDPS XMM1, [EAX]1
 }
 
 #[test]
@@ -648,12 +656,12 @@ fn operand_type_psq() {
 
 #[test]
 fn operand_type_ptp() {
-    decode_helper(&vec![0xFF, 0x10], Mode::Protected, &Instruction::new1(Mnemonic::CALLF, Operand::Indirect(Reg::EAX, Some(OperandSize::Dword), None))); // CALL DWORD PTR [EAX]
-    decode_helper(&vec![0xFF, 0x18], Mode::Protected, &Instruction::new1(Mnemonic::CALLF, Operand::Indirect(Reg::EAX, Some(OperandSize::Fword), None))); // CALL FWORD PTR [EAX]
+    decode_helper(&vec![0xFF, 0x10], Mode::Protected, &Instruction::new1(Mnemonic::CALL, Operand::Indirect(Reg::EAX, Some(OperandSize::Dword), None))); // CALL DWORD PTR [EAX]
+    decode_helper(&vec![0xFF, 0x18], Mode::Protected, &Instruction::new1(Mnemonic::CALL, Operand::Indirect(Reg::EAX, Some(OperandSize::Fword), None))); // CALL FWORD PTR [EAX]
 
     // TODO I'm not 100% sure this is correct. It seems to be from the Intel docs, but GCC won't
     // seem to accept this form?
-    decode_helper(&vec![0x48, 0xFF, 0x18], Mode::Long, &Instruction::new1(Mnemonic::CALLF, Operand::Indirect(Reg::EAX, Some(OperandSize::Tbyte), None))); // CALL TBYTE PTR [EAX]
+    decode_helper(&vec![0x48, 0xFF, 0x18], Mode::Long, &Instruction::new1(Mnemonic::CALL, Operand::Indirect(Reg::EAX, Some(OperandSize::Tbyte), None))); // CALL TBYTE PTR [EAX]
 }
 
 #[test]
@@ -669,7 +677,7 @@ fn operand_type_qp() {
 #[test]
 fn operand_type_sd() {
     decode_helper(&vec![0xF2, 0x0F, 0x58, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::ADDSD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // ADDSD XMM1, XMM2
-    decode_helper(&vec![0xF2, 0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDSD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::XMMword), None))); // ADDSD XMM1, [RAX]
+    decode_helper(&vec![0xF2, 0x0F, 0x58, 0x08], Mode::Long, &Instruction::new2(Mnemonic::ADDSD, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::Xmmword), None))); // ADDSD XMM1, [RAX]
 }
 
 #[test]
@@ -726,21 +734,21 @@ fn operand_type_w() {
 fn operand_type_xmm() {
     decode_helper(&vec![0xC5, 0xE9, 0x58, 0xCB], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2), Operand::Direct(Reg::XMM3))); // VADDPD XMM1, XMM2, XMM3
     decode_helper(&vec![0xC5, 0xE9, 0x58, 0x08], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2),
-        Operand::Indirect(Reg::RAX, Some(OperandSize::XMMword), None))); // VADDPD XMM1, XMM2, [EAX}
+        Operand::Indirect(Reg::RAX, Some(OperandSize::Xmmword), None))); // VADDPD XMM1, XMM2, [EAX}
 }
 
 #[test]
 fn operand_type_ymm() {
     decode_helper(&vec![0xC5, 0xED, 0x58, 0xCB], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::YMM1), Operand::Direct(Reg::YMM2), Operand::Direct(Reg::YMM3))); // VADDPD YMM1, YMM2, YMM3
     decode_helper(&vec![0xC5, 0xED, 0x58, 0x08], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::YMM1), Operand::Direct(Reg::YMM2),
-        Operand::Indirect(Reg::RAX, Some(OperandSize::YMMword), None))); // VADDPD YMM1, YMM2, [EAX}
+        Operand::Indirect(Reg::RAX, Some(OperandSize::Ymmword), None))); // VADDPD YMM1, YMM2, [EAX}
 }
 
 #[test]
 fn operand_type_zmm() {
     decode_helper(&vec![0x62, 0xF1, 0xED, 0x48, 0x58, 0xCB], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::ZMM1), Operand::Direct(Reg::ZMM2), Operand::Direct(Reg::ZMM3))); // VADDPD ZMM1, ZMM2, ZMM3
     decode_helper(&vec![0x62, 0xF1, 0xED, 0x48, 0x58, 0x08], Mode::Long, &Instruction::new3(Mnemonic::VADDPD, Operand::Direct(Reg::ZMM1), Operand::Direct(Reg::ZMM2),
-        Operand::Indirect(Reg::RAX, Some(OperandSize::ZMMword), None))); // VADDPD ZMM1, ZMM2, [EAX}
+        Operand::Indirect(Reg::RAX, Some(OperandSize::Zmmword), None))); // VADDPD ZMM1, ZMM2, [EAX}
 }
 
 #[test]
@@ -752,11 +760,11 @@ fn operand_type_xmm_or_ymm() {
 #[test]
 fn operand_type_xmm_or_ymm_or_mem_or_mem64() {
     decode_helper(&vec![0xC5, 0xF9, 0x5A, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // VCVTPD2PS XMM1, XMM2
-    decode_helper(&vec![0xC5, 0xF9, 0x5A], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::XMMword), None))); // VCVTPD2PS XMM1, XMMWORD PTR [RAX]
+    decode_helper(&vec![0xC5, 0xF9, 0x5A], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::Xmmword), None))); // VCVTPD2PS XMM1, XMMWORD PTR [RAX]
     decode_helper(&vec![0x62, 0xF1, 0xFD, 0x18, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1),
         Operand::AVXBroadcastIndirect(BroadcastMode::Broadcast1To2, Reg::RAX, Some(OperandSize::Qword), None))); // VCVTPD2PS XMM1, QWORD PTR [RAX] {1to2}
     decode_helper(&vec![0xC5, 0xFD, 0x5A, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::XMM2))); // VCVTPD2PS XMM1, XMM2
-    decode_helper(&vec![0xC5, 0xFD, 0x5A], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::XMMword), None))); // VCVTPD2PS XMM1, XMMWORD PTR [RAX]
+    decode_helper(&vec![0xC5, 0xFD, 0x5A], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::Xmmword), None))); // VCVTPD2PS XMM1, XMMWORD PTR [RAX]
     decode_helper(&vec![0x62, 0xF1, 0xFD, 0x38, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::XMM1),
         Operand::AVXBroadcastIndirect(BroadcastMode::Broadcast1To4, Reg::RAX, Some(OperandSize::Qword), None))); // VCVTPD2PS XMM1, QWORD PTR [RAX] {1to4}
 }
@@ -789,7 +797,7 @@ fn operand_type_xmm_or_mem64() {
 #[test]
 fn operand_type_ymm_or_mem_or_mem32() {
     decode_helper(&vec![0x62, 0xF1, 0x7C, 0x48, 0x5A, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::VCVTPS2PD, Operand::Direct(Reg::ZMM1), Operand::Direct(Reg::YMM2))); // VCVTPS2PD ZMM1, YMM2
-    decode_helper(&vec![0x62, 0xF1, 0x7C, 0x48, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPS2PD, Operand::Direct(Reg::ZMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::YMMword), None))); // VCVTPS2PD ZMM1, YMMWORD PTR [RAX]
+    decode_helper(&vec![0x62, 0xF1, 0x7C, 0x48, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPS2PD, Operand::Direct(Reg::ZMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::Ymmword), None))); // VCVTPS2PD ZMM1, YMMWORD PTR [RAX]
     decode_helper(&vec![0x62, 0xF1, 0x7C, 0x58, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPS2PD, Operand::Direct(Reg::ZMM1),
         Operand::AVXBroadcastIndirect(BroadcastMode::Broadcast1To8, Reg::RAX, Some(OperandSize::Dword), None))); // VCVTPS2PD ZMM1, DWORD PTR [RAX] {1to8}
 }
@@ -797,7 +805,7 @@ fn operand_type_ymm_or_mem_or_mem32() {
 #[test]
 fn operand_type_ymm_or_mem_or_mem64() {
     decode_helper(&vec![0xC5, 0xFF, 0xE6, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2DQ, Operand::Direct(Reg::XMM1), Operand::Direct(Reg::YMM2))); // VCVTPD2DQ XMM1, YMM2
-    decode_helper(&vec![0xC5, 0xFF, 0xE6, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2DQ, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::YMMword), None))); // VCVTPD2DQ XMM1, YMMWORD PTR [RAX]
+    decode_helper(&vec![0xC5, 0xFF, 0xE6, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2DQ, Operand::Direct(Reg::XMM1), Operand::Indirect(Reg::RAX, Some(OperandSize::Ymmword), None))); // VCVTPD2DQ XMM1, YMMWORD PTR [RAX]
     decode_helper(&vec![0x62, 0xF1, 0xFF, 0x38, 0xE6, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2DQ, Operand::Direct(Reg::XMM1),
         Operand::AVXBroadcastIndirect(BroadcastMode::Broadcast1To4, Reg::RAX, Some(OperandSize::Qword), None))); // VCVTPD2DQ XMM1, YMMWORD PTR [RAX]
 }
@@ -806,7 +814,7 @@ fn operand_type_ymm_or_mem_or_mem64() {
 fn operand_type_zmm_or_mem_or_mem64() {
     decode_helper(&vec![0x62, 0xF1, 0xFD, 0x48, 0x5A, 0xCA], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::YMM1), Operand::Direct(Reg::ZMM2))); // VCVTPD2PS YMM1, ZMM2
     decode_helper(&vec![0x62, 0xF1, 0xFD, 0x48, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::YMM1),
-        Operand::Indirect(Reg::RAX, Some(OperandSize::ZMMword), None))); // VCVTPD2PS YMM1, ZMMWORD PTR [RAX]
+        Operand::Indirect(Reg::RAX, Some(OperandSize::Zmmword), None))); // VCVTPD2PS YMM1, ZMMWORD PTR [RAX]
     decode_helper(&vec![0x62, 0xF1, 0xFD, 0x58, 0x5A, 0x08], Mode::Long, &Instruction::new2(Mnemonic::VCVTPD2PS, Operand::Direct(Reg::YMM1),
         Operand::AVXBroadcastIndirect(BroadcastMode::Broadcast1To8, Reg::RAX, Some(OperandSize::Qword), None))); // VCVTPD2PS YMM1, QWORD PTR [RAX] {1to8}
 }

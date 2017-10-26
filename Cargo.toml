@@ -4,6 +4,7 @@ version = "0.0.1"
 authors = ["Gregory Comer <me@gregorycomer.com>"]
 
 [dependencies]
-lazy_static = "0.2"
-byteorder = "1"
 arrayvec = "0.3.23"
+byteorder = "1"
+lazy_static = "0.2"
+matches = "0.1"

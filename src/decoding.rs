@@ -1,6 +1,6 @@
 use std::io::{Bytes, Read};
 use std::iter::Peekable;
-use ::{Instruction, MergeMode, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale, SegmentReg};
+use ::{Instruction, MergeMode, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale, RegType, SegmentReg};
 use ::instruction_buffer::*;
 use ::instruction_buffer::CompositePrefix; // For disambiguation
 use ::instruction_def::*;
@@ -159,67 +159,136 @@ impl<T: Read> InstructionReader<T> {
         }
 
         // Find the matching instruction definition
-        // let def = get_instruction_def_by_opcode(&buffer, self.mode).ok_or(InstructionDecodingError::UnknownOpcode)?;
+        let def_res = find_instruction_def_by_opcode(buffer.is_two_byte_opcode, buffer.primary_opcode,
+            buffer.secondary_opcode, None, self.mode);
+            
+        // Read a ModR/M if we found a valid def which needs one or if we need an opcode extension
+        // to disambiguate.
+        if def_res.map(|def| InstructionReader::<T>::has_mod_rm(def)).unwrap_or(false) ||
+            matches!(def_res, Err(FindInstructionDefByOpcodeError::NeedOpcodeExt)) {
+            let mod_rm = self.expect_byte()?;
+            buffer.mod_rm_mod = Some(mod_rm >> 6);
+            buffer.mod_rm_reg = Some((mod_rm >> 3) & 0x7 | reg_ext);
+            buffer.mod_rm_rm = Some(mod_rm & 0x7);
 
-        // ModR/M
-        //if InstructionReader::<T>::has_mod_rm(def) {
-        //    let mod_rm = self.expect_byte()?;
-        //    buffer.mod_rm_mod = Some(mod_rm >> 6);
-        //    buffer.mod_rm_reg = Some((mod_rm >> 3) & 0x7 | reg_ext);
-        //    buffer.mod_rm_rm = Some(mod_rm & 0x7);
-
-        //    // SIB
-        //    if InstructionReader::<T>::has_sib(addr_mode, &buffer) {
-        //        let sib = self.expect_byte()?;
-        //        buffer.sib_scale = Some(sib >> 6);
-        //        buffer.sib_index = Some((sib >> 3) & 0x7 | index_ext);
-        //        buffer.sib_base = Some(sib & 0x7 | b_ext);
-        //    } else {
-        //        buffer.mod_rm_reg = buffer.mod_rm_reg.map(|reg| reg | b_ext);
-        //        buffer.mod_rm_rm = buffer.mod_rm_rm.map(|rm| rm | index_ext);
-        //    }
-        //}
-
-        // Build operands (read immediates as appropriate)
-        // Destination operand is typically operand1, but needs to be read last (source operands
-        // come first), so read the operands in the correct order (ordered_operands()), then
-        // re-arrange them so they map to the correct operands.
-        //let operand_results: Result<ArrayVec<[_; 4]>, InstructionDecodingError> = def.ordered_operands().iter()
-        //    .map(|op_def| op_def.as_ref().map_or(Ok(None), |o_d| 
-        //        Ok(if o_d.fixed_operand.is_none() {
-        //            Some(self.read_operand(o_d, &buffer)?)
-        //        } else { None }))).collect();
-
-        unimplemented!();
-    }
-
-    fn read_literal8(&mut self) -> Result<Operand, InstructionDecodingError> {
-        self.expect_byte().map(|b| Operand::Literal8(b))
-    }
-
-    fn read_literal16(&mut self) -> Result<Operand, InstructionDecodingError> {
-        (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u16) << (8*n) )))).map(|b| Operand::Literal16(b))
-    }
-
-    fn read_literal32(&mut self) -> Result<Operand, InstructionDecodingError> {
-        (0..4).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u32) << (8*n) )))).map(|b| Operand::Literal32(b))
-    }
-
-    fn read_literal64(&mut self) -> Result<Operand, InstructionDecodingError> {
-        (0..8).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u64) << (8*n) )))).map(|b| Operand::Literal64(b))
-    }
-
-    fn read_literal_sized(&mut self, size: OperandSize) -> Result<Operand, InstructionDecodingError> {
-        match size {
-            OperandSize::Byte => self.read_literal8(),
-            OperandSize::Word => self.read_literal16(),
-            OperandSize::Dword => self.read_literal32(),
-            OperandSize::Qword => self.read_literal64(),
-            _ => panic!("Invalid literal size.")
+            // SIB
+            if InstructionReader::<T>::has_sib(addr_mode, &buffer) {
+                let sib = self.expect_byte()?;
+                buffer.sib_scale = Some(sib >> 6);
+                buffer.sib_index = Some((sib >> 3) & 0x7 | index_ext);
+                buffer.sib_base = Some(sib & 0x7 | b_ext);
+            } else {
+                buffer.mod_rm_reg = buffer.mod_rm_reg.map(|reg| reg | b_ext);
+                buffer.mod_rm_rm = buffer.mod_rm_rm.map(|rm| rm | index_ext);
+            }
         }
+        
+        // If we have a def, unwrap it, otherwise try again to find one using the opcode extension
+        // we read.
+        let def = def_res.or_else(|_| find_instruction_def_by_opcode(buffer.is_two_byte_opcode,
+            buffer.primary_opcode, buffer.secondary_opcode, Some(buffer.mod_rm_reg.unwrap()),
+            self.mode).map_err(|_| InstructionDecodingError::UnknownOpcode))?;
+
+        // Build operands (reading immediates as appropriate)
+        // TODO Could re-write this without vec
+        let operand_results: Result<Vec<Operand>, InstructionDecodingError> = 
+            def.operands.iter().filter_map(
+                |maybe_op_def| maybe_op_def.as_ref().map(
+                    |op_def| self.read_operand(op_def, &buffer)
+            )).collect();
+        let mut operands_iter = operand_results?.into_iter();
+
+        Ok(Instruction {
+            mnemonic: def.mnemonic,
+            operand1: operands_iter.next(),
+            operand2: operands_iter.next(),
+            operand3: operands_iter.next(),
+            operand4: operands_iter.next(),
+            lock: buffer.prefix1 == Some(Prefix1::Lock),
+            rounding_mode: unimplemented!(),
+            merge_mode: unimplemented!(),
+            sae: unimplemented!(),
+            mask: unimplemented!(),
+            broadcast: unimplemented!(),
+        })
+    }
+
+    fn read_operand(&mut self, op_def: &OperandDefinition, buffer: &InstructionBuffer)
+        -> Result<Operand, InstructionDecodingError> {
+        let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
+        let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);
+
+        // We can assume that we have a ModR/M byte if we've gotten to this point as it
+        // would have errored out if we needed one but didn't read one.
+        Ok(match op_def.encoding {
+            OperandEncoding::ModRmReg =>
+                if let OperandType::Reg(reg_type) = op_def.op_type {
+                    Operand::Direct(Reg::from_code_reg_type(
+                        buffer.mod_rm_reg.unwrap(), reg_type, size)
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
+                } else { panic!("Invalid operand definition."); },
+
+            OperandEncoding::ModRmRm => { // TODO Handle MIB
+                let reg_type = if let OperandType::Reg(reg_type) = op_def.op_type { reg_type }
+                    else { RegType::General };
+                self.rm_helper(buffer, op_def, 
+                    |c| Reg::from_code_reg_type(c, reg_type, size))?
+            },
+
+            OperandEncoding::Vex =>
+                if let OperandType::Reg(reg_type) = op_def.op_type {
+                    Operand::Direct(Reg::from_code_reg_type(
+                        buffer.mod_rm_reg.unwrap(), reg_type, size)
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
+                } else { panic!("Invalid operand definition."); },
+
+            OperandEncoding::Imm =>
+                match op_def.op_type {
+                    OperandType::Reg(reg_type) => Operand::Direct(Reg::from_code_reg_type(
+                        self.expect_byte()?, reg_type, size)
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?),
+                    OperandType::Imm => match op_def.size {
+                        OperandSize::Byte => self.expect_byte().map(|b| Operand::Literal8(b))?,
+                        OperandSize::Word => 
+                            (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
+                                |b| a | ((b as u16) << (8*n) )))).map(|b| Operand::Literal16(b))?,
+                        OperandSize::Dword => 
+                            (0..4).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
+                                |b| a | ((b as u32) << (8*n) )))).map(|b| Operand::Literal32(b))?,
+                        _ => unimplemented!()
+                    },
+                    _ => panic!("Bad instruction definition.")
+                },
+
+            OperandEncoding::OpcodeAddend =>
+                if let OperandType::Reg(reg_type) = op_def.op_type {
+                    Operand::Direct(Reg::from_code_reg_type(
+                        buffer.primary_opcode & 0x7, reg_type, size)
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
+                } else { panic!("Invalid operand definition."); },
+
+            OperandEncoding::Offset => unimplemented!(),
+
+            OperandEncoding::Mib => unimplemented!(),
+
+            OperandEncoding::FixedPostAddend => unimplemented!(),
+
+            OperandEncoding::Fixed =>
+                match op_def.op_type {
+                    OperandType::Fixed(FixedOperand::Reg(reg)) =>
+                        Operand::Direct(reg),
+                    OperandType::Fixed(FixedOperand::Constant(v)) =>
+                        match op_def.size {
+                            OperandSize::Unsized |
+                            OperandSize::Byte => Operand::Literal8(v as u8),
+                            OperandSize::Word => Operand::Literal16(v as u16),
+                            OperandSize::Dword => Operand::Literal32(v),
+                            OperandSize::Qword => Operand::Literal64(v as u64),
+                            _ => panic!("Invalid operand definition.")
+                        },
+                    _ => panic!("Invalid operand definition.")
+                }
+        })
     }
 
     fn read_memory_and_segment_16(&mut self) -> Result<Operand, InstructionDecodingError> {
@@ -267,22 +336,23 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn read_operand(&mut self, op_def: &OperandDefinition, buffer: &InstructionBuffer)
-        -> Result<Operand, InstructionDecodingError> {
-        let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
-        let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);
-        unimplemented!();
-    }
-
     fn has_mod_rm(def: &InstructionDefinition) -> bool {
-        unimplemented!();
+        def.opcode_ext.is_some() ||
+        def.operands.iter().any(|o| o.as_ref().map_or(false, |op| match op.encoding {
+            OperandEncoding::ModRmReg |
+            OperandEncoding::ModRmRm |
+            OperandEncoding::Mib |
+            OperandEncoding::FixedPostAddend // TODO?
+                => true,
+            _ => false
+        }))
     }
 
     fn get_address_size(mode: Mode, buffer: &InstructionBuffer) -> OperandSize {
-        match mode {
-            Mode::Real => if !buffer.address_size_prefix { OperandSize::Word } else { OperandSize::Dword },
-            Mode::Protected => if !buffer.address_size_prefix { OperandSize::Dword } else { OperandSize::Word },
-            Mode::Long => if !buffer.address_size_prefix { OperandSize::Qword } else { OperandSize::Dword },
+        match (mode, buffer.address_size_prefix) {
+            (Mode::Real, false) | (Mode::Protected, true) => OperandSize::Word,
+            (Mode::Real, true) | (Mode::Protected, false) | (Mode::Long, true) => OperandSize::Dword,
+            (Mode::Long, false) => OperandSize::Qword
         }
     }
 
@@ -359,39 +429,51 @@ impl<T: Read> InstructionReader<T> {
     }
 
     fn reg_helper<TConv>(buffer: &InstructionBuffer, read_proc: fn(&InstructionBuffer) -> 
-                Result<u8, InstructionDecodingError>, conv_proc: TConv) -> Result<Reg, InstructionDecodingError>
-                where TConv : Fn(u8) -> Option<Reg> {
-        read_proc(buffer).and_then(|code| conv_proc(code).ok_or(InstructionDecodingError::InvalidInstruction))
+        Result<u8, InstructionDecodingError>, conv_proc: TConv)
+        -> Result<Reg, InstructionDecodingError> where TConv : Fn(u8) -> Option<Reg> {
+        read_proc(buffer).and_then(|code| 
+           conv_proc(code).ok_or(InstructionDecodingError::InvalidInstruction))
     }
 
-    fn reg_helper_general(mode: Mode, buffer: &InstructionBuffer, op_def: &OperandDefinition, read_proc:
-        fn(&InstructionBuffer) -> Result<u8, InstructionDecodingError>) -> Result<Reg, InstructionDecodingError> {
+    fn reg_helper_general(mode: Mode, buffer: &InstructionBuffer, op_def: &OperandDefinition,
+        read_proc: fn(&InstructionBuffer) -> Result<u8, InstructionDecodingError>)
+        -> Result<Reg, InstructionDecodingError> {
         match InstructionReader::<T>::get_operand_size(mode, op_def, buffer) {
             OperandSize::Byte => InstructionReader::<T>::reg_helper(buffer, read_proc,
                 |code| Reg::from_code_general_8(code, InstructionReader::<T>::has_rex(buffer))),
-            OperandSize::Word => InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_16),
-            OperandSize::Dword => InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_32),
-            OperandSize::Qword => InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_64),
+            OperandSize::Word =>
+                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_16),
+            OperandSize::Dword =>
+                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_32),
+            OperandSize::Qword =>
+                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_64),
             _ => Err(InstructionDecodingError::InvalidInstruction)
         }
     }
 
-    fn rm_helper<TConv>(&mut self, buffer: &InstructionBuffer, op_def: &OperandDefinition, conv_proc: TConv)
-        -> Result<Operand, InstructionDecodingError>
+    fn rm_helper<TConv>(&mut self, buffer: &InstructionBuffer, op_def: &OperandDefinition,
+        conv_proc: TConv) -> Result<Operand, InstructionDecodingError>
         where TConv : Fn(u8) -> Option<Reg> {
         let rm = buffer.mod_rm_rm.ok_or(InstructionDecodingError::InvalidInstruction)?;
         let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);
+
         Ok(match addr_size {
             OperandSize::Word => {
                 let mode = buffer.mod_rm_mod.ok_or(InstructionDecodingError::InvalidInstruction)?;
                 let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
                 let segment = buffer.get_segment_reg();
-                if mode == 0b11 { return conv_proc(rm).ok_or(InstructionDecodingError::InvalidInstruction)
-                    .map(|r| Operand::Direct(r)); }
+
+                if mode == 0b11 { 
+                    return conv_proc(rm).ok_or(InstructionDecodingError::InvalidInstruction)
+                        .map(|r| Operand::Direct(r)); 
+                }
+
                 let disp = if mode == 0 && rm != 0b110 || mode == 3 { None } // No displacement
                     else { // 8/16-bit displacement
-                        Some((if mode == 1 { self.read_disp8()? as u64 } else { self.read_disp16()? as u64 }))
+                        Some(if mode == 1 { self.read_disp8()? as u64 } 
+                            else { self.read_disp16()? as u64 })
                     };
+
                 let (reg1, reg2) = match rm {
                     0 => (Some(Reg::BX), Some(Reg::SI)),
                     1 => (Some(Reg::BX), Some(Reg::DI)),
@@ -403,14 +485,17 @@ impl<T: Read> InstructionReader<T> {
                     7 => (Some(Reg::BX), None),
                     _ => unreachable!()
                 };
+
                 match (reg1, reg2, disp) {
                     (None, None, Some(addr)) => Operand::Memory(addr, Some(size), segment),
                     (Some(r1), None, None) => Operand::Indirect(r1, Some(size), segment),
-                    (Some(r1), None, Some(disp)) => Operand::IndirectDisplaced(r1, disp, Some(size), segment),
+                    (Some(r1), None, Some(disp)) => 
+                        Operand::IndirectDisplaced(r1, disp, Some(size), segment),
                     (Some(r1), Some(r2), None) =>
                         Operand::IndirectScaledIndexed(r1, r2, RegScale::One, Some(size), segment),
                     (Some(r1), Some(r2), Some(disp)) =>
-                        Operand::IndirectScaledIndexedDisplaced(r1, r2, RegScale::One, disp, Some(size), segment),
+                        Operand::IndirectScaledIndexedDisplaced(r1, r2, RegScale::One, disp, 
+                            Some(size), segment),
                     _ => unreachable!()
                 }
             },
@@ -421,7 +506,8 @@ impl<T: Read> InstructionReader<T> {
                     0b00 => {
                         match rm {
                             0b000 | 0b001 | 0b010 | 0b011 | 0b110 | 0b111 => // [RM]
-                                Operand::Indirect(Reg::from_code_general_sized(rm, InstructionReader::<T>::has_rex(buffer),
+                                Operand::Indirect(Reg::from_code_general_sized(rm,
+                                    InstructionReader::<T>::has_rex(buffer),
                                     addr_size).ok_or(InstructionDecodingError::InvalidInstruction)?,
                                     size, segment),
                             0b100 => self.sib_helper(buffer, op_def, addr_size)?, // [SIB]
@@ -524,8 +610,8 @@ impl<T: Read> InstructionReader<T> {
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum InstructionDecodingError {
-    // EndOfStream - Indicates no more bytes are available on the underlying stream. Not returned when partial
-    // instructions are seen.
+    // EndOfStream - Indicates no more bytes are available on the underlying stream.
+    // Not returned when partial instructions are seen.
     EndOfStream,
 
     // PartialInstruction - Indicates that the stream ended in the middle of an instruction.

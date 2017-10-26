@@ -1,6 +1,7 @@
+extern crate arrayvec;
 extern crate byteorder;
 #[macro_use] extern crate lazy_static;
-extern crate arrayvec;
+#[macro_use] extern crate matches;
 
 mod decoding;
 mod encoding;

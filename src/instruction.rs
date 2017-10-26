@@ -844,6 +844,10 @@ impl Reg {
             _ => return None
         })
     }
+
+    pub fn from_code_reg_type(code: u8, reg_type: RegType, size: OperandSize) -> Option<Reg> {
+        unimplemented!()
+    }
 }
 
 // AVX Merge Mode
