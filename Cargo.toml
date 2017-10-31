@@ -2,6 +2,11 @@
 name = "x86asm"
 version = "0.1.0"
 authors = ["Gregory Comer <me@gregorycomer.com>"]
+description = "A crate for assembling and disassembling x86 instructions."
+repository = "https://github.com/GregoryComer/rust-x86asm"
+readme = "README.md"
+keywords = ["x86", "assembly", "assemble", "disassemble"]
+license = "MIT"
 
 [dependencies]
 arrayvec = "0.3.23"
