@@ -8,71 +8,71 @@ use ::test::run_test;
 
 #[test]
 fn cmovnb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(BX)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 220], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(DX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 214], OperandSize::Word)
 }
 
 #[test]
 fn cmovnb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(SI)), operand2: Some(IndirectDisplaced(BX, 31085, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 183, 109, 121], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(CX)), operand2: Some(IndirectDisplaced(SI, 29404, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 140, 220, 114], OperandSize::Word)
 }
 
 #[test]
 fn cmovnb_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(DI)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 252], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(BP)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 235], OperandSize::Dword)
 }
 
 #[test]
 fn cmovnb_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(SP)), operand2: Some(IndirectScaledIndexedDisplaced(EDI, EAX, Two, 610419977, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 164, 71, 9, 69, 98, 36], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(BP)), operand2: Some(Indirect(EBX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 43], OperandSize::Dword)
 }
 
 #[test]
 fn cmovnb_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(CX)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 202], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(SP)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 231], OperandSize::Qword)
 }
 
 #[test]
 fn cmovnb_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(SP)), operand2: Some(IndirectScaledDisplaced(RBX, Four, 1893173944, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 36, 157, 184, 138, 215, 112], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(CX)), operand2: Some(IndirectScaledIndexed(RBX, RDX, Eight, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 12, 211], OperandSize::Qword)
 }
 
 #[test]
 fn cmovnb_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EBP)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 233], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EBP)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 234], OperandSize::Word)
 }
 
 #[test]
 fn cmovnb_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 56, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 114, 56], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 23243, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 67, 170, 203, 90], OperandSize::Word)
 }
 
 #[test]
 fn cmovnb_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EDI)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(ESI)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 244], OperandSize::Dword)
 }
 
 #[test]
 fn cmovnb_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EDX)), operand2: Some(IndirectScaledDisplaced(EAX, Four, 402387101, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 20, 133, 157, 240, 251, 23], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EDX)), operand2: Some(Indirect(ESI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 22], OperandSize::Dword)
 }
 
 #[test]
 fn cmovnb_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(ESI)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 243], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EDX)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 210], OperandSize::Qword)
 }
 
 #[test]
 fn cmovnb_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledIndexed(RCX, RSI, Four, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 44, 177], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(EDI)), operand2: Some(IndirectScaledIndexed(RAX, RCX, Eight, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 67, 60, 200], OperandSize::Qword)
 }
 
 #[test]
 fn cmovnb_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(RDX)), operand2: Some(Direct(RBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 67, 213], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(RDX)), operand2: Some(Direct(RCX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 67, 209], OperandSize::Qword)
 }
 
 #[test]
 fn cmovnb_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(RBX)), operand2: Some(IndirectScaledDisplaced(RDI, Eight, 1736326313, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 67, 28, 253, 169, 60, 126, 103], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CMOVNB, operand1: Some(Direct(RBP)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RDI, Two, 1785183842, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 67, 172, 123, 98, 190, 103, 106], OperandSize::Qword)
 }
 

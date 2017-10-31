@@ -8,22 +8,22 @@ use ::test::run_test;
 
 #[test]
 fn fcom_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectDisplaced(DI, 180, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 149, 180, 0], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectDisplaced(SI, 184, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 148, 184, 0], OperandSize::Word)
 }
 
 #[test]
 fn fcom_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledDisplaced(EAX, Four, 59492804, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 20, 133, 196, 201, 139, 3], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledIndexed(EAX, EDI, Four, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 20, 184], OperandSize::Dword)
 }
 
 #[test]
 fn fcom_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 23], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledIndexed(RAX, RDI, Four, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 20, 184], OperandSize::Qword)
 }
 
 #[test]
 fn fcom_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Direct(ST7)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 215], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Direct(ST1)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 209], OperandSize::Word)
 }
 
 #[test]
@@ -33,21 +33,21 @@ fn fcom_5() {
 
 #[test]
 fn fcom_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Direct(ST3)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 211], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Direct(ST6)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 214], OperandSize::Qword)
 }
 
 #[test]
 fn fcom_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectDisplaced(DI, 25377, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 149, 33, 99], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 16], OperandSize::Word)
 }
 
 #[test]
 fn fcom_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Indirect(ESI, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 22], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledIndexedDisplaced(EDX, EAX, Eight, 580534853, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 148, 194, 69, 66, 154, 34], OperandSize::Dword)
 }
 
 #[test]
 fn fcom_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(IndirectScaledDisplaced(RDX, Four, 792684041, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 20, 149, 9, 102, 63, 47], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCOM, operand1: Some(Indirect(RBX, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 19], OperandSize::Qword)
 }
 

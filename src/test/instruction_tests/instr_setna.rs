@@ -13,7 +13,7 @@ fn setna_1() {
 
 #[test]
 fn setna_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 242, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 128, 242, 0], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectDisplaced(BX, 1663, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 135, 127, 6], OperandSize::Word)
 }
 
 #[test]
@@ -23,7 +23,7 @@ fn setna_3() {
 
 #[test]
 fn setna_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledDisplaced(EDI, Eight, 830075802, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 253, 154, 243, 121, 49], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledDisplaced(ECX, Four, 1693224574, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 141, 126, 142, 236, 100], OperandSize::Dword)
 }
 
 #[test]
@@ -33,7 +33,7 @@ fn setna_5() {
 
 #[test]
 fn setna_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledDisplaced(RDI, Four, 1326816068, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 189, 68, 155, 21, 79], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledIndexed(RBX, RCX, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 139], OperandSize::Qword)
 }
 
 #[test]
@@ -43,6 +43,6 @@ fn setna_7() {
 
 #[test]
 fn setna_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(Indirect(RCX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 1], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNA, operand1: Some(IndirectScaledIndexed(RAX, RSI, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 150, 4, 176], OperandSize::Qword)
 }
 

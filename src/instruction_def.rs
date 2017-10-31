@@ -2,7 +2,41 @@ use std::collections::HashMap;
 use std::io::Write;
 use std::sync::RwLock;
 use ::{Instruction, InstructionEncodingError, Mnemonic, Mode, Operand, OperandSize, Reg, RegType};
+use ::instruction_buffer::InstructionBuffer;
 use ::instruction_defs::INSTR_DEFS;
+
+#[derive(Debug)]
+pub struct InstructionDefinition {
+    pub allow_prefix: bool,
+    pub operand_size_prefix: OperandSizePrefixBehavior,
+    pub address_size_prefix: Option<bool>,
+    pub f2_prefix: PrefixBehavior,
+    pub f3_prefix: PrefixBehavior,
+    pub composite_prefix: Option<CompositePrefix>,
+    pub fwait: bool, 
+
+    pub two_byte_opcode: bool,
+    pub primary_opcode: u8,
+    pub secondary_opcode: Option<u8>,
+    pub opcode_ext: Option<u8>,
+
+    pub has_mod_rm: bool,
+    pub fixed_mod_rm_mod: Option<u8>,
+    pub fixed_mod_rm_reg: Option<u8>,
+    pub allow_mask: bool,
+    pub allow_merge_mode: bool,
+    pub allow_rounding: bool,
+    pub allow_sae: bool,
+    
+    pub operands: [Option<OperandDefinition>; 4],
+
+    pub feature_set: Option<&'static [FeatureSet]>,
+    pub valid_16: bool,
+    pub valid_32: bool,
+    pub valid_64: bool,
+    pub desc: &'static str,
+    pub mnemonic: Mnemonic,
+}
 
 lazy_static! {
     static ref INSTR_MNEMONIC_MAP : RwLock<HashMap<Mnemonic, Vec<&'static InstructionDefinition>>> = {
@@ -38,14 +72,18 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
             // Look for the shortest matching def. If multiple incompatible defs match,
             // return AmbiguousSize.
             for m in matches {
+                println!("\n Evaluating def: {:?}", m);
+
                 if best.map_or(true, |b| compare_def_length(m, b)) {
-                    let m_sizes = get_op_sizes(m);
-                    if sizes.map_or(true, |s| compare_sizes(&s, &m_sizes)) {
-                        best = Some(m);
-                        sizes = Some(m_sizes);
-                    } else {
-                        return Err(InstructionEncodingError::AmbiguousSize);
-                    }
+                    best = Some(m);
+                }
+                
+                let m_sizes = get_op_sizes(m, instr);
+                if sizes.map_or(true, |s| compare_sizes(&s, &m_sizes)) {
+                    sizes = Some(m_sizes);
+                } else {
+                    println!("Ambiguous defs:\n\n{:?}\n\n{:?}\n", best, m);
+                    return Err(InstructionEncodingError::AmbiguousSize);
                 }
             }
 
@@ -53,31 +91,101 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
         })
 }
 
-pub fn find_instruction_def_by_opcode(two_byte_opcode: bool, primary_opcode: u8, 
-    secondary_opcode: Option<u8>, opcode_ext: Option<u8>, mode: Mode)
+fn temp_helper(tag: &'static str, val: bool) -> bool {
+    println!(" - {}: {:?}", tag, val);
+    val
+}
+
+pub fn find_instruction_def_by_opcode(buffer: &InstructionBuffer, mode: Mode)
     -> Result<&'static InstructionDefinition, FindInstructionDefByOpcodeError> {
-    let mut matches = INSTR_DEFS.iter().filter(|def|
-        def.two_byte_opcode == two_byte_opcode &&
-        def.primary_opcode == primary_opcode &&
-        def.secondary_opcode == secondary_opcode &&
+    println!("buffer: {:?}\n", buffer);
+    let mut matches = INSTR_DEFS.iter().filter(|def| {
+        if def.primary_opcode == buffer.primary_opcode {
+            println!("test def: {:?}", def);
+            println!("");
+        }
+
+        let has_opcode_addend = def.operands.iter().any(|o| o.as_ref().map_or(false,
+            |op| op.encoding == OperandEncoding::OpcodeAddend));
+
+        def.two_byte_opcode == buffer.is_two_byte_opcode &&
+        (def.primary_opcode == buffer.primary_opcode ||
+        has_opcode_addend && (buffer.primary_opcode & !0x7) == def.primary_opcode) &&
+        def.secondary_opcode == buffer.secondary_opcode &&
+        match def.f2_prefix {
+            PrefixBehavior::Always => buffer.f2_prefix,
+            PrefixBehavior::Never => !buffer.f2_prefix,
+            PrefixBehavior::Optional => true
+        } &&
+        match def.f3_prefix {
+            PrefixBehavior::Always => buffer.f3_prefix,
+            PrefixBehavior::Never => !buffer.f3_prefix,
+            PrefixBehavior::Optional => true
+        } &&
+        def.fixed_mod_rm_mod.map_or(true, |m| buffer.mod_rm_mod == Some(m)) &&
+        def.fixed_mod_rm_reg.map_or(true, |m| buffer.mod_rm_reg == Some(m)) &&
         // Only compare extensions if one is provided. If an opcode extension is needed to
         // disambiguate, it will be checked below.
-        (def.opcode_ext.is_none() && opcode_ext.is_none() || 
-         opcode_ext.map_or(true, |_| opcode_ext == def.opcode_ext)) &&
-        match mode {
+        temp_helper("opcode_ext", (def.opcode_ext.is_none() || 
+            buffer.mod_rm_reg.map_or(true, |_| buffer.mod_rm_reg == def.opcode_ext))) &&
+        temp_helper("mode", match mode {
             Mode::Real => def.valid_16,
             Mode::Protected => def.valid_32,
             Mode::Long => def.valid_64,
-        }
-    );
+        }) && 
+        temp_helper("op_size_prefix", match def.operand_size_prefix {
+            OperandSizePrefixBehavior::Always => buffer.operand_size_prefix,
+            OperandSizePrefixBehavior::RealOnly => if mode == Mode::Real 
+                { buffer.operand_size_prefix } else { !buffer.operand_size_prefix },
+            OperandSizePrefixBehavior::NotReal => if mode == Mode::Real
+            { !buffer.operand_size_prefix } else { buffer.operand_size_prefix },
+            OperandSizePrefixBehavior::Never => !buffer.operand_size_prefix
+        }) &&
+        temp_helper("composite_prefix", match def.composite_prefix {
+            Some(CompositePrefix::Rex { size_64: s }) => 
+                buffer.composite_prefix == Some(::instruction_buffer::CompositePrefix::Rex) &&
+                s.map_or(true, |size| size == buffer.operand_size_64),
+            Some(CompositePrefix::Vex { vector_size: vs, we: we, .. }) => 
+                buffer.composite_prefix == Some(::instruction_buffer::CompositePrefix::Vex) &&
+                temp_helper("we", we.map_or(true, |e| buffer.vex_e == Some(e))) &&
+                temp_helper("size", match vs {
+                    Some(OperandSize::Xmmword) =>
+                        buffer.vector_len == Some(false) && buffer.vex_l.map_or(true, |l| !l),
+                    Some(OperandSize::Ymmword) =>
+                        buffer.vector_len == Some(true) && buffer.vex_l.map_or(true, |l| !l),
+                    Some(OperandSize::Zmmword) =>
+                        buffer.vector_len == Some(false) && buffer.vex_l == Some(true),
+                    _ => true
+                }),
+            Some(CompositePrefix::Evex { vector_size: vs, we: we, .. }) => 
+                buffer.composite_prefix == Some(::instruction_buffer::CompositePrefix::Evex) &&
+                we.map_or(true, |e| buffer.vex_e == Some(e)) &&
+                match vs {
+                    Some(OperandSize::Xmmword) =>
+                        buffer.vector_len == Some(false) && buffer.vex_l.map_or(true, |l| !l),
+                    Some(OperandSize::Ymmword) =>
+                        buffer.vector_len == Some(true) && buffer.vex_l.map_or(true, |l| !l),
+                    Some(OperandSize::Zmmword) =>
+                        buffer.vector_len == Some(false) && buffer.vex_l == Some(true),
+                    _ => true
+                },
+            None => buffer.composite_prefix != Some(::instruction_buffer::CompositePrefix::Vex)
+                && buffer.composite_prefix != Some(::instruction_buffer::CompositePrefix::Evex)
+                && !buffer.operand_size_64 // TODO Is this okay?
+        }) &&
+        temp_helper("operands", def.operands.iter().all(|op| op.as_ref().map_or(true, |o| o.is_compatible(buffer))))
+    });
+
     let first = matches.next();
     if let Some(f) = first {
         let next = matches.next();
         if next.is_some() { // If multiple matches exist...
-            if f.opcode_ext.is_some() { // And they differentiate by opcode ext, it's ambiguous
-                Err(FindInstructionDefByOpcodeError::NeedOpcodeExt)
-            } else { // Shouldn't happen, indicates a problem with the instruction definitions
-                panic!("Internal error - multiple matching instruction definitions.");
+            if buffer.mod_rm_mod.is_none() { // Need a ModR/M byte
+                Err(FindInstructionDefByOpcodeError::NeedModRm)
+            } else {
+                Ok(f)
+                // TODO Is this an error case?
+                // panic!("Internal error - multiple matching instruction definitions: \n\n{:?}\n\n{:?}", f, next.unwrap());
             }
         } else { // If there's only one match, it's the one we're looking for
             Ok(f)
@@ -93,19 +201,21 @@ pub enum FindInstructionDefByOpcodeError {
     NoEncoding,
 
     // Indicates that an opcode extension is needed to disambiguate
-    NeedOpcodeExt
+    NeedModRm
 }
 
 fn compare_sizes(a: &[Option<OperandSize>; 4], b: &[Option<OperandSize>; 4]) -> bool {
-    a.iter().zip(b.iter()).all( |(m_s1, m_s2)| match (*m_s1, *m_s2) {
+    a.iter().zip(b.iter()).all(|(m_s1, m_s2)| match (*m_s1, *m_s2) {
         (Some(s1), Some(s2)) => s1 == s2 || s1 == OperandSize::Unsized || s2 == OperandSize::Unsized,
         (None, None) => true,
         _ => false
     })
 }
 
-fn get_op_sizes(def: &InstructionDefinition) -> [Option<OperandSize>; 4] {
-    let mut iter = def.operands.iter().map(|o| o.as_ref().map(|op| op.size));
+fn get_op_sizes(def: &InstructionDefinition, instr: &Instruction) -> [Option<OperandSize>; 4] {
+    let mut ops = instr.operands();
+    let mut iter = def.operands.iter().zip(ops.iter())
+        .map(|(def, op)| def.as_ref().map(|d| op.map_or(d.size, |o| d.get_real_size(&o))));
     [iter.next().unwrap_or(None),
      iter.next().unwrap_or(None),
      iter.next().unwrap_or(None),
@@ -113,7 +223,6 @@ fn get_op_sizes(def: &InstructionDefinition) -> [Option<OperandSize>; 4] {
 }
 
 fn compare_def_length(a: &InstructionDefinition, b: &InstructionDefinition) -> bool {
-    println!("cmp a ({}): {:?}\nb ({}): {:?}", a.len(), a, b.len(), b);
     a.len() < b.len()
 }
 
@@ -147,48 +256,24 @@ impl InstructionDefinition {
             Some(CompositePrefix::Rex { .. }) => 1,
             None => 0
         }) +
-        b(self.fixed_prefix.is_some()) +
         b(self.two_byte_opcode) +
         b(self.secondary_opcode.is_some()) +
-        b(self.fixed_post.is_some()) +
         self.operands.iter().filter_map(|o| o.as_ref().map(|op| op.len())).sum::<u32>()
     }
-}
-
-#[derive(Debug)]
-pub struct InstructionDefinition {
-    pub allow_prefix: bool,
-    pub operand_size_prefix: OperandSizePrefixBehavior,
-    pub address_size_prefix: Option<bool>,
-    pub fixed_prefix: Option<u8>,
-    pub composite_prefix: Option<CompositePrefix>,
-
-    pub two_byte_opcode: bool,
-    pub primary_opcode: u8,
-    pub secondary_opcode: Option<u8>,
-    pub opcode_ext: Option<u8>,
-
-    pub fixed_post: Option<u8>,
-    pub has_mod_rm: bool,
-    pub allow_mask: bool,
-    pub allow_merge_mode: bool,
-    pub allow_rounding: bool,
-    pub allow_sae: bool,
-    
-    pub operands: [Option<OperandDefinition>; 4],
-
-    pub feature_set: Option<&'static [FeatureSet]>,
-    pub valid_16: bool,
-    pub valid_32: bool,
-    pub valid_64: bool,
-    pub desc: &'static str,
-    pub mnemonic: Mnemonic,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum OperandSizePrefixBehavior {
     Always,
-    ConditionalOnSize(u8),
+    RealOnly,
+    NotReal,
+    Never
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum PrefixBehavior {
+    Always,
+    Optional,
     Never
 }
 
@@ -254,6 +339,48 @@ impl OperandDefinition {
         }).unwrap_or(false)
     }
 
+    fn get_real_size(&self, op: &Operand) -> OperandSize {
+        self.get_real_type(op).map_or(OperandSize::Unsized, |t| {
+            let s = match *t {
+                OperandType::Mem(Some(s)) |
+                OperandType::Bcst(s) => s,
+                _ => self.size
+            };
+
+            match s {
+                OperandSize::Far16 => OperandSize::Dword,
+                OperandSize::Far32 => OperandSize::Fword,
+                OperandSize::Far64 => OperandSize::Tbyte,
+                _ => s
+            }
+        })
+    }
+
+    fn get_real_type(&self, op: &Operand) -> Option<&OperandType> {
+        if let OperandType::Set(set) = self.op_type {
+            set.iter().find(|s| match **s {
+                OperandType::Reg(_) => {
+                    !op.is_memory()
+                },
+                OperandType::Mem(s) => {
+                    op.is_memory() &&
+                    op.size().map_or(true, |sz| s.map_or(true, |sz2|
+                        sz == sz2 ||
+                        sz == OperandSize::Unsized ||
+                        sz2 == OperandSize::Unsized))
+                },
+                OperandType::Bcst(s) => {
+                    op.is_memory() &&
+                    op.size().map_or(true, |sz|
+                        sz == s ||
+                        sz == OperandSize::Unsized ||
+                        s == OperandSize::Unsized)
+                },
+                _ => unimplemented!()
+            })
+        } else { Some(&self.op_type) }
+    }
+
     fn matches_operand_type(op_type: &OperandType, def_size: OperandSize, op: &Option<Operand>,
         instr_def: &InstructionDefinition, instr: &Instruction) -> bool {
         fn size_helper(def_size: OperandSize, op: &Option<Operand>) -> bool {
@@ -313,6 +440,16 @@ impl OperandDefinition {
                 => 0
         }
     }
+
+    fn is_compatible(&self, buffer: &InstructionBuffer) -> bool {
+        if let OperandEncoding::ModRmRm = self.encoding {
+            if let OperandType::Reg(_) = self.op_type {
+                buffer.mod_rm_mod.map_or(true, |m| m == 0b11)
+            } else if let OperandType::Mem(_) = self.op_type {
+                buffer.mod_rm_mod.map_or(true, |m| m != 0b11)
+            } else { true }
+        } else { true }
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -328,6 +465,16 @@ pub enum OperandType {
     Set(&'static [OperandType])
 }
 
+impl OperandType {
+    pub fn broadcast_size(&self) -> Option<OperandSize> {
+        match *self {
+            OperandType::Bcst(s) => Some(s),
+            OperandType::Set(items) => items.iter().filter_map(|i| i.broadcast_size()).next(),
+            _ => None
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum OperandEncoding {
     ModRmReg,
@@ -337,7 +484,6 @@ pub enum OperandEncoding {
     OpcodeAddend,
     Offset,
     Mib,
-    FixedPostAddend,
     Fixed
 }
 

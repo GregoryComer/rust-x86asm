@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn xsavec_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(IndirectDisplaced(BP, 82, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 102, 82], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(IndirectDisplaced(BP, 14962, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 166, 114, 58], OperandSize::Word)
 }
 
 #[test]
 fn xsavec_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(IndirectScaledDisplaced(EDX, Eight, 1061786495, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 36, 213, 127, 147, 73, 63], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(IndirectScaledIndexedDisplaced(ESI, ECX, Two, 778059223, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 164, 78, 215, 61, 96, 46], OperandSize::Dword)
 }
 
 #[test]
 fn xsavec_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(Indirect(RBX, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 35], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::XSAVEC, operand1: Some(IndirectDisplaced(RBX, 515056682, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 163, 42, 36, 179, 30], OperandSize::Qword)
 }
 

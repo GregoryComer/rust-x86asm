@@ -33,6 +33,7 @@ use instruction_def::OperandDefinition;
 use instruction_def::OperandEncoding;
 use instruction_def::OperandSizePrefixBehavior;
 use instruction_def::OperandType;
+use instruction_def::PrefixBehavior;
 use instruction_def::RegType;
 use instruction_def::VexOperandBehavior;
 use operand::OperandSize;
@@ -84,8 +85,8 @@ fn main() {
         let op_size_op = (0u8..4).filter_map(|i| {
             let (has_16, has_32) = group.iter().filter_map(|o| o.operands[i as usize].as_ref())
                 .fold((false, false), |(has_16, has_32), op|
-                    (has_16 || op.size == OperandSize::Word,
-                    has_32 || op.size == OperandSize::Dword)
+                    (has_16 || op.size == OperandSize::Word || op.size == OperandSize::Far16,
+                    has_32 || op.size == OperandSize::Dword || op.size == OperandSize::Far32)
                 );
             if has_16 && has_32 { Some(i) } else { None }
             // if has_16 || has_32 { Some(i) } else { None }
@@ -94,8 +95,12 @@ fn main() {
         for mut instr in group {
             if let Some(i) = op_size_op {
                 if instr_needs_op_size_prefix(&instr, i) {
-                    instr.operand_size_prefix = 
-                        OperandSizePrefixBehavior::ConditionalOnSize(i);
+                    if instr.operands[i as usize].as_ref().map_or(false,
+                        |op| op.size == OperandSize::Word || op.size == OperandSize::Far16) {
+                        instr.operand_size_prefix = OperandSizePrefixBehavior::NotReal;
+                    } else {
+                        instr.operand_size_prefix = OperandSizePrefixBehavior::RealOnly;
+                    }
                 }
             }
 
@@ -189,8 +194,8 @@ fn parse_record(record: &EncodingRecord) -> instruction_def::InstructionDefiniti
                     Some(0x66) => 
                        { instr.operand_size_prefix = OperandSizePrefixBehavior::Always; }
                     Some(0x67) => { instr.address_size_prefix = Some(true); },
-                    Some(0xF2) => { instr.fixed_prefix = Some(0xF2); },
-                    Some(0xF3) => { instr.fixed_prefix = Some(0xF3); },
+                    Some(0xF2) => { instr.f2_prefix = PrefixBehavior::Always; },
+                    Some(0xF3) => { instr.f3_prefix = PrefixBehavior::Always; },
                     Some(0x0F) => { instr.two_byte_opcode = true; }, 
                     None => {},
                     _ => panic!("Invalid prefix: {:?}.", prefix)
@@ -220,13 +225,20 @@ fn parse_record(record: &EncodingRecord) -> instruction_def::InstructionDefiniti
                     Some(CompositePrefix::Vex { .. }) |
                     Some(CompositePrefix::Evex { .. }) => false,
                     _ => true
-                } && !instr.two_byte_opcode => { instr.fixed_prefix = Some(b); },
+                } && !instr.two_byte_opcode => { if b == 0xF2 { instr.f2_prefix = PrefixBehavior::Always }
+                    else { instr.f3_prefix = PrefixBehavior::Always } },
                 0x0F if !instr.two_byte_opcode => { instr.two_byte_opcode = true; }, 
                 _ if instr.primary_opcode == 0x38 || instr.primary_opcode == 0x3A => {
                     instr.secondary_opcode = Some(b);
                 },
-                // _ if instr.primary_opcode == 0x78 => { instr.secondary_opcode = Some(b); } // TODO See VCVTTPD2UDQ, maybe mistake in docs? GNU AS doesn't include the 0x02.
-                _ if instr.primary_opcode != 0 => { instr.fixed_post = Some(b); }
+                _ if instr.primary_opcode == 0x9B => {
+                    instr.fwait = true;
+                    instr.primary_opcode = b;
+                },
+                _ if instr.primary_opcode != 0 => {
+                    instr.fixed_mod_rm_mod = Some(b >> 6);
+                    instr.fixed_mod_rm_reg = Some((b >> 3) & 0x7);
+                },
                 _ => { instr.primary_opcode = b; }
             },
             OpcodeToken::OpcodeExt(ext) => { instr.opcode_ext = Some(ext); },
@@ -269,18 +281,29 @@ fn fixup(instr: &mut InstructionDefinition) {
         "BSWAP" => {
             // BSWAP needs an operand size prefix in real mode
             if instr.operands[0].as_ref().map_or(false, |o| o.size == OperandSize::Dword) {
-                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+                instr.operand_size_prefix = OperandSizePrefixBehavior::RealOnly;
             }   
+        },
+        "CRC32" => {
+            // This is sort of a weird case, as it needs REX in long mode, but is 32-bit
+            if instr.valid_64 && !instr.valid_32 && 
+                instr.operands[0].as_ref().map_or(false, |o| o.size == OperandSize::Dword) &&
+                instr.operands[1].as_ref().map_or(false, |o| o.size == OperandSize::Byte) {
+                instr.composite_prefix = Some(CompositePrefix::Rex { size_64: Some(false) });
+            }
         },
         "LAR" => {
             // LAR's operand size prefix depends on the first operand, but this isn't obvious
-            instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+            // TODO Is this correct?
+            instr.operand_size_prefix =
+                if instr.operands[1].as_ref().map_or(false, |o| o.size == OperandSize::Word)
+                { OperandSizePrefixBehavior::NotReal } else { OperandSizePrefixBehavior::RealOnly };
         },
         "MOVNTI" => {
             // MOVNTI r32, r/m16 needs op size prefix in real mode, even though it's unambiguous
             if instr.operands[0].as_ref().map_or(false, |o| o.size == OperandSize::Dword) {
-                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
-            }
+                instr.operand_size_prefix = OperandSizePrefixBehavior::RealOnly;
+            }   
         }
         "MOVSX" |
         "MOVZX" => {
@@ -288,12 +311,16 @@ fn fixup(instr: &mut InstructionDefinition) {
             if (instr.primary_opcode == 0xBF || instr.primary_opcode == 0xB7)
                 && instr.operands[0].as_ref().map_or(false,
                 |o| o.size == OperandSize::Dword) {
-                instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+                instr.operand_size_prefix = OperandSizePrefixBehavior::RealOnly;
             }
         },
-        "SLDT" => {
-            instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
-        },
+        // TODO Next 2?
+        // "SLDT" => {
+        //     instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+        // },
+        // "STR" => {
+        //     instr.operand_size_prefix = OperandSizePrefixBehavior::ConditionalOnSize(0)
+        // },
         _ => {}
     }
 }
@@ -307,7 +334,8 @@ fn mnemonic_from_instr(instr: &String) -> &str {
 fn instr_needs_op_size_prefix(instr: &InstructionDefinition, i: u8)
     -> bool {
     instr.operands[i as usize].as_ref().map_or(false,
-        |o| o.size == OperandSize::Word || o.size == OperandSize::Dword)
+        |o| o.size == OperandSize::Word || o.size == OperandSize::Dword
+            || o.size == OperandSize::Far16 || o.size == OperandSize::Far32)
 }
 
 fn instr_tokens_to_operand<'a, I>(tokens: I, enc_info: Option<(OperandEncoding, OperandAccess)>,
@@ -337,9 +365,7 @@ fn generate_implied_encoding(op_type: &OperandType, has_embedded_reg: bool)
     -> (OperandEncoding, OperandAccess) {
     match *op_type { // TODO Better implied operand access
         OperandType::Reg(reg_type) => {
-            if reg_type == RegType::Fpu && has_embedded_reg {
-                (OperandEncoding::FixedPostAddend, OperandAccess::Read)
-            } else { (OperandEncoding::ModRmRm, OperandAccess::Read) }
+            (OperandEncoding::ModRmRm, OperandAccess::Read)
         },
         OperandType::Mem(_) => (OperandEncoding::ModRmRm, OperandAccess::Read),
         OperandType::Imm => (OperandEncoding::Imm, OperandAccess::Read),
@@ -364,7 +390,7 @@ fn instr_token_to_operand_type(token: &InstructionToken) -> (OperandType, Option
         InstructionToken::Bcst(bcst_size)
             => (OperandType::Bcst(bcst_size), None),
         InstructionToken::Rel(op_size)
-            => (OperandType::Rel(op_size), Some(OperandSize::Unsized)),
+            => (OperandType::Rel(op_size), Some(op_size)),
         InstructionToken::Offset(op_size)
             => (OperandType::Offset, Some(op_size)),
         InstructionToken::FixedReg(reg)
@@ -481,7 +507,12 @@ named!(parse_operand_part<InstructionToken>, alt_complete!(
         tag!("m") |
         tag!("vm32x") | tag!("vm32y") | tag!("vm32z") |
         tag!("vm64x") | tag!("vm64y") | tag!("vm64z")
-    ) => { |_| InstructionToken::Mem(OperandSize::Unsized) }
+    ) => { |_| InstructionToken::Mem(OperandSize::Unsized) } |
+    alt_complete!( // TODO Could make instr defs here more specific
+        tag!("CR0-CR7") |
+        tag!("CR8")
+    ) => { |_| InstructionToken::Reg(RegType::Control, OperandSize::Unsized) } |
+    tag!("DR0-DR7") => { |_| InstructionToken::Reg(RegType::Debug, OperandSize::Unsized) }
 ));
 
 named!(parse_size<OperandSize>, alt_complete!(
@@ -532,6 +563,7 @@ named!(parse_opcode_token<OpcodeToken>, ws!(alt_complete!(
             tag_no_case!("REX.W" )
         ) => { |_| OpcodeToken::RexW } |
         alt_complete!(
+            tag!("REX.R + ") | // TODO?
             tag!("REX + ") |
             tag!("REX")
         ) => { |_| OpcodeToken::Rex } |
@@ -748,14 +780,17 @@ impl Debug for InstructionDefinition {
     allow_prefix: {:?},
     operand_size_prefix: {:?},
     address_size_prefix: {:?},
-    fixed_prefix: {:?},
+    f2_prefix: PrefixBehavior::{:?},
+    f3_prefix: PrefixBehavior::{:?},
     composite_prefix: {:?},
+    fwait: {:?},
     two_byte_opcode: {:?},
     primary_opcode: {:?},
     secondary_opcode: {:?},
     opcode_ext: {:?},
-    fixed_post: {:?},
     has_mod_rm: {:?},
+    fixed_mod_rm_mod: {:?},
+    fixed_mod_rm_reg: {:?},
     allow_mask: {:?},
     allow_merge_mode: {:?},
     allow_rounding: {:?},
@@ -771,14 +806,17 @@ impl Debug for InstructionDefinition {
         self.allow_prefix,
         self.operand_size_prefix,
         self.address_size_prefix,
-        self.fixed_prefix,
+        self.f2_prefix,
+        self.f3_prefix,
         self.composite_prefix,
+        self.fwait,
         self.two_byte_opcode,
         self.primary_opcode,
         self.secondary_opcode,
         self.opcode_ext,
-        self.fixed_post,
         self.has_mod_rm,
+        self.fixed_mod_rm_mod,
+        self.fixed_mod_rm_reg,
         self.allow_mask,
         self.allow_merge_mode,
         self.allow_rounding,

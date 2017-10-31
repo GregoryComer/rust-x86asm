@@ -6,16 +6,19 @@ pub struct InstructionDefinition {
     pub allow_prefix: bool,
     pub operand_size_prefix: OperandSizePrefixBehavior,
     pub address_size_prefix: Option<bool>,
-    pub fixed_prefix: Option<u8>,
+    pub f2_prefix: PrefixBehavior,
+    pub f3_prefix: PrefixBehavior,
     pub composite_prefix: Option<CompositePrefix>,
+    pub fwait: bool,
 
     pub two_byte_opcode: bool,
     pub primary_opcode: u8,
     pub secondary_opcode: Option<u8>,
     pub opcode_ext: Option<u8>,
 
-    pub fixed_post: Option<u8>,
     pub has_mod_rm: bool,
+    pub fixed_mod_rm_mod: Option<u8>,
+    pub fixed_mod_rm_reg: Option<u8>,
     pub allow_mask: bool,
     pub allow_merge_mode: bool,
     pub allow_rounding: bool,
@@ -47,16 +50,19 @@ impl Default for InstructionDefinition {
             allow_prefix: true,
             operand_size_prefix: OperandSizePrefixBehavior::Never,
             address_size_prefix: None,
-            fixed_prefix: None,
             composite_prefix: None,
+            fwait: false,
+            f2_prefix: PrefixBehavior::Never,
+            f3_prefix: PrefixBehavior::Never,
 
             two_byte_opcode: false,
             primary_opcode: 0,
             secondary_opcode: None,
             opcode_ext: None,
 
-            fixed_post: None,
             has_mod_rm: false,
+            fixed_mod_rm_mod: None,
+            fixed_mod_rm_reg: None,
             allow_mask: false,
             allow_merge_mode: false,
             allow_rounding: false,
@@ -76,7 +82,15 @@ impl Default for InstructionDefinition {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum OperandSizePrefixBehavior {
     Always,
-    ConditionalOnSize(u8),
+    RealOnly,
+    NotReal,
+    Never
+}
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+pub enum PrefixBehavior {
+    Always,
+    Optional,
     Never
 }
 
@@ -157,7 +171,6 @@ pub enum OperandEncoding {
     OpcodeAddend,
     Offset,
     Mib,
-    FixedPostAddend,
     Fixed
 }
 
@@ -176,7 +189,9 @@ pub enum RegType {
     Fpu,
     Bound,
     Mask,
-    Segment
+    Segment,
+    Control,
+    Debug
 }
 
 #[derive(Clone, Copy, Debug)]

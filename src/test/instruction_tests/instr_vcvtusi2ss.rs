@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn vcvtusi2ss_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Down), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 110, 56, 123, 196], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Nearest), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 118, 24, 123, 204], OperandSize::Dword)
 }
 
 #[test]
 fn vcvtusi2ss_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexed(ECX, EDI, Four, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 102, 8, 123, 12, 185], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM6)), operand3: Some(IndirectScaledIndexed(EAX, EBX, Two, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 78, 8, 123, 20, 88], OperandSize::Dword)
 }
 
 #[test]
 fn vcvtusi2ss_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM31)), operand2: Some(Direct(XMM13)), operand3: Some(Direct(ESI)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Down), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 97, 22, 56, 123, 254], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM28)), operand2: Some(Direct(XMM17)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Up), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 97, 118, 80, 123, 228], OperandSize::Qword)
 }
 
 #[test]
 fn vcvtusi2ss_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM30)), operand3: Some(IndirectScaledIndexedDisplaced(RAX, RAX, Eight, 94793801, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 14, 0, 123, 156, 192, 73, 112, 166, 5], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM8)), operand3: Some(IndirectScaledIndexedDisplaced(RDI, RDX, Four, 1791179553, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 62, 8, 123, 164, 151, 33, 59, 195, 106], OperandSize::Qword)
 }
 
 #[test]
 fn vcvtusi2ss_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM11)), operand2: Some(Direct(XMM24)), operand3: Some(Direct(RBX)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Up), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 113, 190, 80, 123, 219], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM12)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(RDX)), operand4: None, lock: false, rounding_mode: Some(RoundingMode::Down), merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 113, 238, 56, 123, 226], OperandSize::Qword)
 }
 
 #[test]
 fn vcvtusi2ss_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM13)), operand3: Some(IndirectDisplaced(RCX, 397595801, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 241, 150, 8, 123, 153, 153, 212, 178, 23], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VCVTUSI2SS, operand1: Some(Direct(XMM11)), operand2: Some(Direct(XMM5)), operand3: Some(Indirect(RCX, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[98, 113, 214, 8, 123, 25], OperandSize::Qword)
 }
 

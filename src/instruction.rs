@@ -1,10 +1,10 @@
 use std::io::Write;
-use ::{InstructionEncodingError, Mnemonic, Mode, RegType};
+use ::{InstructionEncodingError, Mnemonic, Mode};
 use ::encoding::{encode};
 use ::instruction_def::{find_instruction_def, InstructionDefinition, OperandType};
 use ::operand::{Operand, OperandSize};
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug)]
 pub struct Instruction {
     pub mnemonic: Mnemonic,
     pub operand1: Option<Operand>,
@@ -44,7 +44,8 @@ impl Instruction {
         }
     }
 
-    pub fn new3(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand) -> Instruction {
+    pub fn new3(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand)
+        -> Instruction {
         Instruction {
             mnemonic: mnemonic,
             operand1: Some(operand1),
@@ -54,7 +55,8 @@ impl Instruction {
         }
     }
 
-    pub fn new4(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand, operand4: Operand) -> Instruction {
+    pub fn new4(mnemonic: Mnemonic, operand1: Operand, operand2: Operand, operand3: Operand,
+        operand4: Operand) -> Instruction {
         Instruction {
             mnemonic: mnemonic,
             operand1: Some(operand1),
@@ -94,6 +96,25 @@ impl Default for Instruction {
     }
 }
 
+impl PartialEq for Instruction {
+    fn eq(&self, other: &Instruction) -> bool {
+        self.mnemonic == other.mnemonic &&
+        self.operand1 == other.operand1 &&
+        self.operand2 == other.operand2 &&
+        self.operand3 == other.operand3 &&
+        self.operand4 == other.operand4 &&
+        self.lock == other.lock &&
+        self.rounding_mode == other.rounding_mode &&
+        self.merge_mode.unwrap_or(MergeMode::Merge) == 
+            other.merge_mode.unwrap_or(MergeMode::Merge) &&
+        self.sae == other.sae &&
+        self.mask.unwrap_or(MaskReg::K0) == other.mask.unwrap_or(MaskReg::K0) &&
+        self.broadcast == other.broadcast
+    }
+}
+
+impl Eq for Instruction { }
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum RoundingMode {
     Nearest,
@@ -109,6 +130,16 @@ impl RoundingMode {
             RoundingMode::Down => 1,
             RoundingMode::Up => 2,
             RoundingMode::Zero => 3
+        }
+    }
+    
+    pub fn from_code(code: u8) -> Option<RoundingMode> {
+        match code {
+            0 => Some(RoundingMode::Nearest),
+            1 => Some(RoundingMode::Down),
+            2 => Some(RoundingMode::Up),
+            3 => Some(RoundingMode::Zero),
+            _ => None
         }
     }
 }
@@ -178,7 +209,7 @@ pub enum Reg {
     MM0, MM1, MM2, MM3,
     MM4, MM5, MM6, MM7,
     CR0, CR1, CR2, CR3,
-    CR4, CR8,
+    CR4, CR5, CR6, CR7, CR8,
     DR0, DR1, DR2, DR3,
     DR4, DR5, DR6, DR7,
     TR3, TR4, TR5, TR6, TR7,
@@ -392,8 +423,9 @@ impl Reg {
             Reg::R8D  | Reg::R9D  | Reg::R10D | Reg::R11D | 
             Reg::R12D | Reg::R13D | Reg::R14D | Reg::R15D |
             Reg::CR0  | Reg::CR1  | Reg::CR2  | Reg::CR3  |
-            Reg::DR0 | Reg::DR1 | Reg::DR2 | Reg::DR3 | 
-            Reg::DR4 | Reg::DR5 | Reg::DR6 | Reg::DR7 |
+            Reg::CR4  | Reg::CR5  | Reg::CR6  | Reg::CR7  |
+            Reg::DR0  | Reg::DR1  | Reg::DR2  | Reg::DR3  | 
+            Reg::DR4  | Reg::DR5  | Reg::DR6  | Reg::DR7  |
             Reg::TR3  | Reg::TR4  | Reg::TR5  | Reg::TR6  | // TODO Are test registers really 32 bits?
             Reg::TR7  | Reg::CR4  | Reg::EFLAGS | Reg::EIP  => OperandSize::Dword,
 
@@ -671,6 +703,15 @@ impl Reg {
         })
     }
 
+    pub fn from_code_avx(code: u8, size: OperandSize) -> Option<Reg> {
+        match size {
+            OperandSize::Xmmword => Reg::from_code_xmm(code),
+            OperandSize::Ymmword => Reg::from_code_ymm(code),
+            OperandSize::Zmmword => Reg::from_code_zmm(code),
+            _ => None
+        }
+    }
+
     pub fn from_code_mmx(code: u8) -> Option<Reg> {
         Some(match code {
             0x0 => Reg::MM0,
@@ -811,18 +852,6 @@ impl Reg {
         })
     }
 
-    pub fn from_code_control(code: u8) -> Option<Reg> {
-        Some(match code {
-            0x0 => Reg::CR0,
-            0x1 => Reg::CR1,
-            0x2 => Reg::CR2,
-            0x3 => Reg::CR3,
-            0x4 => Reg::CR4,
-            0x8 => Reg::CR8,
-            _ => return None
-        })
-    }
-
     pub fn from_code_debug(code: u8) -> Option<Reg> {
         Some(match code {
             0x0 => Reg::DR0,
@@ -837,6 +866,16 @@ impl Reg {
         })
     }
 
+    pub fn from_code_bounds(code: u8) -> Option<Reg> {
+        Some(match code {
+            0 => Reg::BND0,
+            1 => Reg::BND1,
+            2 => Reg::BND2,
+            3 => Reg::BND3,
+            _ => return None
+        })
+    }
+
     pub fn from_code_test(code: u8) -> Option<Reg> {
         Some(match code {
             0x6 => Reg::TR6,
@@ -845,8 +884,48 @@ impl Reg {
         })
     }
 
-    pub fn from_code_reg_type(code: u8, reg_type: RegType, size: OperandSize) -> Option<Reg> {
-        unimplemented!()
+    pub fn from_code_control(code: u8) -> Option<Reg> {
+        Some(match code {
+            0 => Reg::CR0,
+            1 => Reg::CR1,
+            2 => Reg::CR2,
+            3 => Reg::CR3,
+            4 => Reg::CR4,
+            5 => Reg::CR5,
+            6 => Reg::CR6,
+            7 => Reg::CR7,
+            8 => Reg::CR8,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_mask(code: u8) -> Option<Reg> {
+        Some(match code {
+            0 => Reg::K0,
+            1 => Reg::K1,
+            2 => Reg::K2,
+            3 => Reg::K3,
+            4 => Reg::K4,
+            5 => Reg::K5,
+            6 => Reg::K6,
+            7 => Reg::K7,
+            _ => return None
+        })
+    }
+
+    pub fn from_code_reg_type(code: u8, reg_type: RegType, size: OperandSize, has_rex: bool)
+        -> Option<Reg> {
+        match reg_type {
+            RegType::General => Reg::from_code_general_sized(code, has_rex, size),
+            RegType::Mmx => Reg::from_code_mmx(code),
+            RegType::Avx => Reg::from_code_avx(code, size),
+            RegType::Fpu => Reg::from_code_fpu(code),
+            RegType::Bound => Reg::from_code_bounds(code),
+            RegType::Mask => Reg::from_code_mask(code),
+            RegType::Segment => Reg::from_code_segment(code),
+            RegType::Control => Reg::from_code_control(code),
+            RegType::Debug => Reg::from_code_debug(code)
+        }
     }
 }
 
@@ -883,6 +962,20 @@ impl MaskReg {
             MaskReg::K7 => 7,
         }
     }
+
+    pub fn from_code(code: u8) -> Option<MaskReg> {
+        match code {
+            0 => Some(MaskReg::K0),
+            1 => Some(MaskReg::K1),
+            2 => Some(MaskReg::K2),
+            3 => Some(MaskReg::K3),
+            4 => Some(MaskReg::K4),
+            5 => Some(MaskReg::K5),
+            6 => Some(MaskReg::K6),
+            7 => Some(MaskReg::K7),
+            _ => None
+        }
+    }
 }
 
 // AVX Broadcast Mode
@@ -903,4 +996,28 @@ impl BroadcastMode {
             BroadcastMode::Broadcast1To16 => 16,
         }
     }
+
+    pub fn from_multiplier(multiplier: u8) -> Option<BroadcastMode> {
+        match multiplier {
+            2 => Some(BroadcastMode::Broadcast1To2),
+            4 => Some(BroadcastMode::Broadcast1To4),
+            8 => Some(BroadcastMode::Broadcast1To8),
+            16 => Some(BroadcastMode::Broadcast1To16),
+            _ => None
+        }
+
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RegType { // TODO Move to different file?
+    General,
+    Mmx,
+    Avx,
+    Fpu,
+    Bound,
+    Mask,
+    Segment,
+    Control,
+    Debug
 }

@@ -87,12 +87,27 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
 
     let addr_size = get_addr_size(def, instr, mode)?;
 
+    buffer.fwait = def.fwait;
     buffer.operand_size_prefix = get_operand_size_prefix(instr, def.operand_size_prefix, mode);
     buffer.address_size_prefix = def.address_size_prefix.unwrap_or_else(
         || get_address_size_prefix(addr_size, mode));
-    buffer.fixed_prefix = def.fixed_prefix;
+
+    match def.f2_prefix {
+        PrefixBehavior::Always => buffer.f2_prefix = true,
+        PrefixBehavior::Optional => { }, // TODO
+        PrefixBehavior::Never => buffer.f2_prefix = false,
+    }
+
+    match def.f3_prefix {
+        PrefixBehavior::Always => buffer.f3_prefix = true,
+        PrefixBehavior::Optional => { }, // TODO
+        PrefixBehavior::Never => buffer.f3_prefix = false,
+    }
+
     buffer.operand_size_64 = get_op_size_64(def, instr);
     if def.opcode_ext.is_some() { buffer.mod_rm_reg = def.opcode_ext; }
+    if def.fixed_mod_rm_mod.is_some() { buffer.mod_rm_mod = def.fixed_mod_rm_mod; }
+    if def.fixed_mod_rm_reg.is_some() { buffer.mod_rm_reg = def.fixed_mod_rm_reg; }
 
     if let Some(pref) = def.composite_prefix {
         match pref {
@@ -116,7 +131,6 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
     buffer.is_two_byte_opcode = def.two_byte_opcode;
     buffer.primary_opcode = def.primary_opcode;
     buffer.secondary_opcode = def.secondary_opcode;
-    buffer.fixed_post = def.fixed_post;
 
     buffer.mask_reg = instr.mask.map(|m| m.get_reg_code());
     buffer.merge_mode = instr.merge_mode;
@@ -149,13 +163,8 @@ fn get_operand_size_prefix(instr: &Instruction, behavior: OperandSizePrefixBehav
     match behavior {
         OperandSizePrefixBehavior::Always => true,
         OperandSizePrefixBehavior::Never => false,
-        OperandSizePrefixBehavior::ConditionalOnSize(i) => {
-            instr.operands()[i as usize].and_then(|op| op.size())
-                .map_or(false, |s| match mode {
-                    Mode::Real => { s == OperandSize::Dword } ,
-                    Mode::Protected | Mode::Long => { s == OperandSize::Word }
-                })
-        }
+        OperandSizePrefixBehavior::RealOnly => mode == Mode::Real,
+        OperandSizePrefixBehavior::NotReal => mode != Mode::Real,
     }
 }
 
@@ -289,12 +298,6 @@ pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, o
         OperandEncoding::OpcodeAddend => {
             if let Some(Operand::Direct(reg)) = *op {
                 buffer.opcode_add = Some(reg.get_reg_code());
-            } else { panic!("Internal error."); }
-        },
-        OperandEncoding::FixedPostAddend => {
-            if buffer.fixed_post.is_none() { unreachable!(); } // Bad def
-            if let Some(Operand::Direct(reg)) = *op {
-                buffer.fixed_post = Some(buffer.fixed_post.unwrap() + reg.get_reg_code());
             } else { panic!("Internal error."); }
         },
         OperandEncoding::Fixed => {}

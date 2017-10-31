@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn sgdt_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(Memory(7942, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 6, 6, 31], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectDisplaced(BX, 2768, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 135, 208, 10], OperandSize::Word)
 }
 
 #[test]
 fn sgdt_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectDisplaced(ECX, 1599724274, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 129, 242, 218, 89, 95], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectScaledIndexed(EAX, EDX, Two, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 4, 80], OperandSize::Dword)
 }
 
 #[test]
 fn sgdt_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectDisplaced(RAX, 581580906, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 128, 106, 56, 170, 34], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SGDT, operand1: Some(IndirectScaledDisplaced(RSI, Eight, 813798490, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 4, 245, 90, 148, 129, 48], OperandSize::Qword)
 }
 

@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn fcmovb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 198], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 199], OperandSize::Word)
 }
 
 #[test]
 fn fcmovb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 194], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 197], OperandSize::Dword)
 }
 
 #[test]
 fn fcmovb_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 199], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FCMOVB, operand1: Some(Direct(ST)), operand2: Some(Direct(ST3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 195], OperandSize::Qword)
 }
 

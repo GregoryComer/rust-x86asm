@@ -13,41 +13,41 @@ fn fistp_1() {
 
 #[test]
 fn fistp_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(ESI, EBX, Eight, 556498377, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 156, 222, 201, 125, 43, 33], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(ESI, EDI, Four, 813371761, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 156, 190, 113, 17, 123, 48], OperandSize::Dword)
 }
 
 #[test]
 fn fistp_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(Indirect(RDX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 26], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectDisplaced(RBX, 423229486, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[219, 155, 46, 248, 57, 25], OperandSize::Qword)
 }
 
 #[test]
 fn fistp_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 20, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 90, 20], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 25], OperandSize::Word)
 }
 
 #[test]
 fn fistp_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledDisplaced(EAX, Two, 510629163, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 28, 69, 43, 149, 111, 30], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(Indirect(ECX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 25], OperandSize::Dword)
 }
 
 #[test]
 fn fistp_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(Indirect(RAX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledDisplaced(RDX, Eight, 1529043099, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 28, 213, 155, 88, 35, 91], OperandSize::Qword)
 }
 
 #[test]
 fn fistp_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 4575, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 187, 223, 17], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 82, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 121, 82], OperandSize::Word)
 }
 
 #[test]
 fn fistp_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledDisplaced(EDX, Two, 315565102, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 60, 85, 46, 36, 207, 18], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledIndexedDisplaced(ESI, EDI, Two, 1121262484, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 188, 126, 148, 27, 213, 66], OperandSize::Dword)
 }
 
 #[test]
 fn fistp_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectDisplaced(RDX, 1815795331, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 186, 131, 214, 58, 108], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISTP, operand1: Some(IndirectScaledDisplaced(RBX, Two, 1985455968, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[223, 60, 93, 96, 167, 87, 118], OperandSize::Qword)
 }
 

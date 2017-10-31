@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn movlhps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLHPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 22, 242], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLHPS, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 22, 221], OperandSize::Dword)
 }
 
 #[test]
 fn movlhps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVLHPS, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 22, 210], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVLHPS, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 22, 216], OperandSize::Qword)
 }
 

@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn fstenv_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 232, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 177, 232, 0], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(IndirectDisplaced(DI, 33, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 117, 33], OperandSize::Word)
 }
 
 #[test]
 fn fstenv_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(IndirectScaledDisplaced(EAX, Two, 1442505303, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 52, 69, 87, 226, 250, 85], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(IndirectDisplaced(EBX, 599725176, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 179, 120, 20, 191, 35], OperandSize::Dword)
 }
 
 #[test]
 fn fstenv_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(Indirect(RDX, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 50], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FSTENV, operand1: Some(Indirect(RBX, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[155, 217, 51], OperandSize::Qword)
 }
 

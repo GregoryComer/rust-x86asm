@@ -13,6 +13,6 @@ fn wrgsbase_1() {
 
 #[test]
 fn wrgsbase_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::WRGSBASE, operand1: Some(Direct(RSI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 174, 222], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::WRGSBASE, operand1: Some(Direct(RCX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 72, 15, 174, 217], OperandSize::Qword)
 }
 

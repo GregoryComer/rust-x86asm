@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn dppd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM6)), operand3: Some(Literal8(96)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 214, 96], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM7)), operand3: Some(Literal8(80)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 223, 80], OperandSize::Dword)
 }
 
 #[test]
 fn dppd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexedDisplaced(EBX, EAX, Two, 278697177, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(3)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 156, 67, 217, 148, 156, 16, 3], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledDisplaced(ESI, Two, 1454145160, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(93)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 52, 117, 136, 126, 172, 86, 93], OperandSize::Dword)
 }
 
 #[test]
 fn dppd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM0)), operand3: Some(Literal8(121)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 208, 121], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM7)), operand3: Some(Literal8(53)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 247, 53], OperandSize::Qword)
 }
 
 #[test]
 fn dppd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledDisplaced(RBX, Four, 2084693867, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(92)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 36, 157, 107, 231, 65, 124, 92], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DPPD, operand1: Some(Direct(XMM4)), operand2: Some(IndirectDisplaced(RSI, 2070692297, Some(OperandSize::Xmmword), None)), operand3: Some(Literal8(114)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 58, 65, 166, 201, 65, 108, 123, 114], OperandSize::Qword)
 }
 

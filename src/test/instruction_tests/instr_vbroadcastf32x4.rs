@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn vbroadcastf32x4_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(YMM3)), operand2: Some(IndirectDisplaced(EDI, 325882819, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 242, 125, 170, 26, 159, 195, 147, 108, 19], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(YMM3)), operand2: Some(IndirectScaledDisplaced(EDX, Two, 1178895961, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 242, 125, 169, 26, 28, 85, 89, 134, 68, 70], OperandSize::Dword)
 }
 
 #[test]
 fn vbroadcastf32x4_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(YMM24)), operand2: Some(IndirectDisplaced(RCX, 1437175990, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 98, 125, 172, 26, 129, 182, 144, 169, 85], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(YMM10)), operand2: Some(IndirectDisplaced(RCX, 34863451, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 114, 125, 171, 26, 145, 91, 249, 19, 2], OperandSize::Qword)
 }
 
 #[test]
 fn vbroadcastf32x4_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(ZMM5)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, ECX, Two, 662111956, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 242, 125, 205, 26, 172, 78, 212, 6, 119, 39], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(ZMM7)), operand2: Some(IndirectScaledDisplaced(EDI, Eight, 337061470, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 242, 125, 202, 26, 60, 253, 94, 38, 23, 20], OperandSize::Dword)
 }
 
 #[test]
 fn vbroadcastf32x4_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(ZMM0)), operand2: Some(IndirectScaledIndexedDisplaced(RCX, RAX, Four, 413202852, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 242, 125, 207, 26, 132, 129, 164, 249, 160, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VBROADCASTF32X4, operand1: Some(Direct(ZMM30)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RBX, Two, 2136203625, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 98, 125, 202, 26, 180, 90, 105, 225, 83, 127], OperandSize::Qword)
 }
 

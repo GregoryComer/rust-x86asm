@@ -2,6 +2,7 @@ mod addressing16;
 mod addressing32;
 mod addressing64;
 mod decode;
+mod encode;
 mod size_inference;
 mod instruction_tests;
 
@@ -17,9 +18,12 @@ fn test_aliased<F>(mnemonics: &[Mnemonic], test: F)
 }
 
 fn decode_helper(bytes: &Vec<u8>, mode: Mode, expected: &Instruction) {
+    println!("decode_helper ({:?}): {:?}\n", mode, expected);
     let mut buffer = Cursor::new(bytes);
     let mut reader = InstructionReader::new(buffer, mode);
     assert_eq!(reader.read().expect("Decoding failed"), *expected);
+
+    println!("\n * * * DECODE OK * * *\n");
 }
 
 fn decode32_helper(bytes: &Vec<u8>, expected: &Instruction) {
@@ -170,7 +174,21 @@ fn run_test(instr: &Instruction, expected: &[u8], addr_size: OperandSize) {
     let mut buffer = Cursor::new(Vec::new());
     instr.encode(&mut buffer, Mode::from_size(addr_size).unwrap()).expect("Encoding failed");
     if &buffer.get_ref()[..] != expected {
-        panic!("Test failed. Mode: {:?}.\nInstruction: {:?}.\nOutput: {:?}.\nExpected: {:?}",
-            addr_size, instr, buffer.get_ref(), expected);
+        print!("Output:   [");
+        output_hex_array(buffer.get_ref());
+        println!("]");
+        print!("Expected: [");
+        output_hex_array(expected);
+        println!("]");
+        panic!("Test failed. Mode: {:?}.\nInstruction: {:?}.\n", addr_size, instr); 
+    }
+}
+
+fn output_hex_array(data: &[u8]) {
+    for i in 0..data.len() {
+        print!("{:02X}", data[i]);
+        if i != data.len() - 1 {
+           print!(", "); 
+        }
     }
 }

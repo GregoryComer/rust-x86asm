@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn fdivrp_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST2)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 242], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST3)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 243], OperandSize::Word)
 }
 
 #[test]
 fn fdivrp_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST6)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 246], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST4)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 244], OperandSize::Dword)
 }
 
 #[test]
 fn fdivrp_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST3)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 243], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVRP, operand1: Some(Direct(ST2)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 242], OperandSize::Qword)
 }
 

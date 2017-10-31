@@ -8,17 +8,17 @@ use ::test::run_test;
 
 #[test]
 fn fnstsw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 9571, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 187, 99, 37], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(Indirect(DI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 61], OperandSize::Word)
 }
 
 #[test]
 fn fnstsw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledDisplaced(ECX, Two, 386383627, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 77, 11, 191, 7, 23], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledDisplaced(EAX, Four, 784818391, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 133, 215, 96, 199, 46], OperandSize::Dword)
 }
 
 #[test]
 fn fnstsw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledDisplaced(RAX, Two, 980567054, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 69, 14, 68, 114, 58], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(Indirect(RAX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 56], OperandSize::Qword)
 }
 
 #[test]

@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn aad_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::AAD, operand1: Some(Literal8(16)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[213, 16], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::AAD, operand1: Some(Literal8(30)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[213, 30], OperandSize::Word)
 }
 
 #[test]
 fn aad_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::AAD, operand1: Some(Literal8(120)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[213, 120], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::AAD, operand1: Some(Literal8(61)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[213, 61], OperandSize::Dword)
 }
 

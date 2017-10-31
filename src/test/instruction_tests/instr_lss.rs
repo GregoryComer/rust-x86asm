@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn lss_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(CX)), operand2: Some(IndirectScaledIndexed(BP, DI, One, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 11], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(DI)), operand2: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 1144, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 185, 120, 4], OperandSize::Word)
 }
 
 #[test]
 fn lss_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(BX)), operand2: Some(IndirectDisplaced(EAX, 1096637992, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 178, 152, 40, 94, 93, 65], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(BX)), operand2: Some(IndirectDisplaced(ECX, 163576788, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 178, 153, 212, 251, 191, 9], OperandSize::Dword)
 }
 
 #[test]
 fn lss_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(DX)), operand2: Some(IndirectDisplaced(RAX, 1638742012, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 178, 144, 252, 55, 173, 97], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(SI)), operand2: Some(IndirectScaledDisplaced(RSI, Eight, 1993988580, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 178, 52, 245, 228, 217, 217, 118], OperandSize::Qword)
 }
 
 #[test]
 fn lss_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(EDX)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, EBX, Four, 263663467, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 148, 154, 107, 47, 183, 15], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(ESP)), operand2: Some(Indirect(EDX, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 34], OperandSize::Dword)
 }
 
 #[test]
 fn lss_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(EBX)), operand2: Some(Indirect(RAX, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(ECX)), operand2: Some(IndirectScaledIndexed(RBX, RSI, Eight, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 178, 12, 243], OperandSize::Qword)
 }
 
 #[test]
 fn lss_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(RDI)), operand2: Some(IndirectDisplaced(RCX, 740358039, Some(OperandSize::Far64), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 178, 185, 151, 247, 32, 44], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LSS, operand1: Some(Direct(RDI)), operand2: Some(IndirectDisplaced(RCX, 1632670667, Some(OperandSize::Far64), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 178, 185, 203, 147, 80, 97], OperandSize::Qword)
 }
 

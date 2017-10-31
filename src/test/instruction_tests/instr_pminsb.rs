@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn pminsb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 222], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 197], OperandSize::Dword)
 }
 
 #[test]
 fn pminsb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 224839127, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 60, 77, 215, 197, 102, 13], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM1)), operand2: Some(IndirectScaledDisplaced(EDX, Two, 1152019552, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 12, 85, 96, 108, 170, 68], OperandSize::Dword)
 }
 
 #[test]
 fn pminsb_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 249], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 201], OperandSize::Qword)
 }
 
 #[test]
 fn pminsb_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM3)), operand2: Some(Indirect(RCX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 25], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexed(RAX, RAX, Four, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 36, 128], OperandSize::Qword)
 }
 

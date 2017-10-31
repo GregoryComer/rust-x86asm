@@ -8,451 +8,451 @@ use ::test::run_test;
 
 #[test]
 fn or_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 219], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 217], OperandSize::Word)
 }
 
 #[test]
 fn or_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(BX, 126, Some(OperandSize::Byte), None)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 79, 126], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 98, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 90, 98], OperandSize::Word)
 }
 
 #[test]
 fn or_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 203], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 210], OperandSize::Dword)
 }
 
 #[test]
 fn or_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(EDX, ESI, Two, 325403143, Some(OperandSize::Byte), None)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 148, 114, 7, 66, 101, 19], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(EDI, EAX, Four, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 28, 135], OperandSize::Dword)
 }
 
 #[test]
 fn or_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 203], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 211], OperandSize::Qword)
 }
 
 #[test]
 fn or_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(RAX, 359173983, Some(OperandSize::Byte), None)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 144, 95, 143, 104, 21], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(RSI, Some(OperandSize::Byte), None)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 14], OperandSize::Qword)
 }
 
 #[test]
 fn or_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 217], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 219], OperandSize::Qword)
 }
 
 #[test]
 fn or_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RBX, RDI, Four, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 28, 187], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(RBX, Two, 2084726152, Some(OperandSize::Byte), None)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 28, 93, 136, 101, 66, 124], OperandSize::Qword)
 }
 
 #[test]
 fn or_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SI)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 246], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 218], OperandSize::Word)
 }
 
 #[test]
 fn or_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(SI, 17886, Some(OperandSize::Word), None)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 180, 222, 69], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(BX, 236, Some(OperandSize::Word), None)), operand2: Some(Direct(BP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 175, 236, 0], OperandSize::Word)
 }
 
 #[test]
 fn or_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SI)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 246], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CX)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 209], OperandSize::Dword)
 }
 
 #[test]
 fn or_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(EAX, EAX, Two, Some(OperandSize::Word), None)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 20, 64], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(ECX, 2093168844, Some(OperandSize::Word), None)), operand2: Some(Direct(DX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 145, 204, 56, 195, 124], OperandSize::Dword)
 }
 
 #[test]
 fn or_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 243], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 218], OperandSize::Qword)
 }
 
 #[test]
 fn or_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(RDX, Some(OperandSize::Word), None)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 50], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(RSI, RSI, Eight, 1337118387, Some(OperandSize::Word), None)), operand2: Some(Direct(SP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 164, 246, 179, 206, 178, 79], OperandSize::Qword)
 }
 
 #[test]
 fn or_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ECX)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 241], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ECX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 225], OperandSize::Word)
 }
 
 #[test]
 fn or_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 227, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 152, 227, 0], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(DI, 97, Some(OperandSize::Dword), None)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 93, 97], OperandSize::Word)
 }
 
 #[test]
 fn or_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 242], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 252], OperandSize::Dword)
 }
 
 #[test]
 fn or_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(EDI, EDX, Eight, 1862869517, Some(OperandSize::Dword), None)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 188, 215, 13, 34, 9, 111], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(ESI, Some(OperandSize::Dword), None)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 38], OperandSize::Dword)
 }
 
 #[test]
 fn or_19() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBP)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 245], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 242], OperandSize::Qword)
 }
 
 #[test]
 fn or_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(RBX, Two, 16820367, Some(OperandSize::Dword), None)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 20, 93, 143, 168, 0, 1], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RDX, RCX, Eight, Some(OperandSize::Dword), None)), operand2: Some(Direct(ESI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 52, 202], OperandSize::Qword)
 }
 
 #[test]
 fn or_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RBP)), operand2: Some(Direct(RBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 237], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RCX)), operand2: Some(Direct(RSP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 225], OperandSize::Qword)
 }
 
 #[test]
 fn or_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(RDX, Two, 117974300, Some(OperandSize::Qword), None)), operand2: Some(Direct(RDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 20, 85, 28, 37, 8, 7], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(RAX, 1751924288, Some(OperandSize::Qword), None)), operand2: Some(Direct(RBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 152, 64, 62, 108, 104], OperandSize::Qword)
 }
 
 #[test]
 fn or_23() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 202], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 203], OperandSize::Word)
 }
 
 #[test]
 fn or_24() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 25], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Memory(6864, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 30, 208, 26], OperandSize::Word)
 }
 
 #[test]
 fn or_25() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 219], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 217], OperandSize::Dword)
 }
 
 #[test]
 fn or_26() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(IndirectScaledDisplaced(EDI, Four, 2095466409, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 12, 189, 169, 71, 230, 124], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(IndirectScaledIndexed(EDI, ECX, Eight, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 28, 207], OperandSize::Dword)
 }
 
 #[test]
 fn or_27() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 210], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 217], OperandSize::Qword)
 }
 
 #[test]
 fn or_28() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(IndirectScaledIndexed(RDX, RAX, Eight, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 12, 194], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(IndirectDisplaced(RDX, 1900066070, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 138, 22, 181, 64, 113], OperandSize::Qword)
 }
 
 #[test]
 fn or_29() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 201], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[8, 209], OperandSize::Qword)
 }
 
 #[test]
 fn or_30() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(IndirectScaledIndexed(RDI, RAX, Four, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 12, 135], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(IndirectScaledIndexed(RSI, RAX, Eight, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[10, 20, 198], OperandSize::Qword)
 }
 
 #[test]
 fn or_31() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 252], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Direct(BP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 234], OperandSize::Word)
 }
 
 #[test]
 fn or_32() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SI)), operand2: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 20124, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 178, 156, 78], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BP)), operand2: Some(IndirectDisplaced(BP, 6378, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 174, 234, 24], OperandSize::Word)
 }
 
 #[test]
 fn or_33() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 243], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DI)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 223], OperandSize::Dword)
 }
 
 #[test]
 fn or_34() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(IndirectScaledDisplaced(EDX, Eight, 274535962, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 20, 213, 26, 22, 93, 16], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DI)), operand2: Some(Indirect(ECX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 57], OperandSize::Dword)
 }
 
 #[test]
 fn or_35() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(Direct(CX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 204], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 242], OperandSize::Qword)
 }
 
 #[test]
 fn or_36() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(IndirectScaledDisplaced(RDI, Eight, 476875493, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 36, 253, 229, 138, 108, 28], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BX)), operand2: Some(IndirectScaledIndexedDisplaced(RDI, RDX, Two, 249519345, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 156, 87, 241, 92, 223, 14], OperandSize::Qword)
 }
 
 #[test]
 fn or_37() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Direct(EDX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 210], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ECX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 9, 225], OperandSize::Word)
 }
 
 #[test]
 fn or_38() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Memory(20500, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 30, 20, 80], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 11, 32], OperandSize::Word)
 }
 
 #[test]
 fn or_39() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 226], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESI)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 206], OperandSize::Dword)
 }
 
 #[test]
 fn or_40() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESP)), operand2: Some(IndirectDisplaced(ESI, 1387237981, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 166, 93, 146, 175, 82], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, EBX, Two, 484435346, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 172, 90, 146, 229, 223, 28], OperandSize::Dword)
 }
 
 #[test]
 fn or_41() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ECX)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 225], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[9, 234], OperandSize::Qword)
 }
 
 #[test]
 fn or_42() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(IndirectScaledIndexed(RDI, RDX, Two, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 20, 87], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledIndexed(RDX, RCX, Eight, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[11, 52, 202], OperandSize::Qword)
 }
 
 #[test]
 fn or_43() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RBX)), operand2: Some(Direct(RDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 251], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RBX)), operand2: Some(Direct(RSP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 9, 227], OperandSize::Qword)
 }
 
 #[test]
 fn or_44() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RCX)), operand2: Some(IndirectScaledIndexedDisplaced(RSI, RDI, Two, 297361381, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 11, 140, 126, 229, 95, 185, 17], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RBP)), operand2: Some(IndirectScaledIndexedDisplaced(RAX, RDX, Eight, 623435566, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 11, 172, 208, 46, 223, 40, 37], OperandSize::Qword)
 }
 
 #[test]
 fn or_45() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(101)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 101], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(90)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 90], OperandSize::Word)
 }
 
 #[test]
 fn or_46() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(121)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 121], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 0], OperandSize::Dword)
 }
 
 #[test]
 fn or_47() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(10)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 10], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AL)), operand2: Some(Literal8(126)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[12, 126], OperandSize::Qword)
 }
 
 #[test]
 fn or_48() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(18749)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 61, 73], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(9602)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 130, 37], OperandSize::Word)
 }
 
 #[test]
 fn or_49() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(11773)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 253, 45], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(9436)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 220, 36], OperandSize::Dword)
 }
 
 #[test]
 fn or_50() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(31662)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 174, 123], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(AX)), operand2: Some(Literal16(30739)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 19, 120], OperandSize::Qword)
 }
 
 #[test]
 fn or_51() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(862092881)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 81, 126, 98, 51], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(994110113)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 13, 161, 234, 64, 59], OperandSize::Word)
 }
 
 #[test]
 fn or_52() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(112401051)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 155, 26, 179, 6], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(442113381)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 101, 29, 90, 26], OperandSize::Dword)
 }
 
 #[test]
 fn or_53() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(1079846771)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 115, 39, 93, 64], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EAX)), operand2: Some(Literal32(1587638257)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[13, 241, 111, 161, 94], OperandSize::Qword)
 }
 
 #[test]
 fn or_54() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RAX)), operand2: Some(Literal32(79526092)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 13, 204, 120, 189, 4], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RAX)), operand2: Some(Literal32(1890863632)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 13, 16, 74, 180, 112], OperandSize::Qword)
 }
 
 #[test]
 fn or_55() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Literal8(116)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 201, 116], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Literal8(4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 203, 4], OperandSize::Word)
 }
 
 #[test]
 fn or_56() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(BP, 31958, Some(OperandSize::Byte), None)), operand2: Some(Literal8(91)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 142, 214, 124, 91], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 28162, Some(OperandSize::Byte), None)), operand2: Some(Literal8(51)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 137, 2, 110, 51], OperandSize::Word)
 }
 
 #[test]
 fn or_57() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Literal8(46)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 202, 46], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CL)), operand2: Some(Literal8(39)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 201, 39], OperandSize::Dword)
 }
 
 #[test]
 fn or_58() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(EAX, ECX, Eight, Some(OperandSize::Byte), None)), operand2: Some(Literal8(67)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 12, 200, 67], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(ESI, Eight, 1794157987, Some(OperandSize::Byte), None)), operand2: Some(Literal8(109)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 12, 245, 163, 173, 240, 106, 109], OperandSize::Dword)
 }
 
 #[test]
 fn or_59() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Literal8(12)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 202, 12], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Literal8(47)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 202, 47], OperandSize::Qword)
 }
 
 #[test]
 fn or_60() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(RAX, RDX, Eight, 1469692230, Some(OperandSize::Byte), None)), operand2: Some(Literal8(95)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 140, 208, 70, 185, 153, 87, 95], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RDX, RAX, Two, Some(OperandSize::Byte), None)), operand2: Some(Literal8(81)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 12, 66, 81], OperandSize::Qword)
 }
 
 #[test]
 fn or_61() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BL)), operand2: Some(Literal8(0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 203, 0], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DL)), operand2: Some(Literal8(79)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 202, 79], OperandSize::Qword)
 }
 
 #[test]
 fn or_62() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(RCX, Two, 1644029813, Some(OperandSize::Byte), None)), operand2: Some(Literal8(107)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 12, 77, 117, 231, 253, 97, 107], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(RCX, 1782214988, Some(OperandSize::Byte), None)), operand2: Some(Literal8(18)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[128, 137, 76, 113, 58, 106, 18], OperandSize::Qword)
 }
 
 #[test]
 fn or_63() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(CX)), operand2: Some(Literal16(17472)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 201, 64, 68], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(Literal16(5194)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 204, 74, 20], OperandSize::Word)
 }
 
 #[test]
 fn or_64() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 216, Some(OperandSize::Word), None)), operand2: Some(Literal16(3226)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 139, 216, 0, 154, 12], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Memory(9342, Some(OperandSize::Word), None)), operand2: Some(Literal16(14411)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 14, 126, 36, 75, 56], OperandSize::Word)
 }
 
 #[test]
 fn or_65() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BX)), operand2: Some(Literal16(27019)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 203, 139, 105], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Literal16(32179)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 202, 179, 125], OperandSize::Dword)
 }
 
 #[test]
 fn or_66() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(EBX, EDX, Two, Some(OperandSize::Word), None)), operand2: Some(Literal16(16632)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 12, 83, 248, 64], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(EAX, EDI, Four, Some(OperandSize::Word), None)), operand2: Some(Literal16(25187)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 12, 184, 99, 98], OperandSize::Dword)
 }
 
 #[test]
 fn or_67() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DI)), operand2: Some(Literal16(23579)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 207, 27, 92], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Literal16(3934)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 202, 94, 15], OperandSize::Qword)
 }
 
 #[test]
 fn or_68() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(RAX, 2117885286, Some(OperandSize::Word), None)), operand2: Some(Literal16(3102)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 136, 102, 93, 60, 126, 30, 12], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(RAX, Some(OperandSize::Word), None)), operand2: Some(Literal16(5822)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 8, 190, 22], OperandSize::Qword)
 }
 
 #[test]
 fn or_69() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Literal32(318827126)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 203, 118, 234, 0, 19], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESP)), operand2: Some(Literal32(1042497950)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 204, 158, 65, 35, 62], OperandSize::Word)
 }
 
 #[test]
 fn or_70() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 23095, Some(OperandSize::Dword), None)), operand2: Some(Literal32(783781039)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 137, 55, 90, 175, 140, 183, 46], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(BX, Some(OperandSize::Dword), None)), operand2: Some(Literal32(2000060761)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 129, 15, 89, 129, 54, 119], OperandSize::Word)
 }
 
 #[test]
 fn or_71() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBP)), operand2: Some(Literal32(1803608301)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 205, 237, 224, 128, 107], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDX)), operand2: Some(Literal32(418736316)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 202, 188, 104, 245, 24], OperandSize::Dword)
 }
 
 #[test]
 fn or_72() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(ECX, Four, 239516615, Some(OperandSize::Dword), None)), operand2: Some(Literal32(454735470)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 12, 141, 199, 187, 70, 14, 110, 182, 26, 27], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(EDX, Some(OperandSize::Dword), None)), operand2: Some(Literal32(47470356)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 10, 20, 87, 212, 2], OperandSize::Dword)
 }
 
 #[test]
 fn or_73() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBP)), operand2: Some(Literal32(1550376840)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 205, 136, 223, 104, 92], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Literal32(2145649088)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 203, 192, 1, 228, 127], OperandSize::Qword)
 }
 
 #[test]
 fn or_74() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(RDI, Some(OperandSize::Dword), None)), operand2: Some(Literal32(1492352757)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 15, 245, 126, 243, 88], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(RBX, Some(OperandSize::Dword), None)), operand2: Some(Literal32(142560841)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[129, 11, 73, 78, 127, 8], OperandSize::Qword)
 }
 
 #[test]
 fn or_75() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RSI)), operand2: Some(Literal32(1436672518)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 129, 206, 6, 226, 161, 85], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RSP)), operand2: Some(Literal32(603791174)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 129, 204, 70, 31, 253, 35], OperandSize::Qword)
 }
 
 #[test]
 fn or_76() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RAX, RBX, Eight, Some(OperandSize::Qword), None)), operand2: Some(Literal32(903618041)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 129, 12, 216, 249, 29, 220, 53], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RCX, RDI, Two, Some(OperandSize::Qword), None)), operand2: Some(Literal32(514009601)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 129, 12, 121, 1, 42, 163, 30], OperandSize::Qword)
 }
 
 #[test]
 fn or_77() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Literal8(47)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 202, 47], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(BP)), operand2: Some(Literal8(90)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 205, 90], OperandSize::Word)
 }
 
 #[test]
 fn or_78() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 213, Some(OperandSize::Word), None)), operand2: Some(Literal8(101)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 136, 213, 0, 101], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Word), None)), operand2: Some(Literal8(107)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 10, 107], OperandSize::Word)
 }
 
 #[test]
 fn or_79() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DX)), operand2: Some(Literal8(65)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 202, 65], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(Literal8(110)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 204, 110], OperandSize::Dword)
 }
 
 #[test]
 fn or_80() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(EDI, 1491537681, Some(OperandSize::Word), None)), operand2: Some(Literal8(96)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 143, 17, 15, 231, 88, 96], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(ESI, Some(OperandSize::Word), None)), operand2: Some(Literal8(14)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 14, 14], OperandSize::Dword)
 }
 
 #[test]
 fn or_81() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(SP)), operand2: Some(Literal8(65)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 204, 65], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(DI)), operand2: Some(Literal8(46)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 207, 46], OperandSize::Qword)
 }
 
 #[test]
 fn or_82() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RDI, RAX, Four, Some(OperandSize::Word), None)), operand2: Some(Literal8(7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 12, 135, 7], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(RDX, RDX, Four, 212197780, Some(OperandSize::Word), None)), operand2: Some(Literal8(87)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 140, 146, 148, 225, 165, 12, 87], OperandSize::Qword)
 }
 
 #[test]
 fn or_83() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Literal8(21)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 203, 21], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Literal8(35)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 203, 35], OperandSize::Word)
 }
 
 #[test]
 fn or_84() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Memory(22932, Some(OperandSize::Dword), None)), operand2: Some(Literal8(1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 14, 148, 89, 1], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectDisplaced(BP, 145, Some(OperandSize::Dword), None)), operand2: Some(Literal8(110)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 131, 142, 145, 0, 110], OperandSize::Word)
 }
 
 #[test]
 fn or_85() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDI)), operand2: Some(Literal8(113)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 207, 113], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EDI)), operand2: Some(Literal8(92)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 207, 92], OperandSize::Dword)
 }
 
 #[test]
 fn or_86() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(EBX, EBX, Two, 216787832, Some(OperandSize::Dword), None)), operand2: Some(Literal8(115)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 140, 91, 120, 235, 235, 12, 115], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Indirect(ECX, Some(OperandSize::Dword), None)), operand2: Some(Literal8(7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 9, 7], OperandSize::Dword)
 }
 
 #[test]
 fn or_87() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(EBX)), operand2: Some(Literal8(109)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 203, 109], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(ESI)), operand2: Some(Literal8(102)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 206, 102], OperandSize::Qword)
 }
 
 #[test]
 fn or_88() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexedDisplaced(RBX, RAX, Two, 773854221, Some(OperandSize::Dword), None)), operand2: Some(Literal8(113)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 140, 67, 13, 20, 32, 46, 113], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RCX, RDX, Two, Some(OperandSize::Dword), None)), operand2: Some(Literal8(82)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[131, 12, 81, 82], OperandSize::Qword)
 }
 
 #[test]
 fn or_89() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RSI)), operand2: Some(Literal8(119)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 131, 206, 119], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(Direct(RDX)), operand2: Some(Literal8(31)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 131, 202, 31], OperandSize::Qword)
 }
 
 #[test]
 fn or_90() {
-    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledDisplaced(RBX, Four, 1499764778, Some(OperandSize::Qword), None)), operand2: Some(Literal8(93)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 131, 12, 157, 42, 152, 100, 89, 93], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::OR, operand1: Some(IndirectScaledIndexed(RCX, RCX, Two, Some(OperandSize::Qword), None)), operand2: Some(Literal8(40)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 131, 12, 73, 40], OperandSize::Qword)
 }
 

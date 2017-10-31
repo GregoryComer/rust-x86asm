@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn maxps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 217], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 252], OperandSize::Dword)
 }
 
 #[test]
 fn maxps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, ESI, Two, 657276002, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 188, 118, 98, 60, 45, 39], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledDisplaced(EAX, Two, 346118717, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 60, 69, 61, 90, 161, 20], OperandSize::Dword)
 }
 
 #[test]
 fn maxps_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 246], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 211], OperandSize::Qword)
 }
 
 #[test]
 fn maxps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM3)), operand2: Some(Indirect(RSI, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 30], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MAXPS, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledDisplaced(RDX, Eight, 1941983422, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 95, 44, 213, 190, 80, 192, 115], OperandSize::Qword)
 }
 

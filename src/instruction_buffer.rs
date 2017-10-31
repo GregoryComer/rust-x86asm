@@ -21,6 +21,7 @@ pub const PREFIX_TWO_BYTE_OPCODE: u8 = 0x0F;
 pub const PREFIX_VEX2: u8 = 0xC5;
 pub const PREFIX_VEX3: u8 = 0xC4;
 pub const PREFIX_EVEX: u8 = 0x62;
+pub const FWAIT: u8 = 0x9B;
 
 #[derive(Debug)]
 pub struct InstructionBuffer { 
@@ -29,7 +30,9 @@ pub struct InstructionBuffer {
     pub operand_size_prefix: bool,
     pub operand_size_64: bool,
     pub address_size_prefix: bool,
-    pub fixed_prefix: Option<u8>,
+    pub f2_prefix: bool,
+    pub f3_prefix: bool,
+    pub fwait: bool,
     pub is_two_byte_opcode: bool,
     pub primary_opcode: u8,
     pub secondary_opcode: Option<u8>,
@@ -51,7 +54,6 @@ pub struct InstructionBuffer {
     pub vex_b: Option<bool>,
     pub vex_l: Option<bool>,
     pub composite_prefix: Option<CompositePrefix>,
-    pub fixed_post: Option<u8>
 
     // TODO Force REX
 }
@@ -75,6 +77,8 @@ impl InstructionBuffer {
         let emit_vex = !emit_evex && self.should_emit_vex();
         let emit_rex = !emit_evex && !emit_vex && self.should_emit_rex();
 
+        if self.fwait { writer.write_all(&[FWAIT])?; bytes_written += 1; }
+
         // Prefix 1
         if let Some(p1) = self.get_prefix1_byte() { writer.write_all(&[p1])?; bytes_written += 1; }
 
@@ -89,10 +93,13 @@ impl InstructionBuffer {
             if self.operand_size_prefix { writer.write_all(&[PREFIX_OP_SIZE])?; bytes_written += 1; }
         }
 
-        // Fixed prefix
-        if let Some(pre) = self.fixed_prefix {
-            if !emit_vex && !emit_evex || !((pre == 0xF2) || (pre == 0xF3)) {
-                writer.write_all(&[pre])?; bytes_written += 1;
+        // F2/F3
+        if !emit_vex && !emit_evex {
+            if self.f2_prefix {
+                writer.write_all(&[0xF2])?; bytes_written += 1;
+            }
+            if self.f3_prefix {
+                writer.write_all(&[0xF3])?; bytes_written += 1;
             }
         }
 
@@ -116,9 +123,6 @@ impl InstructionBuffer {
 
         // Secondary opcode
         if let Some(op) = self.secondary_opcode { writer.write_all(&[op])?; bytes_written += 1; }
-
-        // Fixed post
-        if let Some(b) = self.fixed_post { writer.write_all(&[b])?; bytes_written += 1; }
 
         // ModR/M byte
         if let Some(mod_rm) = self.get_mod_rm() { writer.write_all(&[mod_rm])?; bytes_written += 1; }
@@ -188,8 +192,8 @@ impl InstructionBuffer {
         let vex_b = self.mod_rm_rm.or(self.sib_base).map(|r| (!r & 0x8) >> 3);
         let vex_we = if self.vex_e.unwrap_or(self.operand_size_64) { 1 } else { 0 };
         let pp = if self.operand_size_prefix { 1 }
-                 else if self.fixed_prefix.map(|p| p == 0xF3).unwrap_or(false) { 2 }
-                 else if self.fixed_prefix.map(|p| p == 0xF2).unwrap_or(false) { 3 }
+                 else if self.f3_prefix { 2 }
+                 else if self.f2_prefix { 3 }
                  else { 0 };
         let map_select = if self.primary_opcode == 0x38 { 2 }
                          else if self.primary_opcode == 0x3A { 3 }
@@ -242,8 +246,8 @@ impl InstructionBuffer {
             MergeMode::Zero => 1
         }).unwrap_or(0);
         let pp = if self.operand_size_prefix { 1 }
-             else if self.fixed_prefix.map(|p| p == 0xF3).unwrap_or(false) { 2 }
-             else if self.fixed_prefix.map(|p| p == 0xF2).unwrap_or(false) { 3 }
+             else if self.f3_prefix { 2 }
+             else if self.f2_prefix { 3 }
              else { 0 };
         let map_select = if self.primary_opcode == 0x38 { 2 }
                      else if self.primary_opcode == 0x3A { 3 }
@@ -379,6 +383,10 @@ impl InstructionBuffer {
             _ => None
         })
     }
+
+    pub fn has_rex(&self) -> bool {
+        self.composite_prefix == Some(CompositePrefix::Rex)
+    }
 }
 
 impl Default for InstructionBuffer {
@@ -390,7 +398,9 @@ impl Default for InstructionBuffer {
             operand_size_prefix: false,
             operand_size_64: false,
             address_size_prefix: false,
-            fixed_prefix: None,
+            f2_prefix: false,
+            f3_prefix: false,
+            fwait: false,
             is_two_byte_opcode: false,
             primary_opcode: 0,
             secondary_opcode: None,
@@ -411,7 +421,6 @@ impl Default for InstructionBuffer {
             merge_mode: None,
             vex_b: None,
             vex_l: None,
-            fixed_post: None,
         }
     }
 }

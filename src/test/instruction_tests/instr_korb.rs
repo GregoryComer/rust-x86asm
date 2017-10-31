@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn korb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::KORB, operand1: Some(Direct(K5)), operand2: Some(Direct(K1)), operand3: Some(Direct(K6)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 245, 69, 238], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KORB, operand1: Some(Direct(K7)), operand2: Some(Direct(K1)), operand3: Some(Direct(K6)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 245, 69, 254], OperandSize::Dword)
 }
 
 #[test]
 fn korb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::KORB, operand1: Some(Direct(K3)), operand2: Some(Direct(K1)), operand3: Some(Direct(K2)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 245, 69, 218], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KORB, operand1: Some(Direct(K2)), operand2: Some(Direct(K6)), operand3: Some(Direct(K7)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 205, 69, 215], OperandSize::Qword)
 }
 

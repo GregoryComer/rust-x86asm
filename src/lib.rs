@@ -15,7 +15,7 @@ mod operand;
 
 pub use self::decoding::{InstructionDecodingError, InstructionReader};
 pub use self::encoding::{InstructionEncodingError, InstructionWriter};
-pub use self::instruction::{ Instruction, Reg, RegScale, SegmentReg, MergeMode, MaskReg, BroadcastMode, RoundingMode };
+pub use self::instruction::{ Instruction, Reg, RegScale, SegmentReg, MergeMode, MaskReg, BroadcastMode, RoundingMode, RegType };
 pub use self::operand::{Operand, OperandSize};
 pub use self::mnemonic::Mnemonic;
 
@@ -43,15 +43,4 @@ impl Mode {
             _ => None,
         }
     }
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum RegType { // TODO Move to different file?
-    General,
-    Mmx,
-    Avx,
-    Fpu,
-    Bound,
-    Mask,
-    Segment
 }

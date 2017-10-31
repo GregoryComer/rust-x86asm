@@ -473,6 +473,10 @@ fn random_bound_reg() -> Reg { random_of(&[Reg::BND0, Reg::BND1, Reg::BND2, Reg:
 
 fn random_segment_reg() -> Reg { random_of(&[Reg::CS, Reg::DS, Reg::ES, Reg::FS, Reg::GS, Reg::SS]) }
 
+fn random_control_reg() -> Reg { random_of(&[Reg::CR0, Reg::CR1, Reg::CR2, Reg::CR3, Reg::CR4 ]) }
+
+fn random_debug_reg() -> Reg { random_of(&[Reg::DR0, Reg::DR1, Reg::DR2, Reg::DR3, Reg::DR4, Reg::DR5]) }
+
 fn random_xmm_reg(use_all: bool) -> Reg { 
     if use_all { random_of(&[
         Reg::XMM0,  Reg::XMM1,  Reg::XMM2,  Reg::XMM3,  Reg::XMM4,  Reg::XMM5,  Reg::XMM6,  Reg::XMM7,
@@ -537,6 +541,8 @@ fn random_reg(reg_type: RegType, size: OperandSize, addr_size: OperandSize,
         RegType::Bound => random_bound_reg(),
         RegType::Mask => random_mask_reg(),
         RegType::Segment => random_segment_reg(),
+        RegType::Control => random_control_reg(),
+        RegType::Debug => random_debug_reg()
     }
 }
 

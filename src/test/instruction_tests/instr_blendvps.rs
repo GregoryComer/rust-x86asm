@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn blendvps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM7)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 207], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 202], OperandSize::Dword)
 }
 
 #[test]
 fn blendvps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM2)), operand2: Some(IndirectDisplaced(EAX, 1440482848, Some(OperandSize::Xmmword), None)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 144, 32, 6, 220, 85], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledDisplaced(EAX, Four, 1105484551, Some(OperandSize::Xmmword), None)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 28, 133, 7, 91, 228, 65], OperandSize::Dword)
 }
 
 #[test]
@@ -23,6 +23,6 @@ fn blendvps_3() {
 
 #[test]
 fn blendvps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledIndexedDisplaced(RSI, RDI, Four, 1692964391, Some(OperandSize::Xmmword), None)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 132, 190, 39, 150, 232, 100], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BLENDVPS, operand1: Some(Direct(XMM3)), operand2: Some(Indirect(RSI, Some(OperandSize::Xmmword), None)), operand3: Some(Direct(XMM0)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 20, 30], OperandSize::Qword)
 }
 

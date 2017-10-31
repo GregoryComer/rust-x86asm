@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn divsd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 204], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 249], OperandSize::Dword)
 }
 
 #[test]
 fn divsd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM0)), operand2: Some(Indirect(EBX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 3], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM6)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, EAX, Two, 640523327, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 180, 70, 63, 156, 45, 38], OperandSize::Dword)
 }
 
 #[test]
 fn divsd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 245], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 232], OperandSize::Qword)
 }
 
 #[test]
 fn divsd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RAX, Two, 1199155738, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 132, 66, 26, 170, 121, 71], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIVSD, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexed(RDI, RDX, Eight, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 94, 28, 215], OperandSize::Qword)
 }
 

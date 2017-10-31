@@ -8,16 +8,16 @@ use ::test::run_test;
 
 #[test]
 fn enter_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(20343)), operand2: Some(Literal8(88)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 119, 79, 88], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(12552)), operand2: Some(Literal8(24)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 8, 49, 24], OperandSize::Word)
 }
 
 #[test]
 fn enter_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(13336)), operand2: Some(Literal8(52)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 24, 52, 52], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(931)), operand2: Some(Literal8(14)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 163, 3, 14], OperandSize::Dword)
 }
 
 #[test]
 fn enter_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(5958)), operand2: Some(Literal8(26)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 70, 23, 26], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ENTER, operand1: Some(Literal16(17550)), operand2: Some(Literal8(73)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[200, 142, 68, 73], OperandSize::Qword)
 }
 
