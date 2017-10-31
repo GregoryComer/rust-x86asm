@@ -8,17 +8,17 @@ use ::test::run_test;
 
 #[test]
 fn fnstsw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(Indirect(DI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 61], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 233, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 184, 233, 0], OperandSize::Word)
 }
 
 #[test]
 fn fnstsw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledDisplaced(EAX, Four, 784818391, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 133, 215, 96, 199, 46], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledDisplaced(EDI, Four, 1262691123, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 189, 51, 35, 67, 75], OperandSize::Dword)
 }
 
 #[test]
 fn fnstsw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(Indirect(RAX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 56], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FNSTSW, operand1: Some(IndirectScaledIndexed(RSI, RDX, Two, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[221, 60, 86], OperandSize::Qword)
 }
 
 #[test]

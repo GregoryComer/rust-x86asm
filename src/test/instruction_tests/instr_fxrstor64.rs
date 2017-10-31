@@ -8,6 +8,6 @@ use ::test::run_test;
 
 #[test]
 fn fxrstor64_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FXRSTOR64, operand1: Some(IndirectScaledDisplaced(RSI, Eight, 126130528, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 174, 12, 245, 96, 153, 132, 7], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FXRSTOR64, operand1: Some(Indirect(RCX, Some(OperandSize::Unsized), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 174, 9], OperandSize::Qword)
 }
 

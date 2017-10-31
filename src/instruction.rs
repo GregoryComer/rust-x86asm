@@ -1,7 +1,7 @@
 use std::io::Write;
 use ::{InstructionEncodingError, Mnemonic, Mode};
 use ::encoding::{encode};
-use ::instruction_def::{find_instruction_def, InstructionDefinition, OperandType};
+use ::instruction_def::{find_instruction_def};
 use ::operand::{Operand, OperandSize};
 
 #[derive(Copy, Clone, Debug)]
@@ -427,7 +427,7 @@ impl Reg {
             Reg::DR0  | Reg::DR1  | Reg::DR2  | Reg::DR3  | 
             Reg::DR4  | Reg::DR5  | Reg::DR6  | Reg::DR7  |
             Reg::TR3  | Reg::TR4  | Reg::TR5  | Reg::TR6  | // TODO Are test registers really 32 bits?
-            Reg::TR7  | Reg::CR4  | Reg::EFLAGS | Reg::EIP  => OperandSize::Dword,
+            Reg::TR7  | Reg::EFLAGS | Reg::EIP  => OperandSize::Dword,
 
             // 64-bit registers
             Reg::RAX  | Reg::RBX  | Reg::RCX  | Reg::RDX  |        
@@ -555,38 +555,38 @@ impl Reg {
     pub fn get_reg_code(&self) -> u8 {
         match *self {
             // TODO Handle SPL, BPL, SIL, DIL
-            Reg::AL               | Reg::AX   | Reg::EAX  | Reg::RAX | Reg::ST0 | Reg::MM0 | Reg::XMM0  | Reg::YMM0  | Reg::ZMM0  | Reg::ES | Reg::CR0             | Reg::K0 | Reg::BND0 | Reg::DR0 => 0,
-            Reg::CL               | Reg::CX   | Reg::ECX  | Reg::RCX | Reg::ST1 | Reg::MM1 | Reg::XMM1  | Reg::YMM1  | Reg::ZMM1  | Reg::CS | Reg::CR1             | Reg::K1 | Reg::BND1 | Reg::DR1 => 1,
-            Reg::DL               | Reg::DX   | Reg::EDX  | Reg::RDX | Reg::ST2 | Reg::MM2 | Reg::XMM2  | Reg::YMM2  | Reg::ZMM2  | Reg::SS | Reg::CR2             | Reg::K2 | Reg::BND2 | Reg::DR2 => 2,
-            Reg::BL               | Reg::BX   | Reg::EBX  | Reg::RBX | Reg::ST3 | Reg::MM3 | Reg::XMM3  | Reg::YMM3  | Reg::ZMM3  | Reg::DS | Reg::CR3  | Reg::DR3 | Reg::K3 | Reg::BND3 | Reg::DR3 => 3,
-            Reg::AH   | Reg::SPL  | Reg::SP   | Reg::ESP  | Reg::RSP | Reg::ST4 | Reg::MM4 | Reg::XMM4  | Reg::YMM4  | Reg::ZMM4  | Reg::FS | Reg::CR4  | Reg::DR4 | Reg::K4             | Reg::DR4 => 4,
-            Reg::CH   | Reg::BPL  | Reg::BP   | Reg::EBP  | Reg::RBP | Reg::ST5 | Reg::MM5 | Reg::XMM5  | Reg::YMM5  | Reg::ZMM5  | Reg::GS             | Reg::DR5 | Reg::K5             | Reg::DR5 => 5,
-            Reg::DH   | Reg::SIL  | Reg::SI   | Reg::ESI  | Reg::RSI | Reg::ST6 | Reg::MM6 | Reg::XMM6  | Reg::YMM6  | Reg::ZMM6                        | Reg::DR6 | Reg::K6             | Reg::DR6 => 6,
-            Reg::BH   | Reg::DIL  | Reg::DI   | Reg::EDI  | Reg::RDI | Reg::ST7 | Reg::MM7 | Reg::XMM7  | Reg::YMM7  | Reg::ZMM7                        | Reg::DR7 | Reg::K7             | Reg::DR7 => 7,
-            Reg::R8B              | Reg::R8W  | Reg::R8D  | Reg::R8                        | Reg::XMM8  | Reg::YMM8  | Reg::ZMM8  | Reg::ES | Reg::CR8                                              => 8,
-            Reg::R9B              | Reg::R9W  | Reg::R9D  | Reg::R9                        | Reg::XMM9  | Reg::YMM9  | Reg::ZMM9  | Reg::CS                                                         => 9,
-            Reg::R10B             | Reg::R10W | Reg::R10D | Reg::R10                       | Reg::XMM10 | Reg::YMM10 | Reg::ZMM10 | Reg::SS                                                         => 10,
-            Reg::R11B             | Reg::R11W | Reg::R11D | Reg::R11                       | Reg::XMM11 | Reg::YMM11 | Reg::ZMM11 | Reg::DS                                                         => 11,
-            Reg::R12B             | Reg::R12W | Reg::R12D | Reg::R12                       | Reg::XMM12 | Reg::YMM12 | Reg::ZMM12 | Reg::FS                                                         => 12,
-            Reg::R13B             | Reg::R13W | Reg::R13D | Reg::R13                       | Reg::XMM13 | Reg::YMM13 | Reg::ZMM13 | Reg::GS                                                         => 13,
-            Reg::R14B             | Reg::R14W | Reg::R14D | Reg::R14                       | Reg::XMM14 | Reg::YMM14 | Reg::ZMM14                                                                   => 14,
-            Reg::R15B             | Reg::R15W | Reg::R15D | Reg::R15                       | Reg::XMM15 | Reg::YMM15 | Reg::ZMM15                                                                   => 15,
-                                                                                             Reg::XMM16 | Reg::YMM16 | Reg::ZMM16                                                                   => 16,
-                                                                                             Reg::XMM17 | Reg::YMM17 | Reg::ZMM17                                                                   => 17,
-                                                                                             Reg::XMM18 | Reg::YMM18 | Reg::ZMM18                                                                   => 18,
-                                                                                             Reg::XMM19 | Reg::YMM19 | Reg::ZMM19                                                                   => 19,
-                                                                                             Reg::XMM20 | Reg::YMM20 | Reg::ZMM20                                                                   => 20,
-                                                                                             Reg::XMM21 | Reg::YMM21 | Reg::ZMM21                                                                   => 21,
-                                                                                             Reg::XMM22 | Reg::YMM22 | Reg::ZMM22                                                                   => 22,
-                                                                                             Reg::XMM23 | Reg::YMM23 | Reg::ZMM23                                                                   => 23,
-                                                                                             Reg::XMM24 | Reg::YMM24 | Reg::ZMM24                                                                   => 24,
-                                                                                             Reg::XMM25 | Reg::YMM25 | Reg::ZMM25                                                                   => 25,
-                                                                                             Reg::XMM26 | Reg::YMM26 | Reg::ZMM26                                                                   => 26,
-                                                                                             Reg::XMM27 | Reg::YMM27 | Reg::ZMM27                                                                   => 27,
-                                                                                             Reg::XMM28 | Reg::YMM28 | Reg::ZMM28                                                                   => 28,
-                                                                                             Reg::XMM29 | Reg::YMM29 | Reg::ZMM29                                                                   => 29,
-                                                                                             Reg::XMM30 | Reg::YMM30 | Reg::ZMM30                                                                   => 30,
-                                                                                             Reg::XMM31 | Reg::YMM31 | Reg::ZMM31                                                                   => 31,
+            Reg::AL               | Reg::AX   | Reg::EAX  | Reg::RAX | Reg::ST0 | Reg::MM0 | Reg::XMM0  | Reg::YMM0  | Reg::ZMM0  | Reg::ES | Reg::CR0  | Reg::K0 | Reg::BND0 | Reg::DR0 => 0,
+            Reg::CL               | Reg::CX   | Reg::ECX  | Reg::RCX | Reg::ST1 | Reg::MM1 | Reg::XMM1  | Reg::YMM1  | Reg::ZMM1  | Reg::CS | Reg::CR1  | Reg::K1 | Reg::BND1 | Reg::DR1 => 1,
+            Reg::DL               | Reg::DX   | Reg::EDX  | Reg::RDX | Reg::ST2 | Reg::MM2 | Reg::XMM2  | Reg::YMM2  | Reg::ZMM2  | Reg::SS | Reg::CR2  | Reg::K2 | Reg::BND2 | Reg::DR2 => 2,
+            Reg::BL               | Reg::BX   | Reg::EBX  | Reg::RBX | Reg::ST3 | Reg::MM3 | Reg::XMM3  | Reg::YMM3  | Reg::ZMM3  | Reg::DS | Reg::CR3  | Reg::K3 | Reg::BND3 | Reg::DR3 => 3,
+            Reg::AH   | Reg::SPL  | Reg::SP   | Reg::ESP  | Reg::RSP | Reg::ST4 | Reg::MM4 | Reg::XMM4  | Reg::YMM4  | Reg::ZMM4  | Reg::FS | Reg::CR4  | Reg::K4             | Reg::DR4 => 4,
+            Reg::CH   | Reg::BPL  | Reg::BP   | Reg::EBP  | Reg::RBP | Reg::ST5 | Reg::MM5 | Reg::XMM5  | Reg::YMM5  | Reg::ZMM5  | Reg::GS             | Reg::K5             | Reg::DR5 => 5,
+            Reg::DH   | Reg::SIL  | Reg::SI   | Reg::ESI  | Reg::RSI | Reg::ST6 | Reg::MM6 | Reg::XMM6  | Reg::YMM6  | Reg::ZMM6                        | Reg::K6             | Reg::DR6 => 6,
+            Reg::BH   | Reg::DIL  | Reg::DI   | Reg::EDI  | Reg::RDI | Reg::ST7 | Reg::MM7 | Reg::XMM7  | Reg::YMM7  | Reg::ZMM7                        | Reg::K7             | Reg::DR7 => 7,
+            Reg::R8B              | Reg::R8W  | Reg::R8D  | Reg::R8                        | Reg::XMM8  | Reg::YMM8  | Reg::ZMM8            | Reg::CR8                                   => 8,
+            Reg::R9B              | Reg::R9W  | Reg::R9D  | Reg::R9                        | Reg::XMM9  | Reg::YMM9  | Reg::ZMM9                                                         => 9,
+            Reg::R10B             | Reg::R10W | Reg::R10D | Reg::R10                       | Reg::XMM10 | Reg::YMM10 | Reg::ZMM10                                                        => 10,
+            Reg::R11B             | Reg::R11W | Reg::R11D | Reg::R11                       | Reg::XMM11 | Reg::YMM11 | Reg::ZMM11                                                        => 11,
+            Reg::R12B             | Reg::R12W | Reg::R12D | Reg::R12                       | Reg::XMM12 | Reg::YMM12 | Reg::ZMM12                                                        => 12,
+            Reg::R13B             | Reg::R13W | Reg::R13D | Reg::R13                       | Reg::XMM13 | Reg::YMM13 | Reg::ZMM13                                                        => 13,
+            Reg::R14B             | Reg::R14W | Reg::R14D | Reg::R14                       | Reg::XMM14 | Reg::YMM14 | Reg::ZMM14                                                        => 14,
+            Reg::R15B             | Reg::R15W | Reg::R15D | Reg::R15                       | Reg::XMM15 | Reg::YMM15 | Reg::ZMM15                                                        => 15,
+                                                                                             Reg::XMM16 | Reg::YMM16 | Reg::ZMM16                                                        => 16,
+                                                                                             Reg::XMM17 | Reg::YMM17 | Reg::ZMM17                                                        => 17,
+                                                                                             Reg::XMM18 | Reg::YMM18 | Reg::ZMM18                                                        => 18,
+                                                                                             Reg::XMM19 | Reg::YMM19 | Reg::ZMM19                                                        => 19,
+                                                                                             Reg::XMM20 | Reg::YMM20 | Reg::ZMM20                                                        => 20,
+                                                                                             Reg::XMM21 | Reg::YMM21 | Reg::ZMM21                                                        => 21,
+                                                                                             Reg::XMM22 | Reg::YMM22 | Reg::ZMM22                                                        => 22,
+                                                                                             Reg::XMM23 | Reg::YMM23 | Reg::ZMM23                                                        => 23,
+                                                                                             Reg::XMM24 | Reg::YMM24 | Reg::ZMM24                                                        => 24,
+                                                                                             Reg::XMM25 | Reg::YMM25 | Reg::ZMM25                                                        => 25,
+                                                                                             Reg::XMM26 | Reg::YMM26 | Reg::ZMM26                                                        => 26,
+                                                                                             Reg::XMM27 | Reg::YMM27 | Reg::ZMM27                                                        => 27,
+                                                                                             Reg::XMM28 | Reg::YMM28 | Reg::ZMM28                                                        => 28,
+                                                                                             Reg::XMM29 | Reg::YMM29 | Reg::ZMM29                                                        => 29,
+                                                                                             Reg::XMM30 | Reg::YMM30 | Reg::ZMM30                                                        => 30,
+                                                                                             Reg::XMM31 | Reg::YMM31 | Reg::ZMM31                                                        => 31,
             _ => panic!("Invalid register: {:?}.", self)
         }
     }

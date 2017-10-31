@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn bndcl_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND2)), operand2: Some(Direct(ESP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 212], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND0)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 193], OperandSize::Dword)
 }
 
 #[test]
 fn bndcl_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND1)), operand2: Some(IndirectScaledIndexed(EDI, ECX, Four, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 12, 143], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND3)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, EDX, Four, 94145718, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 156, 146, 182, 140, 156, 5], OperandSize::Dword)
 }
 
 #[test]
 fn bndcl_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND2)), operand2: Some(Direct(RSP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 212], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND0)), operand2: Some(Direct(RBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 195], OperandSize::Qword)
 }
 
 #[test]
 fn bndcl_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND0)), operand2: Some(Indirect(RAX, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 0], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BNDCL, operand1: Some(Direct(BND0)), operand2: Some(IndirectDisplaced(RBX, 682572982, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 26, 131, 182, 60, 175, 40], OperandSize::Qword)
 }
 

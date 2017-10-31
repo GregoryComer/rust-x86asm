@@ -1,5 +1,5 @@
 use ::{Mnemonic, Operand, Reg, OperandSize, SegmentReg, MaskReg, BroadcastMode, MergeMode, RoundingMode, RegScale};
-use ::test::{encode32_helper0, encode32_helper1, encode32_helper2, encode32_helper3, encode32_helper4, test_aliased, encode32_assert_ambiguous};
+use ::test::{encode32_helper2, encode32_helper3, encode32_assert_ambiguous};
 
 #[test]
 fn infer_size_indirect_8bit_instr() {

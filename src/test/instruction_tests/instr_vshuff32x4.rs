@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn vshuff32x4_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM2)), operand2: Some(Direct(ZMM1)), operand3: Some(Direct(ZMM5)), operand4: Some(Literal8(92)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 243, 117, 202, 35, 213, 92], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM3)), operand2: Some(Direct(ZMM5)), operand3: Some(Direct(ZMM4)), operand4: Some(Literal8(15)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 85, 205, 35, 220, 15], OperandSize::Dword)
 }
 
 #[test]
 fn vshuff32x4_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM4)), operand2: Some(Direct(ZMM7)), operand3: Some(IndirectDisplaced(EAX, 423217455, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 69, 205, 35, 160, 47, 201, 57, 25, 118], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM2)), operand2: Some(Direct(ZMM7)), operand3: Some(IndirectScaledIndexed(EDI, EAX, Eight, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(21)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 69, 206, 35, 20, 199, 21], OperandSize::Dword)
 }
 
 #[test]
 fn vshuff32x4_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM6)), operand2: Some(Direct(ZMM6)), operand3: Some(IndirectDisplaced(EDI, 2134355939, Some(OperandSize::Dword), None)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 77, 221, 35, 183, 227, 175, 55, 127, 118], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM0)), operand2: Some(Direct(ZMM3)), operand3: Some(IndirectScaledDisplaced(EAX, Eight, 44724668, Some(OperandSize::Dword), None)), operand4: Some(Literal8(0)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 101, 217, 35, 4, 197, 188, 113, 170, 2, 0], OperandSize::Dword)
 }
 
 #[test]
 fn vshuff32x4_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM19)), operand2: Some(Direct(ZMM20)), operand3: Some(Direct(ZMM22)), operand4: Some(Literal8(51)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 163, 93, 194, 35, 222, 51], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM21)), operand2: Some(Direct(ZMM7)), operand3: Some(Direct(ZMM0)), operand4: Some(Literal8(83)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 227, 69, 202, 35, 232, 83], OperandSize::Qword)
 }
 
 #[test]
 fn vshuff32x4_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM26)), operand2: Some(Direct(ZMM6)), operand3: Some(IndirectScaledIndexedDisplaced(RBX, RDI, Eight, 1206524353, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(122)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 99, 77, 204, 35, 148, 251, 193, 25, 234, 71, 122], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM15)), operand2: Some(Direct(ZMM9)), operand3: Some(IndirectScaledDisplaced(RDX, Eight, 375963431, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(88)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 115, 53, 206, 35, 60, 213, 39, 191, 104, 22, 88], OperandSize::Qword)
 }
 
 #[test]
 fn vshuff32x4_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM14)), operand2: Some(Direct(ZMM4)), operand3: Some(IndirectScaledDisplaced(RDI, Two, 689740214, Some(OperandSize::Dword), None)), operand4: Some(Literal8(40)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 115, 93, 221, 35, 52, 125, 182, 153, 28, 41, 40], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VSHUFF32x4, operand1: Some(Direct(ZMM27)), operand2: Some(Direct(ZMM13)), operand3: Some(IndirectScaledIndexedDisplaced(RDI, RAX, Two, 913204171, Some(OperandSize::Dword), None)), operand4: Some(Literal8(75)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 99, 21, 221, 35, 156, 71, 203, 99, 110, 54, 75], OperandSize::Qword)
 }
 

@@ -8,41 +8,41 @@ use ::test::run_test;
 
 #[test]
 fn pmaxsw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM0)), operand2: Some(Direct(MM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 195], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM7)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 253], OperandSize::Dword)
 }
 
 #[test]
 fn pmaxsw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM6)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, EBX, Two, 2102946738, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 180, 90, 178, 107, 88, 125], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM0)), operand2: Some(IndirectDisplaced(EAX, 1717020765, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 128, 93, 168, 87, 102], OperandSize::Dword)
 }
 
 #[test]
 fn pmaxsw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM6)), operand2: Some(Direct(MM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 240], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM7)), operand2: Some(Direct(MM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 252], OperandSize::Qword)
 }
 
 #[test]
 fn pmaxsw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM2)), operand2: Some(IndirectDisplaced(RSI, 1273738326, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 150, 86, 180, 235, 75], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(MM4)), operand2: Some(IndirectScaledIndexed(RAX, RDX, Eight, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 238, 36, 208], OperandSize::Qword)
 }
 
 #[test]
 fn pmaxsw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 254], OperandSize::Dword)
 }
 
 #[test]
 fn pmaxsw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexedDisplaced(EBX, EAX, Eight, 1377805139, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 164, 195, 83, 163, 31, 82], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexed(ECX, ESI, Two, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 36, 113], OperandSize::Dword)
 }
 
 #[test]
 fn pmaxsw_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 210], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 196], OperandSize::Qword)
 }
 
 #[test]
 fn pmaxsw_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RSI, Four, 1840883151, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 172, 179, 207, 165, 185, 109], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMAXSW, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RAX, Two, 1827683966, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 238, 156, 66, 126, 62, 240, 108], OperandSize::Qword)
 }
 

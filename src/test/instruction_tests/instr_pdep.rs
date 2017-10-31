@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn pdep_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(EBX)), operand2: Some(Direct(ESI)), operand3: Some(Direct(EDI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 75, 245, 223], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(EBX)), operand2: Some(Direct(EBX)), operand3: Some(Direct(EDX)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 99, 245, 218], OperandSize::Dword)
 }
 
 #[test]
 fn pdep_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESI)), operand2: Some(Direct(EBP)), operand3: Some(IndirectScaledIndexedDisplaced(EDX, ECX, Four, 1657135626, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 83, 245, 180, 138, 10, 226, 197, 98], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESP)), operand2: Some(Direct(EBX)), operand3: Some(IndirectScaledIndexedDisplaced(EDI, ESI, Two, 444800528, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 99, 245, 164, 119, 16, 30, 131, 26], OperandSize::Dword)
 }
 
 #[test]
 fn pdep_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESI)), operand2: Some(Direct(EDX)), operand3: Some(Direct(ECX)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 107, 245, 241], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDI)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 67, 245, 228], OperandSize::Qword)
 }
 
 #[test]
 fn pdep_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESP)), operand2: Some(Direct(EBP)), operand3: Some(IndirectDisplaced(RSI, 1281347526, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 83, 245, 166, 198, 207, 95, 76], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(ESP)), operand2: Some(Direct(EDI)), operand3: Some(IndirectScaledDisplaced(RDI, Four, 923912191, Some(OperandSize::Dword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 67, 245, 36, 189, 255, 199, 17, 55], OperandSize::Qword)
 }
 
 #[test]
 fn pdep_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(RBP)), operand2: Some(Direct(RDI)), operand3: Some(Direct(RSI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 195, 245, 238], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(RSI)), operand2: Some(Direct(RBP)), operand3: Some(Direct(RDI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 211, 245, 247], OperandSize::Qword)
 }
 
 #[test]
 fn pdep_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(RBP)), operand2: Some(Direct(RDX)), operand3: Some(IndirectDisplaced(RDI, 1251759622, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 235, 245, 175, 6, 86, 156, 74], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PDEP, operand1: Some(Direct(RBP)), operand2: Some(Direct(RSI)), operand3: Some(IndirectScaledDisplaced(RSI, Four, 1242148224, Some(OperandSize::Qword), None)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 203, 245, 44, 181, 128, 173, 9, 74], OperandSize::Qword)
 }
 

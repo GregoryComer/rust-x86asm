@@ -8,7 +8,7 @@ use ::test::run_test;
 
 #[test]
 fn rdgsbase_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDGSBASE, operand1: Some(Direct(ESI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 174, 206], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDGSBASE, operand1: Some(Direct(ESP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 174, 204], OperandSize::Qword)
 }
 
 #[test]

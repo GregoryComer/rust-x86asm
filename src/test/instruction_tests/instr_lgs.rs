@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn lgs_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(BX)), operand2: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 32317, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 154, 61, 126], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(DX)), operand2: Some(IndirectDisplaced(DI, 90, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 85, 90], OperandSize::Word)
 }
 
 #[test]
 fn lgs_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(DX)), operand2: Some(IndirectDisplaced(EBX, 71239161, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 181, 147, 249, 5, 63, 4], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(BX)), operand2: Some(IndirectScaledIndexed(EAX, EDI, Two, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 181, 28, 120], OperandSize::Dword)
 }
 
 #[test]
 fn lgs_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(BP)), operand2: Some(Indirect(RAX, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 181, 40], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(CX)), operand2: Some(IndirectScaledDisplaced(RDX, Eight, 618905129, Some(OperandSize::Far16), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 181, 12, 213, 41, 190, 227, 36], OperandSize::Qword)
 }
 
 #[test]
 fn lgs_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 251650835, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 44, 77, 19, 227, 255, 14], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledIndexed(ECX, EAX, Four, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 52, 129], OperandSize::Dword)
 }
 
 #[test]
 fn lgs_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(EDX)), operand2: Some(IndirectScaledDisplaced(RBX, Eight, 573075216, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 20, 221, 16, 111, 40, 34], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(EBP)), operand2: Some(IndirectScaledDisplaced(RDX, Eight, 1416678466, Some(OperandSize::Far32), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 181, 44, 213, 66, 204, 112, 84], OperandSize::Qword)
 }
 
 #[test]
 fn lgs_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(RCX)), operand2: Some(IndirectScaledDisplaced(RDX, Four, 1390988172, Some(OperandSize::Far64), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 181, 12, 149, 140, 203, 232, 82], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LGS, operand1: Some(Direct(RDX)), operand2: Some(IndirectScaledDisplaced(RDI, Four, 1863571290, Some(OperandSize::Far64), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 181, 20, 189, 90, 215, 19, 111], OperandSize::Qword)
 }
 

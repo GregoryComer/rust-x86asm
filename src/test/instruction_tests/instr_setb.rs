@@ -13,27 +13,27 @@ fn setb_1() {
 
 #[test]
 fn setb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Memory(8866, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 6, 162, 34], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectDisplaced(SI, 9087, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 132, 127, 35], OperandSize::Word)
 }
 
 #[test]
 fn setb_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 193], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 194], OperandSize::Dword)
 }
 
 #[test]
 fn setb_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectScaledIndexedDisplaced(EDX, EDI, Four, 1700387730, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 132, 186, 146, 219, 89, 101], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Indirect(EDX, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 2], OperandSize::Dword)
 }
 
 #[test]
 fn setb_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 194], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 193], OperandSize::Qword)
 }
 
 #[test]
 fn setb_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RAX, Two, 1470235488, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 132, 65, 96, 3, 162, 87], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectDisplaced(RDI, 854708002, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 135, 34, 207, 241, 50], OperandSize::Qword)
 }
 
 #[test]
@@ -43,6 +43,6 @@ fn setb_7() {
 
 #[test]
 fn setb_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectScaledIndexedDisplaced(RBX, RBX, Four, 1051587600, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 132, 155, 16, 244, 173, 62], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETB, operand1: Some(IndirectScaledDisplaced(RDI, Four, 1157456417, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 146, 4, 189, 33, 98, 253, 68], OperandSize::Qword)
 }
 

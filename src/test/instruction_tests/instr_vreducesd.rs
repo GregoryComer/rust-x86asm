@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn vreducesd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM1)), operand3: Some(Direct(XMM6)), operand4: Some(Literal8(71)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 245, 159, 87, 214, 71], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM2)), operand3: Some(Direct(XMM1)), operand4: Some(Literal8(43)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K1), broadcast: None }, &[98, 243, 237, 153, 87, 217, 43], OperandSize::Dword)
 }
 
 #[test]
 fn vreducesd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM6)), operand3: Some(IndirectScaledDisplaced(EDX, Eight, 304410097, Some(OperandSize::Qword), None)), operand4: Some(Literal8(41)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 205, 141, 87, 20, 213, 241, 237, 36, 18, 41], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM4)), operand3: Some(IndirectScaledIndexedDisplaced(EDI, ESI, Four, 1940720713, Some(OperandSize::Qword), None)), operand4: Some(Literal8(6)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 221, 143, 87, 156, 183, 73, 12, 173, 115, 6], OperandSize::Dword)
 }
 
 #[test]
 fn vreducesd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM9)), operand2: Some(Direct(XMM18)), operand3: Some(Direct(XMM28)), operand4: Some(Literal8(53)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K1), broadcast: None }, &[98, 19, 237, 145, 87, 204, 53], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM22)), operand2: Some(Direct(XMM19)), operand3: Some(Direct(XMM14)), operand4: Some(Literal8(87)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: true, mask: Some(MaskReg::K1), broadcast: None }, &[98, 195, 229, 145, 87, 246, 87], OperandSize::Qword)
 }
 
 #[test]
 fn vreducesd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM18)), operand2: Some(Direct(XMM27)), operand3: Some(IndirectDisplaced(RBX, 97222277, Some(OperandSize::Qword), None)), operand4: Some(Literal8(28)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 227, 165, 133, 87, 147, 133, 126, 203, 5, 28], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VREDUCESD, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM6)), operand3: Some(IndirectScaledIndexedDisplaced(RDI, RBX, Eight, 873004931, Some(OperandSize::Qword), None)), operand4: Some(Literal8(87)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 243, 205, 143, 87, 140, 223, 131, 255, 8, 52, 87], OperandSize::Qword)
 }
 

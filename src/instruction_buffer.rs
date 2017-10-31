@@ -1,7 +1,7 @@
 use std::io::{ Write };
 use std::io::Result as IoResult;
 use byteorder::{ LittleEndian, WriteBytesExt };
-use ::{ InstructionEncodingError, Mode, Reg, SegmentReg };
+use ::{ InstructionEncodingError, Mode, SegmentReg };
 use ::instruction::MergeMode;
 
 pub const PREFIX_LOCK: u8 = 0xF0;

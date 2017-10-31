@@ -1,11 +1,9 @@
 use std::io::{Bytes, Read};
-use std::iter;
 use std::iter::Peekable;
-use ::{BroadcastMode, Instruction, MaskReg, MergeMode, Mnemonic, Mode, Operand, OperandSize, Reg, RegScale, RegType, RoundingMode, SegmentReg};
+use ::{BroadcastMode, Instruction, MaskReg, MergeMode, Mode, Operand, OperandSize, Reg, RegScale, RegType, RoundingMode};
 use ::instruction_buffer::*;
 use ::instruction_buffer::CompositePrefix; // For disambiguation
 use ::instruction_def::*;
-use arrayvec::ArrayVec;
 
 pub struct InstructionReader<T: Read> {
     reader: Peekable<Bytes<T>>,
@@ -28,21 +26,13 @@ impl<T: Read> InstructionReader<T> {
         }
     }
     
-    fn expect_byte_peek(&mut self) -> Result<u8, InstructionDecodingError> {
-        match self.reader.peek() {
-            Some(&Ok(b)) => Ok(b),
-            Some(&Err(_)) => Err(InstructionDecodingError::ReadError),
-            None => Err(InstructionDecodingError::PartialInstruction)
-        }
-    }
-
+    #[allow(unused_assignments)] // Compiler wrongly complains about opcode_byte not being read?
     pub fn read(&mut self) -> Result<Instruction, InstructionDecodingError> {
         let mut buffer: InstructionBuffer = Default::default();
         let mut reg_ext = 0; // Extension to mod_rm_reg field
         let mut index_ext = 0; // Extension to sib_index field
         let mut b_ext = 0; // Extension to mod_rm_rm field or sib_base field
-        let mut v_ext = 0; // Extension to vex operand field
-        let mut opcode_byte = 0; // Primary opcode
+        let mut opcode_byte = 0;
 
         // Check for end of stream
         if self.reader.peek().is_none() {
@@ -71,8 +61,6 @@ impl<T: Read> InstructionReader<T> {
                 PREFIX_ES => { buffer.prefix2 = Some(Prefix2::ES); },
                 PREFIX_FS => { buffer.prefix2 = Some(Prefix2::FS); },
                 PREFIX_GS => { buffer.prefix2 = Some(Prefix2::GS); },
-                PREFIX_BRANCH_NOT_TAKEN => { buffer.prefix2 = Some(Prefix2::BranchNotTaken); },
-                PREFIX_BRANCH_TAKEN => { buffer.prefix2 = Some(Prefix2::BranchTaken); },
                 PREFIX_TWO_BYTE_OPCODE => { buffer.is_two_byte_opcode = true; },
                 PREFIX_VEX2 => { // Two-byte VEX prefix
                     let data = self.expect_byte()?;
@@ -142,7 +130,6 @@ impl<T: Read> InstructionReader<T> {
                     buffer.vex_l = Some(data3 & 0x40 != 0);
                     buffer.vector_len = Some(data3 & 0x20 != 0);
                     buffer.vex_b = Some(data3 & 0x10 != 0);
-                    v_ext = if data3 & 0x8 != 0 { 0x10 } else { 0x0 };
                     buffer.mask_reg = Some(data3 & 0x7);
                 },
                 b if self.mode == Mode::Long && buffer.composite_prefix.is_none() && b & 0xF0 == 0x40 => { // REX prefix
@@ -234,7 +221,7 @@ impl<T: Read> InstructionReader<T> {
     fn read_operand(&mut self, op_def: &OperandDefinition, buffer: &InstructionBuffer)
         -> Result<Operand, InstructionDecodingError> {
 
-        let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
+        let size = InstructionReader::<T>::get_operand_size(op_def, buffer);
         let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);
 
         // We can assume that we have a ModR/M byte if we've gotten to this point as it
@@ -337,22 +324,6 @@ impl<T: Read> InstructionReader<T> {
         })
     }
 
-    fn read_memory_and_segment_16(&mut self) -> Result<Operand, InstructionDecodingError> {
-        let addr = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u16) << (8*n) ))));
-        let segment = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u16) << (8*n) ))));
-        segment.and_then(|s| addr.map(|a| Operand::MemoryAndSegment16(s, a)))
-    }
-
-    fn read_memory_and_segment_32(&mut self) -> Result<Operand, InstructionDecodingError> {
-        let addr = (0..4).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u32) << (8*n) ))));
-        let segment = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-            |b| a | ((b as u16) << (8*n) ))));
-        segment.and_then(|s| addr.map(|a| Operand::MemoryAndSegment32(s, a)))
-    }
-
     fn read_disp8(&mut self) -> Result<u8, InstructionDecodingError> {
         self.expect_byte()
     }
@@ -367,19 +338,10 @@ impl<T: Read> InstructionReader<T> {
             |b| a | ((b as u32) << (8*n) ))))
     }
 
+    #[allow(dead_code)]
     fn read_disp64(&mut self) -> Result<u64, InstructionDecodingError> {
         (0..8).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
             |b| a | ((b as u64) << (8*n) ))))
-    }
-
-    fn read_disp_sized(&mut self, size: OperandSize) -> Result<u64, InstructionDecodingError> {
-        match size {
-            OperandSize::Byte => self.read_disp8().map(|v| v as u64),
-            OperandSize::Word => self.read_disp16().map(|v| v as u64),
-            OperandSize::Dword => self.read_disp32().map(|v| v as u64),
-            OperandSize::Qword => self.read_disp64(),
-            _ => panic!("Invalid displacement size.")
-        }
     }
 
     fn has_mod_rm(def: &InstructionDefinition) -> bool {
@@ -401,99 +363,9 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn get_reg_code(buffer: &InstructionBuffer) -> Result<u8, InstructionDecodingError> {
-        buffer.mod_rm_reg.ok_or(InstructionDecodingError::PartialInstruction)
-    }
-
-    fn get_rm_code(buffer: &InstructionBuffer) -> Result<u8, InstructionDecodingError> {
-        buffer.mod_rm_rm.ok_or(InstructionDecodingError::PartialInstruction)
-    }
-
-    fn get_mod_code(buffer: &InstructionBuffer) -> Result<u8, InstructionDecodingError> {
-        buffer.mod_rm_mod.ok_or(InstructionDecodingError::PartialInstruction)
-    }
-
-    fn get_vex_code(buffer: &InstructionBuffer) -> Result<u8, InstructionDecodingError> {
-        buffer.mod_rm_rm.ok_or(InstructionDecodingError::PartialInstruction)
-    }
-
-    fn get_sized_a(mode: Mode, buffer: &InstructionBuffer, size: OperandSize) -> Reg {
-        match size {
-            OperandSize::Word => Reg::AX,
-            OperandSize::Dword => Reg::EAX,
-            OperandSize::Qword => Reg::RAX,
-            _ => panic!("Invalid address size.")
-        }
-    }
-
-    fn get_sized_b(mode: Mode, buffer: &InstructionBuffer, size: OperandSize) -> Reg {
-        match size {
-            OperandSize::Word => Reg::BX,
-            OperandSize::Dword => Reg::EBX,
-            OperandSize::Qword => Reg::RBX,
-            _ => panic!("Invalid address size.")
-        }
-    }
-
-    fn get_sized_di(mode: Mode, buffer: &InstructionBuffer, size: OperandSize) -> Reg {
-        match size {
-            OperandSize::Word => Reg::DI,
-            OperandSize::Dword => Reg::EDI,
-            OperandSize::Qword => Reg::RDI,
-            _ => panic!("Invalid address size.")
-        }
-    }
-
-    fn get_flags_sized(size: OperandSize) -> Reg {
-        match size {
-            OperandSize::Word => Reg::FLAGS,
-            OperandSize::Dword => Reg::EFLAGS,
-            OperandSize::Qword => Reg::RFLAGS,
-            _ => panic!("Invalid flags register size.\r\n")
-        }
-    }
-
     fn has_sib(mode: Mode, buffer: &InstructionBuffer) -> bool {
         (mode != Mode::Real) && (buffer.mod_rm_mod.and_then(|rm_mod| buffer.mod_rm_rm.map(
             |rm_rm| (rm_rm & 0b111) == 0b100 && rm_mod != 0b11)).unwrap_or(false))
-    }
-
-    fn get_displacement_size(mode: Mode, buffer: &InstructionBuffer) -> Option<OperandSize> {
-        buffer.mod_rm_mod.and_then(|rm_mod| buffer.mod_rm_rm.and_then(|rm_rm|
-            match rm_mod {
-                0b00 => {
-                    if rm_rm & 0b111 == 0b101 && mode != Mode::Real &&
-                        (InstructionReader::<T>::has_sib(mode, buffer) || mode == Mode::Long) {
-                            Some(OperandSize::Dword)
-                    } else { None }
-                },
-                0b01 => Some(OperandSize::Byte),
-                0b10 => Some(if mode == Mode::Real { OperandSize::Word } else { OperandSize::Dword }),
-                _ => None
-            }))
-    }
-
-    fn reg_helper<TConv>(buffer: &InstructionBuffer, read_proc: fn(&InstructionBuffer) -> 
-        Result<u8, InstructionDecodingError>, conv_proc: TConv)
-        -> Result<Reg, InstructionDecodingError> where TConv : Fn(u8) -> Option<Reg> {
-        read_proc(buffer).and_then(|code| 
-           conv_proc(code).ok_or(InstructionDecodingError::InvalidInstruction))
-    }
-
-    fn reg_helper_general(mode: Mode, buffer: &InstructionBuffer, op_def: &OperandDefinition,
-        instr_def: &InstructionDefinition, read_proc: fn(&InstructionBuffer) -> Result<u8, InstructionDecodingError>)
-        -> Result<Reg, InstructionDecodingError> {
-        match InstructionReader::<T>::get_operand_size(mode, op_def, buffer) {
-            OperandSize::Byte => InstructionReader::<T>::reg_helper(buffer, read_proc,
-                |code| Reg::from_code_general_8(code, InstructionReader::<T>::has_rex(buffer))),
-            OperandSize::Word =>
-                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_16),
-            OperandSize::Dword =>
-                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_32),
-            OperandSize::Qword =>
-                InstructionReader::<T>::reg_helper(buffer, read_proc, Reg::from_code_general_64),
-            _ => Err(InstructionDecodingError::InvalidInstruction)
-        }
     }
 
     fn rm_helper<TConv>(&mut self, buffer: &InstructionBuffer, op_def: &OperandDefinition,
@@ -505,7 +377,7 @@ impl<T: Read> InstructionReader<T> {
         Ok(match addr_size {
             OperandSize::Word => {
                 let mode = buffer.mod_rm_mod.ok_or(InstructionDecodingError::InvalidInstruction)?;
-                let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
+                let size = InstructionReader::<T>::get_operand_size(op_def, buffer);
                 let segment = buffer.get_segment_reg();
 
                 if mode == 0b11 { 
@@ -545,7 +417,7 @@ impl<T: Read> InstructionReader<T> {
                 }
             },
             addr_size @ OperandSize::Dword | addr_size @ OperandSize::Qword => {
-                let size = Some(InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer));
+                let size = Some(InstructionReader::<T>::get_operand_size(op_def, buffer));
                 let segment = buffer.get_segment_reg();
                 match buffer.mod_rm_mod.ok_or(InstructionDecodingError::InvalidInstruction)? & 0x7 {
                     0b00 => {
@@ -601,7 +473,7 @@ impl<T: Read> InstructionReader<T> {
             .ok_or(InstructionDecodingError::InvalidInstruction)?;
         let mode = buffer.mod_rm_mod.ok_or(InstructionDecodingError::InvalidInstruction)?;
         let segment = buffer.get_segment_reg();
-        let size = Some(InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer));
+        let size = Some(InstructionReader::<T>::get_operand_size(op_def, buffer));
         
         Ok(match mode {
             0b00 => {
@@ -664,7 +536,7 @@ impl<T: Read> InstructionReader<T> {
         }
     }
 
-    fn get_operand_size(mode: Mode, op_def: &OperandDefinition, buffer: &InstructionBuffer)
+    fn get_operand_size(op_def: &OperandDefinition, buffer: &InstructionBuffer)
         -> OperandSize {
         let op_type = InstructionReader::<T>::get_operand_type(op_def, buffer);
         let s = match *op_type {

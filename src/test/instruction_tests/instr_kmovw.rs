@@ -8,51 +8,51 @@ use ::test::run_test;
 
 #[test]
 fn kmovw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K4)), operand2: Some(Direct(K1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 225], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K7)), operand2: Some(Direct(K3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 251], OperandSize::Dword)
 }
 
 #[test]
 fn kmovw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K7)), operand2: Some(IndirectScaledDisplaced(ECX, Eight, 488375136, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 60, 205, 96, 3, 28, 29], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K2)), operand2: Some(Indirect(ECX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 17], OperandSize::Dword)
 }
 
 #[test]
 fn kmovw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K6)), operand2: Some(Direct(K7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 247], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K2)), operand2: Some(Direct(K7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 215], OperandSize::Qword)
 }
 
 #[test]
 fn kmovw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K3)), operand2: Some(Indirect(RSI, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 30], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K5)), operand2: Some(IndirectScaledIndexed(RDX, RDI, Four, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 144, 44, 186], OperandSize::Qword)
 }
 
 #[test]
 fn kmovw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(IndirectScaledIndexed(EAX, EAX, Two, Some(OperandSize::Word), None)), operand2: Some(Direct(K7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 145, 60, 64], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(IndirectDisplaced(EBX, 34101637, Some(OperandSize::Word), None)), operand2: Some(Direct(K3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 145, 155, 133, 89, 8, 2], OperandSize::Dword)
 }
 
 #[test]
 fn kmovw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(IndirectScaledIndexed(RBX, RAX, Two, Some(OperandSize::Word), None)), operand2: Some(Direct(K2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 145, 20, 67], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(IndirectScaledDisplaced(RAX, Eight, 314663952, Some(OperandSize::Word), None)), operand2: Some(Direct(K5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 145, 44, 197, 16, 100, 193, 18], OperandSize::Qword)
 }
 
 #[test]
 fn kmovw_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K1)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 146, 203], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K4)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 146, 227], OperandSize::Dword)
 }
 
 #[test]
 fn kmovw_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K6)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 146, 245], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(K4)), operand2: Some(Direct(EBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 146, 227], OperandSize::Qword)
 }
 
 #[test]
 fn kmovw_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(ESP)), operand2: Some(Direct(K2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 147, 226], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(ESI)), operand2: Some(Direct(K3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 147, 243], OperandSize::Dword)
 }
 
 #[test]
 fn kmovw_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(ESI)), operand2: Some(Direct(K6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 147, 246], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KMOVW, operand1: Some(Direct(EBP)), operand2: Some(Direct(K3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 248, 147, 235], OperandSize::Qword)
 }
 

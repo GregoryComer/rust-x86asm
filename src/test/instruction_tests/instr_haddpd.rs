@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn haddpd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM2)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 209], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 225], OperandSize::Dword)
 }
 
 #[test]
 fn haddpd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM1)), operand2: Some(Indirect(ECX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 9], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, EBX, Two, 1445109071, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 148, 94, 79, 157, 34, 86], OperandSize::Dword)
 }
 
 #[test]
 fn haddpd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 218], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 227], OperandSize::Qword)
 }
 
 #[test]
 fn haddpd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM3)), operand2: Some(IndirectDisplaced(RBX, 1117023628, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 155, 140, 109, 148, 66], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::HADDPD, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RBX, Eight, 820785443, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 124, 164, 218, 35, 49, 236, 48], OperandSize::Qword)
 }
 

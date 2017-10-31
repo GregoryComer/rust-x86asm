@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn kortestb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::KORTESTB, operand1: Some(Direct(K1)), operand2: Some(Direct(K1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 249, 152, 201], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::KORTESTB, operand1: Some(Direct(K3)), operand2: Some(Direct(K6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 249, 152, 222], OperandSize::Dword)
 }
 
 #[test]
 fn kortestb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::KORTESTB, operand1: Some(Direct(K2)), operand2: Some(Direct(K2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 249, 152, 210], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::KORTESTB, operand1: Some(Direct(K6)), operand2: Some(Direct(K2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[197, 249, 152, 242], OperandSize::Qword)
 }
 

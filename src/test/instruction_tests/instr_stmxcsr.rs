@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn stmxcsr_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::STMXCSR, operand1: Some(IndirectScaledDisplaced(EDX, Eight, 1183213273, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 28, 213, 217, 102, 134, 70], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::STMXCSR, operand1: Some(IndirectDisplaced(ECX, 1101853158, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 153, 230, 241, 172, 65], OperandSize::Dword)
 }
 
 #[test]
 fn stmxcsr_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::STMXCSR, operand1: Some(IndirectScaledDisplaced(RDX, Four, 377160908, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 28, 149, 204, 4, 123, 22], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::STMXCSR, operand1: Some(IndirectScaledDisplaced(RCX, Two, 64922495, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 174, 28, 77, 127, 163, 222, 3], OperandSize::Qword)
 }
 

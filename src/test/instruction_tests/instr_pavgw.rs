@@ -8,41 +8,41 @@ use ::test::run_test;
 
 #[test]
 fn pavgw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM6)), operand2: Some(Direct(MM3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 243], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM5)), operand2: Some(Direct(MM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 236], OperandSize::Dword)
 }
 
 #[test]
 fn pavgw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM5)), operand2: Some(IndirectDisplaced(ECX, 1488848554, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 169, 170, 6, 190, 88], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM1)), operand2: Some(IndirectScaledIndexedDisplaced(EAX, EAX, Four, 1212399691, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 140, 128, 75, 192, 67, 72], OperandSize::Dword)
 }
 
 #[test]
 fn pavgw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM0)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 197], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM4)), operand2: Some(Direct(MM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 229], OperandSize::Qword)
 }
 
 #[test]
 fn pavgw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM3)), operand2: Some(IndirectScaledDisplaced(RSI, Eight, 1243734869, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 28, 245, 85, 227, 33, 74], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(MM7)), operand2: Some(IndirectScaledIndexed(RBX, RCX, Four, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 227, 60, 139], OperandSize::Qword)
 }
 
 #[test]
 fn pavgw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 248], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 229], OperandSize::Dword)
 }
 
 #[test]
 fn pavgw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexed(EDI, EAX, Four, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 36, 135], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledDisplaced(EBX, Eight, 1691280848, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 44, 221, 208, 229, 206, 100], OperandSize::Dword)
 }
 
 #[test]
 fn pavgw_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 224], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 232], OperandSize::Qword)
 }
 
 #[test]
 fn pavgw_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM3)), operand2: Some(IndirectScaledIndexedDisplaced(RSI, RDX, Four, 679256299, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 156, 150, 235, 160, 124, 40], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PAVGW, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledDisplaced(RSI, Two, 1573116459, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 227, 36, 117, 43, 218, 195, 93], OperandSize::Qword)
 }
 

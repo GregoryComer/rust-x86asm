@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn aesenc_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 232], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 252], OperandSize::Dword)
 }
 
 #[test]
 fn aesenc_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledIndexedDisplaced(ECX, ECX, Eight, 1454024059, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 132, 201, 123, 165, 170, 86], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM3)), operand2: Some(Indirect(ESI, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 30], OperandSize::Dword)
 }
 
 #[test]
 fn aesenc_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 233], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 241], OperandSize::Qword)
 }
 
 #[test]
 fn aesenc_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM4)), operand2: Some(Indirect(RDX, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 34], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::AESENC, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledDisplaced(RDI, Two, 162002391, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 220, 4, 125, 215, 245, 167, 9], OperandSize::Qword)
 }
 

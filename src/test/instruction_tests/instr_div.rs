@@ -8,32 +8,32 @@ use ::test::run_test;
 
 #[test]
 fn div_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 241], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 243], OperandSize::Word)
 }
 
 #[test]
 fn div_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 86, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 113, 86], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(BP, 17109, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 182, 213, 66], OperandSize::Word)
 }
 
 #[test]
 fn div_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 243], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 241], OperandSize::Dword)
 }
 
 #[test]
 fn div_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexed(EDI, EBX, Four, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 52, 159], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(ECX, 25338854, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 177, 230, 163, 130, 1], OperandSize::Dword)
 }
 
 #[test]
 fn div_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 242], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 243], OperandSize::Qword)
 }
 
 #[test]
 fn div_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledDisplaced(RAX, Two, 796591451, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 52, 69, 91, 5, 123, 47], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(RDI, 490306252, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 183, 204, 122, 57, 29], OperandSize::Qword)
 }
 
 #[test]
@@ -43,17 +43,17 @@ fn div_7() {
 
 #[test]
 fn div_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(RDX, RDX, Four, 383480372, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 180, 146, 52, 114, 219, 22], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(RSI, 23254066, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[246, 182, 50, 212, 98, 1], OperandSize::Qword)
 }
 
 #[test]
 fn div_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(DX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 242], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(SI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 246], OperandSize::Word)
 }
 
 #[test]
 fn div_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(BX, 18388, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 183, 212, 71], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(DI, 27979, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 181, 75, 109], OperandSize::Word)
 }
 
 #[test]
@@ -63,7 +63,7 @@ fn div_11() {
 
 #[test]
 fn div_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(EAX, EDX, Two, 1709300924, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 180, 80, 188, 220, 225, 101], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledDisplaced(EDX, Four, 1944901219, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 52, 149, 99, 214, 236, 115], OperandSize::Dword)
 }
 
 #[test]
@@ -73,27 +73,27 @@ fn div_13() {
 
 #[test]
 fn div_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexed(RSI, RBX, Four, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 52, 158], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledDisplaced(RAX, Eight, 2078000800, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 52, 197, 160, 198, 219, 123], OperandSize::Qword)
 }
 
 #[test]
 fn div_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(ESP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 244], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(EBX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 243], OperandSize::Word)
 }
 
 #[test]
 fn div_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Indirect(SI, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 52], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 4372, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 247, 178, 20, 17], OperandSize::Word)
 }
 
 #[test]
 fn div_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(EDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 247], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Direct(EDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 242], OperandSize::Dword)
 }
 
 #[test]
 fn div_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Indirect(ECX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 49], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledDisplaced(EDX, Four, 417288955, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 52, 149, 251, 82, 223, 24], OperandSize::Dword)
 }
 
 #[test]
@@ -103,7 +103,7 @@ fn div_19() {
 
 #[test]
 fn div_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(RDI, RDX, Eight, 1633226544, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 180, 215, 48, 15, 89, 97], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectDisplaced(RDX, 1583400644, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[247, 178, 196, 198, 96, 94], OperandSize::Qword)
 }
 
 #[test]
@@ -113,6 +113,6 @@ fn div_21() {
 
 #[test]
 fn div_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(Indirect(RAX, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 247, 48], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::DIV, operand1: Some(IndirectScaledIndexedDisplaced(RBX, RBX, Four, 1689275708, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 247, 180, 155, 60, 77, 176, 100], OperandSize::Qword)
 }
 

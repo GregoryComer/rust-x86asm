@@ -8,22 +8,22 @@ use ::test::run_test;
 
 #[test]
 fn ficom_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 25230, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 147, 142, 98], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexed(BP, DI, One, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 19], OperandSize::Word)
 }
 
 #[test]
 fn ficom_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexed(EAX, ESI, Four, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 20, 176], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexedDisplaced(EDX, EAX, Four, 685852312, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 148, 130, 152, 70, 225, 40], OperandSize::Dword)
 }
 
 #[test]
 fn ficom_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(Indirect(RAX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 16], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(Indirect(RDX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 18], OperandSize::Qword)
 }
 
 #[test]
 fn ficom_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 77, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 82, 77], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 3852, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 147, 12, 15], OperandSize::Word)
 }
 
 #[test]
@@ -33,6 +33,6 @@ fn ficom_5() {
 
 #[test]
 fn ficom_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(Indirect(RSI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 22], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FICOM, operand1: Some(Indirect(RBX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 19], OperandSize::Qword)
 }
 

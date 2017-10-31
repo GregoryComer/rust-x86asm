@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn bswap_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 207], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EBX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 203], OperandSize::Word)
 }
 
 #[test]
 fn bswap_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 202], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(ECX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 201], OperandSize::Dword)
 }
 
 #[test]
 fn bswap_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(ECX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 201], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(EBP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 205], OperandSize::Qword)
 }
 
 #[test]
 fn bswap_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(RDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 202], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BSWAP, operand1: Some(Direct(RBP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 205], OperandSize::Qword)
 }
 

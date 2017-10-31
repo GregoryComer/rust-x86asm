@@ -8,32 +8,32 @@ use ::test::run_test;
 
 #[test]
 fn crc32_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 227], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 202], OperandSize::Word)
 }
 
 #[test]
 fn crc32_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 50], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(IndirectDisplaced(BX, 17844, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 159, 180, 69], OperandSize::Word)
 }
 
 #[test]
 fn crc32_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 202], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EDI)), operand2: Some(Direct(DL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 250], OperandSize::Dword)
 }
 
 #[test]
 fn crc32_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(Indirect(EDX, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 10], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(IndirectDisplaced(EAX, 1315494088, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 152, 200, 216, 104, 78], OperandSize::Dword)
 }
 
 #[test]
 fn crc32_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EDI)), operand2: Some(Direct(CL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 249], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 243], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledDisplaced(RAX, Four, 816564587, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 36, 133, 107, 201, 171, 48], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(IndirectDisplaced(RSI, 2036226931, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 158, 115, 91, 94, 121], OperandSize::Qword)
 }
 
 #[test]
@@ -43,37 +43,37 @@ fn crc32_7() {
 
 #[test]
 fn crc32_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(IndirectDisplaced(RDX, 1900925449, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 162, 9, 210, 77, 113], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(IndirectDisplaced(RBX, 1430030239, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 240, 139, 159, 135, 60, 85], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RSI)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 240, 243], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RDI)), operand2: Some(Direct(BL)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 240, 251], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RBP)), operand2: Some(IndirectScaledIndexedDisplaced(RBX, RCX, Two, 1698499120, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 240, 172, 75, 48, 10, 61, 101], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RCX)), operand2: Some(Indirect(RAX, Some(OperandSize::Byte), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 240, 8], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(Direct(DI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 231], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 227], OperandSize::Word)
 }
 
 #[test]
 fn crc32_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 25], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 32], OperandSize::Word)
 }
 
 #[test]
 fn crc32_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(Direct(SI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 222], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBP)), operand2: Some(Direct(BX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 235], OperandSize::Dword)
 }
 
 #[test]
 fn crc32_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledDisplaced(EDX, Two, 673843497, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 52, 85, 41, 9, 42, 40], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EDI)), operand2: Some(IndirectScaledIndexed(EDX, EDI, Two, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 60, 122], OperandSize::Dword)
 }
 
 #[test]
@@ -83,17 +83,17 @@ fn crc32_15() {
 
 #[test]
 fn crc32_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(Indirect(RDX, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 10], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EDI)), operand2: Some(IndirectScaledDisplaced(RSI, Eight, 4052386, Some(OperandSize::Word), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 60, 245, 162, 213, 61, 0], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 223], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(Direct(ECX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 241], OperandSize::Word)
 }
 
 #[test]
 fn crc32_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(Indirect(DI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 29], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESP)), operand2: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 242, 15, 56, 241, 32], OperandSize::Word)
 }
 
 #[test]
@@ -103,26 +103,26 @@ fn crc32_19() {
 
 #[test]
 fn crc32_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBP)), operand2: Some(Indirect(EDI, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 47], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(IndirectDisplaced(EBX, 1097443477, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 179, 149, 168, 105, 65], OperandSize::Dword)
 }
 
 #[test]
 fn crc32_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBP)), operand2: Some(Direct(EDI)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 239], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(EBX)), operand2: Some(Direct(EBP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 221], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ECX)), operand2: Some(IndirectScaledDisplaced(RDX, Two, 1583398480, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 12, 85, 80, 190, 96, 94], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RSI, Two, 581398362, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 15, 56, 241, 180, 114, 90, 111, 167, 34], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_23() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RBX)), operand2: Some(Direct(RSP)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 241, 220], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RSP)), operand2: Some(Direct(RBX)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 241, 227], OperandSize::Qword)
 }
 
 #[test]
 fn crc32_24() {
-    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RDX)), operand2: Some(IndirectScaledIndexedDisplaced(RCX, RDI, Four, 891296056, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 241, 148, 185, 56, 25, 32, 53], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::CRC32, operand1: Some(Direct(RBP)), operand2: Some(IndirectScaledDisplaced(RAX, Eight, 1346677315, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[242, 72, 15, 56, 241, 44, 197, 67, 170, 68, 80], OperandSize::Qword)
 }
 

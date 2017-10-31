@@ -17,20 +17,12 @@ cargo run -- --tests \
 
 DEF_COUNT=`grep -o InstructionDefinition temp | wc -l`
 
-echo "use ::{BroadcastMode, Instruction, MaskReg, MergeMode, Mnemonic, OperandSize, Reg, RoundingMode};
+echo "use ::{Mnemonic, OperandSize, Reg};
 use ::RegType::*;
 use ::instruction_def::*;
-use ::Operand::*;
 use ::instruction_def::OperandType::*;
 use ::instruction_def::OperandSizePrefixBehavior::*;
-use ::Reg::*;
-use ::RegScale::*;
-
-pub struct TestCase {
-	addr_size: OperandSize,
-	instruction: Instruction,
-	expected: &'static [u8],
-}" >> instruction_defs.rs
+" >> instruction_defs.rs
 
 echo "pub static INSTR_DEFS: [InstructionDefinition; $DEF_COUNT] = [" >> instruction_defs.rs
 cat temp >> instruction_defs.rs

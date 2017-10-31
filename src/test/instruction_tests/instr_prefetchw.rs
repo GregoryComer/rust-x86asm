@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn prefetchw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PREFETCHW, operand1: Some(Indirect(EDI, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 13, 15], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PREFETCHW, operand1: Some(IndirectScaledIndexed(EDX, ECX, Eight, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 13, 12, 202], OperandSize::Dword)
 }
 
 #[test]
 fn prefetchw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PREFETCHW, operand1: Some(IndirectDisplaced(RAX, 861358125, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 13, 136, 45, 72, 87, 51], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PREFETCHW, operand1: Some(IndirectScaledIndexedDisplaced(RAX, RCX, Four, 461772944, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 13, 140, 136, 144, 24, 134, 27], OperandSize::Qword)
 }
 

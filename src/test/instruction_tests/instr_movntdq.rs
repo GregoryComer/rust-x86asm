@@ -8,11 +8,11 @@ use ::test::run_test;
 
 #[test]
 fn movntdq_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTDQ, operand1: Some(IndirectDisplaced(ESI, 1223747755, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 231, 190, 171, 232, 240, 72], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTDQ, operand1: Some(Indirect(EDX, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 231, 42], OperandSize::Dword)
 }
 
 #[test]
 fn movntdq_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MOVNTDQ, operand1: Some(IndirectScaledIndexedDisplaced(RSI, RCX, Eight, 369938084, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 231, 180, 206, 164, 206, 12, 22], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MOVNTDQ, operand1: Some(IndirectScaledIndexedDisplaced(RSI, RDX, Two, 948812640, Some(OperandSize::Xmmword), None)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 231, 164, 86, 96, 187, 141, 56], OperandSize::Qword)
 }
 

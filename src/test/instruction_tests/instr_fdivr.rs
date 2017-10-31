@@ -8,22 +8,22 @@ use ::test::run_test;
 
 #[test]
 fn fdivr_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectScaledIndexedDisplaced(BX, SI, One, 138, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 184, 138, 0], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Indirect(SI, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 60], OperandSize::Word)
 }
 
 #[test]
 fn fdivr_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectScaledIndexedDisplaced(EAX, EAX, Four, 859770985, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 188, 128, 105, 16, 63, 51], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectDisplaced(ESI, 1510179670, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 190, 86, 131, 3, 90], OperandSize::Dword)
 }
 
 #[test]
 fn fdivr_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Indirect(RCX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 57], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectDisplaced(RDX, 808061230, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 186, 46, 9, 42, 48], OperandSize::Qword)
 }
 
 #[test]
 fn fdivr_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST)), operand2: Some(Direct(ST5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 253], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST)), operand2: Some(Direct(ST1)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 249], OperandSize::Word)
 }
 
 #[test]
@@ -33,17 +33,17 @@ fn fdivr_5() {
 
 #[test]
 fn fdivr_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST)), operand2: Some(Direct(ST3)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 251], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST)), operand2: Some(Direct(ST6)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[216, 254], OperandSize::Qword)
 }
 
 #[test]
 fn fdivr_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 58], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Memory(24425, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 62, 105, 95], OperandSize::Word)
 }
 
 #[test]
 fn fdivr_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectDisplaced(EBX, 899977303, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 187, 87, 144, 164, 53], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(IndirectScaledIndexedDisplaced(EBX, EDI, Four, 22355727, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 188, 187, 15, 31, 85, 1], OperandSize::Dword)
 }
 
 #[test]
@@ -63,6 +63,6 @@ fn fdivr_11() {
 
 #[test]
 fn fdivr_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST6)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 246], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FDIVR, operand1: Some(Direct(ST4)), operand2: Some(Direct(ST)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[220, 244], OperandSize::Qword)
 }
 

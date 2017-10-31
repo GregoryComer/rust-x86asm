@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn minps_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 240], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 196], OperandSize::Dword)
 }
 
 #[test]
 fn minps_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexedDisplaced(ECX, ECX, Two, 729116784, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 164, 73, 112, 112, 117, 43], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledDisplaced(ECX, Two, 1862445293, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 4, 77, 237, 168, 2, 111], OperandSize::Dword)
 }
 
 #[test]
 fn minps_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 240], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM2)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 202], OperandSize::Qword)
 }
 
 #[test]
 fn minps_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexed(RSI, RBX, Four, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 60, 158], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::MINPS, operand1: Some(Direct(XMM5)), operand2: Some(IndirectScaledIndexed(RBX, RCX, Eight, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 93, 44, 203], OperandSize::Qword)
 }
 

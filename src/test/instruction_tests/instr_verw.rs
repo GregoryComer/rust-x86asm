@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn verw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(BX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 235], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 239], OperandSize::Word)
 }
 
 #[test]
 fn verw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(IndirectScaledIndexed(BX, SI, One, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 40], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(IndirectDisplaced(BX, 191, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 175, 191, 0], OperandSize::Word)
 }
 
 #[test]
 fn verw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 239], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(DX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 234], OperandSize::Dword)
 }
 
 #[test]
 fn verw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(IndirectScaledDisplaced(EDX, Eight, 1191856132, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 44, 213, 4, 72, 10, 71], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(IndirectDisplaced(EDI, 2083809611, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 175, 75, 105, 52, 124], OperandSize::Dword)
 }
 
 #[test]
 fn verw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(SP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 236], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 237], OperandSize::Qword)
 }
 
 #[test]
 fn verw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(IndirectScaledDisplaced(RAX, Four, 1760963756, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 44, 133, 172, 44, 246, 104], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VERW, operand1: Some(Indirect(RBX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 0, 43], OperandSize::Qword)
 }
 

@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn comisd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 205], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM0)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 232], OperandSize::Dword)
 }
 
 #[test]
 fn comisd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM1)), operand2: Some(IndirectScaledDisplaced(EAX, Four, 138237377, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 12, 133, 193, 85, 61, 8], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledDisplaced(EBX, Eight, 13392794, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 36, 221, 154, 91, 204, 0], OperandSize::Dword)
 }
 
 #[test]
 fn comisd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 196], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 221], OperandSize::Qword)
 }
 
 #[test]
 fn comisd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledDisplaced(RDI, Eight, 1937732369, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 60, 253, 17, 115, 127, 115], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::COMISD, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexed(RDX, RDI, Four, Some(OperandSize::Qword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 47, 60, 186], OperandSize::Qword)
 }
 

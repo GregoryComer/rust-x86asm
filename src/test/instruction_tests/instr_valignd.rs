@@ -8,91 +8,91 @@ use ::test::run_test;
 
 #[test]
 fn valignd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM4)), operand3: Some(Direct(XMM2)), operand4: Some(Literal8(2)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 93, 139, 3, 218, 2], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM5)), operand3: Some(Direct(XMM2)), operand4: Some(Literal8(35)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 243, 85, 139, 3, 218, 35], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM5)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledDisplaced(EAX, Eight, 1256379, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(29)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 101, 141, 3, 44, 197, 187, 43, 19, 0, 29], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM3)), operand3: Some(IndirectScaledIndexedDisplaced(EAX, EDX, Eight, 912086127, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(16)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 101, 140, 3, 132, 208, 111, 84, 93, 54, 16], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM7)), operand3: Some(IndirectDisplaced(EDX, 925151261, Some(OperandSize::Dword), None)), operand4: Some(Literal8(66)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 69, 156, 3, 178, 29, 176, 36, 55, 66], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM5)), operand3: Some(IndirectScaledIndexed(EAX, EBX, Two, Some(OperandSize::Dword), None)), operand4: Some(Literal8(101)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 85, 154, 3, 52, 88, 101], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM8)), operand2: Some(Direct(XMM5)), operand3: Some(Direct(XMM21)), operand4: Some(Literal8(120)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: None }, &[98, 51, 85, 143, 3, 197, 120], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM1)), operand2: Some(Direct(XMM11)), operand3: Some(Direct(XMM24)), operand4: Some(Literal8(34)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 147, 37, 138, 3, 200, 34], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM11)), operand2: Some(Direct(XMM28)), operand3: Some(Indirect(RDX, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(24)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 115, 29, 130, 3, 26, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM11)), operand2: Some(Direct(XMM24)), operand3: Some(IndirectDisplaced(RCX, 407266041, Some(OperandSize::Xmmword), None)), operand4: Some(Literal8(72)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 115, 61, 131, 3, 153, 249, 98, 70, 24, 72], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM20)), operand3: Some(IndirectScaledDisplaced(RBX, Eight, 466032883, Some(OperandSize::Dword), None)), operand4: Some(Literal8(78)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 93, 146, 3, 60, 221, 243, 24, 199, 27, 78], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM26)), operand3: Some(IndirectScaledIndexed(RDI, RSI, Eight, Some(OperandSize::Dword), None)), operand4: Some(Literal8(67)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: Some(BroadcastMode::Broadcast1To4) }, &[98, 243, 45, 148, 3, 52, 247, 67], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_7() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM7)), operand2: Some(Direct(YMM5)), operand3: Some(Direct(YMM0)), operand4: Some(Literal8(51)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 243, 85, 170, 3, 248, 51], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM6)), operand2: Some(Direct(YMM2)), operand3: Some(Direct(YMM2)), operand4: Some(Literal8(49)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 109, 172, 3, 242, 49], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM0)), operand2: Some(Direct(YMM3)), operand3: Some(IndirectDisplaced(ESI, 1703132429, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(34)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 101, 174, 3, 134, 13, 189, 131, 101, 34], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM6)), operand2: Some(Direct(YMM5)), operand3: Some(Indirect(EBX, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(1)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 243, 85, 172, 3, 51, 1], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM6)), operand2: Some(Direct(YMM1)), operand3: Some(Indirect(EDI, Some(OperandSize::Dword), None)), operand4: Some(Literal8(77)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 117, 186, 3, 55, 77], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM3)), operand2: Some(Direct(YMM7)), operand3: Some(IndirectScaledDisplaced(EDI, Eight, 352703240, Some(OperandSize::Dword), None)), operand4: Some(Literal8(119)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 69, 186, 3, 28, 253, 8, 211, 5, 21, 119], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM11)), operand2: Some(Direct(YMM11)), operand3: Some(Direct(YMM15)), operand4: Some(Literal8(118)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K3), broadcast: None }, &[98, 83, 37, 171, 3, 223, 118], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM19)), operand2: Some(Direct(YMM0)), operand3: Some(Direct(YMM22)), operand4: Some(Literal8(10)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 163, 125, 173, 3, 222, 10], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM28)), operand2: Some(Direct(YMM29)), operand3: Some(Indirect(RBX, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(23)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 99, 21, 161, 3, 35, 23], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM29)), operand2: Some(Direct(YMM19)), operand3: Some(IndirectScaledIndexedDisplaced(RAX, RDI, Eight, 1282519480, Some(OperandSize::Ymmword), None)), operand4: Some(Literal8(95)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 99, 101, 162, 3, 172, 248, 184, 177, 113, 76, 95], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM27)), operand2: Some(Direct(YMM19)), operand3: Some(Indirect(RSI, Some(OperandSize::Dword), None)), operand4: Some(Literal8(24)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 99, 101, 181, 3, 30, 24], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(YMM5)), operand2: Some(Direct(YMM30)), operand3: Some(IndirectScaledIndexed(RDX, RDX, Two, Some(OperandSize::Dword), None)), operand4: Some(Literal8(9)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K7), broadcast: Some(BroadcastMode::Broadcast1To8) }, &[98, 243, 13, 183, 3, 44, 82, 9], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM3)), operand2: Some(Direct(ZMM3)), operand3: Some(Direct(ZMM0)), operand4: Some(Literal8(83)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 101, 205, 3, 216, 83], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM7)), operand2: Some(Direct(ZMM7)), operand3: Some(Direct(ZMM4)), operand4: Some(Literal8(83)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 243, 69, 206, 3, 252, 83], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM6)), operand2: Some(Direct(ZMM1)), operand3: Some(IndirectScaledDisplaced(ESI, Eight, 1522401594, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(0)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K5), broadcast: None }, &[98, 243, 117, 205, 3, 52, 245, 58, 1, 190, 90, 0], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM1)), operand2: Some(Direct(ZMM3)), operand3: Some(IndirectScaledIndexed(ESI, ECX, Two, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(65)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K1), broadcast: None }, &[98, 243, 101, 201, 3, 12, 78, 65], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM5)), operand2: Some(Direct(ZMM0)), operand3: Some(IndirectScaledDisplaced(EBX, Eight, 1998379140, Some(OperandSize::Dword), None)), operand4: Some(Literal8(15)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 125, 218, 3, 44, 221, 132, 216, 28, 119, 15], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM7)), operand2: Some(Direct(ZMM1)), operand3: Some(IndirectScaledIndexed(EAX, EBX, Four, Some(OperandSize::Dword), None)), operand4: Some(Literal8(89)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 117, 218, 3, 60, 152, 89], OperandSize::Dword)
 }
 
 #[test]
 fn valignd_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM1)), operand2: Some(Direct(ZMM26)), operand3: Some(Direct(ZMM18)), operand4: Some(Literal8(104)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 179, 45, 198, 3, 202, 104], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM9)), operand2: Some(Direct(ZMM21)), operand3: Some(Direct(ZMM15)), operand4: Some(Literal8(16)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: None }, &[98, 83, 85, 194, 3, 207, 16], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM13)), operand2: Some(Direct(ZMM25)), operand3: Some(IndirectScaledIndexedDisplaced(RAX, RDX, Two, 603414111, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(81)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K4), broadcast: None }, &[98, 115, 53, 196, 3, 172, 80, 95, 94, 247, 35, 81], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM25)), operand2: Some(Direct(ZMM26)), operand3: Some(IndirectScaledDisplaced(RDX, Two, 423382484, Some(OperandSize::Zmmword), None)), operand4: Some(Literal8(56)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: None }, &[98, 99, 45, 198, 3, 12, 85, 212, 77, 60, 25, 56], OperandSize::Qword)
 }
 
 #[test]
 fn valignd_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM17)), operand2: Some(Direct(ZMM24)), operand3: Some(Indirect(RAX, Some(OperandSize::Dword), None)), operand4: Some(Literal8(51)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K6), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 227, 61, 214, 3, 8, 51], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::VALIGND, operand1: Some(Direct(ZMM0)), operand2: Some(Direct(ZMM25)), operand3: Some(IndirectScaledDisplaced(RAX, Four, 856711933, Some(OperandSize::Dword), None)), operand4: Some(Literal8(98)), lock: false, rounding_mode: None, merge_mode: Some(MergeMode::Zero), sae: false, mask: Some(MaskReg::K2), broadcast: Some(BroadcastMode::Broadcast1To16) }, &[98, 243, 53, 210, 3, 4, 133, 253, 98, 16, 51, 98], OperandSize::Qword)
 }
 

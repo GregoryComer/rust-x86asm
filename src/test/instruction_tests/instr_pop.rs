@@ -43,87 +43,87 @@ fn pop_7() {
 
 #[test]
 fn pop_8() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 95], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(DX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 90], OperandSize::Dword)
 }
 
 #[test]
 fn pop_9() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(SI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 94], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 93], OperandSize::Qword)
 }
 
 #[test]
 fn pop_10() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(ESI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 94], OperandSize::Word)
-}
-
-#[test]
-fn pop_11() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(EDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[95], OperandSize::Dword)
-}
-
-#[test]
-fn pop_12() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(RDI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[95], OperandSize::Qword)
-}
-
-#[test]
-fn pop_13() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[91], OperandSize::Word)
-}
-
-#[test]
-fn pop_14() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Indirect(BX, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 7], OperandSize::Word)
-}
-
-#[test]
-fn pop_15() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 91], OperandSize::Dword)
-}
-
-#[test]
-fn pop_16() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledDisplaced(EDI, Two, 1434728891, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 4, 125, 187, 57, 132, 85], OperandSize::Dword)
-}
-
-#[test]
-fn pop_17() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 91], OperandSize::Qword)
-}
-
-#[test]
-fn pop_18() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledDisplaced(RBX, Four, 424806741, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 4, 157, 85, 9, 82, 25], OperandSize::Qword)
-}
-
-#[test]
-fn pop_19() {
     run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(EDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 90], OperandSize::Word)
 }
 
 #[test]
+fn pop_11() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(EDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[90], OperandSize::Dword)
+}
+
+#[test]
+fn pop_12() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(RSI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[94], OperandSize::Qword)
+}
+
+#[test]
+fn pop_13() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[95], OperandSize::Word)
+}
+
+#[test]
+fn pop_14() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledIndexed(BX, DI, One, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 1], OperandSize::Word)
+}
+
+#[test]
+fn pop_15() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 93], OperandSize::Dword)
+}
+
+#[test]
+fn pop_16() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledIndexed(ESI, EBX, Two, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 4, 94], OperandSize::Dword)
+}
+
+#[test]
+fn pop_17() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 93], OperandSize::Qword)
+}
+
+#[test]
+fn pop_18() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledDisplaced(RDI, Four, 1767630877, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 4, 189, 29, 232, 91, 105], OperandSize::Qword)
+}
+
+#[test]
+fn pop_19() {
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(ECX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 89], OperandSize::Word)
+}
+
+#[test]
 fn pop_20() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 2], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectDisplaced(SI, 24035, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 143, 132, 227, 93], OperandSize::Word)
 }
 
 #[test]
 fn pop_21() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(EBX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[91], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(ECX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[89], OperandSize::Dword)
 }
 
 #[test]
 fn pop_22() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectDisplaced(EDI, 409113444, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 135, 100, 147, 98, 24], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledIndexed(EDX, EBX, Four, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 4, 154], OperandSize::Dword)
 }
 
 #[test]
 fn pop_23() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(RCX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[89], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(Direct(RDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[90], OperandSize::Qword)
 }
 
 #[test]
 fn pop_24() {
-    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RCX, Two, 911766449, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 132, 73, 177, 115, 88, 54], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::POP, operand1: Some(IndirectScaledDisplaced(RSI, Eight, 286804644, Some(OperandSize::Qword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[143, 4, 245, 164, 74, 24, 17], OperandSize::Qword)
 }
 
 #[test]

@@ -8,21 +8,21 @@ use ::test::run_test;
 
 #[test]
 fn addss_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM7)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 229], OperandSize::Dword)
 }
 
 #[test]
 fn addss_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexedDisplaced(ESI, EBX, Eight, 1875011077, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 164, 222, 5, 102, 194, 111], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM0)), operand2: Some(IndirectScaledIndexedDisplaced(EDX, ESI, Four, 2110132666, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 132, 178, 186, 17, 198, 125], OperandSize::Dword)
 }
 
 #[test]
 fn addss_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM6)), operand2: Some(Direct(XMM4)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 244], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM4)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 231], OperandSize::Qword)
 }
 
 #[test]
 fn addss_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM1)), operand2: Some(IndirectScaledIndexed(RDI, RBX, Four, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 12, 159], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::ADDSS, operand1: Some(Direct(XMM2)), operand2: Some(IndirectScaledIndexedDisplaced(RDX, RSI, Two, 1596491686, Some(OperandSize::Dword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[243, 15, 88, 148, 114, 166, 135, 40, 95], OperandSize::Qword)
 }
 

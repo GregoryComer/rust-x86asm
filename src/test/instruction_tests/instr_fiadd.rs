@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn fiadd_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(Indirect(BX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 7], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectScaledIndexed(BP, SI, One, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 2], OperandSize::Word)
 }
 
 #[test]
 fn fiadd_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectDisplaced(EAX, 313653072, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 128, 80, 247, 177, 18], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectDisplaced(EBX, 1684295499, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 131, 75, 79, 100, 100], OperandSize::Dword)
 }
 
 #[test]
 fn fiadd_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(Indirect(RCX, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 1], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectScaledIndexedDisplaced(RCX, RDI, Four, 409052741, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 132, 185, 69, 166, 97, 24], OperandSize::Qword)
 }
 
 #[test]
 fn fiadd_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 24650, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 130, 74, 96], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(Indirect(DI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 5], OperandSize::Word)
 }
 
 #[test]
 fn fiadd_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectDisplaced(EDX, 1953835327, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 130, 63, 41, 117, 116], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectScaledIndexedDisplaced(EDI, ESI, Four, 1260485731, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 132, 183, 99, 124, 33, 75], OperandSize::Dword)
 }
 
 #[test]
 fn fiadd_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(IndirectScaledIndexedDisplaced(RDI, RDX, Two, 164741419, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 132, 87, 43, 193, 209, 9], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FIADD, operand1: Some(Indirect(RSI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 6], OperandSize::Qword)
 }
 

@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn lmsw_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 247], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(CX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 241], OperandSize::Word)
 }
 
 #[test]
 fn lmsw_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 28803, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 178, 131, 112], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Indirect(SI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 52], OperandSize::Word)
 }
 
 #[test]
 fn lmsw_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(BX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 243], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(BP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 245], OperandSize::Dword)
 }
 
 #[test]
 fn lmsw_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(IndirectScaledDisplaced(EDI, Two, 1192761142, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 52, 125, 54, 23, 24, 71], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(IndirectScaledDisplaced(ECX, Two, 2074855014, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 52, 77, 102, 198, 171, 123], OperandSize::Dword)
 }
 
 #[test]
 fn lmsw_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(SI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 246], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(Direct(DX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 242], OperandSize::Qword)
 }
 
 #[test]
 fn lmsw_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(IndirectScaledDisplaced(RSI, Eight, 738691274, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 52, 245, 202, 136, 7, 44], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::LMSW, operand1: Some(IndirectScaledDisplaced(RSI, Four, 1686553707, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 1, 52, 181, 107, 196, 134, 100], OperandSize::Qword)
 }
 

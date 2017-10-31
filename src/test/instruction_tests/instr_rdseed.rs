@@ -8,7 +8,7 @@ use ::test::run_test;
 
 #[test]
 fn rdseed_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(DI)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 255], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(SP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 199, 252], OperandSize::Dword)
 }
 
 #[test]
@@ -18,7 +18,7 @@ fn rdseed_2() {
 
 #[test]
 fn rdseed_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(EBX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 251], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(ESP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 199, 252], OperandSize::Dword)
 }
 
 #[test]
@@ -28,6 +28,6 @@ fn rdseed_4() {
 
 #[test]
 fn rdseed_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(RDX)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 199, 250], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::RDSEED, operand1: Some(Direct(RBP)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[72, 15, 199, 253], OperandSize::Qword)
 }
 

@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn setnle_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 195], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(Direct(DL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 194], OperandSize::Word)
 }
 
 #[test]
 fn setnle_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 13369, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 129, 57, 52], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectDisplaced(BX, 49, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 71, 49], OperandSize::Word)
 }
 
 #[test]
@@ -23,16 +23,16 @@ fn setnle_3() {
 
 #[test]
 fn setnle_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectScaledDisplaced(ESI, Four, 1067663084, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 181, 236, 62, 163, 63], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectScaledDisplaced(EDX, Two, 993497395, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 85, 51, 145, 55, 59], OperandSize::Dword)
 }
 
 #[test]
 fn setnle_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(Direct(CL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 193], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(Direct(BL)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 195], OperandSize::Qword)
 }
 
 #[test]
 fn setnle_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectScaledDisplaced(RDX, Eight, 1845974285, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 4, 213, 13, 85, 7, 110], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::SETNLE, operand1: Some(IndirectDisplaced(RDX, 452454387, Some(OperandSize::Byte), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[15, 159, 130, 243, 231, 247, 26], OperandSize::Qword)
 }
 

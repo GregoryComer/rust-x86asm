@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn bextr_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EBP)), operand2: Some(Direct(EBP)), operand3: Some(Direct(ECX)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 112, 247, 237], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EDX)), operand2: Some(Direct(EBP)), operand3: Some(Direct(EDI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 64, 247, 213], OperandSize::Dword)
 }
 
 #[test]
 fn bextr_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EBP)), operand2: Some(IndirectDisplaced(EDI, 1574384675, Some(OperandSize::Dword), None)), operand3: Some(Direct(ESI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 72, 247, 175, 35, 52, 215, 93], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EDX)), operand2: Some(Indirect(ESI, Some(OperandSize::Dword), None)), operand3: Some(Direct(EDX)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 104, 247, 22], OperandSize::Dword)
 }
 
 #[test]
 fn bextr_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EBX)), operand2: Some(Direct(ECX)), operand3: Some(Direct(EBX)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 96, 247, 217], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(ESI)), operand2: Some(Direct(EBP)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 88, 247, 245], OperandSize::Qword)
 }
 
 #[test]
 fn bextr_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(ESI)), operand2: Some(IndirectScaledDisplaced(RAX, Four, 627814865, Some(OperandSize::Dword), None)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 88, 247, 52, 133, 209, 177, 107, 37], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(EDX)), operand2: Some(IndirectScaledIndexed(RDX, RDX, Eight, Some(OperandSize::Dword), None)), operand3: Some(Direct(ESP)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 88, 247, 20, 210], OperandSize::Qword)
 }
 
 #[test]
 fn bextr_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(RBP)), operand2: Some(Direct(RDX)), operand3: Some(Direct(RDI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 192, 247, 234], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(RSI)), operand2: Some(Direct(RSP)), operand3: Some(Direct(RSI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 200, 247, 244], OperandSize::Qword)
 }
 
 #[test]
 fn bextr_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(RDI)), operand2: Some(IndirectScaledIndexed(RBX, RDX, Eight, Some(OperandSize::Qword), None)), operand3: Some(Direct(RSP)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 216, 247, 60, 211], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::BEXTR, operand1: Some(Direct(RBX)), operand2: Some(IndirectDisplaced(RCX, 10949294, Some(OperandSize::Qword), None)), operand3: Some(Direct(RDI)), operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[196, 226, 192, 247, 153, 174, 18, 167, 0], OperandSize::Qword)
 }
 

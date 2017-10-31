@@ -8,12 +8,12 @@ use ::test::run_test;
 
 #[test]
 fn pminsb_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM0)), operand2: Some(Direct(XMM5)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 197], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM3)), operand2: Some(Direct(XMM7)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 223], OperandSize::Dword)
 }
 
 #[test]
 fn pminsb_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM1)), operand2: Some(IndirectScaledDisplaced(EDX, Two, 1152019552, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 12, 85, 96, 108, 170, 68], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM2)), operand2: Some(IndirectDisplaced(EAX, 1779304913, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 144, 209, 9, 14, 106], OperandSize::Dword)
 }
 
 #[test]
@@ -23,6 +23,6 @@ fn pminsb_3() {
 
 #[test]
 fn pminsb_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM4)), operand2: Some(IndirectScaledIndexed(RAX, RAX, Four, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 36, 128], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::PMINSB, operand1: Some(Direct(XMM7)), operand2: Some(IndirectScaledIndexedDisplaced(RDI, RBX, Eight, 1699663306, Some(OperandSize::Xmmword), None)), operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[102, 15, 56, 56, 188, 223, 202, 205, 78, 101], OperandSize::Qword)
 }
 

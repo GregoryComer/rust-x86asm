@@ -8,31 +8,31 @@ use ::test::run_test;
 
 #[test]
 fn fisubr_1() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(BP, SI, One, 6111, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 170, 223, 23], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectDisplaced(BP, 172, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 174, 172, 0], OperandSize::Word)
 }
 
 #[test]
 fn fisubr_2() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(ESI, ECX, Two, 723869918, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 172, 78, 222, 96, 37, 43], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(EDI, EAX, Two, 1861555989, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 172, 71, 21, 23, 245, 110], OperandSize::Dword)
 }
 
 #[test]
 fn fisubr_3() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(RBX, RAX, Two, 1003105823, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 172, 67, 31, 46, 202, 59], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(RSI, RDX, Two, 1495452118, Some(OperandSize::Dword), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[218, 172, 86, 214, 201, 34, 89], OperandSize::Qword)
 }
 
 #[test]
 fn fisubr_4() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(BX, DI, One, 24902, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 169, 70, 97], OperandSize::Word)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(BP, DI, One, 31050, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 171, 74, 121], OperandSize::Word)
 }
 
 #[test]
 fn fisubr_5() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexed(EBX, EDX, Eight, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 44, 211], OperandSize::Dword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(ESI, EDI, Four, 1661375939, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 172, 190, 195, 149, 6, 99], OperandSize::Dword)
 }
 
 #[test]
 fn fisubr_6() {
-    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(Indirect(RDI, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 47], OperandSize::Qword)
+    run_test(&Instruction { mnemonic: Mnemonic::FISUBR, operand1: Some(IndirectScaledIndexedDisplaced(RBX, RDI, Four, 1370016420, Some(OperandSize::Word), None)), operand2: None, operand3: None, operand4: None, lock: false, rounding_mode: None, merge_mode: None, sae: false, mask: None, broadcast: None }, &[222, 172, 187, 164, 202, 168, 81], OperandSize::Qword)
 }
 
