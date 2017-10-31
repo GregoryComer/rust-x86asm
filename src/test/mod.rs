@@ -174,13 +174,14 @@ fn run_test(instr: &Instruction, expected: &[u8], addr_size: OperandSize) {
     let mut buffer = Cursor::new(Vec::new());
     instr.encode(&mut buffer, Mode::from_size(addr_size).unwrap()).expect("Encoding failed");
     if &buffer.get_ref()[..] != expected {
+        println!("Test failed.");
         print!("Output:   [");
         output_hex_array(buffer.get_ref());
         println!("]");
         print!("Expected: [");
         output_hex_array(expected);
         println!("]");
-        panic!("Test failed. Mode: {:?}.\nInstruction: {:?}.\n", addr_size, instr); 
+        panic!("Failure. Mode: {:?}.\nInstruction: {:?}.\n", addr_size, instr); 
     }
 }
 

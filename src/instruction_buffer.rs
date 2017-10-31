@@ -61,7 +61,6 @@ pub struct InstructionBuffer {
 impl InstructionBuffer {
     pub fn write<W>(&self, writer: &mut W, mode: Mode) -> Result<usize, InstructionEncodingError> 
         where W: Write {
-        println!("Buffer: {:?}", self);
         self.write_inner(writer, mode).map_err(|_| InstructionEncodingError::WriteFailed)
     }
     
@@ -332,6 +331,7 @@ impl InstructionBuffer {
     fn should_emit_rex(&self) -> bool {
         // Emit a REX prefix if 64-bit operand size is needed, or if reg/index/rm/base
         // need a fourth bit
+        self.composite_prefix == Some(CompositePrefix::Rex) ||
         self.operand_size_64 || 
         self.mod_rm_reg.map(|reg| reg & 0x8 != 0).unwrap_or(false) ||
         self.sib_index.map(|inx| inx & 0x8 != 0).unwrap_or(false) ||

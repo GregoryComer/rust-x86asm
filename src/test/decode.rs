@@ -2,11 +2,16 @@ use ::*;
 use ::test::*;
 
 #[test]
-fn add_test() {
+fn extended_regs() {
+    decode_helper(&vec![0x4C, 0x01, 0xC0], Mode::Long, &Instruction::new2(Mnemonic::ADD, Operand::Direct(Reg::RAX), Operand::Direct(Reg::R8)));
+    decode_helper(&vec![0x40, 0x00, 0xE0], Mode::Long, &Instruction::new2(Mnemonic::ADD, Operand::Direct(Reg::AL), Operand::Direct(Reg::SPL)));
+    decode_helper(&vec![0x40, 0x00, 0xE8], Mode::Long, &Instruction::new2(Mnemonic::ADD, Operand::Direct(Reg::AL), Operand::Direct(Reg::BPL)));
+    decode_helper(&vec![0x40, 0x00, 0xF0], Mode::Long, &Instruction::new2(Mnemonic::ADD, Operand::Direct(Reg::AL), Operand::Direct(Reg::SIL)));
+    decode_helper(&vec![0x40, 0x00, 0xF8], Mode::Long, &Instruction::new2(Mnemonic::ADD, Operand::Direct(Reg::AL), Operand::Direct(Reg::DIL)));
 }
 
 // * * * * * * * * * * * * * * * * * * * LEGACY TESTS * * * * * * * * * * * * * * * * * * * *
-// The tests below correspond to the legacy instruction encoding format, but have been left here
+// The tests below correspond to the legacy instruction encoding format but have been left here
 // for completeness.
 
 #[test]

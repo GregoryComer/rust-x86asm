@@ -197,8 +197,6 @@ impl<T: Read> InstructionReader<T> {
         let def = def_res.or_else(|_| find_instruction_def_by_opcode(&buffer, self.mode)
             .map_err(|_| InstructionDecodingError::UnknownOpcode))?;
 
-        println!(" > def: {:?}", def);
-
         // Build operands (reading immediates as appropriate)
         // TODO Could re-write this without vec
         let operand_results: Result<Vec<Operand>, InstructionDecodingError> = 
@@ -235,7 +233,6 @@ impl<T: Read> InstructionReader<T> {
 
     fn read_operand(&mut self, op_def: &OperandDefinition, buffer: &InstructionBuffer)
         -> Result<Operand, InstructionDecodingError> {
-        println!("read_operand: {:?}", op_def);
 
         let size = InstructionReader::<T>::get_operand_size(self.mode, op_def, buffer);
         let addr_size = InstructionReader::<T>::get_address_size(self.mode, buffer);

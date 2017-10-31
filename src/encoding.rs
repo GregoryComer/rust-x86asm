@@ -83,8 +83,6 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
     where W : Write {
     let mut buffer: InstructionBuffer = Default::default(); 
 
-    println!("def: {:?}", def);
-
     let addr_size = get_addr_size(def, instr, mode)?;
 
     buffer.fwait = def.fwait;
@@ -121,7 +119,6 @@ pub fn encode<W>(writer: &mut W, def: &InstructionDefinition, instr: &Instructio
             CompositePrefix::Evex { vector_size: vs, operand_behavior: _, we: w } => {
                 buffer.vex_e = w;
                 buffer.vector_len = vs.map(|s| s == OperandSize::Ymmword);
-                println!("vs: {:?}, v_l: {:?}", vs, buffer.vector_len);
                 buffer.vex_l = vs.map(|s| s == OperandSize::Zmmword);
                 buffer.composite_prefix = Some(::instruction_buffer::CompositePrefix::Evex);
             },
@@ -255,6 +252,10 @@ pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, o
         OperandEncoding::ModRmReg => { 
             if let Some(Operand::Direct(reg)) = *op {
                 buffer.mod_rm_reg = Some(reg.get_reg_code());
+
+                if reg.needs_rex() && buffer.composite_prefix.is_none() {
+                    buffer.composite_prefix = Some(::instruction_buffer::CompositePrefix::Rex);
+                }
             } else { panic!("Internal error."); }
         }
         OperandEncoding::Mib |
@@ -307,7 +308,6 @@ pub fn encode_operand(buffer: &mut InstructionBuffer, def: &OperandDefinition, o
 }
 
 fn encode_rm(buffer: &mut InstructionBuffer, op: &Operand, mode: Mode) {
-    println!("encode_rm: {:?}", op);
     match *op {
         Operand::Direct(reg) => {
             buffer.mod_rm_mod = Some(0b11);

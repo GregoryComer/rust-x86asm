@@ -72,8 +72,6 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
             // Look for the shortest matching def. If multiple incompatible defs match,
             // return AmbiguousSize.
             for m in matches {
-                println!("\n Evaluating def: {:?}", m);
-
                 if best.map_or(true, |b| compare_def_length(m, b)) {
                     best = Some(m);
                 }
@@ -82,7 +80,6 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
                 if sizes.map_or(true, |s| compare_sizes(&s, &m_sizes)) {
                     sizes = Some(m_sizes);
                 } else {
-                    println!("Ambiguous defs:\n\n{:?}\n\n{:?}\n", best, m);
                     return Err(InstructionEncodingError::AmbiguousSize);
                 }
             }
@@ -92,19 +89,13 @@ pub fn find_instruction_def(instr: &Instruction, mode: Mode)
 }
 
 fn temp_helper(tag: &'static str, val: bool) -> bool {
-    println!(" - {}: {:?}", tag, val);
+    // println!(" - {}: {:?}", tag, val);
     val
 }
 
 pub fn find_instruction_def_by_opcode(buffer: &InstructionBuffer, mode: Mode)
     -> Result<&'static InstructionDefinition, FindInstructionDefByOpcodeError> {
-    println!("buffer: {:?}\n", buffer);
     let mut matches = INSTR_DEFS.iter().filter(|def| {
-        if def.primary_opcode == buffer.primary_opcode {
-            println!("test def: {:?}", def);
-            println!("");
-        }
-
         let has_opcode_addend = def.operands.iter().any(|o| o.as_ref().map_or(false,
             |op| op.encoding == OperandEncoding::OpcodeAddend));
 
