@@ -3,16 +3,7 @@
 The x86asm crate is a Rust library designed for programatically assembling & disassembling x86 instructions. This project supports real, protected, and long mode assembly.
 
 ## Status
-This project is currently in active development. The core instruction encoding logic is complete and all core instructions are implemented, but many instruction extensions have only partial support.
-
-## Instruction Set Extension Support
- * Core Instructions - Full Support
- * SSE1/2 - Full Support
- * SSE3+ - Partial Support
- * AVX1/2 - Partial Support
- * AVX512 - Partial Support
- * BMI - Partial Support
- * MPX - Full Support
+This crate is feature complete but immature. If you encounter bugs or wish for a helpful new feature, feel free to contribute or create an issue. See the contributing  section below.
 
 ## Usage Examples
 See the *examples* directory for full examples.
@@ -96,15 +87,9 @@ let instructions = &[
 for instr in instructions { writer.write(instr).unwrap(); }
 ```
 ## Build
-The x86asm library uses Cargo. To build, clone the repository using Git and run `cargo build` from the command line.
-
+The x86asm crate uses Cargo. To build, clone the repository using Git and run `cargo build` from the command line using either stable or nightly Rust.
 ## Contribute
-Contributions are welcome! If you're not inclined to dig into the code yourself but encounter an issue, feel free to submit an issue using the GitHub issue tracker. Before contributing, please see *parse_x86_ref/README* and *src/test/README* for a detailed description of the instruction format, as well as in-depth guidelines for contributing.
-
-## Major Open Tasks
-* **Exhaustive Instruction Definitions** - Instructions starting with A-O, as well as most instructions starting with P have full definitions. Instructions starting with Q-Z not included in the core instruction set, or included in SSE1/2 need to be defined. See *parse_x86_ref/README* for an in-depth description of the instruction encoding format and contribution process. Each new instruction implemented should have corresponding regression tests in the test module. See *src/test/README* for a description of the test format and contribution process.
-* **Improved Test Coverage** - Real and long mode instruction encoding currently have a basic set of regression tests, covering addressing modes and instruction formats, but lack the level comprehensive test coverage that protected mode encoding has. In addition, instruction dissassembly test coverage is poor and should be improved.
-* **Instruction Description Format** - The current instruction definition format is based on the ref.x86asm.net instruction definition format, with a number of modifications made to fascilitate AVX and other instruction set extensions. However, this instruction format, with the number of extensions made to it, has become somewhat bloated and adding support for new instructions is more difficult than it needs to be. Long term, moving to a more compact instruction encoding format would be ideal. See *parse_x86_ref/README* for more details.
+Contributions are welcome! If you're not inclined to dig into the code yourself but encounter an issue, feel free to submit an issue using the GitHub issue tracker. Before contributing, please see *gen_defs/README* and *src/test/README* for a detailed description of the instruction format, as well as in-depth guidelines for contributing.
 
 ## Contributors
 * Gregory Comer - Author
