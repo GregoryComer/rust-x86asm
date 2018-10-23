@@ -10,7 +10,7 @@ See the *examples* directory for full examples.
 
 Encode a series of instructions to an in-memory buffer:
 ```rust
-use std::io:Cursor;
+use std::io::Cursor;
 use x86asm::{InstructionWriter, Mnemonic, Mode, Operand, Reg};
 
 ...
