@@ -117,7 +117,7 @@ impl InstructionBuffer {
 
         // Primary opcode
         if !(emit_vex || emit_evex) || !(self.primary_opcode == 0x38 || self.primary_opcode == 0x3A) {
-            writer.write_all(&[self.primary_opcode + self.opcode_add.unwrap_or(0)])?; bytes_written += 1;
+            writer.write_all(&[self.primary_opcode + (self.opcode_add.unwrap_or(0) & 0b111)])?; bytes_written += 1;
         }
 
         // Secondary opcode
@@ -179,7 +179,7 @@ impl InstructionBuffer {
             if self.operand_size_64 { 1 << 3 } else { 0 } |
             self.mod_rm_reg.map(|reg| (reg & 0x8) >> 1).unwrap_or(0) |
             self.sib_index.map(|idx| (idx & 0x8) >> 2).unwrap_or(0) |
-            self.mod_rm_rm.map(|rm| (rm & 0x8) >> 3)
+            self.mod_rm_rm.or(self.opcode_add).map(|rm| (rm & 0x8) >> 3)
                 .or(self.sib_base.map(|b| b & 0x8)).unwrap_or(0);
         writer.write(&[rex_byte])
     }
@@ -336,6 +336,7 @@ impl InstructionBuffer {
         self.mod_rm_reg.map(|reg| reg & 0x8 != 0).unwrap_or(false) ||
         self.sib_index.map(|inx| inx & 0x8 != 0).unwrap_or(false) ||
         self.mod_rm_rm.map(|rm| rm & 0x8 != 0).unwrap_or(false) ||
+        self.opcode_add.map(|rm| rm & 0x8 != 0).unwrap_or(false) ||
         self.sib_base.map(|b| b & 0x8 != 0).unwrap_or(false)
     }
 
