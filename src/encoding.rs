@@ -531,7 +531,10 @@ fn encode_indirect_64(buffer: &mut InstructionBuffer, base: Option<Reg>, index: 
 
     match base {
         Some(Reg::RAX) | Some(Reg::RBX) | Some(Reg::RCX) |
-        Some(Reg::RDX) | Some(Reg::RSI) | Some(Reg::RDI) => {
+        Some(Reg::RDX) | Some(Reg::RSI) | Some(Reg::RDI) |
+        Some(Reg::R8)  | Some(Reg::R9)  | Some(Reg::R10) |
+        Some(Reg::R11) | Some(Reg::R12) | Some(Reg::R13) |
+        Some(Reg::R14) | Some(Reg::R15) => {
             match index {
                 Some(index_reg) if index_reg != Reg::RSP => {
                     buffer.mod_rm_rm = Some(4); // Force SIB
