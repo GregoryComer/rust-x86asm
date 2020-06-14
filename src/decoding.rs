@@ -226,13 +226,13 @@ impl<T: Read> InstructionReader<T> {
 
         // We can assume that we have a ModR/M byte if we've gotten to this point as it
         // would have errored out if we needed one but didn't read one.
-        Ok(match op_def.encoding {
+        let res: Result<Operand, InstructionDecodingError> = match op_def.encoding {
             OperandEncoding::ModRmReg =>
                 if let OperandType::Reg(reg_type) = op_def.op_type {
-                    Operand::Direct(Reg::from_code_reg_type(
+                    Ok(Operand::Direct(Reg::from_code_reg_type(
                         buffer.mod_rm_reg.unwrap(), reg_type, size, buffer.has_rex())
-                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
-                } else { panic!("Invalid operand definition."); },
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?))
+                } else { Err(InstructionDecodingError::InvalidOperand) },
 
             OperandEncoding::ModRmRm => { // TODO Handle MIB
                 let reg_type = if let OperandType::Reg(reg_type) = op_def.op_type { reg_type }
@@ -241,87 +241,89 @@ impl<T: Read> InstructionReader<T> {
                             { Some(reg_type) } else { None }).next().unwrap_or(RegType::General)
                     } else { RegType::General };
                 self.rm_helper(buffer, op_def, 
-                    |c| Reg::from_code_reg_type(c, reg_type, size, buffer.has_rex()))?
+                    |c| Reg::from_code_reg_type(c, reg_type, size, buffer.has_rex()))
             },
 
             OperandEncoding::Vex =>
                 if let OperandType::Reg(reg_type) = op_def.op_type {
-                    Operand::Direct(Reg::from_code_reg_type(
+                    Ok(Operand::Direct(Reg::from_code_reg_type(
                         buffer.vex_operand.unwrap(), reg_type, size, buffer.has_rex())
-                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
-                } else { panic!("Invalid operand definition."); },
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?))
+                } else { Err(InstructionDecodingError::InvalidOperand) },
 
             OperandEncoding::Imm =>
                 match op_def.op_type {
                     OperandType::Reg(reg_type) =>
-                        Operand::Direct(Reg::from_code_reg_type(
+                        Ok(Operand::Direct(Reg::from_code_reg_type(
                             self.expect_byte()? >> 4, reg_type, size, buffer.has_rex())
-                            .ok_or(InstructionDecodingError::InvalidInstruction)?),
+                            .ok_or(InstructionDecodingError::InvalidInstruction)?)),
                     OperandType::Imm => match op_def.size {
-                        OperandSize::Byte => self.expect_byte().map(|b| Operand::Literal8(b))?,
+                        OperandSize::Byte => self.expect_byte().map(|b| Operand::Literal8(b)),
                         OperandSize::Word => 
                             (0..2).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-                                |b| a | ((b as u16) << (8*n) )))).map(|b| Operand::Literal16(b))?,
+                                |b| a | ((b as u16) << (8*n) )))).map(|b| Operand::Literal16(b)),
                         OperandSize::Dword => 
                             (0..4).fold(Ok(0), |acc, n| acc.and_then(|a| self.expect_byte().map(
-                                |b| a | ((b as u32) << (8*n) )))).map(|b| Operand::Literal32(b))?,
+                                |b| a | ((b as u32) << (8*n) )))).map(|b| Operand::Literal32(b)),
                         OperandSize::Far16 => { // 16:16
                             let addr = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a|
                                 self.expect_byte().map(|b| a | ((b as u16) << (8*n) ))))?;
                             let segment = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a|
                                 self.expect_byte().map(|b| a | ((b as u16) << (8*n) ))))?;
-                            Operand::MemoryAndSegment16(segment, addr)
+                            Ok(Operand::MemoryAndSegment16(segment, addr))
                         },
                         OperandSize::Far32 => { // 16:32
                             let addr = (0..4).fold(Ok(0), |acc, n| acc.and_then(|a|
                                 self.expect_byte().map(|b| a | ((b as u32) << (8*n) ))))?;
                             let segment = (0..2).fold(Ok(0), |acc, n| acc.and_then(|a|
                                 self.expect_byte().map(|b| a | ((b as u16) << (8*n) ))))?;
-                            Operand::MemoryAndSegment32(segment, addr)
+                            Ok(Operand::MemoryAndSegment32(segment, addr))
                         },
                         _ => unimplemented!()
                     },
                     OperandType::Rel(_) => 
-                        Operand::Offset(
+                        Ok(Operand::Offset(
                             (0..op_def.size.bits() >> 3).fold(Ok(0), |acc, n| acc.and_then(|a|
                                 self.expect_byte().map(|b| a | ((b as u64) << (8*n) ))))?,
-                    None, None),
-                    _ => panic!("Bad instruction definition.")
+                            None, None)),
+                    _ => Err(InstructionDecodingError::InvalidInstruction) 
                 },
 
             OperandEncoding::OpcodeAddend =>
                 if let OperandType::Reg(reg_type) = op_def.op_type {
-                    Operand::Direct(Reg::from_code_reg_type(
+                    Ok(Operand::Direct(Reg::from_code_reg_type(
                         buffer.primary_opcode & 0x7, reg_type, size, buffer.has_rex())
-                        .ok_or(InstructionDecodingError::InvalidInstruction)?)
-                } else { panic!("Invalid operand definition."); },
+                        .ok_or(InstructionDecodingError::InvalidInstruction)?))
+                } else { Err(InstructionDecodingError::InvalidOperand) },
 
             OperandEncoding::Offset =>
-                Operand::Offset(match addr_size {
+                Ok(Operand::Offset(match addr_size {
                     OperandSize::Word => self.read_disp16()? as u64,
                     OperandSize::Dword => self.read_disp32()? as u64,
                     // OperandSize::Qword => self.read_disp64()? as u64,
                     _ => unimplemented!() // TODO?
-                }, Some(op_def.size), None),
+                }, Some(op_def.size), None)),
 
             OperandEncoding::Mib => unimplemented!(),
 
             OperandEncoding::Fixed =>
                 match op_def.op_type {
                     OperandType::Fixed(FixedOperand::Reg(reg)) =>
-                        Operand::Direct(reg),
+                        Ok(Operand::Direct(reg)),
                     OperandType::Fixed(FixedOperand::Constant(v)) =>
                         match op_def.size {
                             OperandSize::Unsized |
-                            OperandSize::Byte => Operand::Literal8(v as u8),
-                            OperandSize::Word => Operand::Literal16(v as u16),
-                            OperandSize::Dword => Operand::Literal32(v),
-                            OperandSize::Qword => Operand::Literal64(v as u64),
-                            _ => panic!("Invalid operand definition.")
+                            OperandSize::Byte => Ok(Operand::Literal8(v as u8)),
+                            OperandSize::Word => Ok(Operand::Literal16(v as u16)),
+                            OperandSize::Dword => Ok(Operand::Literal32(v)),
+                            OperandSize::Qword => Ok(Operand::Literal64(v as u64)),
+                            _ => Err(InstructionDecodingError::InvalidOperand)
                         },
-                    _ => panic!("Invalid operand definition.")
+                    _ => Err(InstructionDecodingError::InvalidOperand)
                 }
-        })
+        };
+
+        res
     }
 
     fn read_disp8(&mut self) -> Result<u8, InstructionDecodingError> {
@@ -590,6 +592,9 @@ pub enum InstructionDecodingError {
 
     // InvalidInstruction - Generic error for an invalid instruction.
     InvalidInstruction,
+
+    // InvalidOperand - Generic error for an invalid operand.
+    InvalidOperand,
 
     // UnknownOpcode - Indicates that an unrecognized opcode was encountered.
     UnknownOpcode
