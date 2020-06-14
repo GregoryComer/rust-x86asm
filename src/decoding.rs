@@ -279,7 +279,7 @@ impl<T: Read> InstructionReader<T> {
                                 self.expect_byte().map(|b| a | ((b as u16) << (8*n) ))))?;
                             Ok(Operand::MemoryAndSegment32(segment, addr))
                         },
-                        _ => unimplemented!()
+                        _ => Err(InstructionDecodingError::NotImplemented)
                     },
                     OperandType::Rel(_) => 
                         Ok(Operand::Offset(
@@ -297,14 +297,13 @@ impl<T: Read> InstructionReader<T> {
                 } else { Err(InstructionDecodingError::InvalidOperand) },
 
             OperandEncoding::Offset =>
-                Ok(Operand::Offset(match addr_size {
-                    OperandSize::Word => self.read_disp16()? as u64,
-                    OperandSize::Dword => self.read_disp32()? as u64,
-                    // OperandSize::Qword => self.read_disp64()? as u64,
-                    _ => unimplemented!() // TODO?
-                }, Some(op_def.size), None)),
+                match addr_size {
+                    OperandSize::Word => Ok(Operand::Offset(self.read_disp16()? as u64, Some(op_def.size), None)),
+                    OperandSize::Dword => Ok(Operand::Offset(self.read_disp32()? as u64, Some(op_def.size), None)),
+                    _ => Err(InstructionDecodingError::NotImplemented) // TODO?
+                },
 
-            OperandEncoding::Mib => unimplemented!(),
+            OperandEncoding::Mib => Err(InstructionDecodingError::NotImplemented),
 
             OperandEncoding::Fixed =>
                 match op_def.op_type {
@@ -597,5 +596,8 @@ pub enum InstructionDecodingError {
     InvalidOperand,
 
     // UnknownOpcode - Indicates that an unrecognized opcode was encountered.
-    UnknownOpcode
+    UnknownOpcode,
+
+    // NotImplemented - Indicates that the suport required to decode is not implemented.
+    NotImplemented
 }
