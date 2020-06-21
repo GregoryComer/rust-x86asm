@@ -53,7 +53,7 @@ pub fn load_instructions(map: &mut HashMap<Mnemonic, Vec<&'static InstructionDef
             let new_list = Vec::new();
             map.insert(instr.mnemonic, new_list);
         };
-        let mut list = map.get_mut(&instr.mnemonic).unwrap();
+        let list = map.get_mut(&instr.mnemonic).unwrap();
         list.push(&instr);
     }
 }
